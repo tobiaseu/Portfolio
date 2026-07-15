@@ -1,1 +1,192 @@
-<!DOCTYPE html><html><head><link href="https://fonts.googleapis.com/css?family=Neue+Haas+Grotesk+Display+Pro&display=swap" rel="stylesheet" /><link href="./css/main.css" rel="stylesheet" /><title>Document</title></head><body><div class="v2_2"><span class="v2_3">Portfolio</span><span class="v4_2">2025</span><div class="v4_4"></div><div class="v4_5"></div></div></body></html>
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tobia Seu — Homepage Prototype</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- SVG guiding line (fixed, animated via JS) -->
+  <svg id="guideLine" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+    <path id="guidePath" d="M10 5 C30 20, 30 80, 10 95" fill="none" stroke="rgba(0,0,0,0.08)" stroke-width="2" stroke-linecap="round" />
+  </svg>
+
+  <header class="site-header">
+    <div class="container">
+      <nav class="topnav">
+        <div class="brand">Tobia Seu</div>
+        <div class="nav-right">Portfolio 2025</div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-left">
+          <h1 class="site-title">Design &amp; Experiments</h1>
+          <p class="lead">Progetti di product design, visual &amp; interaction design. Minimal, tipografico e orientato al racconto del progetto.</p>
+          <div class="cta-row">
+            <a class="btn primary" href="#projects">View work</a>
+            <a class="btn secondary" href="#contact">Contact</a>
+          </div>
+        </div>
+        <div class="hero-media" aria-hidden="true">
+          <div class="media-placeholder">IMAGE / VIDEO</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="container about-grid reveal">
+      <div class="col about-left">
+        <h2>About me</h2>
+        <h3>Education</h3>
+        <div class="timeline">
+          <div class="time-item">
+            <div class="years">2021 - 2025</div>
+            <div class="content">
+              <strong>Bachelor’s Degree in Industrial Product Design</strong>
+              <div class="muted">Università degli Studi di Ferrara — 110/110</div>
+            </div>
+          </div>
+          <div class="time-item">
+            <div class="years">2016 - 2021</div>
+            <div class="content">
+              <strong>Scientific High School Diploma</strong>
+              <div class="muted">Liceo Scientifico — Final Evaluation: 80/100</div>
+            </div>
+          </div>
+        </div>
+
+        <h3>Experience</h3>
+        <ul class="experience-list">
+          <li><span class="years">2017–Now</span> Videomaker &amp; Photographer (Freelance)</li>
+          <li><span class="years">2025</span> UX-UI Design Internship — Iprefab OY</li>
+        </ul>
+      </div>
+
+      <div class="col about-center">
+        <h2>Skills</h2>
+        <h4>Soft Skills</h4>
+        <div class="badges">
+          <span class="pill">Design Thinking</span>
+          <span class="pill">Project Management</span>
+          <span class="pill">Problem Solving</span>
+          <span class="pill">System Design</span>
+          <span class="pill">Team Work</span>
+        </div>
+
+        <h4>Hard Skills</h4>
+        <div class="badges">
+          <span class="pill">Concept Sketching</span>
+          <span class="pill">3D Modeling</span>
+          <span class="pill">3D Rendering</span>
+          <span class="pill">Videomaking</span>
+        </div>
+
+        <h4>Languages</h4>
+        <div class="languages">
+          <div class="lang">
+            <div class="label">Italian</div>
+            <div class="dots"><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span></div>
+            <div class="muted small">Level: Mother tongue</div>
+          </div>
+          <div class="lang">
+            <div class="label">English</div>
+            <div class="dots"><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot"></span><span class="dot"></span></div>
+            <div class="muted small">Level: B2 — IELTS: 6.5</div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="col about-right">
+        <h2>Softwares</h2>
+        <div class="icons">
+          <span class="soft-icon">Ai</span>
+          <span class="soft-icon">Id</span>
+          <span class="soft-icon">Ps</span>
+          <span class="soft-icon">CAD</span>
+          <span class="soft-icon">F</span>
+        </div>
+
+        <h3>Contacts</h3>
+        <div class="contacts">
+          <div>Email: <a href="mailto:toby.seu@gmail.com">toby.seu@gmail.com</a></div>
+          <div>Phone: <a href="tel:+393456348296">345 634 8296</a></div>
+        </div>
+      </aside>
+    </section>
+
+    <section id="projects" class="projects container reveal">
+      <h2>Projects</h2>
+
+      <div class="project-row">
+        <div class="proj-number">01</div>
+        <div class="proj-title">Zeitknot</div>
+        <div class="proj-meta">
+          <span class="small-pill">2022 — University Project</span>
+          <span class="small-pill">Individual Project</span>
+          <span class="small-pill">4 Months</span>
+        </div>
+        <div class="proj-tags">
+          <span class="pill">Concept Design</span>
+          <span class="pill">3D Modeling</span>
+          <span class="pill">3D Printing</span>
+        </div>
+        <div class="proj-desc">An exhibition artifact developed in collaboration with the Ethnographic Museum, designed to bridge tradition and contemporary languages.</div>
+      </div>
+
+      <hr />
+
+      <div class="project-row">
+        <div class="proj-number">02</div>
+        <div class="proj-title">Waterpack</div>
+        <div class="proj-meta">
+          <span class="small-pill">2023 — University Project</span>
+          <span class="small-pill">3 Persons Team</span>
+          <span class="small-pill">3 Months</span>
+        </div>
+        <div class="proj-tags">
+          <span class="pill">Package Design</span>
+          <span class="pill">Eco Design</span>
+          <span class="pill">Sustainable Innovation</span>
+        </div>
+        <div class="proj-desc">A redesign of a classic water carrier with focus on ergonomics and material sustainability.</div>
+      </div>
+
+      <!-- more projects can be copied similarly -->
+    </section>
+
+    <section id="contact" class="contact container reveal">
+      <h2>Contact</h2>
+      <p>Se vuoi metterti in contatto per progetti o collaborazioni, scrivimi.</p>
+
+      <form class="contact-form" action="https://formspree.io/f/your-form-id" method="POST">
+        <label>
+          <span>Name</span>
+          <input type="text" name="name" required />
+        </label>
+        <label>
+          <span>Email</span>
+          <input type="email" name="_replyto" required />
+        </label>
+        <label>
+          <span>Message</span>
+          <textarea name="message" rows="5" required></textarea>
+        </label>
+        <div class="form-actions">
+          <button class="btn primary" type="submit">Send message</button>
+          <button class="btn secondary" type="reset">Reset</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container muted">© Tobia Seu — Prototype</div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
