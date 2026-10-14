@@ -1,0 +1,20 @@
+name: Publish to tobiaseu.com
+on:
+  push:
+    branches: [index]
+  workflow_dispatch:
+permissions:
+  pages: write
+  contents: read
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show Pages config
+        run: |
+          curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/${{ github.repository }}/pages
+      - name: Request a Pages build
+        run: |
+          curl -s -f -X POST -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/${{ github.repository }}/pages/builds
