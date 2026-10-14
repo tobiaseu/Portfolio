@@ -350,6 +350,17 @@ body.focus #rail,body.vfull #rail{opacity:0;pointer-events:none}
 .pj-next:hover b i{transform:translateX(18px)}
 .pj-next:focus-visible{outline:2px solid var(--text);outline-offset:6px}
 @media(max-width:800px){.pj-sec,.pj-sec:nth-of-type(even){grid-template-columns:1fr;gap:2rem;padding:4rem 0}.pj-sec:nth-of-type(even) .pj-txt{order:0}.pj-meta{gap:1.5rem;flex-wrap:wrap}}
+
+/* mobile fixes */
+@media (max-width:760px){
+  .viewport,.cs-vp,.arch-vp{height:100svh}
+  .copy{left:4vw;right:4vw;width:auto;top:auto;bottom:5.5rem;transform:none;padding:1.1rem 1.2rem;border-radius:20px;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--border)}
+  .copy h1{font-size:1.9rem;margin-bottom:.6rem}
+  .copy p{font-size:.92rem;line-height:1.5;margin-bottom:1rem}
+  .copy .big{font-size:1.8rem}
+  header{padding:1rem 1rem}
+  .theme-switch{left:1rem;bottom:1rem}
+}
 </style>
 </head>
 <body data-page="home">
@@ -533,8 +544,8 @@ body.focus #rail,body.vfull #rail{opacity:0;pointer-events:none}
 
 
 <nav id="rail" aria-label="Sezioni"></nav><div id="chint">Drag the cases · scroll for the archive ↓</div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="js/gsap.min.js"></script>
+<script src="js/ScrollTrigger.min.js"></script>
 <script>
 const RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
 gsap.registerPlugin(ScrollTrigger);
@@ -995,7 +1006,7 @@ const landR=cx=>{const w=Math.min(cwid()*.4,600),h=w*.6;return{left:cx-w/2,top:i
 const kkk=()=>Math.max(.5,Math.min(1,innerHeight*.68/568));
 const centerR=()=>{const d=slideDims();return{left:(cwid()-d.w)/2,top:innerHeight*.56-d.h/2,width:d.w,height:d.h,borderRadius:30}};
 const cxS=()=>cwid()*(.5+SH/100);
-gsap.set(['#c1','#c2'],{autoAlpha:0,y:24,yPercent:-50});
+gsap.set(['#c1','#c2'],{autoAlpha:0,y:24,yPercent:matchMedia('(max-width:760px)').matches?0:-50});
 gsap.set('#vwin',{autoAlpha:0});
 gsap.set(['#vcap','#vchips'],{y:16});
 gsap.set('#works',{autoAlpha:0});
