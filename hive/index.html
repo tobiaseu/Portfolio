@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hive · Tobia Seu</title>
+<meta name="description" content="Hive: a Level 3 autonomous tractor HMI. Tier 1 case study.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0d12;--bg2:#11141b;--line:rgba(255,255,255,.1);--text:#f4f5f7;--muted:#8b919c;--blue:#3d6fd1;--sky:#6ec0ff;--amber:#f2a33a;--green:#3fbf5f;--accent:#E5FF00}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+em{font-family:'Playfair Display',Georgia,serif;font-style:italic;font-weight:500}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+@media(min-width:1100px){main .s .wrap{max-width:1500px;padding-left:330px;padding-right:48px}}
+.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-size:clamp(40px,6vw,88px);line-height:.95;letter-spacing:-.04em;margin:.2em 0 0;font-weight:600}
+h2{font-size:clamp(32px,4.6vw,64px);line-height:1.02;letter-spacing:-.03em;margin:.25em 0 .35em;font-weight:600}
+p.lead{font-size:clamp(17px,1.5vw,20px);line-height:1.55;color:#c3c7cf;max-width:560px}
+nav.top{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:18px 24px;font-size:14px;mix-blend-mode:difference}
+nav.top a{text-decoration:none}
+.chip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:13px;color:#d6d9df;background:rgba(255,255,255,.03)}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--sky)}
+
+/* pad */
+.pad{position:relative;aspect-ratio:1366/1024;border-radius:3.2%/4.2%;overflow:hidden;background:#e9edf3;box-shadow:0 0 0 10px #1b1f27,0 0 0 11px #2a2f39,0 40px 120px rgba(0,0,0,.6)}
+.pad img{position:absolute;display:block}
+.pad .full{inset:0;width:100%;height:100%;object-fit:cover}
+
+/* hero */
+#hero{height:170vh;position:relative}
+#heroCopy{position:absolute;top:0;left:0;right:0;height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:7vh;pointer-events:none}
+#stage{position:fixed;z-index:20;left:0;top:0;transform-origin:0 0;will-change:transform}
+#stage .pad{width:100%}
+#dockLabel{position:absolute;left:0;top:calc(100% + 18px);font-size:30px;white-space:nowrap;opacity:0;color:#d6d9df}
+#dockLabel b{color:var(--text);font-weight:600}
+.states img{opacity:0;transition:opacity .6s ease}
+.states img.on{opacity:1}
+
+/* generic section */
+section.s{position:relative;padding:18vh 0}
+.split{display:grid;grid-template-columns:1fr 1.25fr;gap:56px;align-items:center}
+@media(max-width:860px){.split{grid-template-columns:1fr}#dockLabel{display:none}}
+.num{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+
+/* POV */
+#pov{height:300vh;position:relative}
+#pov .pin{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;align-items:center;justify-content:center}
+#pov svg{width:100%;height:100%}
+#povCopy{position:absolute;left:48px;top:14vh;max-width:430px;z-index:2}
+
+/* engagement */
+#engage{height:420vh;position:relative}
+#engage .pin{position:sticky;top:0;height:100vh;display:flex;align-items:center}
+#engage .pad{width:min(52vw,85vh)}
+.steps{display:flex;flex-direction:column;gap:14px;margin-top:28px}
+.step{display:flex;gap:14px;align-items:flex-start;opacity:.35;transition:opacity .4s}
+.step.on{opacity:1}
+.step i{flex:0 0 26px;height:26px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;font-style:normal;font-size:12px}
+.step.on i{background:var(--c,#fff);color:#000;border-color:transparent}
+.step b{display:block;font-weight:600}
+.step span{color:var(--muted);font-size:14px}
+.bar{height:2px;background:var(--line);margin-top:26px;position:relative;max-width:420px}
+.bar u{position:absolute;inset:0 auto 0 0;width:0;background:#fff}
+#watch{position:absolute;width:150px;right:-30px;bottom:-40px;border-radius:38px;box-shadow:0 0 0 7px #1b1f27,0 30px 60px rgba(0,0,0,.6);opacity:0}
+.engStage{position:relative}
+
+/* fleet */
+.fleetMap{background:var(--bg2);border:1px solid var(--line);border-radius:28px;overflow:hidden}
+.fleetList{display:grid;gap:12px;margin-top:22px}
+.fcard{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.02);font-size:14px}
+.fcard small{color:var(--muted);display:block;margin-top:3px}
+.tag{font-size:11px;font-weight:600;letter-spacing:.06em;padding:5px 10px;border-radius:999px;background:var(--blue)}
+.tag.m{background:#2a2f39;color:#c3c7cf}
+
+/* knob vs touch */
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:40px}
+@media(max-width:860px){.vs{grid-template-columns:1fr}}
+.vs figure{margin:0}
+.vs figcaption{margin-top:18px;font-size:15px;color:#c3c7cf}
+.vs figcaption b{color:#fff;display:block;font-size:18px;margin-bottom:4px}
+.ov{position:absolute;inset:0;pointer-events:none}
+.ring{position:absolute;width:5.6%;aspect-ratio:1;border:3px solid var(--sky);border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 18px var(--sky)}
+.tap{position:absolute;width:6%;aspect-ratio:1;border-radius:50%;background:rgba(61,111,209,.35);border:2px solid rgba(255,255,255,.9);transform:translate(-50%,-50%) scale(0)}
+.miniKnob{position:absolute;right:3%;bottom:4%;width:20%}
+
+/* rotella */
+#knobFocus .stage{position:relative;height:min(70vh,640px);display:grid;place-items:center}
+#bigKnob{width:min(56vw,420px)}
+.gest{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:10px}
+.gest .chip.on{background:#fff;color:#000;border-color:#fff}
+.mk{position:absolute;padding:9px 14px;border-radius:999px;font-size:14px;font-weight:600;background:#fff;color:#111;opacity:0;white-space:nowrap}
+.menuL{position:absolute;left:4%;top:50%;transform:translateY(-50%);display:grid;gap:8px;opacity:0}
+.menuL div{padding:10px 16px;border:1px solid var(--line);border-radius:12px;font-size:14px;background:var(--bg2)}
+.menuL div.on{background:var(--blue);border-color:var(--blue)}
+
+/* jobs */
+#jobs{height:280vh;position:relative}
+#jobs .pin{position:sticky;top:0;height:100vh;display:flex;align-items:center;perspective:1800px}
+.jobStack{position:relative;width:min(58vw,92vh);aspect-ratio:1366/1024;transform-style:preserve-3d}
+.jobStack .pad{position:absolute;inset:0}
+
+/* outro */
+#outro{padding:22vh 0 16vh;text-align:center}
+.links{display:flex;gap:12px;justify-content:center;margin-top:28px;flex-wrap:wrap}
+.btn{padding:14px 22px;border-radius:999px;border:1px solid var(--line);text-decoration:none;font-weight:500}
+.btn.p{background:var(--accent);color:#111;border-color:var(--accent)}
+.meta{display:flex;gap:28px;flex-wrap:wrap;margin-top:26px;font-size:14px;color:#c3c7cf}
+.meta span b{display:block;color:var(--muted);font-weight:400;font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
+</style>
+</head>
+<body>
+<nav class="top"><a href="/">Tobia Seu</a><a href="/">Back to work ↗</a></nav>
+
+<!-- fixed live demo pad: centred in the hero, then docks bottom-left -->
+<div id="stage">
+  <div class="pad" id="mainPad">
+    <div id="layers"></div>
+    <div class="states">
+      <img class="full" data-st="planned" src="img/planned.jpg" alt="">
+      <img class="full" data-st="handover" src="img/handover.jpg" alt="">
+      <img class="full" data-st="resume" src="img/resume.jpg" alt="">
+      <img class="full" data-st="home" src="img/home.jpg" alt="">
+      <img class="full" data-st="calendar" src="img/calendar.jpg" alt="">
+    </div>
+  </div>
+  <div id="dockLabel"><span class="dot" style="display:inline-block;margin-right:12px"></span><b>Live demo</b> · <span id="dockState">Autonomous · L3</span></div>
+</div>
+
+<header id="hero">
+  <div id="heroCopy"><div class="wrap">
+    <div class="eyebrow">Tier 1 · Case study 01 · UX/UI Design</div>
+    <h1>Hive<em>.</em></h1>
+  </div></div>
+</header>
+
+<main>
+<section class="s" id="intro"><div class="wrap split">
+  <div></div>
+  <div>
+    <div class="eyebrow">The tractor is the body, the hive is the network</div>
+    <h2>A cockpit for <em>Level 3</em> autonomy in the orchard.</h2>
+    <p class="lead">While the tractor keeps the row on its own, the operator, even a seasonal worker on day one, can plan the day, tag the field and take over safely when a person steps into the row.</p>
+    <div class="meta"><span><b>Role</b>Research, UX/UI, prototype</span><span><b>Team</b>5 people</span><span><b>Time</b>3 months</span><span><b>Year</b>2026</span></div>
+  </div>
+</div></section>
+
+<!-- POV cockpit build -->
+<section id="pov"><div class="pin">
+  <div id="povCopy">
+    <div class="eyebrow">01 · Inside the cab</div>
+    <h2>Two pads, <em>one</em> knob.</h2>
+    <p class="lead">A detachable horizontal dashboard for control, a vertical screen on the pillar for navigation, and a rotary knob under the right hand.</p>
+  </div>
+  <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" id="cab">
+    <defs>
+      <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a2233"/><stop offset="1" stop-color="#2c3a4f"/></linearGradient>
+      <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1c2a22"/><stop offset="1" stop-color="#0e1511"/></linearGradient>
+      <radialGradient id="glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#6ec0ff" stop-opacity=".35"/><stop offset="1" stop-color="#6ec0ff" stop-opacity="0"/></radialGradient>
+      <clipPath id="padClipH"><rect x="0" y="0" width="300" height="225" rx="12"/></clipPath>
+      <clipPath id="padClipV"><rect x="0" y="0" width="150" height="200" rx="10"/></clipPath>
+    </defs>
+    <g id="outside">
+      <rect width="1600" height="420" fill="url(#sky)"/>
+      <rect y="420" width="1600" height="480" fill="url(#ground)"/>
+      <g id="rows" stroke="#4e6b55" stroke-width="2.2" fill="none" stroke-linecap="round"></g>
+      <path id="pathBlue" d="M790 420 L760 900 L840 900 L810 420Z" fill="#3d6fd1" opacity=".55"/>
+    </g>
+    <g id="frame" fill="#07080b" stroke="#2a2f39" stroke-width="2">
+      <path id="roof" d="M0 0H1600V120Q800 70 0 120Z"/>
+      <path id="pillarL" d="M0 120Q90 110 170 116L60 900H0Z"/>
+      <path id="pillarR" d="M1600 120Q1510 110 1430 116L1540 900H1600Z"/>
+      <path id="dash" d="M0 640Q800 560 1600 640V900H0Z"/>
+    </g>
+    <g id="wheel" fill="none" stroke="#2f3541" stroke-width="22">
+      <ellipse cx="640" cy="860" rx="230" ry="120"/>
+      <path d="M440 830L840 830M640 860V960" stroke-width="18"/>
+    </g>
+    <g id="padH" transform="translate(860 470)">
+      <rect x="-8" y="-8" width="316" height="241" rx="16" fill="#1b1f27"/>
+      <image href="img/drive.jpg" width="300" height="225" clip-path="url(#padClipH)" preserveAspectRatio="xMidYMid slice"/>
+    </g>
+    <g id="padV" transform="translate(1270 300) rotate(-7)">
+      <rect x="-7" y="-7" width="164" height="214" rx="14" fill="#1b1f27"/>
+      <image href="img/vertical.jpg" width="150" height="200" clip-path="url(#padClipV)" preserveAspectRatio="xMidYMid slice"/>
+    </g>
+    <g id="knob" transform="translate(1260 790)">
+      <circle r="90" fill="url(#glow)"/>
+      <ellipse rx="46" ry="22" cy="18" fill="#05060a"/>
+      <ellipse rx="46" ry="22" fill="#2a2f39" stroke="#6ec0ff" stroke-width="2"/>
+      <ellipse rx="30" ry="13" fill="#11141b"/>
+    </g>
+    <g font-family="Inter" font-size="15" fill="#d6d9df" id="labels">
+      <g class="lab" transform="translate(1010 448)"><circle r="4" fill="#E5FF00"/><text x="12" y="-8">Horizontal pad · control</text></g>
+      <g class="lab" transform="translate(1345 285)"><circle r="4" fill="#E5FF00"/><text x="-12" y="-8" text-anchor="end">Pillar pad · mapping</text></g>
+      <g class="lab" transform="translate(1260 740)"><circle r="4" fill="#E5FF00"/><text x="-14" y="-8" text-anchor="end">Rotary knob</text></g>
+    </g>
+  </svg>
+</div></section>
+
+<!-- engagement -->
+<section id="engage"><div class="pin"><div class="wrap split" style="grid-template-columns:1fr 1.4fr;width:100%">
+  <div>
+    <div class="eyebrow">02 · Engaging and handing over</div>
+    <h2>Autonomy you can <em>hand back</em>.</h2>
+    <div class="steps">
+      <div class="step" data-i="0" style="--c:var(--amber)"><i>1</i><div><b>Planned take-over</b><span>A person within 50 m: amber borders, a soft chime, crew wristbands pulse.</span></div></div>
+      <div class="step" data-i="1" style="--c:var(--amber)"><i>2</i><div><b>Hands on the wheel</b><span>A countdown and one action: keep the knob pressed.</span></div></div>
+      <div class="step" data-i="2" style="--c:var(--green)"><i>3</i><div><b>Resume Level 3</b><span>Row 7 confirmed in green, release the wheel and the tractor keeps the row.</span></div></div>
+    </div>
+    <div class="bar"><u id="engBar"></u></div>
+  </div>
+  <div class="engStage"><div class="pad" id="engPad" style="visibility:hidden"></div><img id="watch" src="img/watch.jpg" alt="Apple Watch planned take-over"></div>
+</div></div></section>
+
+<!-- fleet -->
+<section class="s" id="fleet"><div class="wrap split">
+  <div>
+    <div class="eyebrow">03 · Multi-fleet</div>
+    <h2>One farm, <em>many</em> tractors.</h2>
+    <p class="lead">A hardware-agnostic kit moves across a mixed fleet. Every machine shares its job, progress and take-over state, so the crew sees who needs a hand.</p>
+    <div class="fleetList">
+      <div class="fcard"><div>T4S · Hoeing<small>Field H · 41% · row 7 of 18</small></div><span class="tag">AUTO · L3</span></div>
+      <div class="fcard"><div>T4S · Sowing<small>Field B · starts 13:00</small></div><span class="tag">AUTO · L3</span></div>
+      <div class="fcard"><div>T4S · Phytosanitary<small>Field A · 17:30</small></div><span class="tag m">MANUAL</span></div>
+    </div>
+  </div>
+  <div class="fleetMap">
+    <svg viewBox="0 0 640 520" id="fleetSvg" style="display:block;width:100%">
+      <g fill="none" stroke="rgba(255,255,255,.14)" stroke-width="1.5">
+        <path d="M40 40H300V240H40Z"/><path d="M340 40H600V200H340Z"/><path d="M40 280H260V480H40Z"/><path d="M300 240H600V480H300Z"/>
+      </g>
+      <g id="fRows" stroke="rgba(255,255,255,.06)"></g>
+      <g font-family="Inter" font-size="13" fill="#8b919c"><text x="52" y="62">Field H</text><text x="352" y="62">Field B</text><text x="52" y="302">Field A</text><text x="312" y="262">Field E</text></g>
+      <path id="fp1" d="M60 80H280V110H60V140H280V170H60V200H280" fill="none" stroke="#3d6fd1" stroke-width="3" stroke-dasharray="4 6" opacity=".6"/>
+      <path id="fp2" d="M360 80H580V110H360V140H580V170H360" fill="none" stroke="#3d6fd1" stroke-width="3" stroke-dasharray="4 6" opacity=".6"/>
+      <path id="fp3" d="M60 320H240V350H60V380H240V410H60V440H240" fill="none" stroke="#8b919c" stroke-width="3" stroke-dasharray="4 6" opacity=".5"/>
+      <g id="t1"><circle r="22" fill="none" stroke="#f2a33a" stroke-width="2" class="ping" opacity="0"/><circle r="9" fill="#6ec0ff"/></g>
+      <g id="t2"><circle r="9" fill="#6ec0ff"/></g>
+      <g id="t3"><circle r="9" fill="#c3c7cf"/></g>
+    </svg>
+  </div>
+</div></section>
+
+<!-- knob vs touch -->
+<section class="s" id="vs"><div class="wrap">
+  <div class="eyebrow">04 · With and without the knob</div>
+  <h2>Touch to plan, <em>a knob</em> for the field.</h2>
+  <p class="lead">On a bumpy row a fingertip misses. Every touch gesture has a knob equivalent, so the same rail works with eyes on the trees.</p>
+  <div class="vs">
+    <figure><div class="pad" id="padTouch"><img class="full" src="img/drive.jpg" alt=""><div class="ov"><div class="tap" id="tap"></div></div></div>
+      <figcaption><b>Touch</b>Parked or on the headland: tap the rail, drag, plan.</figcaption></figure>
+    <figure><div class="pad" id="padKnob"><img class="full" src="img/drive.jpg" alt=""><div class="ov"><div class="ring" id="ring" style="left:4.7%;top:50%"></div>
+      <svg class="miniKnob" viewBox="-60 -60 120 120"><circle r="54" fill="#11141b" stroke="#6ec0ff" stroke-width="3"/><g id="mk"><circle r="40" fill="#2a2f39"/><rect x="-3" y="-38" width="6" height="16" rx="3" fill="#fff"/></g></svg></div></div>
+      <figcaption><b>Knob</b>In the row: rotate to move, push to confirm, no need to look down.</figcaption></figure>
+  </div>
+</div></section>
+
+<!-- rotella focus -->
+<section class="s" id="knobFocus"><div class="wrap" style="text-align:center">
+  <div class="eyebrow">05 · Focus on the knob</div>
+  <h2>Three gestures, <em>whole</em> cockpit.</h2>
+  <div class="gest"><span class="chip" data-g="0">Rotate · move focus</span><span class="chip" data-g="1">Push left · menu</span><span class="chip" data-g="2">Push right · drop a marker</span></div>
+  <div class="stage">
+    <svg id="bigKnob" viewBox="-200 -200 400 400">
+      <circle r="190" fill="url(#kg)" opacity=".5"/>
+      <defs><radialGradient id="kg"><stop offset="0" stop-color="#6ec0ff" stop-opacity=".25"/><stop offset="1" stop-color="#6ec0ff" stop-opacity="0"/></radialGradient></defs>
+      <g id="ticks"></g>
+      <circle r="120" fill="#151922" stroke="#2a2f39" stroke-width="2"/>
+      <g id="kTop"><circle r="96" fill="#1e232d"/><circle r="96" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="10"/><rect x="-5" y="-90" width="10" height="34" rx="5" fill="#fff"/></g>
+      <path id="arrL" d="M-160 0l26-18v36z" fill="#fff" opacity="0"/>
+      <path id="arrR" d="M160 0l-26-18v36z" fill="#fff" opacity="0"/>
+    </svg>
+    <div class="menuL" id="menuL"><div>Home</div><div class="on">Drive</div><div>Fields</div><div>Calendar</div><div>Settings</div></div>
+    <div class="mk" style="right:8%;top:22%">Weeds</div><div class="mk" style="right:2%;top:38%">Disease</div><div class="mk" style="right:2%;top:54%">Pests</div><div class="mk" style="right:8%;top:70%">Drainage</div>
+  </div>
+</div></section>
+
+<!-- jobs -->
+<section id="jobs"><div class="pin"><div class="wrap split" style="grid-template-columns:1fr 1.4fr;width:100%">
+  <div>
+    <div class="eyebrow">06 · Managing the jobs</div>
+    <h2>The day, <em>at a glance</em>.</h2>
+    <p class="lead">Today's jobs carry a colour and an AUTO or MANUAL tag. Zoom out and the same language plans the whole week, with a line for "now".</p>
+  </div>
+  <div class="jobStack" id="jobStack">
+    <div class="pad" id="jCal"><img class="full" src="img/calendar.jpg" alt="Planning calendar"></div>
+    <div class="pad" id="jHome"><img class="full" src="img/home.jpg" alt="Home with today's jobs"></div>
+  </div>
+</div></div></section>
+
+<section id="outro"><div class="wrap">
+  <div class="eyebrow">Outcome</div>
+  <h2>A modular kit, <em>not</em> a new fleet.</h2>
+  <p class="lead" style="margin:0 auto">Expert reviewers praised the clarity of the layout and a kit that protects what farmers already own. Next: a quick-message channel so crews can coordinate shared tasks.</p>
+  <div class="links"><a class="btn p" href="/">All projects</a><a class="btn" href="/#contact">Get in touch</a></div>
+</div></section>
+
+</main>
+<script src="../js/gsap.min.js"></script>
+<script src="../js/ScrollTrigger.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+const W=1366,H=1024,$=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+
+/* ---------- hero pad built from the real Figma layers ---------- */
+const BOX={"job":[445,870,906,1016],"gaugeR":[879,318,1257,719],"notif":[922,84,1359,192],"rail":[0,380,1356,644],"pills":[16,84,218,211],"top":[16,16,1350,72],"compass":[16,800,224,1008],"heading":[643,160,723,245],"blue":[0,248,717,808],"horizon":[0,248,1366,642],"readouts":[233,778,1133,882],"map":[1142,800,1350,1008],"gaugeL":[112,318,291,717],"lines":[0,249,1366,844],"arcL":[186,367,489,642],"line2":[575,251,683,828],"tractor":[606,414,760,630],"side":[237,905,1135,988]};
+const ORDER=['horizon','lines','line2','blue','tractor','gaugeL','arcL','gaugeR','top','pills','rail','heading','notif','readouts','job','side','compass','map'];
+const L=$('#layers');L.style.cssText='position:absolute;inset:0;perspective:1400px';
+const bg=new Image();bg.src='layers/bg.jpg';bg.className='full';L.appendChild(bg);
+const el={};
+for(const k of ORDER){const b=BOX[k],i=new Image();i.src='layers/'+k+'.webp';i.alt='';
+  Object.assign(i.style,{left:b[0]/W*100+'%',top:b[1]/H*100+'%',width:(b[2]-b[0])/W*100+'%',height:(b[3]-b[1])/H*100+'%'});L.appendChild(i);el[k]=i}
+const org=(k,ox,oy)=>{const b=BOX[k];return `${(ox-b[0])/(b[2]-b[0])*100}% ${(oy-b[1])/(b[3]-b[1])*100}%`};
+const build=gsap.timeline({paused:true,defaults:{ease:'expo.out',duration:1.2}});
+build.from(bg,{opacity:0,scale:1.06,duration:1.4,ease:'power2.out'},0)
+ .from(el.horizon,{scaleX:0,opacity:0},.35)
+ .fromTo([el.lines,el.line2],{clipPath:'inset(0 0 100% 0)'},{clipPath:'inset(0 0 0% 0)',duration:1.4,ease:'power2.inOut',stagger:.08},.6)
+ .fromTo(el.blue,{clipPath:'inset(0 0 100% 0)'},{clipPath:'inset(0 0 0% 0)',duration:1.2,ease:'power2.inOut'},1.1);
+const fly=(k,t,o)=>build.from(el[k],Object.assign({opacity:0,z:-380,filter:'blur(8px)',transformOrigin:org(k,o.ox??683,o.oy??512)},o.v),t);
+fly('tractor',1.5,{oy:700,v:{z:-560,y:30}});
+fly('gaugeL',1.9,{ox:337,oy:520,v:{rotationY:35,x:-40}});fly('arcL',2.0,{ox:337,oy:520,v:{rotationY:35,x:-40}});
+fly('gaugeR',2.0,{ox:1030,oy:518,v:{rotationY:-35,x:40}});
+fly('top',2.5,{oy:44,v:{y:-30}});fly('pills',2.6,{oy:140,v:{y:-20}});fly('rail',2.7,{v:{}});
+fly('heading',2.8,{oy:200,v:{z:-480}});fly('notif',2.9,{oy:140,v:{rotationX:-20}});
+fly('readouts',3.1,{oy:830,v:{rotationX:30,y:30}});fly('job',3.25,{oy:940,v:{rotationX:30,y:30}});fly('side',3.35,{oy:945,v:{rotationX:30,y:30}});
+fly('compass',3.5,{ox:120,oy:900,v:{rotationY:40,rotation:-90}});fly('map',3.6,{ox:1245,oy:900,v:{rotationY:-40}});
+window.addEventListener('load',()=>build.play());
+
+/* ---------- stage: centred -> docked bottom-left ---------- */
+const stage=$('#stage');
+const geo=()=>{const vw=innerWidth,vh=innerHeight,w=Math.min(vw*.78,vh*.66*W/H),h=w*H/W;
+  const dw=vw<860?150:260;return {w,h,x0:(vw-w)/2,y0:(vh-h)/2-vh*.1,s:dw/w,x1:24,y1:vh-24-h*dw/w-(vw<860?0:40)}};
+const place=()=>{const g=geo();stage.style.width=g.w+'px'};place();addEventListener('resize',place);
+gsap.set(stage,{x:()=>geo().x0,y:()=>geo().y0});
+gsap.timeline({scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom bottom',scrub:.6,invalidateOnRefresh:true}})
+ .to('#heroCopy',{opacity:0,y:-60,duration:.3},0)
+ .to(stage,{x:()=>geo().x1,y:()=>geo().y1,scale:()=>geo().s,duration:1,ease:'power2.inOut'},.15)
+ .to('#dockLabel',{opacity:1,duration:.2},.9);
+
+/* dock state per section */
+const setState=(st,label)=>{$$('.states img').forEach(i=>i.classList.toggle('on',i.dataset.st===st));$('#dockState').textContent=label};
+const stateAt=(sel,st,label)=>ScrollTrigger.create({trigger:sel,start:'top 60%',end:'bottom 40%',onToggle:s=>s.isActive&&setState(st,label)});
+stateAt('#intro',null,'Autonomous · L3');stateAt('#pov',null,'Autonomous · L3');
+stateAt('#fleet',null,'Autonomous · L3');stateAt('#vs',null,'Autonomous · L3');stateAt('#knobFocus',null,'Autonomous · L3');
+stateAt('#jobs','home','Today · 3 jobs');stateAt('#outro','calendar','Week 23');
+/* the docked pad hides while a section shows its own big pad */
+const own=['#pov','#engage','#jobs'].map(s=>ScrollTrigger.create({trigger:s,start:'top 60%',end:'bottom 40%'}));let hid=null;
+ScrollTrigger.addEventListener('refresh',()=>hid=null);
+const dockVis=()=>{const h=own.some(t=>t.isActive);if(h!==hid){hid=h;gsap.to(stage,{autoAlpha:h?0:1,duration:.4,overwrite:'auto'})}};
+addEventListener('scroll',dockVis,{passive:true});
+
+/* ---------- POV cockpit build ---------- */
+const rows=$('#rows');for(let i=-9;i<=9;i++){if(!i)continue;const p=document.createElementNS('http://www.w3.org/2000/svg','path');
+  p.setAttribute('d',`M${800+i*6} 420 L${800+i*170} 900`);rows.appendChild(p)}
+$$('#rows path').forEach(p=>{const l=p.getTotalLength();p.style.strokeDasharray=l;p.style.strokeDashoffset=l});
+gsap.timeline({scrollTrigger:{trigger:'#pov',start:'top top',end:'bottom bottom',scrub:.8}})
+ .from('#outside rect',{opacity:0,duration:.4})
+ .to('#rows path',{strokeDashoffset:0,duration:.6,stagger:.02},.1)
+ .from('#pathBlue',{scaleY:0,transformOrigin:'50% 0%',duration:.5},.4)
+ .from('#roof',{y:-160,duration:.5,ease:'power3.out'},.6)
+ .from('#pillarL',{x:-220,duration:.5,ease:'power3.out'},.65)
+ .from('#pillarR',{x:220,duration:.5,ease:'power3.out'},.65)
+ .from('#dash',{y:300,duration:.5,ease:'power3.out'},.7)
+ .from('#wheel',{y:240,opacity:0,duration:.5},.8)
+ .from('#padH',{opacity:0,scale:.6,y:60,transformOrigin:'150px 112px',duration:.6,ease:'back.out(1.4)'},1.0)
+ .from('#padV',{opacity:0,x:120,duration:.6,ease:'power3.out'},1.15)
+ .from('#knob',{opacity:0,scale:.3,transformOrigin:'0 0',duration:.5,ease:'back.out(2)'},1.3)
+ .from('.lab',{opacity:0,y:10,stagger:.1,duration:.3},1.5)
+ .to({},{duration:.4})
+ .from('#povCopy',{opacity:0,y:30,duration:.4},.2);
+
+/* ---------- engagement: Planned TOR -> Handover -> Resume -> L3 ---------- */
+const ep=$('#engPad');ep.style.visibility='visible';
+const ST=['planned','handover','resume','drive'].map(s=>{const i=new Image();i.src='img/'+s+'.jpg';i.className='full';i.style.opacity=s==='drive'?1:0;i.style.zIndex=s==='drive'?0:1;ep.appendChild(i);return i});
+ST.unshift(ST.pop());/* drive first */
+const eng=gsap.timeline({scrollTrigger:{trigger:'#engage',start:'top top',end:'bottom bottom',scrub:.5,
+  onUpdate:s=>{const k=Math.min(2,Math.floor(s.progress*3.4-.25));$$('.step').forEach((e,i)=>e.classList.toggle('on',i===k))}}});
+eng.from(ep,{rotationY:-18,rotationX:8,scale:.9,opacity:0,duration:.6,ease:'power2.out'})
+ .to(ST[1],{opacity:1,duration:.2},.7).to('#watch',{opacity:1,y:-20,duration:.3},.8)
+ .to(ep,{boxShadow:'0 0 0 10px #1b1f27,0 0 0 11px #f2a33a,0 40px 140px rgba(242,163,58,.35)',duration:.3},.75)
+ .to(ST[2],{opacity:1,duration:.2},1.5).to('#watch',{opacity:0,duration:.2},1.5)
+ .to(ST[3],{opacity:1,duration:.2},2.3)
+ .to(ep,{boxShadow:'0 0 0 10px #1b1f27,0 0 0 11px #3fbf5f,0 40px 140px rgba(63,191,95,.3)',duration:.3},2.3)
+ .to([ST[1],ST[2],ST[3]],{opacity:0,duration:.25},3.0)
+ .to(ep,{boxShadow:'0 0 0 10px #1b1f27,0 0 0 11px #2a2f39,0 40px 120px rgba(0,0,0,.6)',duration:.3},3.0)
+ .to('#engBar',{width:'100%',duration:3.3,ease:'none'},0);
+
+/* ---------- fleet: tractors follow their rows ---------- */
+const fRows=$('#fRows');[[40,300,40,240],[340,600,40,200],[40,260,280,480],[300,600,240,480]].forEach(([a,b,c,d])=>{for(let y=c+15;y<d;y+=15){const l=document.createElementNS('http://www.w3.org/2000/svg','line');l.setAttribute('x1',a+8);l.setAttribute('x2',b-8);l.setAttribute('y1',y);l.setAttribute('y2',y);fRows.appendChild(l)}});
+const along=(g,p,dur,delay)=>{const path=$(p),len=path.getTotalLength(),o={t:0};
+  return gsap.to(o,{t:1,duration:dur,delay,repeat:-1,ease:'none',onUpdate:()=>{const q=path.getPointAtLength(o.t*len);$(g).setAttribute('transform',`translate(${q.x} ${q.y})`)}})};
+along('#t1','#fp1',14,0);along('#t2','#fp2',11,0);along('#t3','#fp3',16,0);
+gsap.fromTo('#t1 .ping',{attr:{r:10},opacity:.9},{attr:{r:40},opacity:0,duration:1.6,repeat:-1,repeatDelay:2.4,ease:'power2.out'});
+gsap.from('.fcard',{scrollTrigger:{trigger:'#fleet',start:'top 70%'},opacity:0,x:-30,stagger:.12,duration:.8,ease:'expo.out'});
+
+/* ---------- knob vs touch ---------- */
+const RAIL=[400,452,512,572,624].map(y=>({x:(y===512?65:46)/W*100,y:y/H*100}));
+const tt=gsap.timeline({repeat:-1,scrollTrigger:{trigger:'#vs',start:'top 80%',toggleActions:'play pause resume pause'}});
+RAIL.forEach((p,i)=>{tt.set('#tap',{left:p.x+'%',top:p.y+'%'},i*1.1).fromTo('#tap',{scale:0,opacity:1},{scale:1.5,opacity:0,duration:.7,ease:'power2.out'},i*1.1+.05)});
+const kt=gsap.timeline({repeat:-1,scrollTrigger:{trigger:'#vs',start:'top 80%',toggleActions:'play pause resume pause'}});
+RAIL.forEach((p,i)=>{kt.to('#mk',{rotation:i*36,transformOrigin:'0 0',duration:.5,ease:'power2.inOut'},i*1.1).to('#ring',{left:p.x+'%',top:p.y+'%',duration:.45,ease:'expo.out'},i*1.1+.1)});
+kt.to('#mk',{rotation:0,duration:.6},'+=.4');
+
+/* ---------- big knob focus ---------- */
+const ticks=$('#ticks');for(let i=0;i<48;i++){const r=document.createElementNS('http://www.w3.org/2000/svg','rect');r.setAttribute('x',-1.5);r.setAttribute('y',-160);r.setAttribute('width',3);r.setAttribute('height',i%4?10:20);r.setAttribute('fill','rgba(255,255,255,'+(i%4?.18:.45)+')');r.setAttribute('transform',`rotate(${i*7.5})`);ticks.appendChild(r)}
+const g=i=>$$('.gest .chip').forEach((c,j)=>c.classList.toggle('on',i===j));
+const mi=$$('#menuL div');
+const kf=gsap.timeline({repeat:-1,scrollTrigger:{trigger:'#knobFocus',start:'top 70%',toggleActions:'play pause resume pause'}});
+kf.call(()=>g(0)).to('#kTop',{rotation:60,duration:.9,ease:'power2.inOut'}).to('#kTop',{rotation:-30,duration:.9,ease:'power2.inOut'}).to('#kTop',{rotation:0,duration:.7})
+ .call(()=>g(1)).to('#kTop',{x:-22,duration:.25,ease:'power2.out'}).to('#arrL',{opacity:1,x:-14,duration:.25},'<').to('#kTop',{x:0,duration:.35}).to('#arrL',{opacity:0,x:0,duration:.3},'<')
+ .to('#menuL',{opacity:1,x:10,duration:.5,ease:'expo.out'},'<');
+[2,3,1].forEach(j=>kf.call(()=>mi.forEach((d,k)=>d.classList.toggle('on',k===j))).to('#kTop',{rotation:'+=30',duration:.45,ease:'power2.inOut'},'+=.25'));
+kf.to('#menuL',{opacity:0,duration:.4},'+=.4').set('#kTop',{rotation:0})
+ .call(()=>g(2)).to('#kTop',{x:22,duration:.25,ease:'power2.out'}).to('#arrR',{opacity:1,x:14,duration:.25},'<').to('#kTop',{x:0,duration:.35}).to('#arrR',{opacity:0,x:0,duration:.3},'<')
+ .to('.mk',{opacity:1,x:-14,stagger:.1,duration:.5,ease:'expo.out'},'<').to('.mk',{opacity:0,duration:.4},'+=1.4');
+
+/* ---------- jobs: home -> calendar ---------- */
+gsap.timeline({scrollTrigger:{trigger:'#jobs',start:'top top',end:'bottom bottom',scrub:.7}})
+ .from('#jHome',{rotationY:-22,z:-200,opacity:0,duration:.5})
+ .from('#jCal',{opacity:0,duration:.01},0)
+ .to('#jHome',{x:'-14%',y:'-10%',z:-380,rotationY:18,opacity:.35,duration:1},.8)
+ .fromTo('#jCal',{x:'16%',y:'12%',z:-300,rotationY:-18,opacity:0},{x:0,y:0,z:0,rotationY:0,opacity:1,duration:1},.8);
+</script>
+</body>
+</html>
