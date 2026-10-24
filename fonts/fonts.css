@@ -1,0 +1,13 @@
+/* ---------- font ----------
+   Testo: Akzidenz-Grotesk (Berthold, commerciale). Finche' non ci sono i file con licenza web
+   si usa Archivo (grotesk libera, la piu' vicina). Per passare ad Akzidenz: metti i .woff2 in questa cartella (fonts/)
+   con questi nomi, togli il commento al blocco qui sotto e tutto il sito (home e /hive/) lo usa da solo. */
+@font-face{font-family:'Archivo';src:url(archivo.woff2) format('woff2');font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:'Playfair Display';src:url(playfair-display-italic.woff2) format('woff2');font-weight:500;font-style:italic;font-display:swap}
+:root{--sans:'Archivo','Helvetica Neue',Arial,system-ui,sans-serif}
+/*
+@font-face{font-family:'Akzidenz-Grotesk';src:url(akzidenz-grotesk-regular.woff2) format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Akzidenz-Grotesk';src:url(akzidenz-grotesk-medium.woff2) format('woff2');font-weight:500 600;font-style:normal;font-display:swap}
+@font-face{font-family:'Akzidenz-Grotesk';src:url(akzidenz-grotesk-bold.woff2) format('woff2');font-weight:700;font-style:normal;font-display:swap}
+:root{--sans:'Akzidenz-Grotesk','Archivo','Helvetica Neue',Arial,system-ui,sans-serif}
+*/

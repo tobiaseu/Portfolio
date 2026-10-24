@@ -22,20 +22,23 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23111'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23E5FF00'/%3E%3C/svg%3E">
 
 <title>Tobia Seu · UX/UI & Product Designer in Turin (Torino)</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,500&display=swap" rel="stylesheet">
+<link rel="preload" href="fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/playfair-display-italic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="img/web/tobia.webp" as="image" fetchpriority="high">
+<link rel="stylesheet" href="fonts/fonts.css">
 <style>
 :root{--bg:#F7F7F9;--text:#111;--muted:#5a5a5a;--accent:#E5FF00;--border:rgba(17,17,17,.16);--nav:rgba(255,255,255,.78);--card:#111;--ctext:#fff;--gc:rgba(0,0,0,.11);--fbg:#fff}
 html.dark{--bg:#111;--text:#F7F7F9;--muted:#a5a5a5;--border:rgba(255,255,255,.22);--nav:rgba(30,30,30,.78);--card:#f4f4f2;--ctext:#111;--gc:rgba(255,255,255,.13);--fbg:#111}
 *,*::before,*::after{box-sizing:border-box}
 html{background:var(--bg);scrollbar-gutter:stable}
 html.lock{overflow:hidden}
-body{margin:0;background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased;transition:background .5s,color .5s}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);overflow-x:hidden;-webkit-font-smoothing:antialiased;transition:background .5s,color .5s}
 body.no-cur,body.no-cur *{cursor:none!important}
 .serif{font-family:'Playfair Display',Georgia,serif;font-style:italic;font-weight:500}
-.kicker{margin:0 0 1rem;font:500 .72rem 'Inter',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.kicker{margin:0 0 1rem;font:500 .72rem var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
 
 /* ---------- pulsanti (stessa famiglia: pillola, con o senza cornice) ---------- */
-.btn,.btn-o{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.65rem 1.4rem;border-radius:999px;font:600 .8rem 'Inter',sans-serif;text-decoration:none;cursor:pointer;transition:transform .16s cubic-bezier(.23,1,.32,1),box-shadow .2s cubic-bezier(.23,1,.32,1),border-color .2s cubic-bezier(.23,1,.32,1),background .2s cubic-bezier(.23,1,.32,1)}
+.btn,.btn-o{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.65rem 1.4rem;border-radius:999px;font:600 .8rem var(--sans);text-decoration:none;cursor:pointer;transition:transform .16s cubic-bezier(.23,1,.32,1),box-shadow .2s cubic-bezier(.23,1,.32,1),border-color .2s cubic-bezier(.23,1,.32,1),background .2s cubic-bezier(.23,1,.32,1)}
 .btn{background:var(--accent);color:#000;border:1px solid var(--accent)}
 .btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(229,255,0,.35)}
 .btn-o{background:transparent;color:var(--text);border:1px solid var(--border);backdrop-filter:blur(10px)}
@@ -57,13 +60,13 @@ body.vfull .logo{color:#fff}
 .theme-switch{position:fixed;bottom:1.5rem;left:2rem;z-index:300;display:grid;grid-template-columns:1fr 1fr;padding:4px;border-radius:999px;background:var(--nav);backdrop-filter:blur(12px);border:1px solid var(--border)}
 .ts-thumb{position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);border-radius:999px;background:var(--text);transition:transform .45s cubic-bezier(.23,1,.32,1)}
 html.dark .ts-thumb{transform:translateX(100%)}
-.theme-switch button{position:relative;height:32px;padding:0 1rem;border:0;background:none;border-radius:999px;font:600 .72rem 'Inter',sans-serif;color:var(--muted);cursor:pointer;transition:color .4s}
+.theme-switch button{position:relative;height:32px;padding:0 1rem;border:0;background:none;border-radius:999px;font:600 .72rem var(--sans);color:var(--muted);cursor:pointer;transition:color .4s}
 html:not(.dark) [data-t=light],html.dark [data-t=dark]{color:var(--bg)!important}
 
 /* ---------- cursore "drag" ---------- */
 #cur{position:fixed;left:0;top:0;z-index:400;pointer-events:none;opacity:0;transition:opacity .25s;will-change:transform}
 #cur.show{opacity:1}
-.cur-in{width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;border:1px solid var(--border);background:var(--nav);backdrop-filter:blur(10px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:var(--text);transform:scale(.6);transition:transform .35s cubic-bezier(.23,1,.32,1),background .25s,color .25s,border-color .25s}
+.cur-in{width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;border:1px solid var(--border);background:var(--nav);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:var(--text);transform:scale(.6);transition:transform .35s cubic-bezier(.23,1,.32,1),background .25s,color .25s,border-color .25s}
 #cur.show .cur-in{transform:scale(1)}
 #cur.down .cur-in{transform:scale(.84);background:var(--accent);color:#000;border-color:var(--accent)}
 .cur-in svg{width:13px;height:13px}
@@ -71,7 +74,7 @@ html:not(.dark) [data-t=light],html.dark [data-t=dark]{color:var(--bg)!important
 #cur[data-k=globe].down .ic-arrows{display:none}
 #cur[data-k=globe].down .ic-globe{display:block;animation:spin 2.2s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-.cur-l{display:none;font:600 .5rem 'Inter',sans-serif;letter-spacing:.14em;text-transform:uppercase}
+.cur-l{display:none;font:600 .5rem var(--sans);letter-spacing:.14em;text-transform:uppercase}
 
 /* ---------- pagine ---------- */
 .page{display:none}
@@ -86,13 +89,16 @@ body:not([data-page=home]) .page.sub{animation:in .7s ease}
 .hub{position:absolute;left:50%;top:50%;width:0;height:0;transform-style:preserve-3d}
 .sphere-scene,.sphere{position:absolute;left:0;top:0;width:0;height:0;transform-style:preserve-3d}
 .greeting{position:absolute;left:0;top:0;transform:translate3d(-50%,-50%,0);pointer-events:none;text-align:center}
-.g-wrap{transition:opacity .6s}
+.g-wrap{transition:opacity .6s,transform 1.2s cubic-bezier(.23,1,.32,1)}
+body.pre .g-wrap{opacity:0;transform:translateY(18px)}
+.hin{display:block;transition:opacity 1s cubic-bezier(.23,1,.32,1) .9s}
+body.pre .hin{opacity:0;transition:none}
 body.focus .g-wrap{opacity:0}
 #gt{font-size:clamp(2.5rem,7vw,5.5rem);line-height:1;white-space:nowrap;transition:opacity .28s cubic-bezier(.23,1,.32,1),transform .28s cubic-bezier(.23,1,.32,1)}
 .card{position:absolute;left:0;top:0;width:440px;height:568px;margin:-284px 0 0 -220px;transform-style:preserve-3d;cursor:pointer;will-change:transform}
 .cback{position:absolute;inset:0;transform-style:preserve-3d}
 .cback{border-radius:30px;background:var(--card);transform:translateZ(-.5px) rotateY(180deg);backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:0 0 0 1px color-mix(in srgb,var(--ctext) 14%,transparent),0 1.5px 0 1px color-mix(in srgb,var(--card) 70%,#888),0 30px 70px rgba(0,0,0,.25)}
-.cback::after{content:'tobia seu';position:absolute;left:0;right:0;bottom:34px;text-align:center;font:600 20px 'Inter',sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--ctext);opacity:.3}
+.cback::after{content:'tobia seu';position:absolute;left:0;right:0;bottom:34px;text-align:center;font:600 20px var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--ctext);opacity:.3}
 .cface{position:absolute;inset:0;transform:translateZ(.5px);backface-visibility:hidden;-webkit-backface-visibility:hidden}
 .flip{position:absolute;inset:0;transform-style:preserve-3d;perspective:1600px;transition:transform .5s cubic-bezier(.23,1,.32,1)}
 .card-in{position:absolute;inset:0;border-radius:30px;background:var(--card);color:var(--ctext);box-shadow:0 0 0 1px color-mix(in srgb,var(--ctext) 14%,transparent),0 1.5px 0 1px color-mix(in srgb,var(--card) 70%,#888),0 40px 90px rgba(0,0,0,.28);padding:22px 22px 18px;display:flex;flex-direction:column;gap:16px;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;transition:transform .9s cubic-bezier(.23,1,.32,1)}
@@ -103,7 +109,7 @@ body.top:not(.focus) .card:hover .flip{transform:scale(1.16)}
 .pc:hover .flip{transform:translateY(-8px)}
 .photo{flex:1;min-height:0;border-radius:16px;background-size:cover;background-position:center;background-color:#555;pointer-events:none}
 .cap{height:84px;flex:none;display:flex;justify-content:space-between;align-items:center;padding:0 6px;pointer-events:none}
-.cap b{display:block;font:600 30px/1.1 'Inter',sans-serif;letter-spacing:-.02em}
+.cap b{display:block;font:600 30px/1.1 var(--sans);letter-spacing:-.02em}
 .cap i{display:block;margin-top:7px;font-size:21px;opacity:.7}
 .cap em{font:14px ui-monospace,monospace;opacity:.45;font-style:normal}
 .more{flex:none;display:grid;grid-template-rows:0fr;opacity:0;transform:translateY(14px);transition:grid-template-rows 1s cubic-bezier(.23,1,.32,1),opacity .9s cubic-bezier(.23,1,.32,1) .1s,transform 1s cubic-bezier(.23,1,.32,1);padding:0 6px}
@@ -125,7 +131,7 @@ body.top:not(.focus) .card:hover .flip{transform:scale(1.16)}
 .card-in.back .turn{right:40px;top:40px;background:color-mix(in srgb,var(--ctext) 14%,transparent);color:var(--ctext);box-shadow:none}
 .card .turn{opacity:0;pointer-events:none}
 .card.ready .turn,.card.open .turn{opacity:1;pointer-events:auto}
-.bk{font:500 12px 'Inter',sans-serif;letter-spacing:.16em;text-transform:uppercase;opacity:.55;margin-top:40px}
+.bk{font:500 12px var(--sans);letter-spacing:.16em;text-transform:uppercase;opacity:.55;margin-top:40px}
 .card-in.back h4{margin:0;font-size:34px;font-weight:600;letter-spacing:-.02em;line-height:1.1}
 .card-in.back i{font-size:22px;opacity:.7}
 .card-in.back p{margin:10px 0 0;font-size:17px;line-height:1.6;opacity:.8}
@@ -147,7 +153,7 @@ body.focus #hint{visibility:hidden}
 /* finestra video teaser */
 .vwin{position:absolute;left:0;top:0;width:100%;height:100%;z-index:6;background:#15151a;overflow:hidden;pointer-events:none}
 .vwin video,.v-fallback{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.v-fallback{background:linear-gradient(135deg,#1b1b22,#33333f);display:grid;place-items:center;text-align:center;color:rgba(255,255,255,.75);font:600 1rem 'Inter',sans-serif}
+.v-fallback{background:linear-gradient(135deg,#1b1b22,#33333f);display:grid;place-items:center;text-align:center;color:rgba(255,255,255,.75);font:600 1rem var(--sans)}
 .v-fallback small{display:block;margin-top:.5rem;font-weight:400;font-size:.75rem;opacity:.7}
 .vwin.ok .v-fallback{display:none}
 .v-cap{position:absolute;left:6vw;bottom:15vh;color:#fff;font-size:clamp(2rem,5vw,4rem);line-height:1.05;letter-spacing:-.02em;font-weight:500;opacity:0}
@@ -162,7 +168,7 @@ body.focus #hint{visibility:hidden}
 /* filtri e vista */
 .chips{display:flex;gap:.5rem;flex-wrap:wrap}
 .vt{display:flex;gap:.4rem;margin-top:1.2rem}
-.chip{padding:.5rem 1rem;border-radius:999px;border:1px solid var(--border);background:transparent;color:var(--text);font:500 .76rem 'Inter',sans-serif;cursor:pointer;transition:background .2s cubic-bezier(.23,1,.32,1),color .2s cubic-bezier(.23,1,.32,1),border-color .2s cubic-bezier(.23,1,.32,1),transform .16s cubic-bezier(.23,1,.32,1);white-space:nowrap}
+.chip{padding:.5rem 1rem;border-radius:999px;border:1px solid var(--border);background:transparent;color:var(--text);font:500 .76rem var(--sans);cursor:pointer;transition:background .2s cubic-bezier(.23,1,.32,1),color .2s cubic-bezier(.23,1,.32,1),border-color .2s cubic-bezier(.23,1,.32,1),transform .16s cubic-bezier(.23,1,.32,1);white-space:nowrap}
 .chip:hover{border-color:var(--text)}
 .chip.on{background:var(--text);color:var(--bg);border-color:var(--text)}
 .fcol{position:absolute;left:calc(8vw + min(24vw,350px) + 2.5vw);top:50%;transform:translateY(-50%);z-index:5;width:11.5vw;min-width:150px}
@@ -200,7 +206,7 @@ body[data-view=list] .pgrid{display:none}
 .ls{position:absolute;left:50%;top:0;width:var(--sw,1000px);height:var(--sh,520px);margin-left:calc(var(--sw,1000px)/-2);border-radius:30px;background:var(--card);color:var(--ctext);padding:20px;display:flex;flex-direction:column;gap:12px;box-shadow:0 0 0 1px color-mix(in srgb,var(--ctext) 14%,transparent),0 1.5px 0 1px color-mix(in srgb,var(--card) 70%,#888),0 30px 70px rgba(0,0,0,.22);cursor:pointer;will-change:transform,opacity}
 .ls .photo{flex:1;min-height:0}
 .ls .lcap{height:76px;flex:none;display:flex;justify-content:space-between;align-items:center;padding:0 6px}
-.ls .lcap b{display:block;font:600 30px/1.1 'Inter',sans-serif;letter-spacing:-.02em}
+.ls .lcap b{display:block;font:600 30px/1.1 var(--sans);letter-spacing:-.02em}
 .ls .lcap i{display:block;margin-top:4px;font-size:21px;opacity:.7}
 .ls .lcap div:last-child{display:flex;align-items:center;gap:1.4rem}
 .ls .lcap em{font:14px ui-monospace,monospace;opacity:.45;font-style:normal}
@@ -317,7 +323,7 @@ body[data-page=home] #rail{display:flex}
 #rail{mix-blend-mode:difference}#rail button{color:#bbb}#rail button.on{color:#fff}#rail button:hover{color:#fff}
 body.focus #rail,body.vfull #rail{opacity:0;pointer-events:none}
 #rail{transition:opacity .4s cubic-bezier(.23,1,.32,1)}
-#rail button{display:flex;align-items:center;gap:12px;padding:6px 0;border:0;background:none;cursor:pointer;color:var(--muted);font:500 .68rem 'Inter',sans-serif;letter-spacing:.14em;text-transform:uppercase}
+#rail button{display:flex;align-items:center;gap:12px;padding:6px 0;border:0;background:none;cursor:pointer;color:var(--muted);font:500 .68rem var(--sans);letter-spacing:.14em;text-transform:uppercase}
 #rail button span{opacity:0;transform:translateX(6px);transition:opacity .3s cubic-bezier(.23,1,.32,1),transform .3s cubic-bezier(.23,1,.32,1)}
 #rail button:hover span,#rail button.on span{opacity:1;transform:none}
 #rail button.on{color:var(--text)}
@@ -333,7 +339,7 @@ body.focus #rail,body.vfull #rail{opacity:0;pointer-events:none}
  radial-gradient(120% 90% at 18% 0%,rgba(255,255,255,.10),transparent 55%),
  linear-gradient(rgba(0,0,0,var(--sh,.08)),rgba(0,0,0,var(--sh,.08)));
  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.34),inset 0 0 0 1px rgba(255,255,255,.07),inset 0 -18px 30px -28px rgba(0,0,0,.25)}
-.grain{z-index:2;opacity:.025;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.grain{z-index:2;opacity:.03;background:url(img/grain.png) 0 0/128px}
 .photo{position:relative;box-shadow:inset 0 0 0 1px rgba(255,255,255,.10),inset 0 -34px 44px -32px rgba(0,0,0,.18),inset 0 30px 40px -34px rgba(255,255,255,.35)}
 .photo::after{content:'';position:absolute;inset:0;border-radius:inherit;background:radial-gradient(130% 100% at 50% 40%,transparent 60%,rgba(0,0,0,.16)),linear-gradient(160deg,rgba(255,255,255,.14),transparent 38%)}
 .pj-top{display:flex;justify-content:space-between;align-items:flex-start;gap:2rem;flex-wrap:wrap}
@@ -371,11 +377,12 @@ body.focus #rail,body.vfull #rail{opacity:0;pointer-events:none}
   .copy p{font-size:.92rem;line-height:1.5;margin-bottom:1rem}
   .copy .big{font-size:1.8rem}
   header{padding:1rem 1rem}
+  .nav-pill{top:4.1rem;gap:1.1rem;padding:.5rem 1.1rem;font-size:.74rem;white-space:nowrap}   /* su telefono il menu scende sotto logo e CTA */
   .theme-switch{left:1rem;bottom:1rem}
 }
 </style>
 </head>
-<body data-page="home">
+<body data-page="home" class="pre">
 
 <header>
   <div class="logo" data-go="home">TOBIA SEU</div>
@@ -417,7 +424,7 @@ body.focus #rail,body.vfull #rail{opacity:0;pointer-events:none}
         </div>
       </div>
 
-      <div class="hint" id="hint">Drag to rotate · Scroll to explore<span class="hl"></span></div>
+      <div class="hint" id="hint"><span class="hin">Drag to rotate · Scroll to explore<span class="hl"></span></span></div>
       <div class="hint" id="closehint">ESC to return to the sphere</div>
 
       <div class="copy" id="c1"><h1>I'm Tobia Seu</h1><p>Industrial product designer, from <span class="serif">products and exhibitions</span> to interfaces. I turn complex ideas into tangible experiences, with an interdisciplinary and experimental approach.</p><a class="btn" href="#" data-go="about">Know more about me</a></div>
@@ -658,8 +665,9 @@ for(let k=0;k<6;k++){
    short:'Short caption of the project: role, goal and outcome.',long:'Project '+n+': extended description placeholder. Context, problem, process and result will go here.',
    gal:[['','h'],['','v'],['','h'],['','v'],['','h']],sec:PH_SEC.map(x=>[x[0],x[1],x[2],[['',k%2?'w':'h']]])});
 }
-projects.forEach((p,i)=>{p.i=i;if(!p.ph)p.local=IMG(p.slug+'-cover')});
-const me={local:PHOTO_DIR+'tobia.jpg',pos:'50% 22%',title:'me.',cat:'Industrial Product Designer',me:true};
+const WEB=k=>PHOTO_DIR+'web/'+k+'.webp';   // copertine ridimensionate (1600px, WebP) per sfera, carosello e griglie
+projects.forEach((p,i)=>{p.i=i;if(!p.ph)p.local=WEB(p.slug+'-cover')});
+const me={local:WEB('tobia'),pos:'50% 22%',title:'me.',cat:'Industrial Product Designer',me:true};
 const TAGS=['Product Design','Textile & Fashion','Exhibition Design','System Design'];
 me.i=-1;me.tag='About';me.short='Industrial product designer: concepts, prototypes and interfaces.';me.long='I hold a degree in Industrial Product Design, with a passion for projects in all their forms, from product development to visual communication. My background includes exhibition, prototyping and interactive design, while my most recent work focused on UX and UI design.';
 const items=[me,...projects];            // la card 0 della sfera e' la tua foto
@@ -691,7 +699,7 @@ const rot={x:14,y:0};
 const S={aim:0,hubO:1,wo:0,v:0,f:0,s:0,oth:0,push:0,sh:0,roll:0,gz:0};       // stato guidato dallo scroll
 const F={f:0,push:0,roll:0};
 const PERSP=1500,CS=.25,PUSH=770,SH=22,ctl={ex:0,ey:0};                    // stato guidato dal click sulla card
-let focused=null,idx=0,drag=false,sx=0,ly=0,mx=0,w=.18,pedal=0,pedalS=0,wx=0,bias=.16,tgt=null;
+let focused=null,idx=0,drag=false,armed=false,lx=0,ly=0,dmov=0,spunAt=0,mx=0,w=9,wx=0,qy=0,qx=0,dir=1,tgt=null,vs=[];
 
 /* posizioni: la card 0 (tu) sta al centro-fronte; le altre su una sfera di Fibonacci
    ruotata in modo da stare il piu' lontano possibile dalla tua card */
@@ -712,23 +720,26 @@ const pcHTML=(p,n)=>`<div class="pcw"><div class="pc" data-i="${p.i}">${cardHTML
 const cards=items.map((p,i)=>{
   const c=document.createElement('div');c.className='card'+(p.me?' me':'');
   c.innerHTML=`<div class="cback"></div><div class="cface">${cardHTML(p,i,true)}</div>`;
-  c._face=c.querySelector('.cface');c._back=c.querySelector('.cback');c._ph=Math.random()*6.28;
+  c._face=c.querySelector('.cface');c._back=c.querySelector('.cback');c._ph=Math.random()*6.28;c._d=i===0?0:.06+Math.random()*.36;
   c._base=`translate3d(${P[i].x}px,${P[i].y}px,${P[i].z}px) rotateY(${P[i].ry}deg) rotateX(${P[i].rx}deg) scale(${CS})`;
   c.style.transform=c._base;
-  c.onclick=()=>i===0?goStage():focusCard(i);
+  c.onclick=()=>{if(performance.now()-spunAt<250)return;i===0?goStage():focusCard(i)};   // dopo un trascinamento non apre la card
   sphere.appendChild(c);return c});
 
 /* render: rotazione + bokeh (profondita' di campo).
    Fuori dal click la sfera ha un'apertura "larga" (dietro molto sfocato);
    al click l'apertura si chiude (~f/2.4): le altre card restano visibili e piu' nitide. */
 let calm=0,hideO=0;
+const INTRO={p:0};   // 0 -> 1: ingresso della sfera dopo il caricamento delle immagini
 const _l=Math.hypot(-.5,-.6,.62),LX=-.5/_l,LY=-.6/_l,LZ=.62/_l,_h=Math.hypot(LX,LY,LZ+1),HX=LX/_h,HY=LY/_h,HZ=(LZ+1)/_h;
 function render(){
+  const ip=INTRO.p,ie=1-Math.pow(1-ip,4);
   let ey=rot.y,ex=rot.x;
   if(S.aim>.001){
     if(!tgt){const ty=-P[0].ry;tgt={x:0,y:ty+Math.round((rot.y-ty)/360)*360}}
     ey=L(rot.y,tgt.y,S.aim);ex=L(rot.x,tgt.x,S.aim);
   }else tgt=null;
+  if(ip<1){ey-=(1-ie)*75;ex-=(1-ie)*10}
   ctl.ex=ex;ctl.ey=ey;
   const f=Math.max(F.f,S.f),push=Math.max(F.push,S.push);
   sphere.style.transform=`rotateX(${ex}deg) rotateY(${ey}deg)`;
@@ -740,6 +751,7 @@ function render(){
   const ampB=RM?0:Math.max(F.f,S.s);
   // profondita' di campo (lente sottile): cerchio di confusione ~ |distanza - fuoco| / distanza; davanti nitido, dietro sfocato + velato + desaturato
   const df=PERSP-R-push,A=L(L(15,20,f),46,S.s),off=L(260,170,f)*(1-S.s)+10*S.s,op0=L(.34,.5,f),dark=L(.1,.05,f);
+  let budget=3;     // riflessi: al massimo 3 card ridisegnate per frame
   for(let i=0;i<N;i++){
     const p=P[i],c=cards[i];
     const d=p.y*sa+(-p.x*sb+p.z*cb)*ca;
@@ -749,28 +761,43 @@ function render(){
     {const nx0=p.x/R,ny0=p.y/R,nz0=p.z/R,y1=ny0,x1=nx0*cb+nz0*sb,z1=-nx0*sb+nz0*cb,
       nx=x1,ny=y1*ca-z1*sa,nz=y1*sa+z1*ca,
       dif=Math.max(0,nx*LX+ny*LY+nz*LZ),hd=nx*HX+ny*HY+nz*HZ,spec=Math.pow(Math.max(0,hd),90),
-      sh=(.22*(1-dif)).toFixed(2),si=(.06+.62*spec).toFixed(2),sx=clamp(50+(nx-HX)*160-(ny-HY)*60,-30,130).toFixed(0)+'%',key=sh+si+sx;
-     if(c._lk!==key){c._lk=key;c.style.setProperty('--sh',sh);c.style.setProperty('--si',si);c.style.setProperty('--sx',sx)}}
+      sh=(Math.round(.22*(1-dif)*25)/25).toFixed(2),si=(Math.round((.06+.62*spec)*20)/20).toFixed(2),sx=Math.round(clamp(50+(nx-HX)*160-(ny-HY)*60,-30,130)/5)*5+'%',key=sh+si+sx;
+     c._nz=nz;
+     // il riflesso cambia a scatti piccoli e solo sulle card girate verso di noi: ogni cambio ridisegna la card
+     if(c._lk!==key&&(!c._lk||(nz>-.2&&budget-->0))){c._lk=key;c.style.setProperty('--sh',sh);c.style.setProperty('--si',si);c.style.setProperty('--sx',sx)}}
     const isFoc=focused===c,sharp=isFoc||(i===0&&S.s>.99&&S.oth>.01);
     let fl;
     if(sharp)fl='none';
-    else{const q=coc/26;fl=`blur(${(Math.round(coc/scr*4)/4)}px) saturate(${(1-.4*q).toFixed(2)}) contrast(${(1-.1*q).toFixed(2)}) brightness(${(1-(1-dn)*dark).toFixed(2)})`}
-    if(c._f!==fl){c._face.style.filter=fl;c._back.style.filter=fl;c._f=fl}
+    else{
+      // sfocatura a gradini (in px dello schermo) e solo sul lato della card che si vede: meno lavoro per la GPU
+      const q=Math.round(coc/26*12)/12,lb=coc<.5?0:Math.exp(Math.round(Math.log(coc/scr)*10)/10);
+      fl=lb?`blur(${lb.toFixed(1)}px) saturate(${(1-.4*q).toFixed(2)}) contrast(${(1-.1*q).toFixed(2)}) brightness(${(1-Math.round((1-dn)*10)/10*dark).toFixed(3)})`:'none'}
+    const ff=c._nz>-.3?fl:'none',fb=c._nz<.3?fl:'none';
+    if(c._ff!==ff){c._face.style.filter=ff;c._ff=ff}
+    if(c._fb!==fb){c._back.style.filter=fb;c._fb=fb}
+    // intro: le card arrivano da fuori, una dopo l'altra
+    let ik=1;if(ip<1){ik=clamp((ip-c._d)/(1-.42),0,1);ik=1-Math.pow(1-ik,3)}
     let op=op0+(1-op0)*Math.pow(dn,.8);
     if(i>0)op*=(1-S.oth)*(1-.6*S.s);
+    op*=Math.min(1,ik*1.6);
     const o=op.toFixed(3);
-    if(c._o!==o){c._face.style.opacity=o;c._back.style.opacity=(op*.65).toFixed(3);c._o=o;c.style.setProperty('--eo',sharp?1:clamp(1-coc/2.2,0,1)*op);c.style.visibility=op<.01?'hidden':'visible'}
+    if(c._o!==o){c._face.style.opacity=o;c._back.style.opacity=(op*.65).toFixed(3);c._o=o;const vv=op<.01?'hidden':'visible';if(c._v!==vv){c.style.visibility=vv;c._v=vv}}
     let am=ampB;if(isFoc)am=0;if(i===0)am*=(1-S.s);
-    if(am>.002){const ph=c._ph;
-      c.style.transform=`translate3d(${(p.x+Math.sin(T*.31+ph)*5*am).toFixed(1)}px,${(p.y+Math.sin(T*.37+ph*1.7)*8*am).toFixed(1)}px,${p.z}px) rotateY(${(p.ry+Math.sin(T*.23+ph*2.1)*6*am).toFixed(2)}deg) rotateX(${(p.rx+Math.sin(T*.29+ph*.7)*5*am).toFixed(2)}deg) rotateZ(${(Math.sin(T*.19+ph*1.3)*4*am).toFixed(2)}deg) scale(${CS})`;c._fa=1}
+    if(op<.01){}
+    else if(am>.002||ik<1){const ph=c._ph,m=L(.3,1,ik),sp=(1-ik)*50;
+      c.style.transform=`translate3d(${(p.x*m+Math.sin(T*.31+ph)*5*am).toFixed(1)}px,${(p.y*m+Math.sin(T*.37+ph*1.7)*8*am).toFixed(1)}px,${(p.z*m).toFixed(1)}px) rotateY(${(p.ry+sp+Math.sin(T*.23+ph*2.1)*6*am).toFixed(2)}deg) rotateX(${(p.rx+Math.sin(T*.29+ph*.7)*5*am).toFixed(2)}deg) rotateZ(${(Math.sin(T*.19+ph*1.3)*4*am).toFixed(2)}deg) scale(${CS})`;c._fa=1}
     else if(c._fa){c.style.transform=c._base;c._fa=0}
   }
 }
 
-/* MOTORE (curva di coppia): piu' trascini piu' accelera, ma con attrito */
-const WMAX=6.5,IDLE=.16;
-const torque=r=>r<.4?.5+.5*(r/.4):Math.max(0,1-Math.pow((r-.4)/.6,1.5));
-const canSpin=t=>!focused&&S.aim<.001&&S.hubO>.4&&t.closest('#vp')&&!t.closest('.card,.btn,.btn-o,button,a');
+/* ROTAZIONE: presa diretta (la sfera segue il dito/mouse), al rilascio prosegue con l'inerzia del gesto
+   e torna alla velocita' di crociera in circa un secondo. Tutto in gradi al secondo: stessa sensazione a 60 e 120 Hz. */
+const IDLE=9,        // velocita' di crociera (gradi/s)
+      KX=.17,        // gradi di rotazione per pixel trascinato
+      VMAX=240,      // tetto della spinta al rilascio (gradi/s): mai troppo veloce
+      TAU=.42,       // tempo di ritorno alla crociera (s): piu' basso = torna prima
+      FOLLOW=26;     // quanto stretta e' la presa durante il trascinamento (1/s)
+const canSpin=t=>!focused&&S.aim<.001&&S.hubO>.4&&INTRO.p>.6&&t.closest('#vp')&&!t.closest('.btn,.btn-o,button,a');
 
 /* cursore con icona */
 const cur=$('cur'),curL=$('cur-l'),fine=matchMedia('(hover:hover) and (pointer:fine)').matches;
@@ -790,15 +817,27 @@ function setKind(k){
 addEventListener('pointermove',e=>{
   tX=e.clientX;tY=e.clientY;mx=e.clientX/innerWidth*2-1;
   if(!drag&&!cdrag)setKind(kindOf(e.target));
-  if(drag&&!focused){pedal=clamp((e.clientX-sx)/500,-1,1);wx+=-(e.clientY-ly)*.014;wx=clamp(wx,-1.6,1.6);ly=e.clientY}
+  if(armed&&!focused){
+    const dx=e.clientX-lx,dy=e.clientY-ly;lx=e.clientX;ly=e.clientY;dmov+=Math.abs(dx)+Math.abs(dy);
+    if(!drag&&dmov>5){drag=true;cur.classList.add('down');curL.textContent='Spin'}      // soglia: un clic sulla card resta un clic
+    if(drag){qy+=dx*KX;qx-=dy*KX*.6;const t=performance.now();vs.push([t,dx]);while(vs.length&&t-vs[0][0]>90)vs.shift()}
+  }
   if(cdrag)carMove(e);
 });
 addEventListener('pointerdown',e=>{
-  if(canSpin(e.target)){drag=true;sx=e.clientX;ly=e.clientY;pedal=0;cur.classList.add('down');curL.textContent='Spin'}
+  if(canSpin(e.target)){armed=true;drag=false;dmov=0;lx=e.clientX;ly=e.clientY;vs=[]}
   else if(e.target.closest('.car')&&!e.target.closest('button'))carDown(e);
 });
-addEventListener('pointerup',()=>{if(drag)bias=clamp(w*.12,-.5,.5);drag=false;pedal=0;cur.classList.remove('down');if(curKind)curL.textContent='Drag';if(cdrag)carUp()});
-addEventListener('pointercancel',()=>{if(drag)bias=clamp(w*.12,-.5,.5);drag=false;pedal=0;cur.classList.remove('down');if(cdrag)carUp()});
+function release(){
+  if(drag){
+    const t=performance.now();while(vs.length&&t-vs[0][0]>90)vs.shift();
+    const span=vs.length?Math.max(16,t-vs[0][0]):1,v=vs.reduce((a,b)=>a+b[1],0)/span*1000*KX;   // velocita' del gesto negli ultimi ~90 ms
+    w=clamp(v,-VMAX,VMAX);if(Math.abs(w)>30)dir=Math.sign(w);spunAt=t;
+  }
+  armed=false;drag=false;cur.classList.remove('down');
+}
+addEventListener('pointerup',()=>{release();if(curKind)curL.textContent='Drag';if(cdrag)carUp()});
+addEventListener('pointercancel',()=>{release();if(cdrag)carUp()});
 
 /* saluto multilingua */
 const gr=['welcome','bienvenue','bienvenido','welkom','benvenuto','bin vnù','ben vgnù','beni beniu','tervetuloa'];let bag=[],curW='welcome';
@@ -950,11 +989,15 @@ function stepY(k){const st=heroTL.scrollTrigger,len=st.end-st.start,d=heroTL.dur
   if(k==='world')return 0;if(k==='me')return st.start+(1.9/d)*len;if(k==='cases')return st.start+(10.9/d)*len;
   if(k==='archive')return $('arch').getBoundingClientRect().top+scrollY;return $('meet').getBoundingClientRect().top+scrollY-innerHeight*.3}
 railEl.onclick=e=>{const b=e.target.closest('button');if(b&&!focused)scrollTo({top:stepY(b.dataset.s),behavior:'smooth'})};
+// posizioni delle sezioni misurate solo quando cambia il layout, non a ogni frame (evita layout forzati nel loop)
+let yArch=0,yMeet=0,docH=0;
+function measureY(){if(document.body.dataset.page!=='home')return;yArch=$('arch').getBoundingClientRect().top+scrollY;yMeet=$('meet').getBoundingClientRect().top+scrollY;docH=document.documentElement.scrollHeight}
+ScrollTrigger.addEventListener('refresh',measureY);
 function railUpdate(){if(document.body.dataset.page!=='home')return;
   const st=heroTL.scrollTrigger,t=(scrollY-st.start)/(st.end-st.start)*heroTL.duration();
   const mid=scrollY+innerHeight*.5;let k;
-  if(mid>=$('meet').getBoundingClientRect().top+scrollY||scrollY+innerHeight>=document.documentElement.scrollHeight-4)k='contact';
-  else if(mid>=$('arch').getBoundingClientRect().top+scrollY)k='archive';
+  if(mid>=yMeet||scrollY+innerHeight>=docH-4)k='contact';
+  else if(mid>=yArch)k='archive';
   else k=t<1.2?'world':t<10.2?'me':'cases';
   if(k!==curStep){curStep=k;railB.forEach(b=>b.classList.toggle('on',b.dataset.s===k));$('chint').classList.toggle('on',k==='cases'&&S.wo>.9)}
   else if(k==='cases')$('chint').classList.toggle('on',S.wo>.9)}
@@ -995,23 +1038,25 @@ addEventListener('keydown',e=>{
 const vid=$('vid'),vwin=$('vwin'),worksEl=$('works');
 let vplaying=false,cTick=0;
 vid.addEventListener('loadeddata',()=>vwin.classList.add('ok'));
-(function loop(){
+let lastT=performance.now();
+(function loop(now){
+  const dt=Math.min(.05,Math.max(0,(now-lastT)/1000))||1/60;lastT=now;
   if(document.body.dataset.page==='home'){
     if(!focused&&S.aim<.001){
-      const dz=Math.abs(pedal)<.06?0:Math.sign(pedal)*(Math.abs(pedal)-.06)/.94;
-      pedalS+=(dz-pedalS)*.1;                                                   // pedale filtrato: niente scatti
-      const r=Math.min(1,Math.abs(w)/WMAX);
-      w+=pedalS*.16*(pedalS*w>=0?torque(r):1);                                  // accelerazione = pedale x coppia(regime)
-      w+=((bias+(drag?0:mx*.3))-w)*(drag?.012:.008);                            // attrito leggero: dopo il rilascio la sfera prosegue e mantiene la direzione data
-      rot.y+=w;
-      wx*=drag?.9:.965;rot.x+=wx;                                               // inclinazione con inerzia, resta dove l'hai lasciata
-      if(rot.x>45){rot.x=45;wx=0}else if(rot.x<-45){rot.x=-45;wx=0}
+      const k=1-Math.exp(-dt*FOLLOW),ay=qy*k,ax=qx*k;qy-=ay;qx-=ax;              // presa diretta, appena ammorbidita
+      if(drag){rot.y+=ay;rot.x+=ax;w=ay/dt;wx=ax/dt}
+      else{
+        const cruise=dir*IDLE+(fine?mx*6:0);                                     // il mouse a destra/sinistra spinge appena
+        w+=(cruise-w)*(1-Math.exp(-dt/TAU));rot.y+=w*dt+ay;
+        wx*=Math.exp(-dt/.25);rot.x+=wx*dt+ax;                                    // l'inclinazione si ferma presto e resta dove l'hai lasciata
+      }
+      if(rot.x>45){rot.x=45;wx=0;qx=0}else if(rot.x<-45){rot.x=-45;wx=0;qx=0}
     }
-    document.body.classList.toggle('top',scrollY<40);try{railUpdate()}catch(_){}
+    const top=scrollY<40;if(top!==loop.top){loop.top=top;document.body.classList.toggle('top',top)}try{railUpdate()}catch(_){}
     if(S.hubO>.01)render();
     if(S.wo<.05){cpos=0;snapTo=0}if(!cdrag)cpos+=(snapTo-cpos)*.055;if(S.wo>.01){rCar();worksEl.classList.toggle('live',S.wo>.5)}
     const want=S.v>.55;if(want!==vplaying){vplaying=want;want?vid.play().catch(()=>{}):vid.pause()}
-    document.body.classList.toggle('vfull',S.v>.8);
+    const vf=S.v>.8;if(vf!==loop.vf){loop.vf=vf;document.body.classList.toggle('vfull',vf)}
     if(fine&&!drag&&!cdrag&&++cTick%8===0)setKind(kindOf(document.elementFromPoint(tX,tY)||document.body));   // aggiorna il cursore anche se scorri senza muovere il mouse
     if(curKind){cX+=(tX-cX)*.22;cY+=(tY-cY)*.22;cur.style.transform=`translate3d(${cX.toFixed(1)}px,${cY.toFixed(1)}px,0)`}
   }
@@ -1093,6 +1138,22 @@ document.querySelectorAll('.rv').forEach(el=>rvIO.observe(el));
 addEventListener('resize',()=>{layout();ScrollTrigger.refresh()});
 rebuild();
 go('home');
+
+/* =====================================================================
+   INGRESSO: aspetta font e copertine decodificate (max ~2.2 s), poi la sfera si compone
+   ===================================================================== */
+(function intro(){
+  const imgs=items.filter(p=>p.local).map(p=>{const im=new Image();im.decoding='async';im.src=p.local;return im.decode().catch(()=>{})});
+  const wait=ms=>new Promise(r=>setTimeout(r,ms));
+  const fontsOk=document.fonts?document.fonts.ready.catch(()=>{}):Promise.resolve();
+  Promise.race([fontsOk,wait(900)]).then(()=>{document.body.classList.remove('pre')});           // il saluto entra subito
+  Promise.race([Promise.all([fontsOk,...imgs]),wait(2200)]).then(()=>{
+    document.body.classList.remove('pre');
+    if(RM){INTRO.p=1;return}
+    gsap.to(INTRO,{p:1,duration:2.4,ease:'none'});
+    ScrollTrigger.refresh();
+  });
+})();
 </script>
 </body>
 </html>

@@ -12,12 +12,13 @@
 <meta property="og:url" content="https://tobiaseu.com/hive/">
 <meta property="og:image" content="https://tobiaseu.com/img/h-cover.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,500&display=swap" rel="stylesheet">
+<link rel="preload" href="../fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../fonts/playfair-display-italic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../fonts/fonts.css">
 <style>
 :root{--bg:#0b0d12;--bg2:#11141b;--line:rgba(255,255,255,.1);--text:#f4f5f7;--muted:#8b919c;--blue:#3d6fd1;--sky:#6ec0ff;--amber:#f2a33a;--green:#3fbf5f;--accent:#E5FF00}
 *{box-sizing:border-box}
-html,body{margin:0;background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);-webkit-font-smoothing:antialiased}
 a{color:inherit}
 em{font-family:'Playfair Display',Georgia,serif;font-style:italic;font-weight:500}
 .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
@@ -199,7 +200,7 @@ section.s{position:relative;padding:18vh 0}
       <ellipse rx="46" ry="22" fill="#2a2f39" stroke="#6ec0ff" stroke-width="2"/>
       <ellipse rx="30" ry="13" fill="#11141b"/>
     </g>
-    <g font-family="Inter" font-size="15" fill="#d6d9df" id="labels">
+    <g font-family="Archivo, Helvetica Neue, Arial, sans-serif" style="font-family:var(--sans)" font-size="15" fill="#d6d9df" id="labels">
       <g class="lab" transform="translate(1010 448)"><circle r="4" fill="#E5FF00"/><text x="12" y="-8">Horizontal pad · control</text></g>
       <g class="lab" transform="translate(1345 285)"><circle r="4" fill="#E5FF00"/><text x="-12" y="-8" text-anchor="end">Pillar pad · mapping</text></g>
       <g class="lab" transform="translate(1260 740)"><circle r="4" fill="#E5FF00"/><text x="-14" y="-8" text-anchor="end">Rotary knob</text></g>
@@ -240,7 +241,7 @@ section.s{position:relative;padding:18vh 0}
         <path d="M40 40H300V240H40Z"/><path d="M340 40H600V200H340Z"/><path d="M40 280H260V480H40Z"/><path d="M300 240H600V480H300Z"/>
       </g>
       <g id="fRows" stroke="rgba(255,255,255,.06)"></g>
-      <g font-family="Inter" font-size="13" fill="#8b919c"><text x="52" y="62">Field H</text><text x="352" y="62">Field B</text><text x="52" y="302">Field A</text><text x="312" y="262">Field E</text></g>
+      <g font-family="Archivo, Helvetica Neue, Arial, sans-serif" style="font-family:var(--sans)" font-size="13" fill="#8b919c"><text x="52" y="62">Field H</text><text x="352" y="62">Field B</text><text x="52" y="302">Field A</text><text x="312" y="262">Field E</text></g>
       <path id="fp1" d="M60 80H280V110H60V140H280V170H60V200H280" fill="none" stroke="#3d6fd1" stroke-width="3" stroke-dasharray="4 6" opacity=".6"/>
       <path id="fp2" d="M360 80H580V110H360V140H580V170H360" fill="none" stroke="#3d6fd1" stroke-width="3" stroke-dasharray="4 6" opacity=".6"/>
       <path id="fp3" d="M60 320H240V350H60V380H240V410H60V440H240" fill="none" stroke="#8b919c" stroke-width="3" stroke-dasharray="4 6" opacity=".5"/>
