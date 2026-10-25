@@ -95,24 +95,28 @@ body.pre .g-wrap{opacity:0;transform:translateY(18px)}
 body.pre .hin{opacity:0;transition:none}
 body.focus .g-wrap{opacity:0}
 #gt{font-size:clamp(2.5rem,7vw,5.5rem);line-height:1;white-space:nowrap;transition:opacity .28s cubic-bezier(.23,1,.32,1),transform .28s cubic-bezier(.23,1,.32,1)}
-.card{position:absolute;left:0;top:0;width:440px;height:568px;margin:-284px 0 0 -220px;transform-style:preserve-3d;cursor:pointer;will-change:transform}
+.card{position:absolute;left:0;top:0;width:600px;height:440px;margin:-220px 0 0 -300px;transform-style:preserve-3d;cursor:pointer;will-change:transform}
 .cback{position:absolute;inset:0;transform-style:preserve-3d}
-.cback{border-radius:30px;background:var(--card);transform:translateZ(-.5px) rotateY(180deg);backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:0 0 0 1px color-mix(in srgb,var(--ctext) 14%,transparent),0 1.5px 0 1px color-mix(in srgb,var(--card) 70%,#888),0 30px 70px rgba(0,0,0,.25)}
+.cback{border-radius:0;background:var(--card);transform:translateZ(-.5px) rotateY(180deg);backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:0 30px 70px rgba(0,0,0,.22)}
 .cback::after{content:'tobia seu';position:absolute;left:0;right:0;bottom:34px;text-align:center;font:600 20px var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--ctext);opacity:.3}
 .cface{position:absolute;inset:0;transform:translateZ(.5px);backface-visibility:hidden;-webkit-backface-visibility:hidden}
 .flip{position:absolute;inset:0;transform-style:preserve-3d;perspective:1600px;transition:transform .5s cubic-bezier(.23,1,.32,1)}
-.card-in{position:absolute;inset:0;border-radius:30px;background:var(--card);color:var(--ctext);box-shadow:0 0 0 1px color-mix(in srgb,var(--ctext) 14%,transparent),0 1.5px 0 1px color-mix(in srgb,var(--card) 70%,#888),0 40px 90px rgba(0,0,0,.28);padding:22px 22px 18px;display:flex;flex-direction:column;gap:16px;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;transition:transform .9s cubic-bezier(.23,1,.32,1)}
+.card-in{position:absolute;inset:0;border-radius:0;background:var(--card);color:var(--ctext);box-shadow:0 34px 80px rgba(0,0,0,.24);padding:0;display:flex;flex-direction:column;gap:0;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;transition:transform .9s cubic-bezier(.23,1,.32,1)}
 .card-in.back{transform:rotateY(180deg);justify-content:center;gap:12px;padding:44px 40px}
 .flipped .card-in.front{transform:rotateY(-180deg)}
 .flipped .card-in.back{transform:rotateY(0)}
 body.top:not(.focus) .card:hover .flip{transform:scale(1.16)}
 .pc:hover .flip{transform:translateY(-8px)}
-.photo{flex:1;min-height:0;border-radius:16px;background-size:cover;background-position:center;background-color:#555;pointer-events:none}
-.cap{height:84px;flex:none;display:flex;justify-content:space-between;align-items:center;padding:0 6px;pointer-events:none}
-.cap b{display:block;font:600 30px/1.1 var(--sans);letter-spacing:-.02em}
-.cap i{display:block;margin-top:7px;font-size:21px;opacity:.7}
-.cap em{font:14px ui-monospace,monospace;opacity:.45;font-style:normal}
-.more{flex:none;display:grid;grid-template-rows:0fr;opacity:0;transform:translateY(14px);transition:grid-template-rows 1s cubic-bezier(.23,1,.32,1),opacity .9s cubic-bezier(.23,1,.32,1) .1s,transform 1s cubic-bezier(.23,1,.32,1);padding:0 6px}
+.photo{flex:1;min-height:0;border-radius:0;background-size:cover;background-position:center;background-color:#555;pointer-events:none;overflow:hidden}
+/* loop di 3 foto nella card della sfera (insieme, dettaglio, particolare): la nuova entra scorrendo da destra */
+.photo .pl{position:absolute;inset:0;background-size:cover;background-position:center;clip-path:inset(0 0 0 100%);transform:scale(1.06);transition:clip-path 1.5s cubic-bezier(.65,0,.35,1),transform 2.6s cubic-bezier(.23,1,.32,1)}
+.photo .pl.on{clip-path:inset(0);transform:none}
+.cap{height:92px;flex:none;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:0 24px;pointer-events:none}
+.cap small,.lcap small{display:block;font:500 13px var(--sans);letter-spacing:.12em;text-transform:uppercase;opacity:.55;margin-bottom:8px}
+.cap b{display:block;font:600 32px/1 var(--sans);letter-spacing:-.03em}
+.cap .cr{text-align:right;font-size:15px;opacity:.7;line-height:1.5}
+.cap em,.cap .cr em{display:block;font:14px ui-monospace,monospace;opacity:.6;font-style:normal}
+.more{flex:none;display:grid;grid-template-rows:0fr;opacity:0;transform:translateY(14px);transition:grid-template-rows 1s cubic-bezier(.23,1,.32,1),opacity .9s cubic-bezier(.23,1,.32,1) .1s,transform 1s cubic-bezier(.23,1,.32,1);padding:0 24px}
 .more .mi{min-height:0;overflow:hidden}
 .more p{margin:0 0 16px;font-size:15px;line-height:1.5;max-width:34ch;text-wrap:pretty;opacity:0;transform:translateY(10px);transition:opacity .6s cubic-bezier(.23,1,.32,1),transform .8s cubic-bezier(.23,1,.32,1)}
 .more .row2{opacity:0;transform:translateY(12px) scale(.98);transition:opacity .6s cubic-bezier(.23,1,.32,1),transform .8s cubic-bezier(.23,1,.32,1)}
@@ -124,11 +128,13 @@ body.top:not(.focus) .card:hover .flip{transform:scale(1.16)}
 .row2 .num{font:14px ui-monospace,monospace;opacity:.45;font-style:normal;padding-right:6px}
 .card-in .btn-o{color:var(--ctext);background:color-mix(in srgb,var(--ctext) 13%,transparent);border-color:color-mix(in srgb,var(--ctext) 28%,transparent);backdrop-filter:none}
 .card.open .more{grid-template-rows:1fr;opacity:1;transform:none}
+.card .card-in.front{transition:transform .9s cubic-bezier(.23,1,.32,1),inset 1s cubic-bezier(.23,1,.32,1)}
+.card.open .card-in.front{inset:-68px 0}   /* aperta: la card si allunga e la foto resta grande */
 .card:not(.open) .more *{pointer-events:none}
-.turn{position:absolute;right:34px;top:34px;z-index:4;width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.9);color:#111;display:grid;place-items:center;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.25);transition:transform .2s cubic-bezier(.23,1,.32,1),opacity .4s cubic-bezier(.23,1,.32,1)}
+.turn{position:absolute;right:18px;top:18px;z-index:4;width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.9);color:#111;display:grid;place-items:center;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.25);transition:transform .2s cubic-bezier(.23,1,.32,1),opacity .4s cubic-bezier(.23,1,.32,1)}
 .turn:hover{transform:rotate(-30deg)}
 .turn svg{width:20px;height:20px}
-.card-in.back .turn{right:40px;top:40px;background:color-mix(in srgb,var(--ctext) 14%,transparent);color:var(--ctext);box-shadow:none}
+.card-in.back .turn{right:18px;top:18px;background:color-mix(in srgb,var(--ctext) 14%,transparent);color:var(--ctext);box-shadow:none}
 .card .turn{opacity:0;pointer-events:none}
 .card.ready .turn,.card.open .turn{opacity:1;pointer-events:auto}
 .bk{font:500 12px var(--sans);letter-spacing:.16em;text-transform:uppercase;opacity:.55;margin-top:40px}
@@ -138,11 +144,11 @@ body.top:not(.focus) .card:hover .flip{transform:scale(1.16)}
 .fnav{position:fixed;z-index:160;opacity:0;visibility:hidden;transition:opacity .4s}
 #fworld{z-index:170}
 body.focus .fnav{opacity:1;visibility:visible}
-#fprev{left:calc(50% - 292px);top:50%;margin-top:-22px}#fnext{left:calc(50% + 248px);top:50%;margin-top:-22px}#fx{right:3rem;top:5.5rem}
+#fprev{left:calc(50% - 356px);top:50%;margin-top:-22px}#fnext{left:calc(50% + 312px);top:50%;margin-top:-22px}#fx{right:3rem;top:5.5rem}
 @media(max-width:760px){#fprev,#fnext{display:none}}
 .hint{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);z-index:20;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);pointer-events:none;text-align:center}
 #closehint{display:none}
-#fworld{background:var(--nav);left:50%;margin-left:-88px;width:176px;top:calc(75vh + 111px)}
+#fworld{background:var(--nav);left:50%;margin-left:-88px;width:176px;top:calc(50vh + 300px)}
 body.focus #hint{visibility:hidden}
 .copy{position:absolute;left:6vw;top:50%;width:min(42vw,520px);z-index:10;pointer-events:none}
 .copy a,.copy button{pointer-events:auto}
@@ -161,8 +167,8 @@ body.focus #hint{visibility:hidden}
 
 :root{--k:1}
 /* card di progetto (stessa card della sfera) */
-.pcw{position:relative;width:calc(440px*var(--k));height:calc(568px*var(--k));flex:none}
-.pc{position:absolute;left:0;top:0;width:440px;height:568px;transform:scale(var(--k));transform-origin:0 0;cursor:pointer}
+.pcw{position:relative;width:calc(600px*var(--k));height:calc(440px*var(--k));flex:none}
+.pc{position:absolute;left:0;top:0;width:600px;height:440px;transform:scale(var(--k));transform-origin:0 0;cursor:pointer}
 .pc .turn{opacity:1;pointer-events:auto}
 .pc .card-in{box-shadow:0 24px 60px rgba(0,0,0,.18)}
 /* filtri e vista */
@@ -203,11 +209,11 @@ body[data-view=list] .pgrid{display:none}
 .w-head h2{margin:0;font-size:clamp(2.2rem,4.6vw,4rem);font-weight:500;letter-spacing:-.03em;line-height:1}
 .w-head .kicker{margin-bottom:.8rem}
 .car{perspective:1500px;perspective-origin:50% 50%;position:absolute;left:0;right:0;top:56%;height:var(--sh,520px);margin-top:calc(var(--sh,520px)/-2);cursor:grab;user-select:none;-webkit-user-select:none;touch-action:pan-y}
-.ls{position:absolute;left:50%;top:0;width:var(--sw,1000px);height:var(--sh,520px);margin-left:calc(var(--sw,1000px)/-2);border-radius:30px;background:var(--card);color:var(--ctext);padding:20px;display:flex;flex-direction:column;gap:12px;box-shadow:0 0 0 1px color-mix(in srgb,var(--ctext) 14%,transparent),0 1.5px 0 1px color-mix(in srgb,var(--card) 70%,#888),0 30px 70px rgba(0,0,0,.22);cursor:pointer;will-change:transform,opacity}
+.ls{position:absolute;left:50%;top:0;width:var(--sw,1000px);height:var(--sh,520px);margin-left:calc(var(--sw,1000px)/-2);border-radius:0;background:var(--card);color:var(--ctext);padding:0;display:flex;flex-direction:column;gap:0;box-shadow:0 30px 70px rgba(0,0,0,.2);cursor:pointer;will-change:transform,opacity}
 .ls .photo{flex:1;min-height:0}
-.ls .lcap{height:76px;flex:none;display:flex;justify-content:space-between;align-items:center;padding:0 6px}
-.ls .lcap b{display:block;font:600 30px/1.1 var(--sans);letter-spacing:-.02em}
-.ls .lcap i{display:block;margin-top:4px;font-size:21px;opacity:.7}
+.ls .lcap{height:88px;flex:none;display:flex;justify-content:space-between;align-items:center;padding:0 24px}
+.ls .lcap b{display:block;font:600 30px/1 var(--sans);letter-spacing:-.03em}
+.ls .lcap i{display:block;font-size:15px;font-style:normal;opacity:.7}
 .ls .lcap div:last-child{display:flex;align-items:center;gap:1.4rem}
 .ls .lcap em{font:14px ui-monospace,monospace;opacity:.45;font-style:normal}
 .ls .btn{font-size:14px;padding:.75rem 1.4rem}
@@ -220,21 +226,20 @@ body[data-view=list] .pgrid{display:none}
 .arch-copy h2{margin:0 0 1.2rem;font-size:clamp(2.4rem,5.4vw,4.6rem);font-weight:500;letter-spacing:-.03em;line-height:1}
 .arch-copy p.l2{color:var(--muted);line-height:1.65;max-width:38ch;margin:0 0 1.8rem}
 .stack{position:absolute;right:9vw;top:50%;width:min(44vw,600px);height:min(54vh,420px);transform:translateY(-50%);perspective:1400px}
-.acard{position:absolute;inset:0;border-radius:28px;overflow:hidden;background:#222;box-shadow:0 30px 70px rgba(0,0,0,.25);will-change:transform,opacity;color:#fff}
-.acard .ph{position:absolute;inset:0;background-size:cover;background-position:center}
-.acard::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.75),transparent 55%)}
-.acard .am{position:absolute;left:1.5rem;bottom:1.4rem;z-index:2}
-.acard .am b{display:block;font-size:1.5rem;font-weight:600}
-.acard .am i{font-size:1rem;opacity:.85}
-.acard .an{position:absolute;top:1.2rem;left:1.5rem;z-index:2;font:.7rem ui-monospace,monospace;letter-spacing:.12em}
+.acard{position:absolute;inset:0;border-radius:0;overflow:hidden;background:var(--card);box-shadow:0 30px 70px rgba(0,0,0,.25);will-change:transform,opacity;color:#fff}
+.acard .ph{position:absolute;inset:0 0 74px 0;background-size:cover;background-position:center}
+.acard .am{position:absolute;left:1.4rem;bottom:0;height:74px;display:flex;flex-direction:column;justify-content:center;color:var(--ctext)}
+.acard .am small{font:500 .62rem var(--sans);letter-spacing:.12em;text-transform:uppercase;opacity:.55;margin-bottom:.35rem}
+.acard .am b{display:block;font-size:1.4rem;font-weight:600;letter-spacing:-.03em;line-height:1}
+.acard .an{position:absolute;right:1.4rem;bottom:0;height:74px;display:flex;align-items:center;color:var(--ctext);opacity:.6;font:.7rem ui-monospace,monospace;letter-spacing:.12em}
 /* pagine Cases / Archive */
 .tools-row{display:flex;gap:1.5rem;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:2.5rem}
 .tools-row .vt{margin:0}
 .pgrid{--pk:.5;display:grid;gap:44px 24px;justify-content:space-between}
-.pgrid .pcw{width:calc(440px*var(--pk));height:calc(568px*var(--pk))}
+.pgrid .pcw{width:calc(600px*var(--pk));height:calc(440px*var(--pk))}
 .pgrid .pc{transform:scale(var(--pk))}
 /* pagina progetto */
-.pj-hero{aspect-ratio:16/8;border-radius:28px;background-size:cover;background-position:center;background-color:#555;margin:2.5rem 0}
+.pj-hero{aspect-ratio:16/8;border-radius:0;background-size:cover;background-position:center;background-color:#555;margin:2.5rem 0}
 .pj-cols{display:grid;grid-template-columns:1fr 1fr;gap:4rem}
 .pj-cols h3{margin:0 0 .8rem;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:500}
 .pj-cols p{margin:0 0 1.2rem;color:var(--muted);line-height:1.75;max-width:52ch}
@@ -264,7 +269,7 @@ body[data-view=list] .pgrid{display:none}
 .lead{color:var(--muted);max-width:48ch;line-height:1.65;margin:0 0 3.5rem}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.4rem}
 .grid.big{grid-template-columns:repeat(auto-fill,minmax(340px,1fr))}
-.case{position:relative;aspect-ratio:4/5;border-radius:16px;overflow:hidden;background:#222;cursor:pointer;color:#fff}
+.case{position:relative;aspect-ratio:3/2;border-radius:0;overflow:hidden;background:#222;cursor:pointer;color:#fff}
 .case .ph{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .9s cubic-bezier(.23,1,.32,1)}
 .case:hover .ph{transform:scale(1.07)}
 .case::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.8),transparent 60%)}
@@ -279,7 +284,7 @@ body[data-view=list] .pgrid{display:none}
 
 /* ---------- About ---------- */
 .ab{display:grid;grid-template-columns:minmax(260px,.8fr) 1.2fr;gap:5rem;align-items:start}
-.ab-ph{aspect-ratio:4/5;border-radius:28px;background-size:cover;background-position:center;background-color:#555;position:sticky;top:7rem}
+.ab-ph{aspect-ratio:4/5;border-radius:0;background-size:cover;background-position:center;background-color:#555;position:sticky;top:7rem}
 .ab-t p{color:var(--muted);line-height:1.75;max-width:54ch;margin:0 0 1.2rem;font-size:1.05rem}
 .ab-t p.big{color:var(--text);font-size:clamp(1.5rem,2.6vw,2.2rem);line-height:1.25;letter-spacing:-.02em}
 .ab-t h3{margin:3rem 0 1rem;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:500}
@@ -333,41 +338,74 @@ body.focus #rail,body.vfull #rail{opacity:0;pointer-events:none}
 #chint{position:fixed;left:50%;bottom:2rem;transform:translateX(-50%);z-index:150;font:.7rem ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);opacity:0;pointer-events:none;transition:opacity .5s cubic-bezier(.23,1,.32,1)}
 #chint.on{opacity:1}
 @media (max-width:900px){#rail{display:none!important}}
-.sheen,.grain{position:absolute;inset:0;border-radius:inherit;pointer-events:none}
-.sheen{z-index:3;background:
- linear-gradient(112deg,transparent calc(var(--sx,34%) - 22%),rgba(255,255,255,calc(var(--si,.16)*.4)) calc(var(--sx,34%) - 3%),rgba(255,255,255,var(--si,.16)) var(--sx,34%),rgba(255,255,255,calc(var(--si,.16)*.3)) calc(var(--sx,34%) + 3.5%),transparent calc(var(--sx,34%) + 26%)),
- radial-gradient(120% 90% at 18% 0%,rgba(255,255,255,.10),transparent 55%),
- linear-gradient(rgba(0,0,0,var(--sh,.08)),rgba(0,0,0,var(--sh,.08)));
- box-shadow:inset 0 1.5px 0 rgba(255,255,255,.34),inset 0 0 0 1px rgba(255,255,255,.07),inset 0 -18px 30px -28px rgba(0,0,0,.25)}
-.grain{z-index:2;opacity:.03;background:url(img/grain.png) 0 0/128px}
-.photo{position:relative;box-shadow:inset 0 0 0 1px rgba(255,255,255,.10),inset 0 -34px 44px -32px rgba(0,0,0,.18),inset 0 30px 40px -34px rgba(255,255,255,.35)}
-.photo::after{content:'';position:absolute;inset:0;border-radius:inherit;background:radial-gradient(130% 100% at 50% 40%,transparent 60%,rgba(0,0,0,.16)),linear-gradient(160deg,rgba(255,255,255,.14),transparent 38%)}
-.pj-top{display:flex;justify-content:space-between;align-items:flex-start;gap:2rem;flex-wrap:wrap}
-.pj-meta{display:flex;gap:3rem;margin:1.6rem 0 0;font-size:.8rem;color:var(--muted)}
-.pj-meta b{display:block;color:var(--text);font-weight:500;margin-top:.3rem;font-size:.95rem}
-.pgal{perspective:1500px;margin:2rem -6vw 0;overflow:hidden;cursor:grab;touch-action:pan-y;user-select:none}
-.pgal.drag{cursor:grabbing}
-.pgal-track{display:flex;align-items:center;gap:20px;will-change:transform;padding:10px 0}
-.gi{flex:none;height:min(46vh,440px);border-radius:24px;background-size:cover;background-position:center;background-color:#555;box-shadow:0 30px 60px -30px rgba(0,0,0,.45),inset 0 0 0 1px rgba(255,255,255,.08);pointer-events:none}
-.gi.h{aspect-ratio:4/3}.gi.w{aspect-ratio:16/10}.gi.v{aspect-ratio:3/4}
-.pgal-hint{margin:1rem 0 0;font:.7rem ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-.pj-sec{display:grid;grid-template-columns:.8fr 1.2fr;gap:5rem;align-items:center;padding:7rem 0;border-top:1px solid var(--border)}
-.pj-sec:nth-of-type(even){grid-template-columns:1.2fr .8fr}.pj-sec:nth-of-type(even) .pj-txt{order:2}
-.pj-sec .num{font:.75rem ui-monospace,monospace;color:var(--muted);letter-spacing:.14em}
-.pj-sec h2{margin:.6rem 0 1.2rem;font-size:clamp(2rem,4vw,3.4rem);letter-spacing:-.03em;line-height:1.02;text-wrap:balance}
-.pj-sec p{color:var(--muted);line-height:1.75;max-width:46ch;margin:0 0 1rem;text-wrap:pretty}
-.pj-imgs{display:grid;gap:16px}.pj-imgs.two{grid-template-columns:1fr 1fr}
-.pj-img{border-radius:22px;background-size:cover;background-position:center;background-color:#555;aspect-ratio:4/3;box-shadow:0 30px 60px -34px rgba(0,0,0,.4),inset 0 0 0 1px rgba(255,255,255,.08)}
-.pj-img.t{aspect-ratio:3/4}.pj-img.w{aspect-ratio:16/10}
-.pj-facts{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:1.6rem}
-.pj-facts b{display:block;font-size:1.6rem;letter-spacing:-.02em;color:var(--text);font-weight:500}.pj-facts span{font-size:.75rem;color:var(--muted)}
-.pj-next{display:block;width:100%;margin-top:4rem;padding:5rem 0 1rem;border:0;border-top:1px solid var(--border);background:none;color:var(--text);text-align:left;cursor:pointer}
-.pj-next small{display:block;font:.72rem ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-.pj-next b{display:flex;align-items:center;justify-content:space-between;gap:2rem;font-size:clamp(3rem,9vw,8rem);letter-spacing:-.04em;line-height:1;font-weight:600;margin-top:1rem;transition:transform .5s cubic-bezier(.23,1,.32,1)}
-.pj-next b i{font-style:normal;transition:transform .5s cubic-bezier(.23,1,.32,1)}
-.pj-next:hover b i{transform:translateX(18px)}
-.pj-next:focus-visible{outline:2px solid var(--text);outline-offset:6px}
-@media(max-width:800px){.pj-sec,.pj-sec:nth-of-type(even){grid-template-columns:1fr;gap:2rem;padding:4rem 0}.pj-sec:nth-of-type(even) .pj-txt{order:0}.pj-meta{gap:1.5rem;flex-wrap:wrap}}
+.photo{position:relative}
+/* ---------- pagina progetto: tutta orizzontale (stile Supersolid). Lo scroll verticale fa scorrere la striscia ---------- */
+body[data-page=project] #project{padding:0;min-height:0}
+.xp{position:relative}
+.xp-stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
+.xp-track{position:absolute;left:0;top:0;bottom:0;display:flex;align-items:stretch;gap:clamp(28px,3vw,56px);padding:0 6vw;will-change:transform}
+.xp-pan{flex:none;display:flex;flex-direction:column;padding:7.5rem 0 5.5rem}
+.xp-pan.end{justify-content:flex-end}
+/* apertura: cliente piccolo, nome enorme */
+.xp-intro{width:max-content;max-width:none;justify-content:space-between}
+.xp-intro .kicker{margin:0 0 1.2rem}
+.sub h1.xp-name,.xp-name{margin:0;font-size:clamp(4.5rem,13.5vw,15rem);font-weight:600;letter-spacing:-.055em;line-height:.86;white-space:nowrap}
+.xp-lead{margin:1.8rem 0 0;max-width:30ch;font-size:clamp(1.05rem,1.5vw,1.35rem);line-height:1.4;letter-spacing:-.01em;text-wrap:pretty}
+.xp-meta{display:grid;grid-template-columns:repeat(4,max-content);gap:.5rem 3rem;margin-top:2.2rem;font-size:.75rem;color:var(--muted)}
+.xp-meta b{display:block;margin-top:.35rem;font-size:.92rem;font-weight:500;color:var(--text);max-width:22ch}
+/* foto grandi, spigoli vivi, nessun filtro */
+.xp-fig{--fh:calc(100vh - 12.8rem);--fh:calc(100svh - 12.8rem);--r:1.6;flex:none;margin:0;display:flex;flex-direction:column;justify-content:center;padding:6.2rem 0 4.6rem}
+.xp-fig .fr{position:relative;height:var(--fh);width:calc(var(--fh)*var(--r));overflow:hidden;background:#d9d9dc}
+.xp-fig.h{--r:1.3333}.xp-fig.v{--r:.75}
+.xp-fig figcaption{width:calc(var(--fh)*var(--r))}
+.xp-fig img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.08);will-change:transform}
+.xp-fig figcaption{display:flex;justify-content:space-between;gap:1rem;margin-top:.8rem;font:.68rem ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.xp-pair{flex:none;display:flex;gap:clamp(12px,1.2vw,20px)}
+.xp-pair .xp-fig{padding-left:0;padding-right:0}
+/* righe di testo tra le immagini */
+.xp-txt{width:clamp(300px,30vw,480px)}
+.xp-txt.top{justify-content:flex-start}
+.xp-txt .num{font:.72rem ui-monospace,monospace;letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+.xp-txt h2{margin:.9rem 0 1.3rem;font-size:clamp(2rem,3.4vw,3.6rem);font-weight:600;letter-spacing:-.04em;line-height:.98;text-wrap:balance}
+.xp-txt p{margin:0;color:var(--muted);line-height:1.7;font-size:1rem;text-wrap:pretty}
+.xp-say{width:clamp(320px,46vw,760px);justify-content:center}
+.xp-say p{margin:0;font-size:clamp(1.7rem,3vw,3rem);line-height:1.12;letter-spacing:-.035em;font-weight:500;text-wrap:balance}
+/* in breve: numeri grandi */
+.xp-facts{width:clamp(340px,38vw,620px);justify-content:center}
+.xp-facts .kicker{margin-bottom:2rem}
+.xp-facts div{display:flex;justify-content:space-between;align-items:baseline;gap:2rem;padding:1.1rem 0;border-top:1px solid var(--border)}
+.xp-facts div:last-child{border-bottom:1px solid var(--border)}
+.xp-facts b{font-size:clamp(1.4rem,2.3vw,2.3rem);font-weight:600;letter-spacing:-.04em;line-height:1}
+.xp-facts span{font-size:.78rem;color:var(--muted);text-align:right}
+/* fine: prossimo progetto */
+.xp-next{flex:none;width:min(78vw,1100px);display:grid;grid-template-columns:1fr 1.25fr;gap:2.5rem;align-items:end;padding:7.5rem 0 5.5rem;border:0;background:none;color:var(--text);text-align:left;cursor:pointer;font:inherit}
+.xp-next small{display:block;font:.72rem ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.xp-next .kicker{margin:1.4rem 0 .6rem}
+.xp-next b{display:block;font-size:clamp(3rem,7vw,7.5rem);font-weight:600;letter-spacing:-.05em;line-height:.9;transition:transform .6s cubic-bezier(.23,1,.32,1)}
+.xp-next .go{display:inline-block;margin-top:1.4rem;font-size:.85rem;color:var(--muted)}
+.xp-next .fr{aspect-ratio:16/10;background-size:cover;background-position:center;background-color:#d9d9dc;transition:transform .8s cubic-bezier(.23,1,.32,1)}
+.xp-next:hover b{transform:translateX(14px)}.xp-next:hover .fr{transform:scale(.98)}
+.xp-next:focus-visible{outline:2px solid var(--text);outline-offset:6px}
+/* barra in basso: nome, avanzamento, contatore */
+.xp-bar{position:absolute;left:calc(2rem + 190px);right:6vw;bottom:1.7rem;display:grid;grid-template-columns:1fr minmax(120px,38vw) 1fr;gap:1.5rem;align-items:center;font:.68rem ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);pointer-events:none}
+.xp-bar .ln{height:1px;background:var(--border);position:relative;overflow:hidden}
+.xp-bar .ln i{position:absolute;inset:0;background:var(--text);transform-origin:0 50%;transform:scaleX(0)}
+.xp-bar .r{text-align:right}
+.xp-back{align-self:flex-start;margin-bottom:1.6rem}
+@media(max-width:760px){
+  .xp-track{gap:18px;padding:0 5vw}
+  .xp-pan{padding:8.6rem 0 4.4rem}
+  .xp-intro{width:88vw}
+  .xp-name{font-size:clamp(3.6rem,19vw,6rem);white-space:normal}
+  .xp-meta{grid-template-columns:repeat(2,max-content);gap:.8rem 2rem}
+  .xp-fig{padding:8.4rem 0 4rem}
+  .xp-fig{--fh:min(calc(100svh - 15.6rem),118vw)}
+  .xp-txt,.xp-facts{width:80vw}.xp-say{width:86vw}
+  .xp-say p{font-size:1.7rem}
+  .xp-next{width:88vw;grid-template-columns:1fr;gap:1.4rem;align-content:end}
+  .xp-bar{bottom:1.75rem;left:calc(1rem + 186px);right:5vw;grid-template-columns:1fr auto;gap:.8rem}
+  .xp-bar .t{display:none}
+}
 
 /* mobile fixes */
 @media (max-width:760px){
@@ -583,7 +621,7 @@ const PHOTO_DIR='img/';
 const IMG=k=>PHOTO_DIR+k+'.jpg';
 const TAGS_PH=['Product Design','Textile & Fashion','Exhibition Design','System Design'];
 const projects=[
-{slug:'i',title:'Iprefab',cat:'UX/UI Design',tag:'Digital Product',year:'2025',kind:'Start-up internship',team:'Start-up team',dur:'4 months',role:'Customer journey, UX/UI and Figma prototype',
+{slug:'i',client:'Aalto Start-Up Centre',loop:['i-cover', 'i-p1', 'i-2'],title:'Iprefab',cat:'UX/UI Design',tag:'Digital Product',year:'2025',kind:'Start-up internship',team:'Start-up team',dur:'4 months',role:'Customer journey, UX/UI and Figma prototype',
  short:'An AI configurator that lets you design a Finnish prefab home first, then meet the builder.',
  long:'Customer journey and mobile prototype for Iprefab, a start-up at the Aalto Start-Up Centre: describe your home, see it take shape in 3D and compare models from Finland\'s prefab builders.',
  gal:[['i-cover','w'],['i-p2','v'],['i-2','w'],['i-p1','v'],['i-p3','v']],
@@ -592,7 +630,7 @@ const projects=[
   ['Configurator','A skeleton that builds as you choose','A 3D wireframe of the house rebuilds as the choices change, while the estimated price moves live. People can type a sentence and let the AI turn it into a house they can see, or pick size, floors and roof with one tap.',[['i-2','w']]],
   ['Houses','Models from Finland\'s prefab builders','Once the design is clear, the browse screen compares real models from the builders: filters for house type, size range, price, rooms and floors, a results list with builder tags, and an Ask AI shortcut always within reach.',[['i-p3','t'],['i-p1','t']]],
   ['Handoff','From prototype to implementation','The Figma prototype was the shared reference for the front-end and back-end teams, and the visual language was aligned with the marketing strategy so product and communication speak with one voice.',[['i-cover','w']]]]},
-{slug:'f',title:'Fanta.me',cat:'UX/UI Design',tag:'Digital Product',year:'2026',kind:'Digital product',team:'—',dur:'—',role:'Concept, UX/UI design and prototype',
+{slug:'f',client:'Personal project',loop:['f-cover', 'f-p1', 'f-2'],title:'Fanta.me',cat:'UX/UI Design',tag:'Digital Product',year:'2026',kind:'Digital product',team:'—',dur:'—',role:'Concept, UX/UI design and prototype',
  short:'The fantasy game of real life: call what friends do, vote it, and climb the live standings.',
  long:'A mobile game where a group of friends turns everyday moments into points, with bonus and malus cards, fantapowers and a live podium.',
  gal:[['f-cover','w'],['f-p2','v'],['f-2','w'],['f-p1','v'],['f-p3','v']],
@@ -601,7 +639,7 @@ const projects=[
   ['Powers','Turbo doubles, Moviola cancels','Fantapowers add strategy on top of luck: Turbo doubles a call, Moviola cancels it, and each power can be used once per game, with a countdown that makes the timing matter.',[['f-2','w']]],
   ['Deck','Bonus and malus as collectible cards','The game deck is a set of collectible cards, from +25 to -15, with a base set of 20 and room for personal cards. The deck is closed when the game starts, so everyone plays with the same rules.',[['f-p2','t'],['f-p1','t']]],
   ['Standings','Teams on a live podium','Teams and individuals are ranked on a live podium, with a daily view and a full-game view, so the story of the game is always one tab away.',[['f-p3','t'],['f-p2','t']]]]},
-{slug:'g',title:'Grain Keeper',cat:'System Design',tag:'System Design',year:'2025',kind:'Thesis project',team:'Individual',dur:'6 months',role:'Research, data analysis and design',
+{slug:'g',client:'Sinis Marine Protected Area',loop:['g-cover', 'g-1', 'g-6'],title:'Grain Keeper',cat:'System Design',tag:'System Design',year:'2025',kind:'Thesis project',team:'Individual',dur:'6 months',role:'Research, data analysis and design',
  short:'Urban furniture that keeps tourists from carrying away the quartz sand of the Sinis Peninsula.',
  long:'Thesis project developed with the Sinis Marine Protected Area to counter the unintentional removal of quartz sand caused by overtourism.',
  gal:[['g-1','h'],['g-4','v'],['g-2','h'],['g-5','v'],['g-cover','h']],
@@ -610,7 +648,7 @@ const projects=[
   ['Research','Maintenance is the real problem','The research phase was run jointly with the Sinis Marine Protected Area on the quartz beaches of Is Arutas, Mari Ermi, Corrigas and S\'archeddu e Sa Canna. The main issue of the existing design is not collecting the sand but the frequent maintenance it requires, which is unsustainable with the limited resources available.',[['g-2','h']]],
   ['Output','Showers and a bench that filter and store','A redesigned shower with a sturdier structure, a bamboo tray and a filtration system under the user\'s feet: a funnel sends water and sand to two stacked filters, 1 mm for the quartz sand and 200 micron for sediment. With about 10 litres of capacity, double the previous design, it runs longer between maintenance. Alongside it, a bench offers dry sand storage and a buffer between beach and parking.',[['g-4','t'],['g-7','t']]],
   ['Solution','Visitors release it, volunteers return it','Multilingual prompts on the shower and along the path invite visitors to release the quartz sand as they leave. The sand collects in the filters or in the bench, and volunteers regularly return it to the beach. The products are modular, so the filtering areas can be configured for the size and shape of each beach.',[['g-3','h']]]]},
-{slug:'h',title:'Hive',cat:'UX/UI Design',tag:'Digital Product',year:'2026',kind:'University project',team:'Team of 5',dur:'3 months',role:'Research, UX/UI and prototype',
+{slug:'h',client:'Politecnico di Torino',loop:['h-cover', 'h-p1', 'h-2'],title:'Hive',cat:'UX/UI Design',tag:'Digital Product',year:'2026',kind:'University project',team:'Team of 5',dur:'3 months',role:'Research, UX/UI and prototype',
  short:'A modular tractor HMI that lets farmers multitask safely while Level 3 autonomy keeps the row.',
  long:'Cognitive Ergonomics and HMI project: a touch-and-tactile cockpit for autonomous orchard tractors, with a rotary knob, a pillar mapping screen and a two-level take-over request shared with the crew.',
  gal:[['h-cover','w'],['h-p1','v'],['h-2','w'],['h-p2','v'],['h-p3','v']],
@@ -619,7 +657,7 @@ const projects=[
   ['Concept','Touch to plan, a knob for the field','A detachable horizontal dashboard and a vertical mapping screen on the cab pillar split control from navigation. A rotary knob mirrors every touch gesture: push left for the menu, push right to drop a marker for weeds, disease, pests or drainage, press to adjust working depth or rotor speed.',[['h-p2','t'],['h-p1','t']]],
   ['Safety','Two levels of take-over','When a person is within 50 metres, a Planned TOR turns the borders yellow, plays a soft chime and pulses the crew wristbands. If a collision is less than five seconds away, an Emergency TOR turns every screen red with a loud alarm, and stops tractor and implement if nobody reacts. Colour, sound and vibration say the same thing on every device.',[['h-2','w']]],
   ['Outcome','A modular kit, not a new fleet','Expert reviewers praised the clarity of the layout and a hardware-agnostic kit that moves across a mixed fleet and protects what farmers already own. Their next step for us: a quick-message channel between operators, so crews can coordinate shared tasks without reaching for a phone.',[['h-cover','w']]]]},
-{slug:'q',title:'Quadernazione',cat:'Exhibition Design',tag:'Exhibition Design',year:'2024',kind:'University project',team:'Team of 5',dur:'4 months',role:'Concept, 3D modeling and visualization',
+{slug:'q',client:'Zanotta',loop:['q-cover', 'q-8', 'q-6'],title:'Quadernazione',cat:'Exhibition Design',tag:'Exhibition Design',year:'2024',kind:'University project',team:'Team of 5',dur:'4 months',role:'Concept, 3D modeling and visualization',
  short:'An immersive exhibition on Superstudio\'s Quaderna series, staged in Ferrara\'s Verdi Theatre.',
  long:'Exhibition concept for Zanotta that showcases the radical minds of Superstudio and their Quaderna products through an immersive journey.',
  gal:[['q-cover','h'],['q-2','v'],['q-3','h'],['q-1','h'],['q-4','h']],
@@ -628,7 +666,7 @@ const projects=[
   ['Space','The stage tower of the Verdi Theatre','The stage tower of the former Verdi Theatre in Ferrara was chosen for its strong visual harmony with the showcased products. Its vast, open spaces create an ideal environment for exhibition artifacts inspired by the continuous monument.',[['q-7','t']]],
   ['System','A modular system of environments','The exhibition is structured around the Continuous Monument, an architectural device that divides the space into semi-open environments and integrates captions and technical equipment such as lighting and speakers. Nine environments, from the entrance and colophon to an immersive room, a video installation and storage.',[['q-2','t'],['q-6','t']]],
   ['Experience','A path with no fixed route','Visitors enter through a transitional space and then choose their own path; only a suggested one continues after the colophon. An immersive room hosts an open discussion about the future and a video projection shows Superstudio\'s Supersuperficie, for a visit of about 30 minutes. The visual identity pairs acid green with the Quaderna pattern in a bold yet minimal composition.',[['q-3','h']]]]},
-{slug:'b',title:'Buxaka',cat:'Textile Design',tag:'Textile & Fashion',year:'2023',kind:'University project',team:'Team of 4',dur:'3 months',role:'Concept, 3D modeling and visualization',
+{slug:'b',client:'Museum of Marsh Herbs',loop:['b-cover', 'b-2', 'b-1'],title:'Buxaka',cat:'Textile Design',tag:'Textile & Fashion',year:'2023',kind:'University project',team:'Team of 4',dur:'3 months',role:'Concept, 3D modeling and visualization',
  short:'A modular overwear jacket handwoven with traditional techniques from Romagna.',
  long:'Textile project with the Museum of Marsh Herbs in Bagnacavallo: a modular streetwear jacket that pays tribute to handmade craftsmanship.',
  gal:[['b-cover','h'],['b-1','v'],['b-2','v'],['b-3','v'],['b-4','v']],
@@ -637,7 +675,7 @@ const projects=[
   ['Process','Woven by hand','The entire project was handcrafted with traditional textile techniques: loom weaving, basket weave, plain weave and braiding, each selected to balance decorative and structural needs.',[['b-3','t']]],
   ['Prototype','Hemp, raffia and braided cords','The main structure is woven from hemp on a custom-made loom and forms the back panel and belt, decorated with patterns inspired by Sardinian textile heritage. The suspenders are made from double-braided cords, and all other embellishments from raffia fibres.',[['b-2','t'],['b-6','t']]],
   ['Add-ons','Pockets you can change','Modular pockets can be attached or removed to suit the user\'s needs. The larger one carries a diamond pattern that mirrors the design on the jacket\'s back, while the smaller one, with an alternating weave, is made for compact items.',[['b-4','t']]]]},
-{slug:'w',title:'Waterpack',cat:'Package Design',tag:'Product Design',year:'2023',kind:'University project',team:'Team of 3',dur:'3 months',role:'Prototype design and 3D renderings',
+{slug:'w',client:'Lete',loop:['w-cover', 'w-2', 'w-4'],title:'Waterpack',cat:'Package Design',tag:'Product Design',year:'2023',kind:'University project',team:'Team of 3',dur:'3 months',role:'Prototype design and 3D renderings',
  short:'A redesigned water pack with an ergonomic handle and a cardboard structure.',
  long:'Developed in the Ergonomics and Human-Centered Design course: a rethink of the Lete water pack to improve interaction and reduce environmental impact.',
  gal:[['w-cover','h'],['w-1','v'],['w-2','h'],['w-3','v'],['w-4','h']],
@@ -646,7 +684,7 @@ const projects=[
   ['Concept','Less plastic, same stackability','The aim was to replace plastic with a more sustainable material where possible, improve the handle, and keep good stackability at industrial level, without compromising the main function of the carrier across production, transport and consumption.',[['w-5','h']]],
   ['Output','Cardboard that carries','A rigid-cardboard structure and handle, plus a packaging-cardboard hygiene package that keeps the bottle caps fully enclosed. Plastic is limited to a recycled stabilizing cable that holds the bottles in place, and the handle is removable, staying compatible with stackable packaging.',[['w-3','t'],['w-6','t']]],
   ['Solution','Built to scale','The cardboard packaging is engineered so that bundles stack while the caps stay protected and reachable through strategically placed openings. The design is optimized for industrial scalability, allowing efficient mass production and distribution.',[['w-2','h']]]]},
-{slug:'z',title:'Zeitknot',cat:'Concept Design',tag:'Product Design',year:'2022',kind:'University project',team:'Individual',dur:'4 months',role:'Design and prototype, start to finish',
+{slug:'z',client:'Ethnographic Museum of Santarcangelo',loop:['z-cover', 'z-1', 'z-3'],title:'Zeitknot',cat:'Concept Design',tag:'Product Design',year:'2022',kind:'University project',team:'Individual',dur:'4 months',role:'Design and prototype, start to finish',
  short:'A 3D-printed chess set that reinterprets the traditional objects of Romagna.',
  long:'Exhibition artifact developed with the Ethnographic Museum of Santarcangelo di Romagna to bridge the origins of tradition with contemporary times.',
  gal:[['z-cover','h'],['z-1','v'],['z-2','v'],['z-3','v'],['z-4','v']],
@@ -661,13 +699,14 @@ const PH_COL=['#c98aa0','#9b72c4','#6fbf7e','#c9b86a','#6fa3bf','#bf8a6f','#7a8f
 const PH_SEC=[['Summary','Summary placeholder','Placeholder text: a short summary of the project, who it is for and what it achieved.'],['Problem','The problem','Placeholder text: the starting context and the difficulty to solve.'],['Research','The research','Placeholder text: methods used and the evidence that guided the choices.'],['Output','The output','Placeholder text: materials produced along the way.'],['Solution','The solution','Placeholder text: the final proposal and how it answers the problem.']];
 for(let k=0;k<6;k++){
   const n=projects.length+1;
-  projects.push({ph:true,col:PH_COL[k%PH_COL.length],title:'Project '+n,cat:'Category',tag:TAGS_PH[k%TAGS_PH.length],year:'—',kind:'Project',team:'—',dur:'—',role:'—',
+  projects.push({ph:true,col:PH_COL[k%PH_COL.length],client:'Client',title:'Project '+n,cat:'Category',tag:TAGS_PH[k%TAGS_PH.length],year:'—',kind:'Project',team:'—',dur:'—',role:'—',
    short:'Short caption of the project: role, goal and outcome.',long:'Project '+n+': extended description placeholder. Context, problem, process and result will go here.',
    gal:[['','h'],['','v'],['','h'],['','v'],['','h']],sec:PH_SEC.map(x=>[x[0],x[1],x[2],[['',k%2?'w':'h']]])});
 }
+const WEBS=k=>PHOTO_DIR+'web/s/'+k+'.webp';   // foto del loop nella sfera (1100px)
 const WEB=k=>PHOTO_DIR+'web/'+k+'.webp';   // copertine ridimensionate (1600px, WebP) per sfera, carosello e griglie
 projects.forEach((p,i)=>{p.i=i;if(!p.ph)p.local=WEB(p.slug+'-cover')});
-const me={local:WEB('tobia'),pos:'50% 22%',title:'me.',cat:'Industrial Product Designer',me:true};
+const me={local:WEB('tobia'),pos:'50% 22%',client:'Tobia Seu · Turin',title:'me.',cat:'Industrial Product Designer',me:true};
 const TAGS=['Product Design','Textile & Fashion','Exhibition Design','System Design'];
 me.i=-1;me.tag='About';me.short='Industrial product designer: concepts, prototypes and interfaces.';me.long='I hold a degree in Industrial Product Design, with a passion for projects in all their forms, from product development to visual communication. My background includes exhibition, prototyping and interactive design, while my most recent work focused on UX and UI design.';
 const items=[me,...projects];            // la card 0 della sfera e' la tua foto
@@ -714,7 +753,8 @@ const TURN='<button class="turn" aria-label="Gira la card"><svg viewBox="0 0 24 
 function cardHTML(p,n,sph){
   const act=p.me?'<button class="btn" data-go="about">About me</button>':`<button class="btn" data-proj="${p.i}">View case study ↗</button>`;
   const more=sph?`<div class="more"><div class="mi"><p>${p.short}</p><div class="row2">${act}<em class="num">${pad(n+1)}</em></div></div></div>`:'';
-  return `<div class="flip"><div class="card-in front">${TURN}<div class="photo" style="${bg(p)}"></div><i class="grain"></i><i class="sheen"></i><div class="cap"><div><b>${p.title}</b><i class="serif">${p.cat}</i></div>${sph?'':`<em>${pad(n+1)}</em>`}</div>${more}</div><div class="card-in back">${TURN}<span class="bk">${p.tag}</span><h4>${p.title}</h4><i class="serif">${p.cat}</i><p>${p.long}</p><i class="grain"></i><i class="sheen"></i></div></div>`;
+  const lp=sph&&p.loop?p.loop.map((k,j)=>`<i class="pl${j?'':' on'}" data-src="${WEBS(k)}"${j?'':` style="background-image:url('${p.local}')"`}></i>`).join(''):'';
+  return `<div class="flip"><div class="card-in front">${TURN}<div class="photo" style="${bg(p)}">${lp}</div><div class="cap"><div><small>${p.client||p.tag}</small><b>${p.title}</b></div><div class="cr">${p.cat}${p.me||sph?'':`<em>${pad(n+1)}</em>`}</div></div>${more}</div><div class="card-in back">${TURN}<span class="bk">${p.tag}</span><h4>${p.title}</h4><i class="serif">${p.cat}</i><p>${p.long}</p></div></div>`;
 }
 const pcHTML=(p,n)=>`<div class="pcw"><div class="pc" data-i="${p.i}">${cardHTML(p,projects.indexOf(p),false)}</div></div>`;
 const cards=items.map((p,i)=>{
@@ -725,6 +765,24 @@ const cards=items.map((p,i)=>{
   c.style.transform=c._base;
   c.onclick=()=>{if(performance.now()-spunAt<250)return;i===0?goStage():focusCard(i)};   // dopo un trascinamento non apre la card
   sphere.appendChild(c);return c});
+/* LOOP FOTO SULLA SFERA: ogni progetto mostra a turno 3 foto (insieme, dettaglio, particolare).
+   Una card alla volta cambia foto, in ordine sparso: la sfera si accende un pezzo dopo l'altro */
+const loopCards=cards.filter(c=>c.querySelector('.pl'));
+let loopBag=[];
+function loopStep(){
+  if(RM||document.hidden||document.body.dataset.page!=='home'||INTRO.p<1||scrollY>innerHeight*2)return;
+  if(!loopBag.length)loopBag=loopCards.slice().sort(()=>Math.random()-.5);
+  const c=loopBag.pop();if(c.classList.contains('flipped')||c._busy)return;
+  const ls=[...c.querySelectorAll('.pl')],cur=c._li||0,nx=(cur+1)%ls.length,el=ls[nx];
+  const show=()=>{
+    el.style.transition='none';el.classList.remove('on');void el.offsetWidth;el.style.transition='';
+    el.style.zIndex=c._z=(c._z||1)+1;el.classList.add('on');c._li=nx;
+    setTimeout(()=>{c._busy=0},1700)};
+  c._busy=1;
+  if(el.style.backgroundImage)show();
+  else{const im=new Image();im.src=el.dataset.src;(im.decode?im.decode():Promise.resolve()).then(()=>{el.style.backgroundImage=`url('${el.dataset.src}')`;show()},()=>{c._busy=0})}
+}
+setInterval(loopStep,850);
 
 /* render: rotazione + bokeh (profondita' di campo).
    Fuori dal click la sfera ha un'apertura "larga" (dietro molto sfocato);
@@ -751,7 +809,6 @@ function render(){
   const ampB=RM?0:Math.max(F.f,S.s);
   // profondita' di campo (lente sottile): cerchio di confusione ~ |distanza - fuoco| / distanza; davanti nitido, dietro sfocato + velato + desaturato
   const df=PERSP-R-push,A=L(L(15,20,f),46,S.s),off=L(260,170,f)*(1-S.s)+10*S.s,op0=L(.34,.5,f),dark=L(.1,.05,f);
-  let budget=3;     // riflessi: al massimo 3 card ridisegnate per frame
   for(let i=0;i<N;i++){
     const p=P[i],c=cards[i];
     const d=p.y*sa+(-p.x*sb+p.z*cb)*ca;
@@ -759,12 +816,8 @@ function render(){
     const coc=Math.min(26,A*Math.max(0,dist-df-off)/dist);
     const dn=clamp((d+R)/(2*R),0,1);
     {const nx0=p.x/R,ny0=p.y/R,nz0=p.z/R,y1=ny0,x1=nx0*cb+nz0*sb,z1=-nx0*sb+nz0*cb,
-      nx=x1,ny=y1*ca-z1*sa,nz=y1*sa+z1*ca,
-      dif=Math.max(0,nx*LX+ny*LY+nz*LZ),hd=nx*HX+ny*HY+nz*HZ,spec=Math.pow(Math.max(0,hd),90),
-      sh=(Math.round(.22*(1-dif)*25)/25).toFixed(2),si=(Math.round((.06+.62*spec)*20)/20).toFixed(2),sx=Math.round(clamp(50+(nx-HX)*160-(ny-HY)*60,-30,130)/5)*5+'%',key=sh+si+sx;
-     c._nz=nz;
-     // il riflesso cambia a scatti piccoli e solo sulle card girate verso di noi: ogni cambio ridisegna la card
-     if(c._lk!==key&&(!c._lk||(nz>-.2&&budget-->0))){c._lk=key;c.style.setProperty('--sh',sh);c.style.setProperty('--si',si);c.style.setProperty('--sx',sx)}}
+      nx=x1,ny=y1*ca-z1*sa,nz=y1*sa+z1*ca;
+     c._nz=nz}
     const isFoc=focused===c,sharp=isFoc||(i===0&&S.s>.99&&S.oth>.01);
     let fl;
     if(sharp)fl='none';
@@ -855,11 +908,11 @@ const toolsHTML=()=>`<div class="chips">${['all',...TAGS].map(t=>`<button class=
 document.querySelectorAll('.tools-host').forEach(h=>h.innerHTML=toolsHTML());
 const listHTML=l=>l.length?l.map((p,j)=>`<div class="lrow" data-i="${p.i}"><span class="n">${pad(j+1)}</span><h3>${p.title}</h3><span class="c">${p.cat}</span><span class="a">↗</span></div>`).join(''):'<p class="empty">Nessun progetto in questa categoria.</p>';
 function sync(){document.querySelectorAll('[data-f]').forEach(b=>b.classList.toggle('on',b.dataset.f===FILT));document.querySelectorAll('[data-v]').forEach(b=>b.classList.toggle('on',b.dataset.v===VIEW));document.body.dataset.view=VIEW}
-const kk=()=>clamp(innerHeight*.68/568,.5,1);
+const kk=()=>clamp(innerHeight*.62/440,.5,1);
 function slideDims(){const W=document.documentElement.clientWidth,h=Math.min(innerHeight*.6,W*.64*.625,720),w=h*1.6;return{w,h}}
 /* carosello: 3 progetti in loop (duplicati a 6), si muove da solo ogni 2.5s e si puo' trascinare */
 const K=featured.length,TT=K*2,car=$('car');
-const lsHTML=(p,n)=>`<article class="ls" data-i="${p.i}"><div class="photo" style="${bg(p)}"></div><div class="lcap"><div><b>${p.title}</b><i class="serif">${p.cat}</i></div><div><em>${pad(n+1)} / ${pad(K)}</em><button class="btn" data-proj="${p.i}">View case study ↗</button></div></div></article>`;
+const lsHTML=(p,n)=>`<article class="ls" data-i="${p.i}"><div class="photo" style="${bg(p)}"></div><div class="lcap"><div><small>${p.client}</small><b>${p.title}</b></div><div><i>${p.cat}</i><em>${pad(n+1)} / ${pad(K)}</em><button class="btn" data-proj="${p.i}">View case study ↗</button></div></div></article>`;
 car.innerHTML=Array.from({length:TT},(_,j)=>lsHTML(featured[j%K],j%K)).join('');
 const slides=[...car.children];
 let cpos=0,snapTo=0,cp0=0,cvel=0,clx=0,clt=0,step=500;
@@ -878,7 +931,7 @@ function layout(){
   const d=slideDims();document.documentElement.style.setProperty('--sw',d.w+'px');document.documentElement.style.setProperty('--sh',d.h+'px');
   step=d.w+Math.max(28,W*.02);
   const cw=W*.88,cols=cw>=1000?5:cw>=760?4:cw>=520?3:2,gap=24,cell=(cw-(cols-1)*gap)/cols;   // 4-5 card per riga
-  document.querySelectorAll('.pgrid').forEach(g=>{g.style.setProperty('--pk',cell/440);g.style.gridTemplateColumns=`repeat(${cols},${cell}px)`});
+  document.querySelectorAll('.pgrid').forEach(g=>{g.style.setProperty('--pk',cell/600);g.style.gridTemplateColumns=`repeat(${cols},${cell}px)`});
 }
 function carDown(e){cdrag=true;cx0=e.clientX;cp0=cpos;cvel=0;clx=e.clientX;clt=performance.now();cmoved=0;cur.classList.add('down');snapTo=cpos}
 function carMove(e){
@@ -895,7 +948,7 @@ function carUp(){
 ['pointerdown','keydown'].forEach(ev=>addEventListener(ev,()=>lastAct=performance.now()));
 setInterval(()=>{if(!RM&&document.body.dataset.page==='home'&&S.wo>.9&&!cdrag&&performance.now()-lastAct>1200)snapTo=Math.round(cpos)+1},3500);
 /* archivio in home: card una dietro l'altra, senza filtri */
-$('stack').innerHTML=archList.slice(0,AN).map((p,i)=>`<div class="acard"><div class="ph" style="${bg(p)}"></div><span class="an">${pad(i+1)}</span><div class="am"><b>${p.title}</b><i class="serif">${p.cat}</i></div></div>`).join('');
+$('stack').innerHTML=archList.slice(0,AN).map((p,i)=>`<div class="acard"><div class="ph" style="${bg(p)}"></div><span class="an">${pad(i+1)} · ${p.cat}</span><div class="am"><small>${p.client||p.tag}</small><b>${p.title}</b></div></div>`).join('');
 const acards=[...$('stack').children];
 function render2(){
   const p=S2.t*(AN-1);
@@ -928,51 +981,71 @@ function setView(v){
     else gsap.from('.pgrid .pcw',{opacity:0,scale:.9,y:24,duration:.55,stagger:.04,ease:'power3.out',clearProps:'opacity,transform'});
   }});
 }
-let galRaf=0;
-function galInit(){
-  cancelAnimationFrame(galRaf);
-  const g=document.querySelector('.pgal'),t=g&&g.querySelector('.pgal-track');if(!g)return;
-  const kids=[...t.children],n=kids.length/3;
-  let x=0,v=0,down=false,lx=0,W=0;
-  const measure=()=>{W=kids.slice(0,n).reduce((a,k)=>a+k.offsetWidth+20,0)};
-  let offs=[],ws=[];const measure2=()=>{let a=0;offs=[];ws=[];kids.forEach(k=>{const w=k.offsetWidth;offs.push(a);ws.push(w);a+=w+20})};
-  measure();measure2();x=-W;
-  g.onpointerdown=e=>{down=true;lx=e.clientX;v=0;g.classList.add('drag');g.setPointerCapture(e.pointerId)};
-  g.onpointermove=e=>{if(!down)return;const dx=e.clientX-lx;lx=e.clientX;x+=dx;v=dx};
-  const up=()=>{down=false;g.classList.remove('drag')};g.onpointerup=up;g.onpointercancel=up;
-  let last=performance.now();
-  (function tick(now){
-    const dt=Math.min(40,now-last)/16.7;last=now;
-    if(document.body.dataset.page!=='project'){return}
-    if(!down){x+=v*dt;v*=Math.pow(.95,dt);if(Math.abs(v)<.05&&!RM)x-=.35*dt}
-    if(!W||W<10){measure();measure2()}
-    while(x<-2*W)x+=W;while(x>-W+0)x-=W;
-    t.style.transform=`translate3d(${x.toFixed(1)}px,0,0)`;
-    if(!RM){const gw=g.clientWidth;kids.forEach((k,j)=>{const cx=x+offs[j]+ws[j]/2,raw=(cx-gw/2)/(gw/2),nd=Math.max(-1.6,Math.min(1.6,raw)),ad=Math.abs(nd),e=Math.min(1,Math.max(0,(ad-.5)/.9)),ee=e*e*(3-2*e),sg=nd<0?-1:1;
-      k.style.transform=`translate3d(${(sg*ee*40).toFixed(1)}px,0,${(70*nd*nd-ee*260).toFixed(1)}px) rotateY(${(-nd*20+sg*ee*(-42)).toFixed(2)}deg) scale(${(1-.12*ee).toFixed(3)})`;
-      k.style.opacity=(1-.85*ee).toFixed(3);k.style.filter=ee>.02?`blur(${(ee*5).toFixed(1)}px)`:''})}
-    galRaf=requestAnimationFrame(tick)})(last);
+/* PAGINA PROGETTO: una striscia orizzontale. Lo scroll verticale (rotella, trackpad, dito) la fa scorrere di lato;
+   apertura col nome, poi foto grandi alternate a righe di testo, in fondo il prossimo progetto */
+const PIMG=k=>PHOTO_DIR+'web/'+k+'.webp';
+const XP={x:0,tx:0,max:0,sec:null,track:null,figs:[],raf:0,last:0};
+function xpMeasure(){
+  const sec=XP.sec,t=XP.track;if(!sec||!t)return;
+  XP.max=Math.max(0,t.scrollWidth-document.documentElement.clientWidth);
+  sec.style.height=(XP.max+innerHeight)+'px';
+  XP.figs=[...t.querySelectorAll('.xp-fig')].map(el=>({el,img:el.querySelector('img'),l:el.offsetLeft,w:el.offsetWidth}));
 }
-const COLS=['#9b72c4','#6fbf7e','#c9b86a','#6fa3bf','#c98aa0'];
-const gimg=(k,sh,p,j)=>`<div class="gi ${sh}" style="${k?`background-image:url('${IMG(k)}')`:`background-color:${p.col};filter:hue-rotate(${j*28}deg)`}"></div>`;
+function xpTick(now){
+  if(document.body.dataset.page!=='project'||!XP.sec){XP.raf=0;return}
+  const dt=Math.min(64,now-(XP.last||now))/1000;XP.last=now;
+  const top=XP.sec.getBoundingClientRect().top,p=XP.max?clamp(-top/(XP.sec.offsetHeight-innerHeight||1),0,1):0;
+  XP.tx=p*XP.max;
+  XP.x=RM?XP.tx:XP.x+(XP.tx-XP.x)*(1-Math.exp(-dt*10));
+  if(Math.abs(XP.tx-XP.x)<.05)XP.x=XP.tx;
+  XP.track.style.transform=`translate3d(${(-XP.x).toFixed(1)}px,0,0)`;
+  const vw=document.documentElement.clientWidth;let seen=0;
+  XP.figs.forEach(f=>{const cx=f.l-XP.x+f.w/2;if(cx<vw*.62)seen++;
+    if(!RM&&f.img&&cx>-vw&&cx<vw*2){const r=clamp((cx-vw/2)/vw,-1.2,1.2);f.img.style.transform=`translate3d(${(-r*5).toFixed(2)}%,0,0) scale(1.1)`}});
+  const pr=XP.max?XP.x/XP.max:0;
+  XP.ln.style.transform=`scaleX(${pr.toFixed(4)})`;
+  XP.cnt.textContent=pad(Math.max(1,seen))+' / '+pad(XP.figs.length);
+  XP.raf=requestAnimationFrame(xpTick);
+}
 function openProject(i){
   const p=projects[i];if(!p)return;unfocus();
-  const pr=projects[(i+projects.length-1)%projects.length],nx=projects[(i+1)%projects.length];
-  const gal=[0,1,2].map(()=>p.gal.map(([k,sh],j)=>gimg(k,sh,p,j)).join('')).join('');
-  const secs=p.sec.map((x,k)=>{
-    const imgs=x[3].length>1?`<div class="pj-imgs two">${x[3].map(([m])=>`<div class="pj-img t" style="${m?`background-image:url('${IMG(m)}')`:`background-color:${p.col}`}"></div>`).join('')}</div>`
-      :`<div class="pj-imgs"><div class="pj-img ${x[3][0][1]==='w'?'w':''}" style="${x[3][0][0]?`background-image:url('${IMG(x[3][0][0])}')`:`background-color:${p.col};filter:hue-rotate(${k*24}deg)`}"></div></div>`;
-    const facts=k===0?`<div class="pj-facts"><div><b>${p.year}</b><span>Year</span></div><div><b>${p.team}</b><span>Team</span></div><div><b>${p.dur}</b><span>Duration</span></div></div>`:'';
-    return `<section class="pj-sec rv"><div class="pj-txt"><span class="num">${pad(k+1)} — ${x[0]}</span><h2>${x[1]}</h2><p>${x[2]}</p>${facts}</div>${imgs}</section>`}).join('');
-  $('pj').innerHTML=`<div class="pj-top"><div><button class="btn-o" data-go="cases">← Back to cases</button><p class="kicker" style="margin-top:1.8rem">${p.tag}</p><h1 style="margin-bottom:.4rem">${p.title}</h1><p class="lead serif" style="margin:0;font-size:1.4rem">${p.cat}</p></div></div>
-  <div class="pj-meta"><div>Year<b>${p.year}</b></div><div>Type<b>${p.kind}</b></div><div>My role<b>${p.role}</b></div></div>
-  <div class="pgal" aria-label="Project gallery"><div class="pgal-track">${gal}</div></div><p class="pgal-hint">← Drag the gallery →</p>
-  ${secs}
-  <button class="pj-next" data-proj="${nx.i}"><small>Next project · ${pad(nx.i+1)}</small><b>${nx.title}<i>→</i></b></button>
-  <div class="pj-nav"><button class="btn-o" data-proj="${pr.i}">← ${pr.title}</button><button class="btn-o" data-go="cases">All cases</button></div>`;
+  const nx=projects[(i+1)%projects.length];
+  const used=new Set();
+  const fig=([k,sh],n,cap)=>{if(k)used.add(k);
+    const s=sh==='t'?'v':sh;
+    return `<figure class="xp-fig ${s}"><div class="fr" style="${k?'':`background:${p.col};filter:hue-rotate(${n*26}deg)`}">${k?`<img src="${PIMG(k)}" alt="${p.title}, ${cap}" ${n<2?'fetchpriority="high"':'loading="lazy"'} decoding="async">`:''}</div><figcaption><span>${cap}</span><span>${p.title}</span></figcaption></figure>`};
+  let n=0;
+  const hero=p.gal[0];
+  let html=`<div class="xp-pan xp-intro"><div><button class="btn-o xp-back" data-go="cases">← All cases</button><p class="kicker">${p.client} — ${p.tag}</p></div>
+    <div><h1 class="xp-name">${p.title}</h1><p class="xp-lead">${p.short}</p>
+    <div class="xp-meta"><div>Client<b>${p.client}</b></div><div>Type<b>${p.kind}</b></div><div>Role<b>${p.role}</b></div><div>Year<b>${p.year}</b></div></div></div></div>`;
+  html+=fig(hero,n++,p.cat);
+  html+=`<div class="xp-pan xp-say rv"><p>${p.long}</p></div>`;
+  p.sec.forEach((x,k)=>{
+    let ims=x[3].filter(([m])=>!m||!used.has(m));
+    if(!ims.length){const g=p.gal.find(([m])=>m&&!used.has(m));if(g)ims=[g]}
+    html+=`<div class="xp-pan xp-txt rv ${k%2?'top':'end'}"><span class="num">${pad(k+1)} — ${x[0]}</span><h2>${x[1]}</h2><p>${x[2]}</p></div>`;
+    if(ims.length>1)html+=`<div class="xp-pair">${ims.map(m=>fig(m,n++,x[0])).join('')}</div>`;
+    else if(ims.length)html+=fig(ims[0],n++,x[0]);
+    if(k===0)html+=`<div class="xp-pan xp-facts rv"><p class="kicker">At a glance</p><div><b>${p.year}</b><span>Year</span></div><div><b>${p.team}</b><span>Team</span></div><div><b>${p.dur}</b><span>Duration</span></div><div><b>${p.cat}</b><span>Discipline</span></div></div>`;
+  });
+  const rest=p.gal.filter(([m])=>m&&!used.has(m));
+  if(rest.length)html+=`<div class="xp-pair">${rest.slice(0,2).map(m=>fig(m,n++,'Gallery')).join('')}</div>`;
+  html+=`<button class="xp-next" data-proj="${nx.i}"><div><small>Next case study —</small><p class="kicker">${nx.client}</p><b>${nx.title}</b><span class="go">Click to view the next project →</span></div><div class="fr" style="${bg(nx)}"></div></button>`;
+  $('pj').innerHTML=`<section class="xp" aria-label="${p.title} case study"><div class="xp-stage"><div class="xp-track">${html}</div>
+    <div class="xp-bar" aria-hidden="true"><span class="t">${p.client} · ${p.title}</span><span class="ln"><i></i></span><span class="r"><b id="xpc">01</b> · Scroll →</span></div></div></section>`;
+  XP.sec=$('pj').querySelector('.xp');XP.track=XP.sec.querySelector('.xp-track');XP.ln=XP.sec.querySelector('.xp-bar .ln i');XP.cnt=$('xpc');XP.x=0;XP.last=0;
   document.querySelectorAll('#pj .rv').forEach(el=>rvIO.observe(el));
-  go('project');galInit();
+  go('project');
+  xpMeasure();
+  XP.track.querySelectorAll('img').forEach(im=>{if(!im.complete)im.addEventListener('load',xpMeasure,{once:true})});
+  if(!XP.raf)XP.raf=requestAnimationFrame(xpTick);
 }
+/* trackpad orizzontale e frecce: muovono la stessa striscia */
+addEventListener('wheel',e=>{if(document.body.dataset.page!=='project'||Math.abs(e.deltaX)<=Math.abs(e.deltaY))return;e.preventDefault();scrollBy(0,e.deltaX)},{passive:false});
+addEventListener('keydown',e=>{if(document.body.dataset.page!=='project'||e.target.closest('input,textarea'))return;
+  if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();scrollBy({top:(e.key==='ArrowRight'?1:-1)*innerWidth*.6,behavior:RM?'auto':'smooth'})}});
+addEventListener('resize',()=>{if(document.body.dataset.page==='project')xpMeasure()});
 gsap.timeline({scrollTrigger:{trigger:'#arch',start:'top top',end:'bottom bottom',scrub:.6}})
  .to(S2,{t:1,ease:'none',duration:1,onUpdate:render2});
 
@@ -1067,10 +1140,10 @@ let lastT=performance.now();
    SCROLL: sfera -> tua card -> teaser video -> 3 progetti -> archivio
    ===================================================================== */
 const cwid=()=>document.documentElement.clientWidth;
-const cardR=()=>{const sc=CS*PERSP/(PERSP-R-PUSH),cx=cwid()*(.5+SH/100),cy=innerHeight/2;return{left:cx-220*sc,top:cy-284*sc,width:440*sc,height:568*sc,borderRadius:30*sc}};
-const landR=cx=>{const w=Math.min(cwid()*.4,600),h=w*.6;return{left:cx-w/2,top:innerHeight/2-h/2,width:w,height:h,borderRadius:22}};
-const kkk=()=>Math.max(.5,Math.min(1,innerHeight*.68/568));
-const centerR=()=>{const d=slideDims();return{left:(cwid()-d.w)/2,top:innerHeight*.56-d.h/2,width:d.w,height:d.h,borderRadius:30}};
+const cardR=()=>{const sc=CS*PERSP/(PERSP-R-PUSH),cx=cwid()*(.5+SH/100),cy=innerHeight/2;return{left:cx-300*sc,top:cy-220*sc,width:600*sc,height:440*sc,borderRadius:0}};
+const landR=cx=>{const w=Math.min(cwid()*.4,600),h=w*.6;return{left:cx-w/2,top:innerHeight/2-h/2,width:w,height:h,borderRadius:0}};
+const kkk=()=>Math.max(.5,Math.min(1,innerHeight*.62/440));
+const centerR=()=>{const d=slideDims();return{left:(cwid()-d.w)/2,top:innerHeight*.56-d.h/2,width:d.w,height:d.h,borderRadius:0}};
 const cxS=()=>cwid()*(.5+SH/100);
 gsap.set(['#c1','#c2'],{autoAlpha:0,y:24,yPercent:matchMedia('(max-width:760px)').matches?0:-50});
 gsap.set('#vwin',{autoAlpha:0});
@@ -1090,7 +1163,7 @@ const heroTL=gsap.timeline({defaults:{ease:E},scrollTrigger:{trigger:'#pin',star
  .to('#vwin',{autoAlpha:1,duration:.2,ease:'none'},3.2)          // la finestra prende il posto della card
  .to('#hub',{opacity:0,duration:.2,ease:'none'},3.3)
  .to(S,{hubO:0,duration:.2,ease:'none'},3.3)
- .fromTo('#vwin',{left:()=>cardR().left,top:()=>cardR().top,width:()=>cardR().width,height:()=>cardR().height,borderRadius:()=>cardR().borderRadius},{left:()=>landR(cxS()).left,top:()=>landR(0).top,width:()=>landR(0).width,height:()=>landR(0).height,borderRadius:22,duration:1.3},3.3)   // la card diventa orizzontale, sul posto
+ .fromTo('#vwin',{left:()=>cardR().left,top:()=>cardR().top,width:()=>cardR().width,height:()=>cardR().height,borderRadius:()=>cardR().borderRadius},{left:()=>landR(cxS()).left,top:()=>landR(0).top,width:()=>landR(0).width,height:()=>landR(0).height,borderRadius:0,duration:1.3},3.3)   // la card diventa orizzontale, sul posto
  .to('#c2',{autoAlpha:1,y:0,duration:.9,ease:'power2.out'},4)
  .to(S,{roll:-14,gz:.25,duration:1.4},3.6)
  .to('#c2',{autoAlpha:0,y:-36,duration:.7,ease:'power2.in'},5.4)  // si toglie il testo...

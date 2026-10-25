@@ -7,9 +7,14 @@ Single-file site (`index.html`) built with HTML, CSS, JavaScript and [GSAP](http
 
 - `index.html` — the whole site
 - `img/` — project photos (`<id>-cover.jpg`, `<id>-1.jpg` …) and portrait (`tobia.jpg`)
-- `img/web/` — resized WebP covers and portrait used by the sphere, carousel and grids (regenerate when a cover changes)
+- `img/web/` — WebP versions: covers and portrait (sphere, carousel, grids) and full-size project photos (project pages); regenerate when a photo changes
+- `img/web/s/` — small WebP photos for the 3-photo loop on the sphere cards (`loop` field of each project: overview, detail, particular)
 - `fonts/` — self-hosted fonts; `fonts/fonts.css` is the only place to change the typeface (Archivo now, slot ready for Akzidenz-Grotesk)
 - `cv/` — CV in PDF
+
+## Project pages
+
+Every project uses the same template (`openProject` in `index.html`): one horizontal strip driven by the vertical scroll, with the name, large photos (`gal` + `sec` images) alternating with text rows, and the next project at the end.
 
 ## Run locally
 
