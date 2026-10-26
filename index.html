@@ -150,6 +150,11 @@ body.focus #hint{visibility:hidden}
 .copy a,.copy button{pointer-events:auto}
 .copy h1{font-size:clamp(2rem,4.5vw,3.5rem);font-weight:500;letter-spacing:-.02em;margin:0 0 1rem;line-height:1}
 .copy p{color:var(--muted);line-height:1.65;max-width:38ch;margin:0 0 1.5rem}
+/* "UX/UI · Product · Systemic" designer: la parola scorre in verticale, "designer" resta */
+.copy .role{color:var(--text);font-size:clamp(1.15rem,1.7vw,1.5rem);line-height:1.2;letter-spacing:-.015em;font-weight:500;margin:-.2rem 0 1rem;max-width:none}
+.rw{display:inline-block;height:1.2em;overflow:hidden;vertical-align:bottom;transition:width .7s cubic-bezier(.7,0,.3,1)}
+.rw b{display:flex;flex-direction:column;align-items:flex-start;font-weight:inherit;transition:transform .7s cubic-bezier(.7,0,.3,1)}
+.rw i{font-style:normal;line-height:1.2;white-space:nowrap}
 .copy .big{font-size:clamp(2rem,4.2vw,3.6rem);line-height:1.05;letter-spacing:-.02em;font-weight:500}
 
 /* finestra video teaser */
@@ -388,6 +393,12 @@ body[data-page=project] #project{padding:0;min-height:0}
 .sub h1.xp-name,.xp-name{margin:0;font-size:clamp(3.6rem,10vw,11rem);font-weight:600;letter-spacing:-.055em;line-height:.86;white-space:nowrap}
 .xp-lead{margin:1.6rem 0 0;max-width:32ch;font-size:clamp(1rem,1.3vw,1.2rem);line-height:1.4;letter-spacing:-.01em;text-wrap:pretty}
 .xp-meta{display:grid;grid-template-columns:repeat(4,max-content);gap:.5rem 3rem;margin-top:2.2rem;font-size:.75rem;color:var(--muted)}
+.xp-links{display:flex;gap:.8rem;margin-top:1.6rem}
+.xp-vid .fr{background:#111}
+.xp-vid video,.xp-vid iframe{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border:0}
+.yt{position:absolute;inset:0;border:0;padding:0;background:#111;cursor:pointer}
+.yt img{transform:none;transition:transform .8s cubic-bezier(.23,1,.32,1)}.yt:hover img{transform:scale(1.03)}
+.yt-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);padding:.8rem 1.5rem;border-radius:999px;background:#fff;color:#111;font:600 .85rem var(--sans)}
 .xp-meta b{display:block;margin-top:.35rem;font-size:.92rem;font-weight:500;color:var(--text);max-width:22ch}
 /* foto grandi, spigoli vivi, nessun filtro */
 .xp-fig{--fh:calc(100vh - 12.8rem);--fh:calc(100svh - 12.8rem);--r:1.6;flex:none;margin:0;display:flex;flex-direction:column;justify-content:center;padding:6.2rem 0 4.6rem}
@@ -556,8 +567,9 @@ body:not([data-page=home]) #chint{display:none}
       <div class="hint" id="hint"><span class="hin">Drag to rotate · Scroll to explore<span class="hl"></span></span></div>
       <div class="hint" id="closehint">ESC to return to the sphere</div>
 
-      <div class="copy" id="c1"><h1>I'm Tobia Seu</h1><p>Industrial product designer, from <span class="serif">products and exhibitions</span> to interfaces. I turn complex ideas into tangible experiences, with an interdisciplinary and experimental approach.</p><a class="btn" href="#" data-go="about">Know more about me</a></div>
+      <div class="copy" id="c1"><h1>An <span class="serif">islander</span>.</h1><p class="role">I'm Tobia Seu, <span class="rw" aria-label="UX/UI, product and systemic"><b><i>UX/UI</i><i>Product</i><i>Systemic</i><i aria-hidden="true">UX/UI</i></b></span> designer.</p><p>From <span class="serif">products and exhibitions</span> to interfaces: I turn complex ideas into tangible experiences, with an interdisciplinary and experimental approach.</p><a class="btn" href="#" data-go="about">Know more about me</a></div>
       <div class="copy" id="c2"><div class="big">I give <span class="serif">tangible forms</span><br>to complex systems</div></div>
+      <div class="copy" id="c3"><div class="big">From an island,<br><span class="serif">open</span> to the world</div></div>
 
       <!-- finestra video teaser -->
       <div class="vwin" id="vwin">
@@ -799,22 +811,51 @@ const projects=[
 /* progetti segnaposto (senza immagini): sostituiscili man mano con quelli veri */
 const PH_COL=['#3a3a3c','#4a4a4d','#2c2c2e','#5a5a5e','#424245'];   // progetti provvisori senza foto: grigi neutri
 const PH_SEC=[['Summary','Summary placeholder','Placeholder text: a short summary of the project, who it is for and what it achieved.'],['Problem','The problem','Placeholder text: the starting context and the difficulty to solve.'],['Research','The research','Placeholder text: methods used and the evidence that guided the choices.'],['Output','The output','Placeholder text: materials produced along the way.'],['Solution','The solution','Placeholder text: the final proposal and how it answers the problem.']];
-[['Chiara Alessi interview','Book presentation video','Videomaking','2023','Social media video for the launch of Chiara Alessi\'s book Lo Stato Delle Cose.'],
- ['Fuocosacro','Documentary','Videomaking','2017','Camera operator on the 2017 docufilm Fuocosacro.'],
- ['Unofficial Audi spot','Videomaking experiment','Videomaking','—','A self-initiated car spot, shot and edited as a videomaking experiment.'],
- ['Coral','Design concept','Speculative Design','—','Case study coming soon.'],
- ['Onea','Speculative design','Speculative Design','—','Case study coming soon.']].forEach(([title,cat,tag,year,short],k)=>{
+/* progetti con foto e video ospitati fuori (YouTube, Framer): chiavi in EXT, proporzioni in DIM */
+const YT=id=>'https://i.ytimg.com/vi/'+id+'/maxresdefault.jpg',FR=id=>'https://framerusercontent.com/images/'+id+'.png';
+const EXT={'ca-cover':YT('BZM064G_pp0'),'fs-cover':YT('J31Gmd84640'),
+  'on-cover':FR('AwAbSxq2iw62Hg9MweXXaa1r3Q8'),'on-1':FR('1DucWXp6We4vl3PqRTbUHw51pZg'),'on-2':FR('xg7WIj5SOiDAMVcH16tXvrz3nyA'),'on-3':FR('9ZEDyuWSb2BHQ9gubfPXY6loTmc'),
+  'on-4':FR('QJ6388vACEYUboGek1TmbGZ2z4'),'on-5':FR('6Xo3jVjtEz4GAuDPJNbhb4gDg'),'on-6':FR('pw6eWtld5TT1DDcYTXLN3ffQTU'),'on-7':FR('Zx4ITWneNOFDdgxP5vzbpmNAI')};
+const ONEA_MP4='https://framerusercontent.com/assets/UEJL3wgWP3U7UNTxAJZW0v7ITjE.mp4';
+projects.push(
+{slug:'ca',client:'Chiara Alessi',title:'Chiara Alessi interview',cat:'Book presentation video',tag:'Videomaking',year:'2023',kind:'Freelance video',team:'—',dur:'—',role:'Video production',
+ links:[['Watch on YouTube ↗','https://www.youtube.com/watch?v=BZM064G_pp0']],
+ short:'Social media video for the launch of Chiara Alessi\'s book Lo Stato Delle Cose.',
+ long:'A video interview made for the social media launch of Lo Stato Delle Cose, the 2023 book by design critic Chiara Alessi.',
+ gal:[['yt:BZM064G_pp0','w']],
+ sec:[['Summary','A book, in a few minutes','For the launch of Lo Stato Delle Cose I produced a video for social media: an interview with Chiara Alessi that brings the ideas of the book into a short format people can watch on their phones.',[]]]},
+{slug:'fs',client:'Docufilm by Valerio Matteu',title:'Fuocosacro',cat:'Documentary',tag:'Videomaking',year:'2017',kind:'Docufilm',team:'Team of 6',dur:'2 weeks',role:'Camera 1 operator',
+ links:[['Watch on YouTube ↗','https://www.youtube.com/watch?v=J31Gmd84640']],
+ short:'A docufilm inside the feast of a small village in central Sardinia, where rituals meet the present day.',
+ long:'An anthropological look inside a small village in central Sardinia during its most important days, when rituals and traditions mix with the society of today.',
+ gal:[['yt:J31Gmd84640','w']],
+ sec:[['Summary','Inside the feast','Fuocosacro follows the feast of a small village in central Sardinia during its most important days. I was camera 1 operator in many scenes, in a crew of six that followed the project for about two weeks.',[]],
+  ['Concept','What makes a tradition hold','The film enters the feast to understand what lies behind a tradition that can truly bring people together and make them happy, as old rituals mix with the habits of today\'s society.',[]],
+  ['Crew','A crew of six','Directed by Valerio Matteu, with Marco Meli, Stefano Secchi, Nicola Pusceddu and Daniele Manca.',[]]]});
+[['Unofficial Audi spot','Videomaking experiment','Videomaking','—','A self-initiated car spot, shot and edited as a videomaking experiment.'],
+ ['Coral','Innovation design','Innovation Design','—','Case study coming soon.']].forEach(([title,cat,tag,year,short],k)=>{
   projects.push({ph:true,col:PH_COL[k%PH_COL.length],client:'Case study coming soon',title,cat,tag,year,kind:cat,team:'—',dur:'—',role:'—',short,long:short+' Photos and the full story are on the way.',
    gal:[['','w'],['','v'],['','w']],sec:[['Summary','Coming soon',short,[['','w']]]]});
 });
-const DIM={"b-1":0.665,"b-2":0.615,"b-3":0.751,"b-4":0.759,"b-5":0.616,"b-6":0.616,"b-cover":1.775,"f-2":1.6,"f-cover":1.6,"f-p1":0.75,"f-p2":0.75,"f-p3":0.75,"g-1":1.775,"g-2":0.993,"g-3":1.0,"g-4":0.821,"g-5":0.886,"g-6":2.917,"g-7":0.73,"g-cover":1.775,"h-2":1.6,"h-cover":1.6,"h-p1":0.75,"h-p2":0.75,"h-p3":0.75,"i-2":1.6,"i-cover":1.6,"i-p1":0.75,"i-p2":0.75,"i-p3":0.75,"q-1":1.083,"q-2":0.709,"q-3":2.128,"q-4":2.29,"q-5":1.0,"q-6":1.542,"q-7":0.616,"q-8":1.741,"q-cover":1.775,"w-1":0.745,"w-2":1.673,"w-3":0.763,"w-4":1.158,"w-5":1.396,"w-6":1.641,"w-cover":1.775,"z-1":0.754,"z-2":0.752,"z-3":0.885,"z-4":0.752,"z-cover":1.777};   // proporzioni vere delle foto (larghezza/altezza): le foto non vengono tagliate
-const WEBS=k=>PHOTO_DIR+'web/s/'+k+'.webp';   // foto del loop nella sfera (1100px)
-const WEB=k=>PHOTO_DIR+'web/'+k+'.webp';   // copertine ridimensionate (1600px, WebP) per sfera, carosello e griglie
+projects.push(
+{slug:'on',client:'Orakle, a fictional corporation',title:'Onea',cat:'Speculative Design',tag:'Speculative Design',year:'—',kind:'Speculative design and storytelling',team:'—',dur:'—',role:'Concept, storytelling and immersive website',
+ links:[['Enter the Orakle website ↗','https://oraklecorporate.framer.website/']],
+ short:'A speculative corporate future, told through the immersive website of the company that sells it.',
+ long:'Onea is set in 2041. Orakle, a corporation that predicts burnout and collapse, sells companies a programme that prepares employees for the future by numbing them to it. The story is told from inside, through Orakle\'s own interactive website.',
+ gal:[['on-cover','v'],['on-1','v']],
+ sec:[['Summary','Predict. Prepare. Perform.','Instead of describing a dystopia from the outside, Onea lets people walk into it. The project is an immersive, interactive website for Orakle, a fictional corporation: the visitor is greeted by name, signs an access agreement and explores the products that promise companies a stable future.',[['on-cover','v'],['on-1','v']]],
+  ['World','January 2041','In the story, protests and burnout caused by relentless scheduling have pushed companies towards financial collapse. Orakle\'s answer is O·nea, a programme that keeps the workforce ready: a 34% gain in the Workforce Readiness Index and twelve new companies joining the ecosystem every day.',[['mp4:'+ONEA_MP4,'w']]],
+  ['System','Haptix, O·neiros and O·nea','Haptix, a tactile device for monitoring and gestural command, collects biometric and behavioural data. O·neiros, an algorithm named after the Greek word for dream, turns it into predictions of collective behaviour. O·nea closes the loop with an environment: a workstation with a spherical display and a voice guide for emotional regulation.',[['on-2','v'],['on-3','v']]],
+  ['Critique','Comfort as control','Behind the calm corporate tone, O·nea applies cognitive desensitization: it pre-exposes employees to future stressors until they stop reacting. Testimonials from fictional CEOs and a world map ranking companies by stability make the question tangible: how much would we sign away for a predictable future?',[['on-4','v'],['on-5','v']]],
+  ['Website','A website you enter','The website is the exhibit. A personal greeting, a binding agreement, a snap gesture that turns the door of O·nea towards you and a particle scene to explore turn the visitor into a participant of the story.',[['on-6','v'],['on-7','v']]]]});
+const DIM={"ca-cover":1.778,"fs-cover":1.778,"on-cover":.75,"on-1":.75,"on-2":.75,"on-3":.75,"on-4":.75,"on-5":.75,"on-6":.75,"on-7":.75,"b-1":0.665,"b-2":0.615,"b-3":0.751,"b-4":0.759,"b-5":0.616,"b-6":0.616,"b-cover":1.775,"f-2":1.6,"f-cover":1.6,"f-p1":0.75,"f-p2":0.75,"f-p3":0.75,"g-1":1.775,"g-2":0.993,"g-3":1.0,"g-4":0.821,"g-5":0.886,"g-6":2.917,"g-7":0.73,"g-cover":1.775,"h-2":1.6,"h-cover":1.6,"h-p1":0.75,"h-p2":0.75,"h-p3":0.75,"i-2":1.6,"i-cover":1.6,"i-p1":0.75,"i-p2":0.75,"i-p3":0.75,"q-1":1.083,"q-2":0.709,"q-3":2.128,"q-4":2.29,"q-5":1.0,"q-6":1.542,"q-7":0.616,"q-8":1.741,"q-cover":1.775,"w-1":0.745,"w-2":1.673,"w-3":0.763,"w-4":1.158,"w-5":1.396,"w-6":1.641,"w-cover":1.775,"z-1":0.754,"z-2":0.752,"z-3":0.885,"z-4":0.752,"z-cover":1.777};   // proporzioni vere delle foto (larghezza/altezza): le foto non vengono tagliate
+const WEBS=k=>EXT[k]||PHOTO_DIR+'web/s/'+k+'.webp';   // foto del loop nella sfera (1100px)
+const WEB=k=>EXT[k]||PHOTO_DIR+'web/'+k+'.webp';   // copertine ridimensionate (1600px, WebP) per sfera, carosello e griglie
 projects.forEach((p,i)=>{p.i=i;if(p.ph)return;p.local=WEB(p.slug+'-cover');
   const all=Object.keys(DIM).filter(k=>k.startsWith(p.slug+'-'));   // il loop usa tutte le foto del progetto, prima quelle scelte
   p.loop=[...new Set([...(p.loop||[]),...all])]});
 const me={local:WEB('tobia'),pos:'50% 22%',client:'Tobia Seu · Turin',title:'me.',cat:'Industrial Product Designer',me:true};
-const TAGS=['Product Design','Textile & Fashion','Exhibition Design','System Design','Videomaking','Speculative Design'];
+const TAGS=['Product Design','Textile & Fashion','Exhibition Design','System Design','Videomaking','Speculative Design','Innovation Design'];
 me.i=-1;me.tag='About';me.short='Industrial product designer: concepts, prototypes and interfaces.';me.long='I hold a degree in Industrial Product Design, with a passion for projects in all their forms, from product development to visual communication. My background includes exhibition, prototyping and interactive design, while my most recent work focused on UX and UI design.';
 const items=[me,...projects];            // la card 0 della sfera e' la tua foto
 const N=items.length;
@@ -1131,7 +1172,7 @@ function setView(v){
 /* PAGINA PROGETTO: una striscia orizzontale. Lo scroll verticale (rotella, trackpad, dito) la fa scorrere di lato, veloce (SPD).
    In fondo c'e' una "molla": continuando a scorrere, nel riquadro del progetto successivo compare la sua prima foto;
    piena = si apre il progetto dopo, se ti fermi prima torna indietro da solo. All'inizio, la stessa molla all'indietro */
-const PIMG=k=>PHOTO_DIR+(LITE?'web/s/':'web/')+k+'.webp';   // su mobile le foto da 1100px bastano e pesano meta' in memoria
+const PIMG=k=>EXT[k]||PHOTO_DIR+(LITE?'web/s/':'web/')+k+'.webp';   // su mobile le foto da 1100px bastano e pesano meta' in memoria
 const SPD=2.7,            // px orizzontali per ogni px di scroll: i progetti si sfogliano in fretta
       SPRING=.85,         // lunghezza della molla, in altezze di schermo
       WIDE=1.9;           // foto piu' larghe di cosi' vanno a tutto schermo
@@ -1182,7 +1223,10 @@ addEventListener('scroll',()=>{
 const SHAPE={w:1.6,h:1.333,v:.75,t:.75};
 function projectHTML(p,pv){
   const used=new Set();let n=0;
-  const fig=([k,sh],cap)=>{if(k)used.add(k);const j=n++,r=(k&&DIM[k])||SHAPE[sh]||1.6,full=r>=WIDE;
+  if(/^(yt|mp4):/.test(p.gal[0][0]))used.add(p.slug+'-cover');   // progetti video: si apre col video, la miniatura serve solo alle card
+  const vid=(k,cap)=>{n++;used.add(k);const yt=k.startsWith('yt:'),id=k.slice(k.indexOf(':')+1);
+    return `<figure class="xp-fig xp-vid" style="--r:1.778"><div class="fr">${yt?`<button class="yt" data-yt="${id}" aria-label="Play the video, ${p.title}"><img src="${YT(id)}" alt="" loading="lazy"><span class="yt-play">▶ Play</span></button>`:`<video src="${id}" muted loop playsinline autoplay preload="metadata"></video>`}</div><figcaption><span>${cap}</span><span>${p.title}</span></figcaption></figure>`};
+  const fig=([k,sh],cap)=>{if(k&&/^(yt|mp4):/.test(k))return vid(k,cap);if(k)used.add(k);const j=n++,r=(k&&DIM[k])||SHAPE[sh]||1.6,full=r>=WIDE;
     return `<figure class="xp-fig${full?' full':''}" style="--r:${r}"><div class="fr" style="${k?'':`background:${p.col};filter:hue-rotate(${j*26}deg)`}">${k?`<img src="${PIMG(k)}" alt="${p.title}, ${cap}" ${j<2?'fetchpriority="high"':'loading="lazy"'} decoding="async">`:''}</div><figcaption><span>${cap}</span><span>${p.title}</span></figcaption></figure>`};
   const group=ims=>ims.length>1?`<div class="xp-pair">${ims.map(m=>fig(m[0],m[1])).join('')}</div>`:ims.length?fig(ims[0][0],ims[0][1]):'';
   // foto in piu' del progetto (non usate nelle sezioni): due verticali vanno insieme, le larghe da sole
@@ -1191,7 +1235,7 @@ function projectHTML(p,pv){
     if(DIM[a]<1.25&&b)return group([[[a,'v'],cap],[[b,'v'],cap]]);return group([[[a,'h'],cap]])};
   let h=`<div class="xp-pan xp-intro"><div><button class="btn-o xp-back" data-go="cases">All cases</button><button class="xp-hint" data-projb="${pv.i}"><i class="ldr pv"><i></i></i><span>Scroll back to open the previous project, ${pv.title}</span></button><p class="xp-client">${p.client}</p></div>
     <div><h1 class="xp-name">${p.title}</h1><p class="xp-lead">${p.short}</p>
-    <div class="xp-meta"><div>Client<b>${p.client}</b></div><div>Type<b>${p.kind}</b></div><div>Role<b>${p.role}</b></div><div>Year<b>${p.year}</b></div></div></div></div>`;
+    <div class="xp-meta"><div>Client<b>${p.client}</b></div><div>Type<b>${p.kind}</b></div><div>Role<b>${p.role}</b></div><div>Year<b>${p.year}</b></div></div>${p.links?`<div class="xp-links">${p.links.map(([t,u])=>`<a class="btn-o" href="${u}" target="_blank" rel="noopener">${t}</a>`).join('')}</div>`:''}</div></div>`;
   h+=fig(p.gal[0],p.cat);
   h+=`<div class="xp-pan xp-say rv"><p>${p.long}</p></div>`;
   p.sec.forEach((x,k)=>{
@@ -1199,7 +1243,7 @@ function projectHTML(p,pv){
     if(!ims.length){const g=p.gal.find(([m])=>m&&!used.has(m));if(g)ims=[g]}
     h+=`<div class="xp-pan xp-txt rv ${k%2?'top':'end'}"><span class="num">${x[0]}</span><h2>${x[1]}</h2><p>${x[2]}</p></div>`;
     h+=group(ims.map(m=>[m,x[0]]));
-    if(k===0)h+=`<div class="xp-pan xp-facts rv"><div><b>${p.year}</b><span>Year</span></div><div><b>${p.team}</b><span>Team</span></div><div><b>${p.dur}</b><span>Duration</span></div><div><b>${p.cat}</b><span>Discipline</span></div></div>`;
+    if(k===0)h+=`<div class="xp-pan xp-facts rv">${[[p.year,'Year'],[p.team,'Team'],[p.dur,'Duration'],[p.cat,'Discipline']].filter(([v])=>v&&v!=='—').map(([v,l])=>`<div><b>${v}</b><span>${l}</span></div>`).join('')}</div>`;   // solo i dati che conosciamo
     else h+=takeExtra(x[0]);
   });
   p.gal.forEach(g=>{if(g[0]&&!used.has(g[0]))h+=fig(g,'Gallery')});
@@ -1364,7 +1408,7 @@ const landR=cx=>{const w=Math.min(cwid()*.4,600),h=w*.6;return{left:cx-w/2,top:i
 const kkk=()=>Math.max(.5,Math.min(1,innerHeight*.62/440));
 const centerR=()=>{const d=slideDims(),c=$('car').getBoundingClientRect();return{left:(c.width?c.left+c.width/2:cwid()/2)-d.w/2,top:innerHeight*.56-d.h/2,width:d.w,height:d.h,borderRadius:0}};
 const cxS=()=>cwid()*(.5+SH/100);
-gsap.set(['#c1','#c2'],{autoAlpha:0,y:24,yPercent:matchMedia('(max-width:760px)').matches?0:-50});
+gsap.set(['#c1','#c2','#c3'],{autoAlpha:0,y:24,yPercent:matchMedia('(max-width:760px)').matches?0:-50});
 gsap.set('#vwin',{autoAlpha:0});
 gsap.set(['#vcap','#vchips'],{y:16});gsap.set('#vcap',{yPercent:-58});   // testo al centro dello schermo
 gsap.set('#works',{autoAlpha:0});
@@ -1383,10 +1427,12 @@ const heroTL=gsap.timeline({defaults:{ease:E},scrollTrigger:{trigger:'#pin',star
  .to('#hub',{opacity:0,duration:.2,ease:'none'},3.3)
  .to(S,{hubO:0,duration:.2,ease:'none'},3.3)
  .fromTo('#vwin',{left:()=>cardR().left,top:()=>cardR().top,width:()=>cardR().width,height:()=>cardR().height,borderRadius:()=>cardR().borderRadius},{left:()=>landR(cxS()).left,top:()=>landR(0).top,width:()=>landR(0).width,height:()=>landR(0).height,borderRadius:0,duration:1.3},3.3)   // la card diventa orizzontale, sul posto
- .to('#c2',{autoAlpha:1,y:0,duration:.9,ease:'power2.out'},4)
+ .to('#c2',{autoAlpha:1,y:0,duration:.6,ease:'power2.out'},3.9)
  .to(S,{roll:-14,gz:.25,duration:1.4},3.6)
- .to('#c2',{autoAlpha:0,y:-36,duration:.7,ease:'power2.in'},5.4)  // si toglie il testo...
- .to('#vwin',{left:()=>landR(cwid()/2).left,duration:1.1},5.6)    // ...il frame va al centro
+ .to('#c2',{autoAlpha:0,y:-36,duration:.45,ease:'power2.in'},4.6)  // prima frase...
+ .to('#c3',{autoAlpha:1,y:0,duration:.6,ease:'power2.out'},4.9)    // ...seconda frase
+ .to('#c3',{autoAlpha:0,y:-36,duration:.45,ease:'power2.in'},5.6)  // si toglie il testo...
+ .to('#vwin',{left:()=>landR(cwid()/2).left,duration:1.1},5.75)    // ...il frame va al centro
  .to('#vwin',{left:0,top:0,width:()=>cwid(),height:()=>innerHeight,borderRadius:0,duration:1.7},6.8)   // si ingrandisce
  .to(S,{v:1,roll:-30,gz:.7,duration:1.7},6.8)                    // e il video parte
  .to(['#vcap','#vchips'],{opacity:1,y:0,duration:.6,stagger:.15},8.3)
@@ -1398,6 +1444,13 @@ const heroTL=gsap.timeline({defaults:{ease:E},scrollTrigger:{trigger:'#pin',star
  .to(S,{wo:1,duration:.3},10.7)
  .to('#vwin',{autoAlpha:0,duration:.3,ease:'none'},11)
  .to({},{duration:1.8},11.4);
+/* card me: la parola prima di "designer" cambia ogni 2.4 s */
+(()=>{const rw=document.querySelector('#c1 .rw');if(!rw)return;const b=rw.firstElementChild,w=[...b.children];let k=0;
+  const set=(i,anim)=>{b.style.transition=rw.style.transition=anim?'':'none';b.style.transform=`translateY(${-i*1.2}em)`;rw.style.width=w[i].offsetWidth+'px'};
+  requestAnimationFrame(()=>set(0,false));
+  setInterval(()=>{if(RM)return;k++;set(k,true);if(k===w.length-1)setTimeout(()=>{k=0;set(0,false)},760)},2400);
+  addEventListener('resize',()=>set(k,false));
+})();
 /* teaser provvisorio: la foto mostrata dipende dalla posizione nella timeline (ease in-out = lente, veloci, lente) */
 const VS_KEYS=['i-cover','f-cover','h-cover','g-1','q-cover','b-cover','w-cover','z-cover','i-2','h-2','q-3','b-1','g-6','w-4','f-2','q-6','z-3','b-2','g-3','q-8'];
 const vsEl=$('vshow'),f0=featured[0];
@@ -1432,6 +1485,7 @@ document.addEventListener('click',e=>{
   if(cmoved>6){cmoved=0;if(t.closest('.car'))return}
   const open=(i,d=1)=>turnPage(d,()=>openProject(i,d));
   if(t.closest('#fcase')){if(!focused)return;const it=items[idx];it.me?turnPage(dirTo('about'),()=>go('about')):open(it.i);return}
+  const yb=t.closest('[data-yt]');if(yb){yb.outerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${yb.dataset.yt}?autoplay=1&rel=0" title="YouTube video" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;return}
   const pb=t.closest('[data-projb]');if(pb){e.preventDefault();open(+pb.dataset.projb,-1);return}
   const pj=t.closest('[data-proj]');if(pj){e.preventDefault();open(+pj.dataset.proj);return}
   const lr=t.closest('.lrow');if(lr){open(+lr.dataset.i);return}
