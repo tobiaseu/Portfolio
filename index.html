@@ -27,7 +27,7 @@
 <link rel="preload" href="img/web/tobia.webp" as="image" fetchpriority="high">
 <link rel="stylesheet" href="fonts/fonts.css">
 <style>
-:root{--bg:#F7F7F9;--text:#111;--muted:#5a5a5a;--border:rgba(17,17,17,.16);--nav:rgba(255,255,255,.78);--card:#111;--ctext:#fff;--gc:rgba(0,0,0,.11);--fbg:#fff}
+:root{--gx:3rem;--gy:1.5rem;--ctl:40px;--tsw:156px;--bg:#F7F7F9;--text:#111;--muted:#5a5a5a;--border:rgba(17,17,17,.16);--nav:rgba(255,255,255,.78);--card:#111;--ctext:#fff;--gc:rgba(0,0,0,.11);--fbg:#fff}
 html.dark{--bg:#111;--text:#F7F7F9;--muted:#a5a5a5;--border:rgba(255,255,255,.22);--nav:rgba(30,30,30,.78);--card:#f4f4f2;--ctext:#111;--gc:rgba(255,255,255,.13);--fbg:#111}
 *,*::before,*::after{box-sizing:border-box}
 html{background:var(--bg);scrollbar-gutter:stable}
@@ -50,20 +50,29 @@ body.no-cur,body.no-cur *{cursor:none!important}
 .btn-o.round{width:44px;height:44px;padding:0;font-size:1.15rem}
 
 /* ---------- header ---------- */
-header{position:fixed;top:0;left:0;width:100%;padding:1.5rem 3rem;display:flex;justify-content:space-between;align-items:center;z-index:200;pointer-events:none}
+header{position:fixed;top:0;left:0;width:100%;padding:var(--gy) var(--gx);display:flex;justify-content:space-between;align-items:center;z-index:200;pointer-events:none}
 header>*{pointer-events:auto}
 .logo{font-weight:700;font-size:.75rem;letter-spacing:.14em;cursor:pointer;transition:color .3s}
 body.vfull .logo{color:#fff}
-.nav-pill{position:absolute;left:50%;transform:translateX(-50%);display:flex;gap:1.8rem;padding:.55rem 1.75rem;font-size:.8rem;font-weight:500;background:var(--nav);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:999px}
+.nav-pill{position:absolute;left:50%;transform:translateX(-50%);display:flex;align-items:center;height:var(--ctl);gap:1.8rem;padding:0 1.75rem;font-size:.8rem;font-weight:500;background:var(--nav);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:999px}
 .nav-pill span{cursor:pointer;opacity:.35;transition:opacity .3s}
 .nav-pill span.on,.nav-pill span:hover{opacity:1}
 
+/* gruppo a destra: lingua + Ciao, tutti alti quanto il menu e l'interruttore del tema */
+.hr{display:flex;align-items:center;gap:.6rem}
+header .btn{height:var(--ctl);padding:0 1.5rem}
+.lang-switch{position:relative;display:grid;grid-template-columns:1fr 1fr;height:var(--ctl);padding:4px;border-radius:999px;background:var(--nav);backdrop-filter:blur(12px);border:1px solid var(--border)}
+.lang-switch .ts-thumb{width:calc(50% - 4px)}
+html[lang=en] .lang-switch .ts-thumb{transform:translateX(100%)}
+html.dark .lang-switch .ts-thumb{transform:none}html.dark[lang=en] .lang-switch .ts-thumb{transform:translateX(100%)}
+.lang-switch button{position:relative;height:30px;min-width:40px;padding:0 .7rem;border:0;background:none;border-radius:999px;font:600 .72rem var(--sans);letter-spacing:.04em;color:var(--muted);cursor:pointer;transition:color .4s}
+html[lang=it] [data-l=it],html[lang=en] [data-l=en]{color:var(--bg)}
 /* ---------- toggle light/dark ---------- */
-.theme-switch{position:fixed;bottom:1.5rem;left:2rem;z-index:300;display:grid;grid-template-columns:1fr 1fr;padding:4px;border-radius:999px;background:var(--nav);backdrop-filter:blur(12px);border:1px solid var(--border)}
+.theme-switch{position:fixed;bottom:var(--gy);left:var(--gx);z-index:300;display:grid;grid-template-columns:1fr 1fr;width:var(--tsw);height:var(--ctl);padding:4px;border-radius:999px;background:var(--nav);backdrop-filter:blur(12px);border:1px solid var(--border)}
 .ts-thumb{position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);border-radius:999px;background:var(--text);transition:transform .45s cubic-bezier(.23,1,.32,1)}
 html.dark .ts-thumb{transform:translateX(100%)}
-.theme-switch button{position:relative;height:32px;padding:0 1rem;border:0;background:none;border-radius:999px;font:600 .72rem var(--sans);color:var(--muted);cursor:pointer;transition:color .4s}
-html:not(.dark) [data-t=light],html.dark [data-t=dark]{color:var(--bg)!important}
+.theme-switch button{position:relative;height:30px;padding:0 .4rem;white-space:nowrap;border:0;background:none;border-radius:999px;font:600 .72rem var(--sans);color:var(--muted);cursor:pointer;transition:color .4s}
+html:not(.dark) .theme-switch [data-t=light],html.dark .theme-switch [data-t=dark]{color:var(--bg)!important}
 
 /* ---------- cursore "drag" ---------- */
 #cur{position:fixed;left:0;top:0;z-index:400;pointer-events:none;opacity:0;transition:opacity .25s;will-change:transform}
@@ -150,7 +159,9 @@ body.focus #hint{visibility:hidden}
 .vshow{position:absolute;inset:0}
 .vshow i{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transform:scale(1.04);transition:opacity .4s ease,transform 1.6s cubic-bezier(.23,1,.32,1)}
 .vshow i.on{opacity:1;transform:none}
-.vshow::after{content:'';position:absolute;inset:0;background:radial-gradient(70% 60% at 50% 50%,rgba(0,0,0,.42),rgba(0,0,0,.18))}
+.vshow i:last-child{transform:none}
+.vshow::after{content:'';position:absolute;inset:0;background:radial-gradient(70% 60% at 50% 50%,rgba(0,0,0,.42),rgba(0,0,0,.18));opacity:calc(1 - var(--z,0))}
+.vshow::before{content:'';position:absolute;left:0;right:0;bottom:0;height:62%;z-index:1;background:linear-gradient(to top,#000,rgba(0,0,0,.7) 34%,rgba(0,0,0,0));opacity:var(--z,0)}
 .vwin.ok .vshow{display:none}
 .v-cap{position:absolute;left:6vw;right:6vw;top:50%;text-align:center;color:#fff;font-size:clamp(2rem,5vw,4rem);line-height:1.05;letter-spacing:-.02em;font-weight:500;opacity:0}
 .v-chips{position:absolute;left:6vw;right:6vw;top:calc(50% + clamp(3.4rem,7vw,6rem));display:flex;justify-content:center;gap:.6rem;flex-wrap:wrap;opacity:0}
@@ -405,10 +416,12 @@ body[data-page=project] #project{padding:0;min-height:0}
 /* fine: prossimo progetto */
 /* progetto a tutto schermo: niente header, menu, interruttore tema e footer */
 body[data-page=project] #rail,body[data-page=project] footer{display:none}
+body:not([data-page=home]) #chint{display:none}
 .xp-client{margin:0;font-size:1rem;color:var(--muted)}
-.xp-hint{margin:-.6rem 0 1.6rem;font-size:.85rem;color:var(--muted)}
+.xp-hint{display:flex;align-items:center;gap:.75rem;margin:-.6rem 0 1.6rem;padding:0;border:0;background:none;font:inherit;font-size:.85rem;color:var(--muted);cursor:pointer;text-align:left}
+.xp-hint:hover{color:var(--text)}
 /* fine progetto: riquadro bianco con bordo nero che si riempie di nero scorrendo (pieni e vuoti) */
-.xp-end{width:min(72vw,1040px);justify-content:center;gap:1.4rem}
+.xp-end{--ew:min(72vw,1040px);width:var(--ew);margin:0 calc((100vw - var(--ew))/2 - 6vw) 0 calc((100vw - var(--ew))/2);justify-content:center;gap:1.4rem}
 /* fine: riquadro bianco con bordo; scorrendo entra la prima foto del progetto dopo (con il testo che diventa bianco sopra) */
 .xp-frame{position:relative;display:block;width:100%;height:calc(100svh - 16rem);border:1.5px solid var(--text);background:var(--bg);color:var(--text);padding:0;cursor:pointer;overflow:hidden;text-align:left;font:inherit}
 .xp-rev{position:absolute;inset:0;clip-path:inset(0 100% 0 0)}
@@ -422,7 +435,7 @@ body[data-page=project] #rail,body[data-page=project] footer{display:none}
 .xp-frame:focus-visible{outline:2px solid var(--text);outline-offset:6px}
 .xp-endnav{display:flex;justify-content:space-between;gap:2rem;margin-top:.8rem}
 /* barra di stato: un solo layout. Linea spessa sempre; a sinistra la molla indietro (all'inizio), a destra quella avanti (alla fine) */
-.xp-bar{position:absolute;left:calc(2rem + 196px);right:6vw;bottom:1.6rem;display:grid;grid-template-columns:minmax(0,1fr) minmax(120px,38vw) minmax(0,1fr);gap:1.5rem;align-items:center;font-size:.85rem;color:var(--muted);pointer-events:none}
+.xp-bar{position:absolute;left:calc(var(--gx) + var(--tsw) + 2rem);right:var(--gx);bottom:var(--gy);height:var(--ctl);display:grid;grid-template-columns:minmax(0,1fr) minmax(120px,38vw) minmax(0,1fr);gap:1.5rem;align-items:center;font-size:.85rem;color:var(--muted);pointer-events:none}
 .xp-bar .ln{height:3px;background:var(--border);position:relative;overflow:hidden}
 .xp-bar .ln i{position:absolute;inset:0;background:var(--text);transform-origin:0 50%;transform:scaleX(0)}
 .xp-bar .t,.xp-bar .r{display:flex;align-items:center;gap:.8rem;min-width:0;border:0;background:none;padding:0;font:inherit;color:inherit;text-align:left}
@@ -431,17 +444,15 @@ body[data-page=project] #rail,body[data-page=project] footer{display:none}
 .ldr{flex:none;position:relative;width:72px;height:26px;border:1.5px solid var(--text);overflow:hidden;display:none}
 .ldr i{position:absolute;inset:0;background:var(--text);transform:scaleX(0)}
 .ldr.pv i{transform-origin:100% 50%}.ldr.nx i{transform-origin:0 50%}
-.xp-bar .pvl,.xp-bar .nxl{display:none;color:var(--text)}
-.xp-bar.start .ldr.pv,.xp-bar.start .pvl{display:block}.xp-bar.start .tl{display:none}
-.xp-bar.end .ldr.nx,.xp-bar.end .nxl{display:block}.xp-bar.end .c{display:none}
-.xp-bar.start .t,.xp-bar.end .r{pointer-events:auto;cursor:pointer}
+/* molla indietro: piccolo riquadro sotto All cases, accanto al suggerimento */
+.xp-hint .ldr{display:block;width:52px;height:20px}
 /* transizione tra le pagine: banda morbida bianco/nero solo al centro dello schermo */
 #pt{position:fixed;inset:0;z-index:500;pointer-events:none;overflow:hidden}
 #pt-band{position:absolute;left:15vw;top:0;width:70vw;height:100%;opacity:0;will-change:transform,opacity;
   background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.92) 22%,rgba(20,20,20,.5) 50%,rgba(255,255,255,.92) 78%,transparent 100%);
   -webkit-mask-image:radial-gradient(60% 52% at 50% 50%,#000 30%,transparent 100%);mask-image:radial-gradient(60% 52% at 50% 50%,#000 30%,transparent 100%);filter:blur(24px)}
 @media(max-width:760px){
-  .xp-end{width:88vw}
+  .xp-end{--ew:88vw;margin:0 calc((100vw - var(--ew))/2 - 5vw) 0 calc((100vw - var(--ew))/2)}
   .xp-frame{height:calc(100svh - 19rem)}
   .xp-endnav{flex-direction:column;gap:1rem;margin-top:.4rem}.xp-endnav .btn,.xp-endnav .btn-o{width:100%}
 }
@@ -457,8 +468,8 @@ body[data-page=project] #rail,body[data-page=project] footer{display:none}
   .xp-fig{--fh:min(calc(100svh - 15.6rem),118vw)}
   .xp-txt,.xp-facts{width:80vw}.xp-say{width:86vw}
   .xp-say p{font-size:1.45rem}
-  .xp-bar{bottom:1.45rem;left:calc(1rem + 182px);right:5vw;grid-template-columns:1fr auto;gap:.8rem}
-  .xp-bar .t{display:none}.xp-bar.start .t{display:flex}.xp-bar.start .ln,.xp-bar.end .ln{display:none}.xp-bar.end{grid-template-columns:1fr}
+  .xp-bar{left:calc(var(--gx) + var(--tsw) + 1rem);grid-template-columns:1fr auto;gap:.8rem}
+  .xp-bar .t{display:none}
   .xp-fig.full{--fh:100svh;padding:0}
 }
 
@@ -469,9 +480,9 @@ body[data-page=project] #rail,body[data-page=project] footer{display:none}
   .copy h1{font-size:1.9rem;margin-bottom:.6rem}
   .copy p{font-size:.92rem;line-height:1.5;margin-bottom:1rem}
   .copy .big{font-size:1.8rem}
-  header{padding:1rem 1rem}
+  :root{--gx:1rem;--gy:1rem;--ctl:38px;--tsw:140px}
+  header .btn{padding:0 1.1rem}.lang-switch button{min-width:34px;padding:0 .5rem}.hr{gap:.4rem}
   .nav-pill{top:4.1rem;gap:1.1rem;padding:.5rem 1.1rem;font-size:.74rem;white-space:nowrap}   /* su telefono il menu scende sotto logo e CTA */
-  .theme-switch{left:1rem;bottom:1rem}
 }
 </style>
 </head>
@@ -485,7 +496,10 @@ body[data-page=project] #rail,body[data-page=project] footer{display:none}
     <span data-p="framework" data-go="framework">Framework</span>
     <span data-p="about" data-go="about">About</span>
   </nav>
-  <a class="btn" href="#meet" data-scroll="meet">Let's meet</a>
+  <div class="hr">
+    <div class="lang-switch" role="group" aria-label="Language"><span class="ts-thumb"></span><button data-l="it" onclick="setLang('it')" aria-label="Italiano">IT</button><button data-l="en" onclick="setLang('en')" aria-label="English">EN</button></div>
+    <a class="btn" href="#meet" data-scroll="meet">Ciao</a>
+  </div>
 </header>
 
 <div class="theme-switch">
@@ -646,7 +660,7 @@ body[data-page=project] #rail,body[data-page=project] footer{display:none}
 
 <main class="page sub" id="framework">
   <h1>The <span class="serif">framework</span></h1>
-  <p class="lead">Un metodo sistemico per trasformare strutture complesse in interfacce tangibili e centrate sulle persone.</p>
+  <p class="lead">A systemic method to turn complex structures into tangible, people-centred interfaces.</p>
   <div id="steps"></div>
 </main>
 
@@ -664,6 +678,7 @@ body[data-page=project] #rail,body[data-page=project] footer{display:none}
 
 
 <nav id="rail" aria-label="Sections"></nav><div id="chint">Drag the cases, scroll for more</div>
+<script src="js/i18n.js"></script>
 <script src="js/gsap.min.js"></script>
 <script src="js/ScrollTrigger.min.js"></script>
 <script>
@@ -1118,12 +1133,11 @@ function xpTick(now){
   XP.rev.style.clipPath=`inset(0 ${((1-qs)*100).toFixed(2)}% 0 0)`;
   XP.ph.style.transform=`scale(${(1.12-.12*qs).toFixed(4)})`;
   const pc=Math.round(qs*100)+'%';XP.pct.forEach(e=>e.textContent=pc);
-  XP.nxf.style.transform=`scaleX(${qs.toFixed(4)})`;
   XP.bar.classList.toggle('end',atEnd);
-  if(!atEnd)XP.cnt.textContent=pad(Math.max(1,seen))+' / '+pad(XP.figs.length);
+  XP.cnt.textContent=pad(Math.max(1,seen))+' / '+pad(XP.figs.length);
   if(XP.q>=.995&&XP.armed){XP.armed=false;turnProject(1)}
   // molla all'indietro: si carica solo scorrendo verso l'alto quando sei gia' fermo all'inizio; se smetti si scarica
-  const atStart=s<=2;XP.bar.classList.toggle('start',atStart&&!atEnd);
+  const atStart=s<=2;
   if(!atStart)XP.top0=now+350;
   if(now-XP.bt>140)XP.b=Math.max(0,XP.b-dt*1.8);
   XP.pvf.style.transform=`scaleX(${XP.b.toFixed(3)})`;
@@ -1146,7 +1160,7 @@ function projectHTML(p,pv){
   const pool=()=>p.ph?[]:Object.keys(DIM).filter(k=>k.startsWith(p.slug+'-')&&!used.has(k));
   const takeExtra=cap=>{const ks=pool();if(!ks.length)return'';const a=ks[0],b=ks.find((x,j)=>j>0&&DIM[x]<1.25);
     if(DIM[a]<1.25&&b)return group([[[a,'v'],cap],[[b,'v'],cap]]);return group([[[a,'h'],cap]])};
-  let h=`<div class="xp-pan xp-intro"><div><button class="btn-o xp-back" data-go="cases">All cases</button><p class="xp-hint">Scroll back to open the previous project, ${pv.title}</p><p class="xp-client">${p.client}</p></div>
+  let h=`<div class="xp-pan xp-intro"><div><button class="btn-o xp-back" data-go="cases">All cases</button><button class="xp-hint" data-projb="${pv.i}"><i class="ldr pv"><i></i></i><span>Scroll back to open the previous project, ${pv.title}</span></button><p class="xp-client">${p.client}</p></div>
     <div><h1 class="xp-name">${p.title}</h1><p class="xp-lead">${p.short}</p>
     <div class="xp-meta"><div>Client<b>${p.client}</b></div><div>Type<b>${p.kind}</b></div><div>Role<b>${p.role}</b></div><div>Year<b>${p.year}</b></div></div></div></div>`;
   h+=fig(p.gal[0],p.cat);
@@ -1173,10 +1187,10 @@ function openProject(i,dir=1){
     <div class="xp-endnav"><button class="btn-o" data-projb="${pv.i}">Previous project: ${pv.title}</button><button class="btn" data-proj="${nx.i}">Open ${nx.title}</button></div></div>`;
   $('pj').innerHTML=`<section class="xp" aria-label="${p.title} case study"><div class="xp-stage">
     <div class="xp-track">${projectHTML(p,pv)}${end}</div>
-    <div class="xp-bar start"><button class="t" data-projb="${pv.i}" tabindex="-1"><i class="ldr pv"><i></i></i><span class="tl">${p.title}</span><span class="pvl">Scroll back for ${pv.title}</span></button><span class="ln"><i></i></span><button class="r" data-proj="${nx.i}" tabindex="-1"><b class="c">01</b><span class="nxl">Scroll for ${nx.title}</span><i class="ldr nx"><i></i></i></button></div></div></section>`;
+    <div class="xp-bar"><span class="t"><span class="tl">${p.title}</span></span><span class="ln"><i></i></span><span class="r"><b class="c">01</b></span></div></div></section>`;
   const q=s=>XP.sec.querySelector(s);
   XP.sec=$('pj').querySelector('.xp');XP.track=q('.xp-track');XP.bar=q('.xp-bar');XP.ln=q('.ln i');XP.cnt=q('.xp-bar .c');
-  XP.rev=q('.xp-rev');XP.ph=q('.xp-ph');XP.pct=[...XP.sec.querySelectorAll('.xp-pct')];XP.nxf=q('.ldr.nx i');XP.pvf=q('.ldr.pv i');
+  XP.rev=q('.xp-rev');XP.ph=q('.xp-ph');XP.pct=[...XP.sec.querySelectorAll('.xp-pct')];XP.pvf=q('.ldr.pv i');
   XP.b=0;XP.bt=0;XP.top0=performance.now()+700;XP.x=0;XP.qs=0;XP.q=0;XP.last=0;XP.i=i;XP.armed=true;
   document.querySelectorAll('#pj .rv').forEach(el=>rvIO.observe(el));
   go('project');
@@ -1319,7 +1333,7 @@ const cwid=()=>document.documentElement.clientWidth;
 const cardR=()=>{const sc=CS*PERSP/(PERSP-R-PUSH),cx=cwid()*(.5+SH/100),cy=innerHeight/2;return{left:cx-330*sc,top:cy-220*sc,width:660*sc,height:440*sc,borderRadius:0}};
 const landR=cx=>{const w=Math.min(cwid()*.4,600),h=w*.6;return{left:cx-w/2,top:innerHeight/2-h/2,width:w,height:h,borderRadius:0}};
 const kkk=()=>Math.max(.5,Math.min(1,innerHeight*.62/440));
-const centerR=()=>{const d=slideDims();return{left:(cwid()-d.w)/2,top:innerHeight*.56-d.h/2,width:d.w,height:d.h,borderRadius:0}};
+const centerR=()=>{const d=slideDims(),c=$('car').getBoundingClientRect();return{left:(c.width?c.left+c.width/2:cwid()/2)-d.w/2,top:innerHeight*.56-d.h/2,width:d.w,height:d.h,borderRadius:0}};
 const cxS=()=>cwid()*(.5+SH/100);
 gsap.set(['#c1','#c2'],{autoAlpha:0,y:24,yPercent:matchMedia('(max-width:760px)').matches?0:-50});
 gsap.set('#vwin',{autoAlpha:0});
@@ -1357,12 +1371,14 @@ const heroTL=gsap.timeline({defaults:{ease:E},scrollTrigger:{trigger:'#pin',star
  .to({},{duration:1.8},11.4);
 /* teaser provvisorio: la foto mostrata dipende dalla posizione nella timeline (ease in-out = lente, veloci, lente) */
 const VS_KEYS=['i-cover','f-cover','h-cover','g-1','q-cover','b-cover','w-cover','z-cover','i-2','h-2','q-3','b-1','g-6','w-4','f-2','q-6','z-3','b-2','g-3','q-8'];
-const vsEl=$('vshow');vsEl.innerHTML=VS_KEYS.map(k=>`<i data-src="${WEBS(k)}"></i>`).join('');
+const vsEl=$('vshow'),f0=featured[0];
+vsEl.innerHTML=VS_KEYS.filter(k=>!f0.local.includes('/'+k+'.')).map(k=>`<i data-src="${WEBS(k)}"></i>`).join('')+`<i data-src="${f0.local}" style="background-position:${f0.pos||'center'}"></i>`;
 const vsI=[...vsEl.children];let vsCur=-1;
 gsap.ticker.add(()=>{
   if(document.body.dataset.page!=='home'||vwin.classList.contains('ok'))return;
   const t=heroTL.time();if(t<3||t>11.2)return;
-  const p=clamp((t-3.3)/(9.6-3.3),0,1),e=p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2,k=Math.round(e*(vsI.length-1));
+  const z=clamp((t-9.3)/1.3,0,1);vsEl.style.setProperty('--z',z.toFixed(3));   // rimpicciolendo, il velo scuro diventa la sfumatura della card
+  const p=clamp((t-3.3)/(9.2-3.3),0,1),e=p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2,k=Math.round(e*(vsI.length-1));
   if(k===vsCur)return;vsCur=k;
   for(let j=k;j<Math.min(vsI.length,k+3);j++){const el=vsI[j];if(!el.style.backgroundImage)el.style.backgroundImage=`url('${el.dataset.src}')`}
   vsI.forEach((el,j)=>el.classList.toggle('on',j===k));
