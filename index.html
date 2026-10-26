@@ -122,10 +122,11 @@ body.top:not(.focus) .card:hover .flip{transform:scale(1.16)}
 .cap{position:absolute;z-index:1;left:0;right:0;bottom:0;padding:150px 30px 26px;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;pointer-events:none;color:#fff;background:linear-gradient(to top,#000 0%,rgba(0,0,0,.72) 32%,rgba(0,0,0,0) 100%)}
 .lcap small{font-size:15px!important;letter-spacing:0!important;text-transform:none!important}
 .cap small,.lcap small{display:block;font:500 17px var(--sans);opacity:.72;margin-bottom:8px}
-.cap b{display:block;font:600 44px/1 var(--sans);letter-spacing:-.04em}
-.cap .cr{text-align:right;font-size:17px;opacity:.72;line-height:1.5;flex:none}
-.cap .yr,.lcap .yr{display:block;font:500 17px var(--sans);opacity:.72;margin-top:10px;font-variant-numeric:tabular-nums}
-.lcap .yr{font-size:15px;margin-top:8px}
+.cap b{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;font:600 54px/.98 var(--sans);letter-spacing:-.04em;text-wrap:balance;padding-bottom:.04em}   /* titoli lunghi: due righe */
+.cap>div:first-child{min-width:0;flex:1}
+.cap .cr{text-align:right;font-size:17px;opacity:.72;line-height:1.5;flex:0 1 auto;max-width:34%}
+.cap .yr,.lcap .yr{display:block;font:500 24px var(--sans);opacity:.78;margin-top:12px;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+.lcap .yr{font-size:19px;margin-top:8px}
 .case small{display:block;font-size:.72rem;opacity:.72;margin-bottom:.3rem}
 .xp-year{margin:1rem 0 0;font-size:clamp(1.2rem,1.8vw,1.8rem);font-weight:500;letter-spacing:-.02em;color:var(--muted);font-variant-numeric:tabular-nums}
 .cap .sh{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .9s cubic-bezier(.23,1,.32,1),opacity .7s cubic-bezier(.23,1,.32,1)}
@@ -235,7 +236,7 @@ body[data-view=list] .pgrid{display:none}
 .ls .photo{flex:1;min-height:0}
 .ls .lcap{position:absolute;left:0;right:0;bottom:0;height:auto!important;padding:120px 26px 22px!important;align-items:flex-end!important;background:linear-gradient(to top,#000,rgba(0,0,0,.7) 34%,rgba(0,0,0,0))}
 .ls .lcap{height:88px;flex:none;display:flex;justify-content:space-between;align-items:center;padding:0 24px}
-.ls .lcap b{display:block;font:600 30px/1 var(--sans);letter-spacing:-.03em}
+.ls .lcap b{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;font:600 36px/1 var(--sans);letter-spacing:-.03em;text-wrap:balance;max-width:12ch}
 .ls .lcap i{display:block;font-size:15px;font-style:normal;opacity:.7}
 .ls .lcap div:last-child{display:flex;align-items:center;gap:1.4rem}
 .ls .lcap em{font:14px ui-monospace,monospace;opacity:.45;font-style:normal}
@@ -354,11 +355,18 @@ body[data-view=list] .pgrid{display:none}
 .rv.in{opacity:1;transform:none}
 @media(max-width:760px){.cvrow{grid-template-columns:1fr;gap:.5rem}}
 /* ---------- footer ---------- */
-footer{background:var(--fbg);color:var(--text);border-top:1px solid var(--border);padding:6rem 6vw 6.5rem;position:relative;z-index:40;transition:background .5s,color .5s}
+footer{background:var(--fbg);color:var(--text);border-top:1px solid var(--border);padding:3.5rem 6vw 4rem;position:relative;z-index:40;transition:background .5s,color .5s}
+.ab-talk{display:flex;flex-direction:column;align-items:center;text-align:center;gap:1.6rem;padding-top:7rem;padding-bottom:7rem}
+.ab-talk .kicker{margin:0}
+.ab-talk h2{margin:0;font-size:clamp(2.6rem,7vw,6rem);font-weight:500;letter-spacing:-.03em;line-height:1}
+.ab-talk h2 em{text-decoration:underline;text-decoration-thickness:.06em;text-underline-offset:.12em}
+.ab-talk .btn{padding:.9rem 1.8rem;font-size:.95rem}
+.ab-talk .mail{color:var(--muted);font-size:.9rem;text-decoration:none}.ab-talk .mail:hover{color:var(--text);text-decoration:underline}
+footer .flogo{display:inline-block}
 footer .cta{font-size:clamp(2.4rem,7vw,6rem);font-weight:500;letter-spacing:-.03em;line-height:1;max-width:12ch}
 footer .cta em{text-decoration:underline;text-decoration-thickness:.06em;text-underline-offset:.12em}
 footer .btn{margin-top:2rem;padding:.8rem 1.5rem;font-size:.9rem}
-.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:2rem;margin:4.5rem 0 3rem;padding-top:2.5rem;border-top:1px solid var(--border)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:2rem;margin:2.5rem 0 3rem;padding-top:2.5rem;border-top:1px solid var(--border)}
 .cols h4{margin:0 0 1rem;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:500}
 .cols a,.cols span{display:block;margin-bottom:.5rem;color:var(--text);text-decoration:none;cursor:pointer;font-size:.95rem}
 .cols a:hover,.cols .l:hover{text-decoration:underline;text-decoration-color:currentColor;text-decoration-thickness:2px;text-underline-offset:4px}
@@ -554,7 +562,7 @@ body:not([data-page=home]) #chint{display:none}
   </nav>
   <div class="hr">
     <div class="lang-switch" role="group" aria-label="Language"><span class="ts-thumb"></span><button data-l="it" onclick="setLang('it')" aria-label="Italiano">IT</button><button data-l="en" onclick="setLang('en')" aria-label="English">EN</button></div>
-    <a class="btn" href="#meet" data-scroll="meet">Ciao</a>
+    <a class="btn" href="#talk" data-scroll="talk">Ciao</a>
   </div>
 </header>
 
@@ -634,7 +642,7 @@ body:not([data-page=home]) #chint{display:none}
         <div class="pre-item"><h3>Systems</h3><p>Turning complexity into a shared map of actors, flows and leverage points.</p></div>
         <div class="pre-item"><h3>Interfaces</h3><p>Giving the map a form that can be used, tested and improved.</p></div>
       </div>
-      <div class="pre-cta"><a class="btn" href="#meet" data-scroll="meet">Let's meet</a><button class="btn-o" data-go="framework">See the framework</button></div>
+      <div class="pre-cta"><a class="btn" href="#talk" data-scroll="talk">Let's meet</a><button class="btn-o" data-go="framework">See the framework</button></div>
     </div>
   </section>
 </div>
@@ -711,7 +719,13 @@ body:not([data-page=home]) #chint{display:none}
 
   <section class="ab-sec rv ab-cta">
     <h2>The full CV,<br><span class="serif">in PDF.</span></h2>
-    <div class="pre-cta"><a class="btn" href="cv/tobia-seu-cv.pdf" download>Download CV ↓</a><a class="btn-o" href="#" data-scroll="meet">Let's meet</a></div>
+    <div class="pre-cta"><a class="btn" href="cv/tobia-seu-cv.pdf" download>Download CV ↓</a><a class="btn-o" href="#talk" data-scroll="talk">Let's meet</a></div>
+  </section>
+  <section class="ab-sec rv ab-talk" id="talk">
+    <p class="kicker">Let's talk</p>
+    <h2>Let's make it <em class="serif">tangible.</em></h2>
+    <a class="btn" href="mailto:info@tobiaseu.com">Let's talk ↗</a>
+    <a class="mail" href="mailto:info@tobiaseu.com">info@tobiaseu.com</a>
   </section>
 </main>
 
@@ -722,8 +736,7 @@ body:not([data-page=home]) #chint{display:none}
 </main>
 
 <footer id="meet">
-  <div class="cta">Let's make it <em class="serif">tangible.</em></div>
-  <a class="btn" href="mailto:info@tobiaseu.com">info@tobiaseu.com ↗</a>
+  <div class="logo flogo" data-go="home">TOBIA SEU</div>
   <div class="cols">
     <div><h4>Navigate</h4><span class="l" data-go="home">Home</span><span class="l" data-go="cases">Cases</span><span class="l" data-go="framework">Framework</span><span class="l" data-go="about">About</span></div>
     <div><h4>Elsewhere</h4><a href="#">LinkedIn</a><a href="#">Instagram</a><a href="#">Behance</a></div>
@@ -927,16 +940,18 @@ const PERSP=1500,CS=.25,ctl={ex:0,ey:0};
 const SH=LITE?0:22,SHY=LITE?14:0,PUSH=LITE?Math.min(770,PERSP-330-CS*PERSP/(document.documentElement.clientWidth*.86/660)):770;
 const CSC=CS/(LITE?.6:1);   // su mobile la card e' disegnata al 60% (vedi .lite .card) e scalata di piu': stessa resa, ~1/3 della memoria                    // stato guidato dal click sulla card
 let focused=null,idx=0,drag=false,armed=false,lx=0,ly=0,dmov=0,spunAt=0,mx=0,w=9,wx=0,qy=0,qx=0,dir=1,tgt=null,vs=[];
-/* GERARCHIA PER ANNO (Tobia, 26/10): i progetti piu' recenti all'equatore, dove cade lo sguardo; quelli di meta' percorso
-   a latitudine media; i piu' vecchi verso i poli. La card "me." sta tra quelli medi, in alto a sinistra, non piu' al centro.
-   [latitudine, longitudine] in gradi; l'ordine segue projects (dal piu' recente), il primo e' davanti */
-const SLOT_ME=[38,-36];
-const SLOTS=[[0,0],[6,72],[-6,144],[6,216],[-6,288],          // recenti: equatore
-  [38,84],[-38,30],[40,204],[-38,150],[-40,270],               // medi: latitudine media
-  [72,144],[-70,330],[-72,150]];                               // vecchi: poli
-const slotFor=k=>SLOTS[k]||[(k%2?-1:1)*(55+k%3*8),k*137.5];   // altri progetti futuri: fasce alte, distribuiti
-const P=items.map((it,i)=>{const [la,lo]=it.me?SLOT_ME:slotFor(i-1),f=la*Math.PI/180,l=lo*Math.PI/180;
-  const x=R*Math.cos(f)*Math.sin(l),y=-R*Math.sin(f),z=R*Math.cos(f)*Math.cos(l);   // in CSS la y cresce verso il basso
+/* GERARCHIA PER ANNO (Tobia, 26/10): stessa distribuzione uniforme di prima (punti di Fibonacci, distanza costante tra le card),
+   ma i posti vengono assegnati per latitudine: i progetti piu' recenti prendono i punti piu' vicini all'equatore, quelli di
+   meta' percorso le fasce medie, i piu' vecchi i poli. La card "me." prende un posto della fascia media, in alto.
+   Tutta la sfera e' poi ruotata in modo che il progetto piu' recente stia davanti. */
+const fib=Array.from({length:N},(_,k)=>{const y=1-(2*k+1)/N,r=Math.sqrt(1-y*y),th=Math.PI*(3-Math.sqrt(5))*k;return[Math.cos(th)*r,y,Math.sin(th)*r]});
+const byLat=fib.map((v,k)=>k).sort((a,b)=>Math.abs(fib[a][1])-Math.abs(fib[b][1]));   // dal piu' equatoriale al piu' polare
+const meAt=byLat.slice(Math.floor(N*.4)).find(k=>fib[k][1]>.25&&fib[k][1]<.75)??byLat[Math.floor(N/2)];   // fascia media, in alto (y fib > 0 = su)
+const order=byLat.filter(k=>k!==meAt);
+const slotOf=items.map((it,i)=>it.me?meAt:order[i-1]);
+const lon0=Math.atan2(fib[slotOf[1]][0],fib[slotOf[1]][2]);   // il primo progetto davanti
+const P=items.map((it,i)=>{const [fx,fy,fz]=fib[slotOf[i]],c=Math.cos(-lon0),sn=Math.sin(-lon0);
+  const x=R*(fx*c+fz*sn),y=-R*fy,z=R*(-fx*sn+fz*c);   // in CSS la y cresce verso il basso
   return{x,y,z,ry:Math.atan2(x,z)*180/Math.PI,rx:-Math.asin(clamp(y/R,-1,1))*180/Math.PI}});
 function cardHTML(p,n,sph){
   const lp=p.loop?p.loop.map((k,j)=>`<i class="pl${j?'':' on'}" data-src="${WEBS(k)}"${j?'':` style="background-image:url('${p.local}')"`}></i>`).join(''):'';
@@ -1315,15 +1330,15 @@ function openProject(i,dir=1){
   if(!XP.raf)XP.raf=requestAnimationFrame(xpTick);
 }
 /* quando la molla apre un altro progetto lo slancio dello scroll (inerzia del trackpad) non deve passare alla pagina nuova:
-   blocchiamo l'input finche' l'inerzia non si ferma (o al massimo 6 s), poi lo scroll riparte da zero: serve un gesto nuovo */
-const LOCK={until:0,max:0,last:0};
-const lockScroll=ms=>{const n=performance.now();LOCK.until=n+ms;LOCK.max=n+6000;LOCK.last=n};
-const locked=()=>{const n=performance.now();return n<LOCK.until||(n<LOCK.max&&n-LOCK.last<260)};
-addEventListener('wheel',e=>{if(!locked())return;LOCK.last=performance.now();e.preventDefault();e.stopImmediatePropagation()},{passive:false,capture:true});
-addEventListener('touchmove',e=>{if(!locked())return;LOCK.last=performance.now();if(e.cancelable)e.preventDefault();e.stopImmediatePropagation()},{passive:false,capture:true});
+   blocchiamo l'input per il cambio pagina (0.25 s) + il primo mezzo secondo del progetto nuovo, poi si scorre di nuovo liberamente (Tobia, 26/10) */
+const LOCK={from:0,until:0};
+const lockScroll=ms=>{const n=performance.now();LOCK.from=n;LOCK.until=n+ms};
+const locked=()=>performance.now()<LOCK.until;
+addEventListener('wheel',e=>{if(!locked())return;e.preventDefault();e.stopImmediatePropagation()},{passive:false,capture:true});
+addEventListener('touchmove',e=>{if(!locked())return;if(e.cancelable)e.preventDefault();e.stopImmediatePropagation()},{passive:false,capture:true});
 addEventListener('keydown',e=>{if(locked()&&/^(Arrow|Page|Home|End| )/.test(e.key)){e.preventDefault();e.stopImmediatePropagation()}},{capture:true});
-addEventListener('scroll',()=>{if(locked()&&document.body.dataset.page==='project'&&scrollY>0&&performance.now()>LOCK.until-650)scrollTo(0,0)},{passive:true});
-const turnProject=d=>{const L_=projects.length;lockScroll(900);turnPage(d,()=>openProject((XP.i+d+L_)%L_,d))};
+addEventListener('scroll',()=>{if(locked()&&document.body.dataset.page==='project'&&scrollY>0&&performance.now()>LOCK.from+300)scrollTo(0,0)},{passive:true});
+const turnProject=d=>{const L_=projects.length;lockScroll(750);turnPage(d,()=>openProject((XP.i+d+L_)%L_,d))};
 /* trackpad orizzontale e frecce: muovono la stessa striscia */
 function chargeBack(d){const now=performance.now();if(!XP.sec||scrollY>2||now<XP.top0)return;XP.b=Math.min(1,XP.b+d);XP.bt=now}
 addEventListener('wheel',e=>{if(document.body.dataset.page!=='project')return;
@@ -1545,7 +1560,9 @@ document.addEventListener('click',e=>{
   if(g){e.preventDefault();const to=g.dataset.go;if(to===document.body.dataset.page&&to!=='project'){scrollTo({top:0,behavior:'smooth'});return}turnPage(dirTo(to),()=>go(to));return}
   const sc=t.closest('[data-scroll]');
   if(sc&&document.body.dataset.page==='project'){e.preventDefault();location.href='mailto:info@tobiaseu.com';return}   // nel progetto il footer non c'e': scrivi direttamente
-  if(sc){e.preventDefault();$(sc.dataset.scroll).scrollIntoView({behavior:'smooth'})}
+  if(sc){e.preventDefault();const el=$(sc.dataset.scroll),pg=el.closest('.page');
+    if(pg&&pg.id!==document.body.dataset.page){turnPage(dirTo(pg.id),()=>{go(pg.id);setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'center'}),120)});return}   // "Ciao" porta al contatto in fondo ad About
+    el.scrollIntoView({behavior:'smooth',block:'center'})}
 });
 const rvIO=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');rvIO.unobserve(e.target)}}),{threshold:.15});
 document.querySelectorAll('.rv').forEach(el=>rvIO.observe(el));

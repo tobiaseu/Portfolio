@@ -90,7 +90,7 @@ const IT={
 "Map":"Mappare","Turning complexity into a shared map of actors, flows and tensions.":"Trasformare la complessità in una mappa condivisa di attori, flussi e tensioni.",
 "Prototype":"Prototipare","Giving the map a tangible form with testable products and interfaces.":"Dare alla mappa una forma tangibile con prodotti e interfacce da testare.",
 "Evolve":"Evolvere","Measuring what changes and letting the system keep growing.":"Misurare cosa cambia e lasciare che il sistema continui a crescere.",
-"Let's make it":"Rendiamolo","tangible.":"tangibile.",
+"Let's talk":"Parliamo","Let's talk ↗":"Parliamo ↗","Let's make it":"Rendiamolo","tangible.":"tangibile.",
 "Navigate":"Naviga","Elsewhere":"Altrove","Based in":"Vivo a","Turin, Italy":"Torino, Italia",
 "© 2026 Tobia Seu — Systemic Design Portfolio":"© 2026 Tobia Seu — Portfolio di design sistemico",
 "World":"Mondo","Me":"Io","Contact":"Contatti",
