@@ -246,6 +246,11 @@ const IT={
 "A website you enter":"Un sito in cui entrare",
 "The website is the exhibit. A personal greeting, a binding agreement, a snap gesture that turns the door of O·nea towards you and a particle scene to explore turn the visitor into a participant of the story.":"Il sito è la mostra. Un saluto personale, un accordo vincolante, uno schiocco di dita che ruota verso di te la porta di O·nea e una scena di particelle da esplorare trasformano il visitatore in un partecipante della storia.",
 "A second cut":"Un secondo montaggio","A second video made for the same launch, also on my YouTube channel.":"Un secondo video realizzato per lo stesso lancio, anche questo sul mio canale YouTube.",
+"Self-initiated":"Progetto personale","Car spot":"Spot auto","Shooting and editing":"Riprese e montaggio",
+"A self-initiated spot for the Audi TT, shot and edited as a videomaking experiment.":"Uno spot non ufficiale per l'Audi TT, girato e montato come esperimento di videomaking.",
+"An unofficial spot for the Audi TT: a personal experiment in shooting, rhythm and editing, made to explore how a car commercial is built.":"Uno spot non ufficiale per l'Audi TT: un esperimento personale di riprese, ritmo e montaggio, per capire come si costruisce una pubblicità d'auto.",
+"A car, as a commercial":"Un'auto, come in uno spot",
+"I shot and edited an unofficial spot for the Audi TT as a videomaking experiment: framing, light and rhythm used the way a real commercial would.":"Ho girato e montato uno spot non ufficiale per l'Audi TT come esperimento di videomaking: inquadrature, luce e ritmo usati come in una vera pubblicità.",
 "Case study coming soon. Photos and the full story are on the way.":"Progetto in arrivo. Foto e storia completa in arrivo."
 };
 // frasi con un nome dentro
