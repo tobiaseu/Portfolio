@@ -813,22 +813,20 @@ const PH_COL=['#3a3a3c','#4a4a4d','#2c2c2e','#5a5a5e','#424245'];   // progetti 
 const PH_SEC=[['Summary','Summary placeholder','Placeholder text: a short summary of the project, who it is for and what it achieved.'],['Problem','The problem','Placeholder text: the starting context and the difficulty to solve.'],['Research','The research','Placeholder text: methods used and the evidence that guided the choices.'],['Output','The output','Placeholder text: materials produced along the way.'],['Solution','The solution','Placeholder text: the final proposal and how it answers the problem.']];
 /* progetti con foto e video ospitati fuori (YouTube, Framer): chiavi in EXT, proporzioni in DIM */
 const YT=id=>'https://i.ytimg.com/vi/'+id+'/maxresdefault.jpg',FR=id=>'https://framerusercontent.com/images/'+id+'.png';
-const EXT={'ca-cover':YT('BZM064G_pp0'),'fs-cover':YT('J31Gmd84640'),
-  'on-cover':FR('AwAbSxq2iw62Hg9MweXXaa1r3Q8'),'on-1':FR('1DucWXp6We4vl3PqRTbUHw51pZg'),'on-2':FR('xg7WIj5SOiDAMVcH16tXvrz3nyA'),'on-3':FR('9ZEDyuWSb2BHQ9gubfPXY6loTmc'),
-  'on-4':FR('QJ6388vACEYUboGek1TmbGZ2z4'),'on-5':FR('6Xo3jVjtEz4GAuDPJNbhb4gDg'),'on-6':FR('pw6eWtld5TT1DDcYTXLN3ffQTU'),'on-7':FR('Zx4ITWneNOFDdgxP5vzbpmNAI')};
-const ONEA_MP4='https://framerusercontent.com/assets/UEJL3wgWP3U7UNTxAJZW0v7ITjE.mp4';
+const EXT={'ca-cover':YT('BZM064G_pp0'),'fs-cover':YT('SUhmhww_o3g')};
 projects.push(
 {slug:'ca',client:'Chiara Alessi',title:'Chiara Alessi interview',cat:'Book presentation video',tag:'Videomaking',year:'2023',kind:'Freelance video',team:'—',dur:'—',role:'Video production',
  links:[['Watch on YouTube ↗','https://www.youtube.com/watch?v=BZM064G_pp0']],
  short:'Social media video for the launch of Chiara Alessi\'s book Lo Stato Delle Cose.',
  long:'A video interview made for the social media launch of Lo Stato Delle Cose, the 2023 book by design critic Chiara Alessi.',
  gal:[['yt:BZM064G_pp0','w']],
- sec:[['Summary','A book, in a few minutes','For the launch of Lo Stato Delle Cose I produced a video for social media: an interview with Chiara Alessi that brings the ideas of the book into a short format people can watch on their phones.',[]]]},
+ sec:[['Summary','A book, in a few minutes','For the launch of Lo Stato Delle Cose I produced a video for social media: an interview with Chiara Alessi that brings the ideas of the book into a short format people can watch on their phones.',[]],
+  ['Video','A second cut','A second video made for the same launch, also on my YouTube channel.',[['yt:J31Gmd84640','w']]]]},
 {slug:'fs',client:'Docufilm by Valerio Matteu',title:'Fuocosacro',cat:'Documentary',tag:'Videomaking',year:'2017',kind:'Docufilm',team:'Team of 6',dur:'2 weeks',role:'Camera 1 operator',
- links:[['Watch on YouTube ↗','https://www.youtube.com/watch?v=J31Gmd84640']],
+ links:[['Watch on YouTube ↗','https://www.youtube.com/watch?v=SUhmhww_o3g']],
  short:'A docufilm inside the feast of a small village in central Sardinia, where rituals meet the present day.',
  long:'An anthropological look inside a small village in central Sardinia during its most important days, when rituals and traditions mix with the society of today.',
- gal:[['yt:J31Gmd84640','w']],
+ gal:[['yt:SUhmhww_o3g','w']],
  sec:[['Summary','Inside the feast','Fuocosacro follows the feast of a small village in central Sardinia during its most important days. I was camera 1 operator in many scenes, in a crew of six that followed the project for about two weeks.',[]],
   ['Concept','What makes a tradition hold','The film enters the feast to understand what lies behind a tradition that can truly bring people together and make them happy, as old rituals mix with the habits of today\'s society.',[]],
   ['Crew','A crew of six','Directed by Valerio Matteu, with Marco Meli, Stefano Secchi, Nicola Pusceddu and Daniele Manca.',[]]]});
@@ -842,13 +840,13 @@ projects.push(
  links:[['Enter the Orakle website ↗','https://oraklecorporate.framer.website/']],
  short:'A speculative corporate future, told through the immersive website of the company that sells it.',
  long:'Onea is set in 2041. Orakle, a corporation that predicts burnout and collapse, sells companies a programme that prepares employees for the future by numbing them to it. The story is told from inside, through Orakle\'s own interactive website.',
- gal:[['on-cover','v'],['on-1','v']],
- sec:[['Summary','Predict. Prepare. Perform.','Instead of describing a dystopia from the outside, Onea lets people walk into it. The project is an immersive, interactive website for Orakle, a fictional corporation: the visitor is greeted by name, signs an access agreement and explores the products that promise companies a stable future.',[['on-cover','v'],['on-1','v']]],
-  ['World','January 2041','In the story, protests and burnout caused by relentless scheduling have pushed companies towards financial collapse. Orakle\'s answer is O·nea, a programme that keeps the workforce ready: a 34% gain in the Workforce Readiness Index and twelve new companies joining the ecosystem every day.',[['mp4:'+ONEA_MP4,'w']]],
-  ['System','Haptix, O·neiros and O·nea','Haptix, a tactile device for monitoring and gestural command, collects biometric and behavioural data. O·neiros, an algorithm named after the Greek word for dream, turns it into predictions of collective behaviour. O·nea closes the loop with an environment: a workstation with a spherical display and a voice guide for emotional regulation.',[['on-2','v'],['on-3','v']]],
-  ['Critique','Comfort as control','Behind the calm corporate tone, O·nea applies cognitive desensitization: it pre-exposes employees to future stressors until they stop reacting. Testimonials from fictional CEOs and a world map ranking companies by stability make the question tangible: how much would we sign away for a predictable future?',[['on-4','v'],['on-5','v']]],
-  ['Website','A website you enter','The website is the exhibit. A personal greeting, a binding agreement, a snap gesture that turns the door of O·nea towards you and a particle scene to explore turn the visitor into a participant of the story.',[['on-6','v'],['on-7','v']]]]});
-const DIM={"ca-cover":1.778,"fs-cover":1.778,"on-cover":.75,"on-1":.75,"on-2":.75,"on-3":.75,"on-4":.75,"on-5":.75,"on-6":.75,"on-7":.75,"b-1":0.665,"b-2":0.615,"b-3":0.751,"b-4":0.759,"b-5":0.616,"b-6":0.616,"b-cover":1.775,"f-2":1.6,"f-cover":1.6,"f-p1":0.75,"f-p2":0.75,"f-p3":0.75,"g-1":1.775,"g-2":0.993,"g-3":1.0,"g-4":0.821,"g-5":0.886,"g-6":2.917,"g-7":0.73,"g-cover":1.775,"h-2":1.6,"h-cover":1.6,"h-p1":0.75,"h-p2":0.75,"h-p3":0.75,"i-2":1.6,"i-cover":1.6,"i-p1":0.75,"i-p2":0.75,"i-p3":0.75,"q-1":1.083,"q-2":0.709,"q-3":2.128,"q-4":2.29,"q-5":1.0,"q-6":1.542,"q-7":0.616,"q-8":1.741,"q-cover":1.775,"w-1":0.745,"w-2":1.673,"w-3":0.763,"w-4":1.158,"w-5":1.396,"w-6":1.641,"w-cover":1.775,"z-1":0.754,"z-2":0.752,"z-3":0.885,"z-4":0.752,"z-cover":1.777};   // proporzioni vere delle foto (larghezza/altezza): le foto non vengono tagliate
+ gal:[['on-cover','w']],
+ sec:[['Summary','Predict. Prepare. Perform.','Instead of describing a dystopia from the outside, Onea lets people walk into it. The project is an immersive, interactive website for Orakle, a fictional corporation: the visitor is greeted by name, signs an access agreement and explores the products that promise companies a stable future.',[['on-5','w']]],
+  ['World','January 2041','In the story, protests and burnout caused by relentless scheduling have pushed companies towards financial collapse. Orakle\'s answer is O·nea, a programme that keeps the workforce ready: a 34% gain in the Workforce Readiness Index and twelve new companies joining the ecosystem every day.',[['on-1','w']]],
+  ['System','Haptix, O·neiros and O·nea','Haptix, a tactile device for monitoring and gestural command, collects biometric and behavioural data. O·neiros, an algorithm named after the Greek word for dream, turns it into predictions of collective behaviour. O·nea closes the loop with an environment: a workstation with a spherical display and a voice guide for emotional regulation.',[['on-3','w']]],
+  ['Critique','Comfort as control','Behind the calm corporate tone, O·nea applies cognitive desensitization: it pre-exposes employees to future stressors until they stop reacting. Testimonials from fictional CEOs and a world map ranking companies by stability make the question tangible: how much would we sign away for a predictable future?',[['on-4','w']]],
+  ['Website','A website you enter','The website is the exhibit. A personal greeting, a binding agreement, a snap gesture that turns the door of O·nea towards you and a particle scene to explore turn the visitor into a participant of the story.',[['on-2','w']]]]});
+const DIM={"ca-cover":1.778,"fs-cover":1.778,"on-cover":2.202,"on-1":2.292,"on-2":2.448,"on-3":2.124,"on-4":2.141,"on-5":1.566,"b-1":0.665,"b-2":0.615,"b-3":0.751,"b-4":0.759,"b-5":0.616,"b-6":0.616,"b-cover":1.775,"f-2":1.6,"f-cover":1.6,"f-p1":0.75,"f-p2":0.75,"f-p3":0.75,"g-1":1.775,"g-2":0.993,"g-3":1.0,"g-4":0.821,"g-5":0.886,"g-6":2.917,"g-7":0.73,"g-cover":1.775,"h-2":1.6,"h-cover":1.6,"h-p1":0.75,"h-p2":0.75,"h-p3":0.75,"i-2":1.6,"i-cover":1.6,"i-p1":0.75,"i-p2":0.75,"i-p3":0.75,"q-1":1.083,"q-2":0.709,"q-3":2.128,"q-4":2.29,"q-5":1.0,"q-6":1.542,"q-7":0.616,"q-8":1.741,"q-cover":1.775,"w-1":0.745,"w-2":1.673,"w-3":0.763,"w-4":1.158,"w-5":1.396,"w-6":1.641,"w-cover":1.775,"z-1":0.754,"z-2":0.752,"z-3":0.885,"z-4":0.752,"z-cover":1.777};   // proporzioni vere delle foto (larghezza/altezza): le foto non vengono tagliate
 const WEBS=k=>EXT[k]||PHOTO_DIR+'web/s/'+k+'.webp';   // foto del loop nella sfera (1100px)
 const WEB=k=>EXT[k]||PHOTO_DIR+'web/'+k+'.webp';   // copertine ridimensionate (1600px, WebP) per sfera, carosello e griglie
 projects.forEach((p,i)=>{p.i=i;if(p.ph)return;p.local=WEB(p.slug+'-cover');
@@ -1235,7 +1233,7 @@ function projectHTML(p,pv){
     if(DIM[a]<1.25&&b)return group([[[a,'v'],cap],[[b,'v'],cap]]);return group([[[a,'h'],cap]])};
   let h=`<div class="xp-pan xp-intro"><div><button class="btn-o xp-back" data-go="cases">All cases</button><button class="xp-hint" data-projb="${pv.i}"><i class="ldr pv"><i></i></i><span>Scroll back to open the previous project, ${pv.title}</span></button><p class="xp-client">${p.client}</p></div>
     <div><h1 class="xp-name">${p.title}</h1><p class="xp-lead">${p.short}</p>
-    <div class="xp-meta"><div>Client<b>${p.client}</b></div><div>Type<b>${p.kind}</b></div><div>Role<b>${p.role}</b></div><div>Year<b>${p.year}</b></div></div>${p.links?`<div class="xp-links">${p.links.map(([t,u])=>`<a class="btn-o" href="${u}" target="_blank" rel="noopener">${t}</a>`).join('')}</div>`:''}</div></div>`;
+    <div class="xp-meta">${[['Client',p.client],['Type',p.kind],['Role',p.role],['Year',p.year]].filter(([,v])=>v&&v!=='—').map(([l,v])=>`<div>${l}<b>${v}</b></div>`).join('')}</div>${p.links?`<div class="xp-links">${p.links.map(([t,u])=>`<a class="btn-o" href="${u}" target="_blank" rel="noopener">${t}</a>`).join('')}</div>`:''}</div></div>`;
   h+=fig(p.gal[0],p.cat);
   h+=`<div class="xp-pan xp-say rv"><p>${p.long}</p></div>`;
   p.sec.forEach((x,k)=>{

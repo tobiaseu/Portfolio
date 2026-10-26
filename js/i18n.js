@@ -245,6 +245,7 @@ const IT={
 "Behind the calm corporate tone, O·nea applies cognitive desensitization: it pre-exposes employees to future stressors until they stop reacting. Testimonials from fictional CEOs and a world map ranking companies by stability make the question tangible: how much would we sign away for a predictable future?":"Dietro il tono aziendale calmo, O·nea applica la desensibilizzazione cognitiva: espone in anticipo i dipendenti agli stress futuri finché smettono di reagire. Le testimonianze di CEO immaginari e una mappa del mondo che classifica le aziende per stabilità rendono concreta la domanda: quanto saremmo disposti a cedere per un futuro prevedibile?",
 "A website you enter":"Un sito in cui entrare",
 "The website is the exhibit. A personal greeting, a binding agreement, a snap gesture that turns the door of O·nea towards you and a particle scene to explore turn the visitor into a participant of the story.":"Il sito è la mostra. Un saluto personale, un accordo vincolante, uno schiocco di dita che ruota verso di te la porta di O·nea e una scena di particelle da esplorare trasformano il visitatore in un partecipante della storia.",
+"A second cut":"Un secondo montaggio","A second video made for the same launch, also on my YouTube channel.":"Un secondo video realizzato per lo stesso lancio, anche questo sul mio canale YouTube.",
 "Case study coming soon. Photos and the full story are on the way.":"Progetto in arrivo. Foto e storia completa in arrivo."
 };
 // frasi con un nome dentro
