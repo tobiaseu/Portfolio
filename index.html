@@ -465,7 +465,7 @@ body:not([data-page=home]) #chint{display:none}
 .xp-hint{display:flex;align-items:center;gap:.75rem;margin:-.6rem 0 1.6rem;padding:0;border:0;background:none;font:inherit;font-size:.85rem;color:var(--muted);cursor:pointer;text-align:left}
 .xp-hint:hover{color:var(--text)}
 /* fine progetto: riquadro bianco con bordo nero che si riempie di nero scorrendo (pieni e vuoti) */
-.xp-end{--ew:min(72vw,1040px);width:var(--ew);margin-left:calc(88vw / 12 * .4 - clamp(28px,3vw,56px) - 1.5rem);justify-content:center;gap:1.4rem}
+.xp-end{--ew:min(72vw,1040px);width:var(--ew);margin-left:clamp(90px,12vw,240px);justify-content:center;gap:1.4rem}
 /* fine: riquadro bianco con bordo; scorrendo entra la prima foto del progetto dopo (con il testo che diventa bianco sopra) */
 .xp-frame{position:relative;display:block;width:100%;height:calc(100svh - 16rem);border:1.5px solid var(--text);background:var(--bg);color:var(--text);padding:0;cursor:pointer;overflow:hidden;text-align:left;font:inherit}
 .xp-rev{position:absolute;inset:0;clip-path:inset(0 100% 0 0)}
@@ -496,7 +496,7 @@ body:not([data-page=home]) #chint{display:none}
   background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.92) 22%,rgba(20,20,20,.5) 50%,rgba(255,255,255,.92) 78%,transparent 100%);
   -webkit-mask-image:radial-gradient(60% 52% at 50% 50%,#000 30%,transparent 100%);mask-image:radial-gradient(60% 52% at 50% 50%,#000 30%,transparent 100%);filter:blur(24px)}
 @media(max-width:760px){
-  .xp-end{--ew:88vw;margin-left:0}
+  .xp-end{--ew:88vw;margin-left:14vw}
   .xp-frame{height:calc(100svh - 19rem)}
   .xp-endnav{flex-direction:column;gap:1rem;margin-top:.4rem}.xp-endnav .btn,.xp-endnav .btn-o{width:100%}
 }
@@ -788,9 +788,7 @@ const projects=[
  long:'A mobile game where a group of friends turns everyday moments into points, with bonus and malus cards, fantapowers and a live podium.',
  gal:[['f-cover','w'],['f-p2','v'],['f-2','w'],['f-p1','v'],['f-p3','v']],
  sec:[['Summary','The fantasy game of real life','Fanta.me turns a group of friends into a fantasy league of real life. Someone does something, the card is called, the group confirms the points and the standings move live. Rooms like Fantapasquetta bring people back with one tap.',[['f-p1','t']]],
-  ['Rules','Call it, vote it','Anyone can call a card when something happens. The rest of the group votes, and only confirmed calls count toward the standings, which keeps the game fair and the arguments fun. A live points feed shows every confirmed call as it lands.',[]],
   ['Powers','Turbo doubles, Moviola cancels','Fantapowers add strategy on top of luck: Turbo doubles a call, Moviola cancels it, and each power can be used once per game, with a countdown that makes the timing matter.',[['f-2','w']]],
-  ['Deck','Bonus and malus as collectible cards','The game deck is a set of collectible cards, from +25 to -15, with a base set of 20 and room for personal cards. The deck is closed when the game starts, so everyone plays with the same rules.',[['f-p2','t']]],
   ['Standings','Teams on a live podium','Teams and individuals are ranked on a live podium, with a daily view and a full-game view, so the story of the game is always one tab away.',[['f-p3','t']]]]},
 {slug:'g',client:'Sinis Marine Protected Area',loop:['g-cover', 'g-1', 'g-6'],title:'Grain Keeper',cat:'System Design',tag:'System Design',year:'2025',kind:'Thesis project',team:'Individual',dur:'6 months',role:'Research, data analysis and design',
  short:'Urban furniture that keeps tourists from carrying away the quartz sand of the Sinis Peninsula.',
@@ -801,12 +799,12 @@ const projects=[
   ['Research','Maintenance is the real problem','The research phase was run jointly with the Sinis Marine Protected Area on the quartz beaches of Is Arutas, Mari Ermi, Corrigas and S\'archeddu e Sa Canna. The main issue of the existing design is not collecting the sand but the frequent maintenance it requires, which is unsustainable with the limited resources available.',[['g-2','h']]],
   ['Output','Showers and a bench that filter and store','A redesigned shower with a sturdier structure, a bamboo tray and a filtration system under the user\'s feet: a funnel sends water and sand to two stacked filters, 1 mm for the quartz sand and 200 micron for sediment. With about 10 litres of capacity, double the previous design, it runs longer between maintenance. Alongside it, a bench offers dry sand storage and a buffer between beach and parking.',[['g-4','t'],['g-7','t']]],
   ['Solution','Visitors release it, volunteers return it','Multilingual prompts on the shower and along the path invite visitors to release the quartz sand as they leave. The sand collects in the filters or in the bench, and volunteers regularly return it to the beach. The products are modular, so the filtering areas can be configured for the size and shape of each beach.',[['g-3','h']]]]},
-{slug:'h',client:'Politecnico di Torino',loop:['h-cover', 'h-p1', 'h-2'],title:'Hive',cat:'UX/UI Design',tag:'Digital Product',year:'2026',kind:'University project',team:'Team of 5',dur:'3 months',role:'Research, UX/UI and prototype',
+{slug:'h',client:'Politecnico di Torino',loop:['h-cover', 'h-f4', 'h-2'],hide:['h-f1','h-f2','h-f3','h-f5'],title:'Hive',cat:'UX/UI Design',tag:'Digital Product',year:'2026',kind:'University project',team:'Team of 5',dur:'3 months',role:'Research, UX/UI and prototype',
  short:'A modular tractor HMI that lets farmers multitask safely while Level 3 autonomy keeps the row.',
  long:'Cognitive Ergonomics and HMI project: a touch-and-tactile cockpit for autonomous orchard tractors, with a rotary knob, a pillar mapping screen and a two-level take-over request shared with the crew.',
- gal:[['h-f1','w']],
+ gal:[['h-f4','w']],
  sec:[['Summary','The tractor is the body, the hive is the network','Hive is a human-machine interface for Level 3 autonomous tractors in orchards and vineyards. While the tractor keeps the row on its own, the operator, even a seasonal worker on their first day, can plan the day, tag the field and stay in control. Developed in a team of five for the Cognitive Ergonomics and HMI course.',[['mp4:img/web/v/h-v-loop.mp4']]],
-  ['Research','What farmers asked for','We benchmarked six Level 3 systems, from Mercedes and BMW to Monarch and John Deere, read what farmers say online and interviewed growers, contractors and technicians around Cuneo. The same issues kept coming back: error codes with no words, touchscreens that fail on bumpy ground, implement settings to re-enter every time and a weak sense of safety around people in the rows.',[['h-f2','R0.75@58%']]],
+  ['Research','What farmers asked for','We benchmarked six Level 3 systems, from Mercedes and BMW to Monarch and John Deere, read what farmers say online and interviewed growers, contractors and technicians around Cuneo. The same issues kept coming back: error codes with no words, touchscreens that fail on bumpy ground, implement settings to re-enter every time and a weak sense of safety around people in the rows.',[['h-p1','t']]],
   ['Concept','Two screens, two jobs','A detachable horizontal dashboard and a vertical mapping screen on the cab pillar split control from navigation: plan the day on the pad, follow the row on the pillar.',[['h-cover','']]],
   ['Knob','A knob for the field','A rotary knob mirrors every touch gesture, so the operator never has to aim at glass on bumpy ground: push left for the menu, push right to drop a marker for weeds, disease, pests or drainage, press to adjust working depth or rotor speed.',[['mp4:img/web/v/h-v-knob.mp4','']]],
   ['Safety','Two levels of take-over','When a person is within 50 metres, a Planned TOR turns the borders yellow, plays a soft chime and pulses the crew wristbands. If a collision is less than five seconds away, an Emergency TOR turns every screen red with a loud alarm, and stops tractor and implement if nobody reacts. Colour, sound and vibration say the same thing on every device.',[['h-2','']]],
@@ -832,7 +830,7 @@ const projects=[
 {slug:'w',client:'Lete',loop:['w-cover', 'w-2', 'w-4'],title:'Waterpack',cat:'Package Design',tag:'Product Design',year:'2023',kind:'University project',team:'Team of 3',dur:'3 months',role:'Prototype design and 3D renderings',
  short:'A redesigned water pack with an ergonomic handle and a cardboard structure.',
  long:'Developed in the Ergonomics and Human-Centered Design course: a rethink of the Lete water pack to improve interaction and reduce environmental impact.',
- gal:[['w-cover','h'],['w-1','v'],['w-2','h'],['w-3','v'],['w-4','h']],
+ gal:[['w-cover','R1.5'],['w-1','v'],['w-2','h'],['w-3','v'],['w-4','h']],
  sec:[['Summary','Rethinking the water pack','Developed within the course of Ergonomics and Human-Centered Design: a redesign of the Lete water pack to improve how people interact with it while reducing its environmental impact. I was responsible for designing the prototype, both functional and aesthetic aspects, and for the 3D renderings.',[['w-4','h']]],
   ['Problem','Plastic and an uncomfortable handle','The original design has two main flaws: it is made entirely of plastic and it has a non-ergonomic handle, which makes it less sustainable and uncomfortable to carry.',[['w-1','t']]],
   ['Concept','Less plastic, same stackability','The aim was to replace plastic with a more sustainable material where possible, improve the handle, and keep good stackability at industrial level, without compromising the main function of the carrier across production, transport and consumption.',[['w-5','h']]],
@@ -868,8 +866,7 @@ projects.push(
  short:'Social media video for the launch of Chiara Alessi\'s book Lo Stato Delle Cose.',
  long:'A video interview made for the social media launch of Lo Stato Delle Cose, the 2023 book by design critic Chiara Alessi.',
  gal:[['ca-1','F1.5']],
- sec:[['Summary','A book, in a few minutes','For the launch of Lo Stato Delle Cose I produced a video for social media: an interview with Chiara Alessi that brings the ideas of the book into a short format people can watch on their phones.',[['ca-v','R0.8']]],
-  ['Film','The full interview','The complete interview, as published for the book launch.',[['yt:BZM064G_pp0','']]]]},
+ sec:[['Summary','A book, in a few minutes','For the launch of Lo Stato Delle Cose I produced a video for social media: an interview with Chiara Alessi that brings the ideas of the book into a short format people can watch on their phones.',[['yt:BZM064G_pp0','']]]]},
 {slug:'fs',client:'Docufilm by Valerio Matteu',title:'Fuocosacro',cat:'Documentary',tag:'Videomaking',year:'2017',kind:'Docufilm',team:'Team of 6',dur:'2 weeks',role:'Camera 1 operator',
  links:[['Watch on YouTube ↗','https://www.youtube.com/watch?v=SUhmhww_o3g']],
  short:'A docufilm inside the feast of a small village in central Sardinia, where rituals meet the present day.',
@@ -907,7 +904,7 @@ const WEB=k=>EXT[k]||PHOTO_DIR+'web/'+k+'.webp';   // copertine ridimensionate (
 const PJ_ORDER=['Onea','Hive','Fanta.me','Coral','Iprefab','Grain Keeper','Quadernazione','Buxaka','Chiara Alessi interview','Waterpack','Zeitknot','Unofficial Audi spot','Fuocosacro'];
 projects.sort((a,b)=>(PJ_ORDER.indexOf(a.title)+99)%99-(PJ_ORDER.indexOf(b.title)+99)%99);
 projects.forEach((p,i)=>{p.i=i;if(p.ph)return;p.local=WEB(p.slug+'-cover');
-  const all=Object.keys(DIM).filter(k=>k.startsWith(p.slug+'-'));   // il loop usa tutte le foto del progetto, prima quelle scelte
+  const all=Object.keys(DIM).filter(k=>k.startsWith(p.slug+'-')&&!(p.hide||[]).includes(k));   // il loop usa tutte le foto del progetto, prima quelle scelte
   p.loop=[...new Set([...(p.loop||[]),...all])]});
 const me={local:WEB('tobia'),pos:'50% 22%',client:'Tobia Seu · Turin',title:'me.',cat:'Industrial Product Designer',me:true};
 const TAGS=['Product Design','Textile & Fashion','Exhibition Design','System Design','Videomaking','Speculative Design','Innovation Design'];
@@ -1299,12 +1296,16 @@ function projectHTML(p,pv){
     <div class="xp-meta">${[['Client',p.client],['Type',p.kind],['Role',p.role]].filter(([,v])=>v&&v!=='—').map(([l,v])=>`<div>${l}<b>${v}</b></div>`).join('')}</div>${p.links?`<div class="xp-links">${p.links.map(([t,u])=>`<a class="btn-o" href="${u}" target="_blank" rel="noopener">${t}</a>`).join('')}</div>`:''}</div></div>`;
   h+=fig(p.gal[0],p.cat);
   h+=`<div class="xp-pan xp-say rv"><p>${p.long}</p></div>`;
-  p.sec.forEach((x,k)=>{
-    const ims=x[3].filter(([m])=>!m||!used.has(m));
+  // dopo l'ultima foto o video niente testo (Tobia, 26/10): le sezioni finali senza media passano prima dell'ultima immagine
+  const lastM=p.sec.reduce((a,x,k)=>x[3].length?k:a,-1),secs=lastM<0?p.sec:[...p.sec.slice(0,lastM),...p.sec.slice(lastM+1),p.sec[lastM]];
+  const facts=`<div class="xp-pan xp-facts rv">${[[p.year,'Year'],[p.team,'Team'],[p.dur,'Duration'],[p.cat,'Discipline']].filter(([v])=>v&&v!=='—').map(([v,l])=>`<div><b>${v}</b><span>${l}</span></div>`).join('')}</div>`;   // solo i dati che conosciamo
+  secs.forEach((x,k)=>{
+    const ims=x[3].filter(([m])=>!m||!used.has(m)),last=k===secs.length-1;
     h+=`<div class="xp-pan xp-txt rv ${k%2?'top':'end'}"><span class="num">${x[0]}</span><h2>${x[1]}</h2><p>${x[2]}</p></div>`;
     if(x[4])h+=`<div class="xp-pan xp-data rv">${x[4]}</div>`;   // numeri in chiaro (Coral)
+    if(k===0&&last)h+=facts;
     h+=group(ims.map(m=>[m,x[0]]));
-    if(k===0)h+=`<div class="xp-pan xp-facts rv">${[[p.year,'Year'],[p.team,'Team'],[p.dur,'Duration'],[p.cat,'Discipline']].filter(([v])=>v&&v!=='—').map(([v,l])=>`<div><b>${v}</b><span>${l}</span></div>`).join('')}</div>`;   // solo i dati che conosciamo
+    if(k===0&&!last)h+=facts;
   });
   return h;
 }
@@ -1313,7 +1314,7 @@ const vidIO=new IntersectionObserver(es=>es.forEach(e=>{const v=e.target;if(e.is
 function openProject(i,dir=1){
   const p=projects[i];if(!p)return;unfocus();
   const L_=projects.length,nx=projects[(i+1)%L_],pv=projects[(i+L_-1)%L_];
-  const nk=nx.gal&&nx.gal[0]&&nx.gal[0][0],nbg=nk?`background-image:url('${PIMG(nk)}')`:`background-color:${nx.col}`;
+  const nk=nx.gal&&nx.gal[0]&&nx.gal[0][0],nbg=nk?`background-image:url('${nk.startsWith('mp4:')?nk.slice(4).replace(/\.mp4$/,'.webp'):PIMG(nk)}')`:`background-color:${nx.col}`;
   const ink=w=>`<span class="xp-ink${w?' w':''}"><small>Next project</small><b>${nx.title}</b><em>Keep scrolling to open it <span class="xp-pct">0%</span></em></span>`;
   const end=`<div class="xp-pan xp-end"><button class="xp-frame" data-proj="${nx.i}" aria-label="Open the next project, ${nx.title}">
       ${ink(0)}<span class="xp-rev"><span class="xp-ph" style="${nbg}"></span>${ink(1)}</span></button>
