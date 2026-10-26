@@ -104,14 +104,11 @@ body.focus .g-wrap{opacity:0}
 .cface{position:absolute;inset:0;transform:translateZ(.5px);backface-visibility:hidden;-webkit-backface-visibility:hidden}
 .flip{position:absolute;inset:0;transform-style:preserve-3d;perspective:1600px;transition:transform .5s cubic-bezier(.23,1,.32,1)}
 .card-in{position:absolute;inset:0;border-radius:0;background:#000;color:#fff;box-shadow:0 34px 80px rgba(0,0,0,.24);padding:0;display:flex;flex-direction:column;gap:0;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;transition:transform .9s cubic-bezier(.23,1,.32,1)}
-.card-in.back{transform:rotateY(180deg);justify-content:center;gap:12px;padding:44px 40px}
-.flipped .card-in.front{transform:rotateY(-180deg)}
-.flipped .card-in.back{transform:rotateY(0)}
 body.top:not(.focus) .card:hover .flip{transform:scale(1.16)}
 .pc:hover .flip{transform:translateY(-8px)}
 .photo{position:absolute!important;inset:0;z-index:0;border-radius:0;background-size:cover;background-position:center;background-color:#555;pointer-events:none;overflow:hidden}
 /* loop di 3 foto nella card della sfera (insieme, dettaglio, particolare): la nuova entra scorrendo da destra */
-.photo .pl{position:absolute;inset:0;background-size:cover;background-position:center;clip-path:inset(0 0 0 100%);transform:scale(1.06);transition:clip-path 1.5s cubic-bezier(.65,0,.35,1),transform 2.6s cubic-bezier(.23,1,.32,1)}
+.photo .pl{position:absolute;inset:0;background-size:cover;background-position:center;clip-path:inset(0 0 0 100%);transform:scale(1.06);transition:clip-path 1s cubic-bezier(.65,0,.35,1),transform 1.8s cubic-bezier(.23,1,.32,1)}
 .photo .pl.on{clip-path:inset(0);transform:none}
 .cap{position:absolute;z-index:1;left:0;right:0;bottom:0;padding:150px 30px 26px;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;pointer-events:none;color:#fff;background:linear-gradient(to top,#000 0%,rgba(0,0,0,.72) 32%,rgba(0,0,0,0) 100%)}
 .lcap small{font-size:15px!important;letter-spacing:0!important;text-transform:none!important}
@@ -129,16 +126,6 @@ body.top:not(.focus) .card:hover .flip{transform:scale(1.16)}
 /* card "me": solo la parola, nero su bianco */
 .card-in.mecard{background:#fff;color:#000;display:grid;place-items:center}
 .card-in.mecard b{font:600 190px/1 var(--sans);letter-spacing:-.06em}
-.turn{position:absolute;right:18px;top:18px;z-index:4;width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.9);color:#111;display:grid;place-items:center;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.25);transition:transform .2s cubic-bezier(.23,1,.32,1),opacity .4s cubic-bezier(.23,1,.32,1)}
-.turn:hover{transform:rotate(-30deg)}
-.turn svg{width:20px;height:20px}
-.card-in.back .turn{right:18px;top:18px;background:color-mix(in srgb,var(--ctext) 14%,transparent);color:var(--ctext);box-shadow:none}
-.card .turn{opacity:0;pointer-events:none}
-.card.ready .turn,.card.open .turn{opacity:1;pointer-events:auto}
-.bk{font:500 12px var(--sans);letter-spacing:.16em;text-transform:uppercase;opacity:.55;margin-top:40px}
-.card-in.back h4{margin:0;font-size:34px;font-weight:600;letter-spacing:-.02em;line-height:1.1}
-.card-in.back i{font-size:22px;opacity:.7}
-.card-in.back p{margin:10px 0 0;font-size:17px;line-height:1.6;opacity:.8}
 .fnav{position:fixed;z-index:160;opacity:0;visibility:hidden;transition:opacity .4s}
 body.focus .fnav{opacity:1;visibility:visible}
 #fprev{left:calc(50% - 382px);top:50%;margin-top:-22px}#fnext{left:calc(50% + 338px);top:50%;margin-top:-22px}#fx{right:3rem;top:5.5rem}
@@ -158,18 +145,20 @@ body.focus #hint{visibility:hidden}
 
 /* finestra video teaser */
 .vwin{position:absolute;left:0;top:0;width:100%;height:100%;z-index:6;background:#15151a;overflow:hidden;pointer-events:none}
-.vwin video,.v-fallback{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.v-fallback{background:linear-gradient(135deg,#1b1b22,#33333f);display:grid;place-items:center;text-align:center;color:rgba(255,255,255,.75);font:600 1rem var(--sans)}
-.v-fallback small{display:block;margin-top:.5rem;font-weight:400;font-size:.75rem;opacity:.7}
-.vwin.ok .v-fallback{display:none}
-.v-cap{position:absolute;left:6vw;bottom:15vh;color:#fff;font-size:clamp(2rem,5vw,4rem);line-height:1.05;letter-spacing:-.02em;font-weight:500;opacity:0}
-.v-chips{position:absolute;left:6vw;bottom:8vh;display:flex;gap:.6rem;flex-wrap:wrap;opacity:0}
+.vwin video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+/* in attesa dei video: le foto dei progetti si susseguono con lo scroll (lente, veloci, poi di nuovo lente) */
+.vshow{position:absolute;inset:0}
+.vshow i{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transform:scale(1.04);transition:opacity .4s ease,transform 1.6s cubic-bezier(.23,1,.32,1)}
+.vshow i.on{opacity:1;transform:none}
+.vshow::after{content:'';position:absolute;inset:0;background:radial-gradient(70% 60% at 50% 50%,rgba(0,0,0,.42),rgba(0,0,0,.18))}
+.vwin.ok .vshow{display:none}
+.v-cap{position:absolute;left:6vw;right:6vw;top:50%;text-align:center;color:#fff;font-size:clamp(2rem,5vw,4rem);line-height:1.05;letter-spacing:-.02em;font-weight:500;opacity:0}
+.v-chips{position:absolute;left:6vw;right:6vw;top:calc(50% + clamp(3.4rem,7vw,6rem));display:flex;justify-content:center;gap:.6rem;flex-wrap:wrap;opacity:0}
 
 :root{--k:1}
 /* card di progetto (stessa card della sfera) */
 .pcw{position:relative;width:calc(660px*var(--k));height:calc(440px*var(--k));flex:none}
 .pc{position:absolute;left:0;top:0;width:660px;height:440px;transform:scale(var(--k));transform-origin:0 0;cursor:pointer}
-.pc .turn{opacity:1;pointer-events:auto}
 .pc .card-in{box-shadow:0 24px 60px rgba(0,0,0,.18)}
 /* filtri e vista */
 .chips{display:flex;gap:.5rem;flex-wrap:wrap}
@@ -185,6 +174,7 @@ body.focus #hint{visibility:hidden}
 .lrow{display:grid;grid-template-columns:48px 1.1fr minmax(140px,16vw) 1fr 30px;gap:1.4rem;align-items:center;height:var(--rh,76px);border-top:1px solid var(--border);cursor:pointer;transition:background .2s cubic-bezier(.23,1,.32,1),color .2s cubic-bezier(.23,1,.32,1)}
 .llist .lrow:last-child{border-bottom:1px solid var(--border)}
 .lrow:hover{border-top-color:var(--text)}
+.lrow:focus-visible,.pc:focus-visible{outline:2px solid var(--text);outline-offset:4px}
 .lrow>*{transition:transform .25s cubic-bezier(.23,1,.32,1)}
 .lrow:hover>*{transform:translateX(1rem)}
 .lrow:hover>.a{transform:translateX(-1rem)}
@@ -303,26 +293,22 @@ body[data-view=list] .pgrid{display:none}
 .lg svg{width:28px;height:28px;fill:currentColor}
 .lg.empty{border-style:dashed}
 .tedx{display:flex;align-items:baseline;gap:1px}.tedx svg{width:30px;height:30px}.tedx b{font-size:13px;font-weight:700;line-height:1}
-/* strumenti per categoria, con icona del programma (stesso stile per tutti) */
-.tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem 2.5rem;margin-bottom:3.5rem}
-.tg h3,.aiw h3{margin:0 0 .9rem;font-size:.95rem;font-weight:500;color:var(--muted)}
-.tg ul,.ail{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.55rem}
-.tg li{display:flex;align-items:center;gap:.7rem;font-size:1.02rem}
-.tg li svg,.ail svg{flex:none;width:22px;height:22px;fill:currentColor}
-.tg li svg[fill=none],.ail svg[fill=none]{fill:none}
-/* AI workflow: barra divisa per quota di uso */
-.aiw{margin-bottom:3.5rem;max-width:760px}
-.aibar{display:flex;height:46px;border:1.5px solid var(--text);margin-bottom:1.2rem}
-.aibar span{flex:0 0 var(--w);display:flex;align-items:center;justify-content:space-between;gap:.5rem;padding:0 .8rem;min-width:0;overflow:hidden;font-size:.85rem}
-.aibar span:nth-child(1){background:var(--text);color:var(--bg)}
-.aibar span:nth-child(2){background:color-mix(in srgb,var(--text) 45%,var(--bg));color:var(--bg)}
-.aibar span:nth-child(3){padding:0 .3rem;justify-content:center}
-.aibar span:nth-child(3) em{font-size:.7rem}
-.aibar em{font-style:normal;opacity:.85}
-.ail li{display:grid;grid-template-columns:62px 1fr auto;align-items:center;gap:.8rem;padding:.55rem 0;border-top:1px solid var(--border)}
-.ail li:last-child{border-bottom:1px solid var(--border)}
-.ail .ico{display:flex;gap:6px}
-.ail em{font-style:normal;color:var(--muted);font-size:.9rem}
+/* strumenti per categoria: icone vere dei programmi, a colori, tutte su tessera come le app */
+.tools{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:2.2rem 2.5rem;margin-bottom:3.5rem}
+.tg h3{margin:0 0 .9rem;font-size:.95rem;font-weight:500;color:var(--muted)}
+.tg ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.6rem}
+.tg li{display:flex;align-items:center;gap:.8rem;font-size:1.02rem}
+.ti{flex:none;width:40px;height:40px;border-radius:9px;box-shadow:0 0 0 1px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.06);overflow:hidden}
+.ti svg{display:block;width:100%;height:100%}
+/* AI: un solo grafico compatto (quota d'uso + esperienza) */
+.tg.ai{grid-column:span 2;max-width:560px}
+.aibar{display:flex;height:8px;margin-bottom:.9rem;gap:2px}
+.aibar i{flex:0 0 calc(var(--w) - 2px);background:var(--c)}
+.aich li{display:flex;align-items:center;gap:.6rem}
+.aich .nm{flex:1;display:flex;flex-direction:column;line-height:1.25}
+.aich em{font-style:normal;font-size:.82rem;color:var(--muted)}
+.aich b{font-weight:600;font-size:1.05rem;letter-spacing:-.02em}
+@media(max-width:760px){.tg.ai{grid-column:auto}}
 .ab{display:grid;grid-template-columns:minmax(260px,.8fr) 1.2fr;gap:5rem;align-items:start}
 .ab-ph{aspect-ratio:4/5;border-radius:0;background-size:cover;background-position:center;background-color:#555;position:sticky;top:7rem}
 .ab-t p{color:var(--muted);line-height:1.75;max-width:54ch;margin:0 0 1.2rem;font-size:1.05rem}
@@ -358,8 +344,7 @@ footer .btn{margin-top:2rem;padding:.8rem 1.5rem;font-size:.9rem}
 .cols a:hover,.cols .l:hover{text-decoration:underline;text-decoration-color:currentColor;text-decoration-thickness:2px;text-underline-offset:4px}
 .fb{display:flex;justify-content:space-between;align-items:center;font:.72rem ui-monospace,monospace;color:var(--muted)}
 .fb button{width:40px;height:40px;border-radius:50%;border:1px solid var(--border);background:none;color:var(--text);cursor:pointer}
-.btn:active,.btn-o:active,.chip:active,.turn:active,.fnav:active{transform:scale(.97);transition-duration:.1s}
-.turn:active{transform:scale(.94)}
+.btn:active,.btn-o:active,.chip:active,.fnav:active{transform:scale(.97);transition-duration:.1s}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important;scroll-behavior:auto!important}.rv{transform:none}}
 .hint .hl{display:block;width:1px;height:34px;margin:12px auto 0;background:linear-gradient(var(--muted),transparent);transform-origin:top;animation:hl 2.2s cubic-bezier(.23,1,.32,1) infinite}
 @keyframes hl{0%{transform:scaleY(0);opacity:1}60%{transform:scaleY(1);opacity:1}100%{transform:scaleY(1);opacity:0}}
@@ -399,7 +384,7 @@ body[data-page=project] #project{padding:0;min-height:0}
 .xp-fig.full{--fh:100vh;--fh:100svh;padding:0}.xp-fig.full figcaption{display:none}
 .xp-fig figcaption{width:calc(var(--fh)*var(--r))}
 .xp-fig img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.08);will-change:transform}
-.xp-fig figcaption{display:flex;justify-content:space-between;gap:1rem;margin-top:.8rem;font:.68rem ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.xp-fig figcaption{display:flex;justify-content:space-between;gap:1rem;margin-top:.7rem;font-size:.8rem;color:var(--muted)}
 .xp-pair{flex:none;display:flex;gap:clamp(12px,1.2vw,20px)}
 .xp-pair .xp-fig{padding-left:0;padding-right:0}
 /* righe di testo tra le immagini */
@@ -419,8 +404,9 @@ body[data-page=project] #project{padding:0;min-height:0}
 .xp-facts span{font-size:.78rem;color:var(--muted);text-align:right}
 /* fine: prossimo progetto */
 /* progetto a tutto schermo: niente header, menu, interruttore tema e footer */
-body[data-page=project] .theme-switch,body[data-page=project] #rail,body[data-page=project] footer{display:none}
+body[data-page=project] #rail,body[data-page=project] footer{display:none}
 .xp-client{margin:0;font-size:1rem;color:var(--muted)}
+.xp-hint{margin:-.6rem 0 1.6rem;font-size:.85rem;color:var(--muted)}
 /* fine progetto: riquadro bianco con bordo nero che si riempie di nero scorrendo (pieni e vuoti) */
 .xp-end{width:min(72vw,1040px);justify-content:center;gap:1.4rem}
 /* fine: riquadro bianco con bordo; scorrendo entra la prima foto del progetto dopo (con il testo che diventa bianco sopra) */
@@ -434,8 +420,9 @@ body[data-page=project] .theme-switch,body[data-page=project] #rail,body[data-pa
 .xp-ink b{font-size:clamp(2.8rem,7vw,7.5rem);font-weight:600;letter-spacing:-.055em;line-height:.86}
 .xp-ink em{font-style:normal;font-size:.95rem;display:flex;justify-content:space-between}
 .xp-frame:focus-visible{outline:2px solid var(--text);outline-offset:6px}
+.xp-endnav{display:flex;justify-content:space-between;gap:2rem;margin-top:.8rem}
 /* barra di stato: un solo layout. Linea spessa sempre; a sinistra la molla indietro (all'inizio), a destra quella avanti (alla fine) */
-.xp-bar{position:absolute;left:6vw;right:6vw;bottom:1.6rem;display:grid;grid-template-columns:minmax(0,1fr) minmax(120px,38vw) minmax(0,1fr);gap:1.5rem;align-items:center;font-size:.85rem;color:var(--muted);pointer-events:none}
+.xp-bar{position:absolute;left:calc(2rem + 196px);right:6vw;bottom:1.6rem;display:grid;grid-template-columns:minmax(0,1fr) minmax(120px,38vw) minmax(0,1fr);gap:1.5rem;align-items:center;font-size:.85rem;color:var(--muted);pointer-events:none}
 .xp-bar .ln{height:3px;background:var(--border);position:relative;overflow:hidden}
 .xp-bar .ln i{position:absolute;inset:0;background:var(--text);transform-origin:0 50%;transform:scaleX(0)}
 .xp-bar .t,.xp-bar .r{display:flex;align-items:center;gap:.8rem;min-width:0;border:0;background:none;padding:0;font:inherit;color:inherit;text-align:left}
@@ -456,7 +443,7 @@ body[data-page=project] .theme-switch,body[data-page=project] #rail,body[data-pa
 @media(max-width:760px){
   .xp-end{width:88vw}
   .xp-frame{height:calc(100svh - 19rem)}
-  .xp-endnav{flex-direction:column}
+  .xp-endnav{flex-direction:column;gap:1rem;margin-top:.4rem}.xp-endnav .btn,.xp-endnav .btn-o{width:100%}
 }
 /* barra in basso: nome, avanzamento, contatore */
 .xp-back{align-self:flex-start;margin-bottom:1.6rem}
@@ -470,7 +457,7 @@ body[data-page=project] .theme-switch,body[data-page=project] #rail,body[data-pa
   .xp-fig{--fh:min(calc(100svh - 15.6rem),118vw)}
   .xp-txt,.xp-facts{width:80vw}.xp-say{width:86vw}
   .xp-say p{font-size:1.45rem}
-  .xp-bar{bottom:1.2rem;left:5vw;right:5vw;grid-template-columns:1fr auto;gap:.8rem}
+  .xp-bar{bottom:1.45rem;left:calc(1rem + 182px);right:5vw;grid-template-columns:1fr auto;gap:.8rem}
   .xp-bar .t{display:none}.xp-bar.start .t{display:flex}.xp-bar.start .ln,.xp-bar.end .ln{display:none}.xp-bar.end{grid-template-columns:1fr}
   .xp-fig.full{--fh:100svh;padding:0}
 }
@@ -515,8 +502,8 @@ body[data-page=project] .theme-switch,body[data-page=project] #rail,body[data-pa
   <span class="cur-l" id="cur-l">Drag</span>
 </div></div>
 
-<button class="btn-o round fnav" id="fprev" aria-label="Precedente">&#8249;</button>
-<button class="btn-o round fnav" id="fnext" aria-label="Successivo">&#8250;</button>
+<button class="btn-o round fnav" id="fprev" aria-label="Previous card">&#8249;</button>
+<button class="btn-o round fnav" id="fnext" aria-label="Next card">&#8250;</button>
 <div class="fnav" id="fcta"><button class="btn-o" id="fworld" data-act="world">Return to world</button><button class="btn" id="fcase">View case study</button></div>
 
 <!-- HOME -->
@@ -538,7 +525,7 @@ body[data-page=project] .theme-switch,body[data-page=project] #rail,body[data-pa
 
       <!-- finestra video teaser -->
       <div class="vwin" id="vwin">
-        <div class="v-fallback"><div>Teaser video<small>metti il file in video/teaser.mp4</small></div></div>
+        <div class="vshow" id="vshow"></div>
         <video id="vid" src="video/teaser.mp4" muted loop playsinline preload="metadata"></video>
         <div class="v-cap" id="vcap">And create something<br>that keeps <span class="serif">people</span> in the center</div>
         <div class="v-chips" id="vchips"><span class="btn-o w">Research</span><span class="btn-o w">Systems</span><span class="btn-o w">Interfaces</span><span class="btn-o w">3D &amp; Motion</span></div>
@@ -630,20 +617,20 @@ body[data-page=project] .theme-switch,body[data-page=project] #rail,body[data-pa
   <section class="ab-sec rv">
     <div class="ab-head"><p class="kicker">03 — Skills</p><h2>Skills <span class="serif">&amp; tools</span></h2></div>
     <div class="tools">
-      <div class="tg"><h3>Illustration &amp; layout</h3><ul><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.53 10.73c-.1-.31-.19-.61-.29-.92-.1-.31-.19-.6-.27-.89-.08-.28-.15-.54-.22-.78h-.02c-.09.43-.2.86-.34 1.29-.15.48-.3.98-.46 1.48-.14.51-.29.98-.44 1.4h2.54c-.06-.211-.14-.46-.23-.721-.09-.269-.18-.559-.27-.859zM19.75.3H4.25C1.9.3 0 2.2 0 4.55v14.9c0 2.35 1.9 4.25 4.25 4.25h15.5c2.35 0 4.25-1.9 4.25-4.25V4.55C24 2.2 22.1.3 19.75.3zM14.7 16.83h-2.091c-.069.01-.139-.04-.159-.11l-.82-2.38H7.91l-.76 2.35c-.02.09-.1.15-.19.141H5.08c-.11 0-.14-.061-.11-.18L8.19 7.38c.03-.1.06-.21.1-.33.04-.21.06-.43.06-.65-.01-.05.03-.1.08-.11h2.59c.08 0 .12.03.13.08l3.65 10.3c.03.109 0 .16-.1.16zm3.4-.15c0 .11-.039.16-.129.16H16.01c-.1 0-.15-.061-.15-.16v-7.7c0-.1.041-.14.131-.14h1.98c.09 0 .129.05.129.14v7.7zm-.209-9.03c-.231.24-.571.37-.911.35-.33.01-.65-.12-.891-.35-.23-.25-.35-.58-.34-.92-.01-.34.12-.66.359-.89.242-.23.562-.35.892-.35.391 0 .689.12.91.35.22.24.34.56.33.89.01.34-.11.67-.349.92z"/></svg><span>Illustrator</span></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.25.3C1.9.3 0 2.2 0 4.55v14.9c0 2.35 1.9 4.25 4.25 4.25h15.5c2.35 0 4.25-1.9 4.25-4.25V4.55C24 2.2 22.1.3 19.75.3zm11.31 5.13h2.03c.05-.01.09.03.1.07v9.54c0 .18.01.38.02.6.02.21.03.41.04.58 0 .07-.03.13-.1.16-.52.22-1.07.38-1.63.48-.5.09-1.02.14-1.54.14-.74.01-1.48-.14-2.15-.45-.63-.29-1.15-.77-1.51-1.36-.37-.61-.55-1.37-.55-2.28-.01-.74.18-1.47.55-2.11.38-.65.93-1.19 1.59-1.55.7-.39 1.54-.58 2.53-.58.05 0 .12 0 .21.01s.19.01.31.02V5.54c0-.07.03-.11.1-.11zm-8.93.86h1.95c.06-.01.12.03.13.1.01.01.01.02.01.03v10.26c0 .11-.05.16-.14.16H6.62c-.09 0-.13-.05-.13-.16V6.42c0-.09.05-.13.14-.13zm8.23 4.24c-.39 0-.78.08-1.13.26-.34.17-.63.42-.85.74-.22.32-.33.75-.33 1.27-.01.35.05.7.17 1.03.1.27.25.51.45.71.19.18.42.32.68.4.27.09.55.13.83.13.15 0 .29-.01.42-.02.13.01.25-.01.36-.05v-4.4c-.09-.02-.18-.04-.27-.05-.11-.01-.22-.02-.33-.02z"/></svg><span>InDesign</span></li></ul></div>
-      <div class="tg"><h3>Photography</h3><ul><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.85 8.42c-.37-.15-.77-.21-1.18-.2-.26 0-.49 0-.68.01-.2-.01-.34 0-.41.01v3.36c.14.01.27.02.39.02h.53c.39 0 .78-.06 1.15-.18.32-.09.6-.28.82-.53.21-.25.31-.59.31-1.03.01-.31-.07-.62-.23-.89-.17-.26-.41-.46-.7-.57zM19.75.3H4.25C1.9.3 0 2.2 0 4.55v14.899c0 2.35 1.9 4.25 4.25 4.25h15.5c2.35 0 4.25-1.9 4.25-4.25V4.55C24 2.2 22.1.3 19.75.3zm-7.391 11.65c-.399.56-.959.98-1.609 1.22-.68.25-1.43.34-2.25.34-.24 0-.4 0-.5-.01s-.24-.01-.43-.01v3.209c.01.07-.04.131-.11.141H5.52c-.08 0-.12-.041-.12-.131V6.42c0-.07.03-.11.1-.11.17 0 .33 0 .56-.01.24-.01.49-.01.76-.02s.56-.01.87-.02c.31-.01.61-.01.91-.01.82 0 1.5.1 2.06.31.5.17.96.45 1.34.82.32.32.57.71.73 1.14.149.42.229.85.229 1.3.001.86-.199 1.57-.6 2.13zm7.091 3.89c-.28.4-.671.709-1.12.891-.49.209-1.09.318-1.811.318-.459 0-.91-.039-1.359-.129-.35-.061-.7-.17-1.02-.32-.07-.039-.121-.109-.111-.189v-1.74c0-.029.011-.07.041-.09.029-.02.06-.01.09.01.39.23.8.391 1.24.49.379.1.779.15 1.18.15.38 0 .65-.051.83-.141.16-.07.27-.24.27-.42 0-.141-.08-.27-.24-.4-.16-.129-.489-.279-.979-.471-.51-.18-.979-.42-1.42-.719-.31-.221-.569-.51-.761-.85-.159-.32-.239-.67-.229-1.021 0-.43.12-.84.341-1.21.25-.4.619-.72 1.049-.92.469-.239 1.059-.349 1.769-.349.41 0 .83.03 1.24.09.3.04.59.12.86.23.039.01.08.05.1.09.01.04.02.08.02.12v1.63c0 .04-.02.08-.05.1-.09.02-.14.02-.18 0-.3-.16-.62-.27-.96-.34-.37-.08-.74-.13-1.12-.13-.2-.01-.41.02-.601.07-.129.03-.24.1-.31.2-.05.08-.08.18-.08.27s.04.18.101.26c.09.11.209.2.34.27.229.12.47.23.709.33.541.18 1.061.43 1.541.73.33.209.6.49.789.83.16.318.24.67.23 1.029.011.471-.129.94-.389 1.331z"/></svg><span>Photoshop</span></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.75.3H4.25C1.9.3 0 2.2 0 4.55v14.9c0 2.35 1.9 4.25 4.25 4.25h15.5c2.35 0 4.25-1.9 4.25-4.25V4.55C24 2.2 22.1.3 19.75.3zm-6.99 16.389c0 .051-.029.09-.06.121-.03.02-.06.029-.101.029H6.26c-.11 0-.16-.061-.16-.18V6.44c-.01-.07.04-.13.11-.14h2c.05-.01.11.03.11.08v8.43h4.62c.101 0 .131.049.11.14l-.29 1.739zm6.25-7.859v1.95c0 .08-.05.11-.16.11-.649-.04-1.3.08-1.89.34-.2.09-.39.21-.54.37v5.1c0 .1-.04.14-.13.14h-1.95c-.08.01-.15-.04-.16-.119V11.14c0-.24 0-.49-.01-.75s-.01-.52-.02-.78c-.01-.22-.03-.44-.061-.66-.01-.05.02-.1.07-.11.01-.01.02-.01.04 0h1.75c.1 0 .18.07.21.16.04.07.07.15.08.23.02.1.039.21.05.31.01.11.021.23.021.36.299-.35.66-.64 1.069-.86.46-.25.97-.37 1.49-.36.069-.01.13.04.14.11.001.01.001.02.001.04z"/></svg><span>Lightroom</span></li></ul></div>
-      <div class="tg"><h3>Videomaking</h3><ul><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.15 8.42a2.93 2.93 0 00-1.18-.2 13.9 13.9 0 00-1.09.02v3.36l.39.02h.53c.39 0 .78-.06 1.15-.18.32-.09.6-.28.82-.53.21-.25.31-.59.31-1.03a1.45 1.45 0 00-.93-1.46zM19.75.3H4.25A4.25 4.25 0 000 4.55v14.9c0 2.35 1.9 4.25 4.25 4.25h15.5c2.35 0 4.25-1.9 4.25-4.25V4.55C24 2.2 22.1.3 19.75.3zm-7.09 11.65c-.4.56-.96.98-1.61 1.22-.68.25-1.43.34-2.25.34l-.5-.01-.43-.01v3.21a.12.12 0 01-.11.14H5.82c-.08 0-.12-.04-.12-.13V6.42c0-.07.03-.11.1-.11l.56-.01.76-.02.87-.02.91-.01c.82 0 1.5.1 2.06.31.5.17.96.45 1.34.82.32.32.57.71.73 1.14.15.42.23.85.23 1.3 0 .86-.2 1.57-.6 2.13zm6.82-3.15v1.95c0 .08-.05.11-.16.11a4.35 4.35 0 00-1.92.37c-.19.09-.37.21-.51.37v5.1c0 .1-.04.14-.13.14h-1.97a.14.14 0 01-.16-.12v-5.58l-.01-.75-.02-.78c0-.23-.02-.45-.04-.68a.1.1 0 01.07-.11h1.78c.1 0 .18.07.2.16a3.03 3.03 0 01.13.92c.3-.35.67-.64 1.08-.86a3.1 3.1 0 011.52-.39c.07-.01.13.04.14.11v.04z"/></svg><span>Premiere Pro</span></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.54 10.73c-.1-.31-.19-.61-.29-.92s-.19-.6-.27-.89c-.08-.28-.15-.54-.22-.78h-.02c-.09.43-.2.86-.34 1.29-.15.48-.3.98-.46 1.48-.13.51-.29.98-.44 1.4h2.54c-.06-.21-.14-.46-.23-.72-.09-.27-.18-.56-.27-.86zm8.58-.29c-.55-.03-1.07.26-1.33.76-.12.23-.19.47-.22.72h2.109c.26 0 .45 0 .57-.01.08-.01.16-.03.23-.08v-.1c0-.13-.021-.25-.061-.37-.178-.56-.708-.94-1.298-.92zM19.75.3H4.25C1.9.3 0 2.2 0 4.55v14.9c0 2.35 1.9 4.25 4.25 4.25h15.5c2.35 0 4.25-1.9 4.25-4.25V4.55C24 2.2 22.1.3 19.75.3zm-7.04 16.511h-2.09c-.07.01-.14-.041-.16-.11l-.82-2.4H5.92l-.76 2.36c-.02.09-.1.15-.19.14H3.09c-.11 0-.14-.06-.11-.18L6.2 7.39c.03-.1.06-.19.1-.31.04-.21.06-.43.06-.65-.01-.05.03-.1.08-.11h2.59c.07 0 .12.03.13.08l3.65 10.25c.03.11.001.161-.1.161zm7.851-3.991c-.021.189-.031.33-.041.42-.01.07-.069.13-.14.13-.06 0-.17.01-.33.021-.159.02-.35.029-.579.029-.23 0-.471-.04-.73-.04h-3.17c.039.31.14.62.31.89.181.271.431.48.729.601.4.17.841.26 1.281.25.35-.011.699-.04 1.039-.11.311-.039.61-.119.891-.23.05-.039.08-.02.08.08v1.531c0 .039-.01.08-.021.119-.021.03-.04.051-.069.07-.32.14-.65.24-1 .3-.471.09-.94.13-1.42.12-.761 0-1.4-.12-1.92-.35-.49-.211-.921-.541-1.261-.95-.319-.39-.55-.83-.69-1.31-.14-.471-.209-.961-.209-1.461 0-.539.08-1.07.25-1.59.16-.5.41-.96.75-1.37.33-.4.739-.72 1.209-.95.471-.23 1.03-.31 1.67-.31.531-.01 1.06.09 1.55.31.41.18.77.45 1.05.8.26.34.47.72.601 1.14.129.4.189.81.189 1.22 0 .24-.01.45-.019.64z"/></svg><span>After Effects</span></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.621 0 5.977.004c-1.37 0-2.756.345-3.762 1.11a4.925 4.925 0 0 0-1.61 2.003C.233 3.93 0 5.02 0 5.951l.012 12.2c.002 1.604.479 3.057 1.461 4.112.984 1.056 2.462 1.683 4.331 1.691L16.856 24c1.26.005 3.095-.036 4.303-.714 1.075-.605 2.025-1.556 2.497-2.984.278-.84.345-2.084.344-3.147l-.021-11.13c-.002-.888-.15-2.023-.547-2.934-.425-.976-1.181-1.815-2.322-2.425C20.353.26 19.123 0 17.622 0zm0 .93c1.378 0 2.538.295 3.04.565.977.523 1.544 1.166 1.889 1.96.315.721.47 1.793.473 2.572l.018 11.13c.002 1.013-.097 2.257-.298 2.86-.396 1.202-1.146 1.946-2.063 2.462-.814.457-2.612.593-3.82.588l-11.05-.044c-1.657-.007-2.832-.534-3.626-1.386-.792-.851-1.212-2.06-1.212-3.485L.999 5.95c0-.829.196-1.827.474-2.437.345-.757.75-1.207 1.365-1.674C3.585 1.27 4.868.97 6.08.97zm-5.66 3.423c-1.976.089-3.204 1.658-3.214 3.29.019 1.443 1.635 3.481 2.884 4.53.12.099.154.109.33.18.062.025.198-.047.327-.135.36-.245.993-.947 1.648-1.738a7.67 7.67 0 0 0 1.031-1.683c.409-.89.261-1.599.235-1.888a3.983 3.983 0 0 0-.99-1.692 3.36 3.36 0 0 0-2.251-.864zm4.172 7.922a10.185 10.185 0 0 0-3.244.61c-.15.058-.26.1-.374.17-.057.036-.11.135-.105.292.017.433.29 1.278.624 2.27.384 1.135 1.066 2.27 1.844 2.74a3.23 3.23 0 0 0 2.53.342c.832-.243 1.595-.868 1.962-1.546.986-1.818.19-3.548-1.121-4.417-.447-.296-1.133-.445-1.89-.46-.074 0-.15-.002-.226-.001zm-8.432.038a6.201 6.201 0 0 0-.752.047c-.596.078-.932.273-1.29.51a3.177 3.177 0 0 0-1.365 1.979c-.075.552-.086 1.053.033 1.507.433 1.389 1.326 2.222 2.847 2.452.636.028 1.37-.063 1.99-.45 1.269-.782 2.08-3.17 2.412-4.742.053-.176.035-.357-.013-.42-.005-.067-.044-.113-.19-.183-.398-.192-1.32-.417-2.375-.6a7.68 7.68 0 0 0-1.297-.1z"/></svg><span>DaVinci Resolve</span></li></ul></div>
-      <div class="tg"><h3>3D &amp; CAD</h3><ul><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.823 3.103c-.1 0-.213.006-.34.017-.511.044-1.25.18-1.802.329a6.269 6.269 0 0 0-1.15.42c-.231.112-.33.178-.354.273-.023.094.028.217.16.436s.346.533.535.961c.19.428.356.97.361 1.651.006.68-.149 1.5-.245 1.962-.096.462-.133.568-.227.618-.094.05-.245.044-.525-.021-.281-.065-.69-.187-1.1-.259-.41-.072-.819-.093-1.122-.038-.304.056-.504.189-.645.369-.14.18-.224.406-.282.75A6.957 6.957 0 0 0 0 11.687c.005.317.047.49.136.584.088.094.223.109.492.054s.672-.18 1.224-.215a6.302 6.302 0 0 1 1.94.202c.685.182 1.353.49 1.95.93.598.438 1.127 1.007 1.566 1.593.438.586.787 1.189 1.004 1.541.217.353.304.455.372.42.068-.035.117-.207.145-.417a3.141 3.141 0 0 0-.02-.848 7.467 7.467 0 0 0-.32-1.365 5.617 5.617 0 0 0-.495-1.018c-.146-.247-.241-.408-.245-.51-.004-.103.085-.148.51-.315.424-.167 1.185-.457 1.958-.808.772-.351 1.556-.764 2.042-1.106.486-.341.674-.61.724-.937.05-.326-.039-.71-.16-1.076a6.93 6.93 0 0 0-.529-1.193A13.696 13.696 0 0 0 11.28 5.6a9.187 9.187 0 0 0-1.1-1.236c-.282-.255-.421-.31-.51-.29-.09.02-.131.115-.168.47-.037.356-.07.973-.144 1.559a7.468 7.468 0 0 1-.432 1.773 12.543 12.543 0 0 1-.99 1.982c-.388.64-.803 1.212-1.054 1.462-.25.25-.336.18-.477.064l-.486-.4c-.15-.125-.253-.213-.273-.293-.02-.08.045-.15.27-.448.227-.299.615-.825.96-1.478a7.75 7.75 0 0 0 .796-2.282 10.1 10.1 0 0 0 .095-2.338c-.044-.564-.124-.77-.306-.896-.137-.095-.332-.146-.638-.146zm6.48 7.034h-.012c-.084.01-.192.112-.415.294a6.86 6.86 0 0 1-1.017.7c-.458.257-1.038.507-1.51.734-.47.226-.831.429-1.004.712-.172.283-.155.648.04.85.194.204.566.246.883.259.318.013.58-.002.826.087.246.09.475.285.764.516.288.23.637.498.925.561.289.063.518-.079.766-.202.249-.124.516-.23.888-.225.371.005.847.12 1.318.37.47.248.938.63 1.184.866.247.236.272.327.245.362-.028.036-.108.018-.304-.14-.196-.157-.508-.454-.917-.688-.41-.234-.916-.404-1.4-.391-.482.013-.94.21-1.23.55-.29.34-.412.822-.546 1.164-.133.341-.28.543-.47.617-.19.074-.424.02-.703-.099-.28-.12-.604-.307-.874-.442-.269-.136-.484-.22-.62-.353-.136-.132-.195-.31-.203-.571-.01-.26.032-.6.05-.853.02-.25.018-.413-.038-.56a1.079 1.079 0 0 0-.232-.35c-.07-.07-.099-.075-.113-.058-.014.017-.012.058.01.158.023.1.067.26.05.581-.019.321-.098.803-.16 1.17-.062.366-.107.618-.02.808.087.191.306.322.707.54.4.22.982.527 1.518.855.537.327 1.027.673 1.562 1.089.534.415 1.112.9 1.5 1.238.39.339.588.532.742.59.154.059.264-.018.307-.138.044-.12.023-.285-.014-.429a1.174 1.174 0 0 0-.24-.46 4.92 4.92 0 0 0-.68-.704c-.287-.243-.614-.463-.803-.614-.19-.151-.242-.233-.212-.259.03-.026.14.004.302.108.162.103.375.28.612.459.237.178.499.356.733.584.235.228.443.506.583.706.14.201.214.324.294.372.08.049.165.022.277-.05a3.03 3.03 0 0 0 .426-.355c.178-.169.398-.393.551-.633.154-.24.242-.496.299-.772.056-.276.08-.572.247-.862.167-.29.476-.574.994-1.025.518-.451 1.244-1.07 1.891-1.664.648-.595 1.216-1.165 1.696-1.802.479-.638.87-1.342 1.067-1.743.199-.4.205-.498.14-.526-.063-.027-.198.015-.61.313-.414.297-1.106.849-1.886 1.43-.781.58-1.65 1.19-2.336 1.569-.686.378-1.19.524-1.55.562-.361.037-.58-.034-.724-.11-.143-.077-.21-.158-.224-.241-.013-.084.03-.17.135-.275.106-.106.277-.232.447-.392.17-.16.338-.354.468-.556.13-.202.22-.411.261-.592.042-.181.034-.333-.04-.376-.074-.043-.215.023-.376.11-.162.086-.343.192-.593.3a2.683 2.683 0 0 1-.92.235 1.626 1.626 0 0 1-1.088-.313c-.343-.26-.635-.71-.866-1.147-.23-.438-.398-.865-.512-1.12-.108-.242-.168-.33-.246-.33zm-2.215 4.075a.422.422 0 0 0-.294.115c-.094.086-.145.2-.034.338.112.137.385.297.636.469.252.172.481.357.666.42.184.064.323.006.402-.096.08-.102.1-.247-.003-.404-.103-.157-.327-.325-.564-.481-.238-.157-.488-.302-.681-.346a.574.574 0 0 0-.128-.015zm.252.208c.025 0 .053.003.083.01.118.026.272.115.418.211.145.096.283.2.333.289.05.089.014.163-.048.216a.255.255 0 0 1-.247.053c-.1-.031-.216-.126-.36-.219-.145-.093-.319-.184-.387-.268-.068-.084-.031-.162.029-.218a.26.26 0 0 1 .18-.074zm4.778 3.728c.211-.008.42.06.602.24.183.178.34.467.383.732.042.265-.03.505-.125.692a1.58 1.58 0 0 1-.289.397c-.074.074-.109.095-.14.095h-.003c-.033-.001-.062-.023-.208-.171a7.39 7.39 0 0 1-.573-.642c-.165-.22-.232-.383-.263-.568-.032-.185-.027-.39.082-.536.109-.146.323-.23.534-.239zm.093 1.111a.258.258 0 0 0-.153.046c-.058.041-.105.113-.093.185.012.073.085.146.174.255.089.11.195.255.264.335.068.08.1.093.127.091.029-.002.054-.018.086-.048a.349.349 0 0 0 .094-.157.518.518 0 0 0 .002-.316.668.668 0 0 0-.218-.282.476.476 0 0 0-.283-.109z"/></svg><span>Rhinoceros</span></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m.129 20.202 14.7-9.136h7.625c.235 0 .445.188.445.445 0 .21-.092.305-.21.375l-7.222 4.323c-.47.283-.633.845-.633 1.265l-.008 2.725H24V4.362a.561.561 0 0 0-.585-.562h-8.752L0 12.893V20.2h.129z"/></svg><span>Fusion 360</span></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.8672 1.0527v.0157L0 3.3848v17.914l3.8965-2.332h18.3398V2.3301c0-.702-.5773-1.2774-1.2793-1.2774H3.8672zm7.5058 4.0098h3.3008l2.9844 9.9512h-2.5879l-.5683-2.1895h-2.9844l-.5703 2.1621h-2.416l2.8417-9.9238zm11.8633.0273v14.877H4.172l-2.0684 1.2383v.4648c0 .702.5793 1.2774 1.2813 1.2774H24V5.0898h-.7637zM12.9668 6.6816l-.9941 4.3243h2.0468l-1.0527-4.3243z"/></svg><span>AutoCAD</span></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.052 0C5.394-.007-.003 5.412 0 11.976.003 18.654 5.475 23.981 11.978 24c6.535.02 12.057-5.306 12.022-11.998-.009-1.665-.53-5.371-1.84-5.276-1.98.145-2.159 4.12-2.377 5.407-.417 2.46-1.346 5.08-2.953 6.99-1.88 2.359-4.697 3.634-7.662 3.158-3.55-.564-5.893-3.278-6.68-5.201-.753-1.723-1.035-4.162-.07-6.324 1.16-2.766 3.734-4.632 6.28-5.584 2.006-.827 4.103-1.151 5.357-1.375 2.516-.5 2.855-1.463 2.814-2.149-.015-.252-.256-.724-.785-.943C15.03.269 13.268.001 12.052 0zm5.098 1.342c.139.398.088.85-.148 1.256-.325.56-.972 1.05-1.897 1.29-1.636.428-2.976.554-4.34.96-1.312.39-3.397 1.018-5.316 2.552-.268.842-.341 1.892-.369 2.662.15 5.014 4.557 8.884 9.17 8.682.853-.037 1.921-.261 2.912-.68a13.56 13.56 0 0 0 1.387-2.683l.002-.002v-.002c.424-1.03.606-1.836.8-2.793.32-1.565.202-2.88 1.012-4.758.251-.582.71-1.113 1.258-1.346.25-.105.522-.133.79-.072-.89-2.471-3.115-4.326-5.26-5.066z"/></svg><span>Cinema 4D</span></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.734,11.603c0.078,0.376,0.116,0.76,0.116,1.144c0,1.44-0.562,2.846-1.556,3.889 c-0.989,1.037-2.358,1.668-3.789,1.741c-1.445,0.074-2.885-0.418-3.979-1.365c-1.079-0.933-1.776-2.265-1.921-3.684 c-0.148-1.445,0.273-2.914,1.17-4.057c0.877-1.118,2.168-1.879,3.574-2.095c1.439-0.222,2.934,0.127,4.123,0.97 C18.627,8.965,19.448,10.214,19.734,11.603z M24,6v12c0,3.314-2.686,6-6,6H6c-3.314,0-6-2.686-6-6V6c0-3.314,2.686-6,6-6h12 C21.314,0,24,2.686,24,6z M21.828,9.483c-0.465-1.398-1.274-2.674-2.334-3.697c-1.025-0.988-2.279-1.731-3.639-2.152 c0.159,0.423,0.239,0.874,0.238,1.326c-1.109-1.455-2.809-2.4-4.632-2.564c-1.112-0.1-2.245,0.084-3.265,0.538 c0.829,0.257,1.555,0.807,2.03,1.533C8.383,3.809,6.29,4.017,4.615,5.028C3.931,5.441,3.324,5.98,2.831,6.609 c1.151-0.247,2.375,0.069,3.262,0.843c-0.74,0.709-1.754,1.087-2.778,1.039C3.469,8.742,3.652,8.973,3.859,9.18 c-0.01,0.017-0.021,0.034-0.031,0.051c-0.696,0.314-1.288,0.842-1.68,1.496c-0.438,0.729-0.613,1.6-0.498,2.442 c0.066,0.481,0.226,0.947,0.469,1.367c-0.108-0.934,0.684-1.758,1.622-1.686c0.921,0.071,1.576,0.983,1.351,1.88 c-0.16,0.635-0.732,1.107-1.386,1.142c0.87,1.547,2.362,2.701,4.08,3.146c0.608,0.157,1.238,0.226,1.866,0.206 c-0.471,0.358-1.029,0.608-1.637,0.711c1.493,1.016,3.275,1.567,5.08,1.578c1.455,0.009,2.905-0.33,4.202-0.991 c1.249-0.636,2.345-1.562,3.184-2.684c0.851-1.139,1.43-2.475,1.676-3.876C22.417,12.472,22.305,10.919,21.828,9.483z"/></svg><span>Corona Renderer</span></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.51 13.214c.046-.8.438-1.506 1.03-2.006a3.424 3.424 0 0 1 2.212-.79c.85 0 1.631.3 2.211.79.592.5.983 1.206 1.028 2.005.045.823-.285 1.586-.865 2.153a3.389 3.389 0 0 1-2.374.938 3.393 3.393 0 0 1-2.376-.938c-.58-.567-.91-1.33-.865-2.152M7.35 14.831c.006.314.106.922.256 1.398a7.372 7.372 0 0 0 1.593 2.757 8.227 8.227 0 0 0 2.787 2.001 8.947 8.947 0 0 0 3.66.76 8.964 8.964 0 0 0 3.657-.772 8.285 8.285 0 0 0 2.785-2.01 7.428 7.428 0 0 0 1.592-2.762 6.964 6.964 0 0 0 .25-3.074 7.123 7.123 0 0 0-1.016-2.779 7.764 7.764 0 0 0-1.852-2.043h.002L13.566 2.55l-.02-.015c-.492-.378-1.319-.376-1.86.002-.547.382-.609 1.015-.123 1.415l-.001.001 3.126 2.543-9.53.01h-.013c-.788.001-1.545.518-1.695 1.172-.154.665.38 1.217 1.2 1.22V8.9l4.83-.01-8.62 6.617-.034.025c-.813.622-1.075 1.658-.563 2.313.52.667 1.625.668 2.447.004L7.414 14s-.069.52-.063.831zm12.09 1.741c-.97.988-2.326 1.548-3.795 1.55-1.47.004-2.827-.552-3.797-1.538a4.51 4.51 0 0 1-1.036-1.622 4.282 4.282 0 0 1 .282-3.519 4.702 4.702 0 0 1 1.153-1.371c.942-.768 2.141-1.183 3.396-1.185 1.256-.002 2.455.41 3.398 1.175.48.391.87.854 1.152 1.367a4.28 4.28 0 0 1 .522 1.706 4.236 4.236 0 0 1-.239 1.811 4.54 4.54 0 0 1-1.035 1.626"/></svg><span>Blender</span></li></ul></div>
-      <div class="tg"><h3>Other tools</h3><ul><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.852 8.981h-4.588V0h4.588c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.491-4.49 4.491zM12.735 7.51h3.117c1.665 0 3.019-1.355 3.019-3.019s-1.355-3.019-3.019-3.019h-3.117V7.51zm0 1.471H8.148c-2.476 0-4.49-2.014-4.49-4.49S5.672 0 8.148 0h4.588v8.981zm-4.587-7.51c-1.665 0-3.019 1.355-3.019 3.019s1.354 3.02 3.019 3.02h3.117V1.471H8.148zm4.587 15.019H8.148c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h4.588v8.98zM8.148 8.981c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h3.117V8.981H8.148zM8.172 24c-2.489 0-4.515-2.014-4.515-4.49s2.014-4.49 4.49-4.49h4.588v4.441c0 2.503-2.047 4.539-4.563 4.539zm-.024-7.51a3.023 3.023 0 0 0-3.019 3.019c0 1.665 1.365 3.019 3.044 3.019 1.705 0 3.093-1.376 3.093-3.068v-2.97H8.148zm7.704 0h-.098c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h.098c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.49-4.49 4.49zm-.097-7.509c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h.098c1.665 0 3.019-1.355 3.019-3.019s-1.355-3.019-3.019-3.019h-.098z"/></svg><span>Figma</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 3.5h17v17h-17zM3.5 8h17M9 8v3.5h6V8M12 11.5v2.5M8 17.5h8"/></svg><span>Ultimaker Cura</span></li></ul></div>
-    </div>
-    <div class="aiw">
-      <h3>AI workflow</h3>
-      <div class="aibar" role="img" aria-label="AI workflow: Claude 75%, Gemini 20%, ChatGPT 5%"><span style="--w:75%"><b>Claude</b><em>75%</em></span><span style="--w:20%"><b>Gemini</b><em>20%</em></span><span style="--w:5%"><em>5%</em></span></div>
-      <ul class="ail">
-        <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4.7144 15.9555 4.7174-2.6471.079-.2307-.079-.1275h-.2307l-.7893-.0486-2.6956-.0729-2.3375-.0971-2.2646-.1214-.5707-.1215-.5343-.7042.0546-.3522.4797-.3218.686.0608 1.5179.1032 2.2767.1578 1.6514.0972 2.4468.255h.3886l.0546-.1579-.1336-.0971-.1032-.0972L6.973 9.8356l-2.55-1.6879-1.3356-.9714-.7225-.4918-.3643-.4614-.1578-1.0078.6557-.7225.8803.0607.2246.0607.8925.686 1.9064 1.4754 2.4893 1.8336.3643.3035.1457-.1032.0182-.0728-.164-.2733-1.3539-2.4467-1.445-2.4893-.6435-1.032-.17-.6194c-.0607-.255-.1032-.4674-.1032-.7285L6.287.1335 6.6997 0l.9957.1336.419.3642.6192 1.4147 1.0018 2.2282 1.5543 3.0296.4553.8985.2429.8318.091.255h.1579v-.1457l.1275-1.706.2368-2.0947.2307-2.6957.0789-.7589.3764-.9107.7468-.4918.5828.2793.4797.686-.0668.4433-.2853 1.8517-.5586 2.9021-.3643 1.9429h.2125l.2429-.2429.9835-1.3053 1.6514-2.0643.7286-.8196.85-.9046.5464-.4311h1.0321l.759 1.1293-.34 1.1657-1.0625 1.3478-.8804 1.1414-1.2628 1.7-.7893 1.36.0729.1093.1882-.0183 2.8535-.607 1.5421-.2794 1.8396-.3157.8318.3886.091.3946-.3278.8075-1.967.4857-2.3072.4614-3.4364.8136-.0425.0304.0486.0607 1.5482.1457.6618.0364h1.621l3.0175.2247.7892.522.4736.6376-.079.4857-1.2142.6193-1.6393-.3886-3.825-.9107-1.3113-.3279h-.1822v.1093l1.0929 1.0686 2.0035 1.8092 2.5075 2.3314.1275.5768-.3218.4554-.34-.0486-2.2039-1.6575-.85-.7468-1.9246-1.621h-.1275v.17l.4432.6496 2.3436 3.5214.1214 1.0807-.17.3521-.6071.2125-.6679-.1214-1.3721-1.9246L14.38 17.959l-1.1414-1.9428-.1397.079-.674 7.2552-.3156.3703-.7286.2793-.6071-.4614-.3218-.7468.3218-1.4753.3886-1.9246.3157-1.53.2853-1.9004.17-.6314-.0121-.0425-.1397.0182-1.4328 1.9672-2.1796 2.9446-1.7243 1.8456-.4128.164-.7164-.3704.0667-.6618.4008-.5889 2.386-3.0357 1.4389-1.882.929-1.0868-.0062-.1579h-.0546l-6.3385 4.1164-1.1293.1457-.4857-.4554.0608-.7467.2307-.2429 1.9064-1.3114Z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10.5h3v3h-3v3h-1.5v3H18v-3h-1.5v3H15v-3H9v3H7.5v-3H6v3H4.5v-3H3v-3H0v-3h3v-6h18Zm-15 0h1.5v-3H6Zm10.5 0H18v-3h-1.5z"/></svg></span><span>Claude and Claude Code</span><em>Main tools, 6 months</em></li>
-        <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.04 19.32Q12 21.51 12 24q0-2.49.93-4.68.96-2.19 2.58-3.81t3.81-2.55Q21.51 12 24 12q-2.49 0-4.68-.93a12.3 12.3 0 0 1-3.81-2.58 12.3 12.3 0 0 1-2.58-3.81Q12 2.49 12 0q0 2.49-.96 4.68-.93 2.19-2.55 3.81a12.3 12.3 0 0 1-3.81 2.58Q2.49 12 0 12q2.49 0 4.68.96 2.19.93 3.81 2.55t2.55 3.81"/></svg></span><span>Gemini</span><em>About 2 years</em></li>
-        <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></svg></span><span>ChatGPT</span><em>Since 2022</em></li>
-      </ul>
+      <div class="tg"><h3>Illustration &amp; layout</h3><ul><li><span class="ti"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="1" y="1" width="38" height="38" rx="8" fill="#330000" stroke="#FF9A00" stroke-width="2"/><text x="20" y="27" text-anchor="middle" font-family="Archivo,Helvetica,Arial,sans-serif" font-size="18" font-weight="600" fill="#FF9A00">Ai</text></svg></span><span>Illustrator</span></li><li><span class="ti"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="1" y="1" width="38" height="38" rx="8" fill="#49021F" stroke="#FF3366" stroke-width="2"/><text x="20" y="27" text-anchor="middle" font-family="Archivo,Helvetica,Arial,sans-serif" font-size="18" font-weight="600" fill="#FF3366">Id</text></svg></span><span>InDesign</span></li></ul></div>
+      <div class="tg"><h3>Photography</h3><ul><li><span class="ti"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="1" y="1" width="38" height="38" rx="8" fill="#001E36" stroke="#31A8FF" stroke-width="2"/><text x="20" y="27" text-anchor="middle" font-family="Archivo,Helvetica,Arial,sans-serif" font-size="18" font-weight="600" fill="#31A8FF">Ps</text></svg></span><span>Photoshop</span></li><li><span class="ti"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="1" y="1" width="38" height="38" rx="8" fill="#001E36" stroke="#31A8FF" stroke-width="2"/><text x="20" y="27" text-anchor="middle" font-family="Archivo,Helvetica,Arial,sans-serif" font-size="18" font-weight="600" fill="#31A8FF">Lr</text></svg></span><span>Lightroom</span></li></ul></div>
+      <div class="tg"><h3>Videomaking</h3><ul><li><span class="ti"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="1" y="1" width="38" height="38" rx="8" fill="#00005B" stroke="#9999FF" stroke-width="2"/><text x="20" y="27" text-anchor="middle" font-family="Archivo,Helvetica,Arial,sans-serif" font-size="18" font-weight="600" fill="#9999FF">Pr</text></svg></span><span>Premiere Pro</span></li><li><span class="ti"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="1" y="1" width="38" height="38" rx="8" fill="#00005B" stroke="#9999FF" stroke-width="2"/><text x="20" y="27" text-anchor="middle" font-family="Archivo,Helvetica,Arial,sans-serif" font-size="18" font-weight="600" fill="#9999FF">Ae</text></svg></span><span>After Effects</span></li><li><span class="ti"><svg viewBox="-8 -8 40 40" aria-hidden="true"><rect x="-8" y="-8" width="40" height="40" rx="8" fill="#fff"/><path d="M17.621 0 5.977.004c-1.37 0-2.756.345-3.762 1.11a4.925 4.925 0 0 0-1.61 2.003C.233 3.93 0 5.02 0 5.951l.012 12.2c.002 1.604.479 3.057 1.461 4.112.984 1.056 2.462 1.683 4.331 1.691L16.856 24c1.26.005 3.095-.036 4.303-.714 1.075-.605 2.025-1.556 2.497-2.984.278-.84.345-2.084.344-3.147l-.021-11.13c-.002-.888-.15-2.023-.547-2.934-.425-.976-1.181-1.815-2.322-2.425C20.353.26 19.123 0 17.622 0zm0 .93c1.378 0 2.538.295 3.04.565.977.523 1.544 1.166 1.889 1.96.315.721.47 1.793.473 2.572l.018 11.13c.002 1.013-.097 2.257-.298 2.86-.396 1.202-1.146 1.946-2.063 2.462-.814.457-2.612.593-3.82.588l-11.05-.044c-1.657-.007-2.832-.534-3.626-1.386-.792-.851-1.212-2.06-1.212-3.485L.999 5.95c0-.829.196-1.827.474-2.437.345-.757.75-1.207 1.365-1.674C3.585 1.27 4.868.97 6.08.97zm-5.66 3.423c-1.976.089-3.204 1.658-3.214 3.29.019 1.443 1.635 3.481 2.884 4.53.12.099.154.109.33.18.062.025.198-.047.327-.135.36-.245.993-.947 1.648-1.738a7.67 7.67 0 0 0 1.031-1.683c.409-.89.261-1.599.235-1.888a3.983 3.983 0 0 0-.99-1.692 3.36 3.36 0 0 0-2.251-.864zm4.172 7.922a10.185 10.185 0 0 0-3.244.61c-.15.058-.26.1-.374.17-.057.036-.11.135-.105.292.017.433.29 1.278.624 2.27.384 1.135 1.066 2.27 1.844 2.74a3.23 3.23 0 0 0 2.53.342c.832-.243 1.595-.868 1.962-1.546.986-1.818.19-3.548-1.121-4.417-.447-.296-1.133-.445-1.89-.46-.074 0-.15-.002-.226-.001zm-8.432.038a6.201 6.201 0 0 0-.752.047c-.596.078-.932.273-1.29.51a3.177 3.177 0 0 0-1.365 1.979c-.075.552-.086 1.053.033 1.507.433 1.389 1.326 2.222 2.847 2.452.636.028 1.37-.063 1.99-.45 1.269-.782 2.08-3.17 2.412-4.742.053-.176.035-.357-.013-.42-.005-.067-.044-.113-.19-.183-.398-.192-1.32-.417-2.375-.6a7.68 7.68 0 0 0-1.297-.1z" fill="#233A51"/></svg></span><span>DaVinci Resolve</span></li></ul></div>
+      <div class="tg"><h3>3D &amp; CAD</h3><ul><li><span class="ti"><svg viewBox="-8 -8 40 40" aria-hidden="true"><rect x="-8" y="-8" width="40" height="40" rx="8" fill="#fff"/><path d="M6.823 3.103c-.1 0-.213.006-.34.017-.511.044-1.25.18-1.802.329a6.269 6.269 0 0 0-1.15.42c-.231.112-.33.178-.354.273-.023.094.028.217.16.436s.346.533.535.961c.19.428.356.97.361 1.651.006.68-.149 1.5-.245 1.962-.096.462-.133.568-.227.618-.094.05-.245.044-.525-.021-.281-.065-.69-.187-1.1-.259-.41-.072-.819-.093-1.122-.038-.304.056-.504.189-.645.369-.14.18-.224.406-.282.75A6.957 6.957 0 0 0 0 11.687c.005.317.047.49.136.584.088.094.223.109.492.054s.672-.18 1.224-.215a6.302 6.302 0 0 1 1.94.202c.685.182 1.353.49 1.95.93.598.438 1.127 1.007 1.566 1.593.438.586.787 1.189 1.004 1.541.217.353.304.455.372.42.068-.035.117-.207.145-.417a3.141 3.141 0 0 0-.02-.848 7.467 7.467 0 0 0-.32-1.365 5.617 5.617 0 0 0-.495-1.018c-.146-.247-.241-.408-.245-.51-.004-.103.085-.148.51-.315.424-.167 1.185-.457 1.958-.808.772-.351 1.556-.764 2.042-1.106.486-.341.674-.61.724-.937.05-.326-.039-.71-.16-1.076a6.93 6.93 0 0 0-.529-1.193A13.696 13.696 0 0 0 11.28 5.6a9.187 9.187 0 0 0-1.1-1.236c-.282-.255-.421-.31-.51-.29-.09.02-.131.115-.168.47-.037.356-.07.973-.144 1.559a7.468 7.468 0 0 1-.432 1.773 12.543 12.543 0 0 1-.99 1.982c-.388.64-.803 1.212-1.054 1.462-.25.25-.336.18-.477.064l-.486-.4c-.15-.125-.253-.213-.273-.293-.02-.08.045-.15.27-.448.227-.299.615-.825.96-1.478a7.75 7.75 0 0 0 .796-2.282 10.1 10.1 0 0 0 .095-2.338c-.044-.564-.124-.77-.306-.896-.137-.095-.332-.146-.638-.146zm6.48 7.034h-.012c-.084.01-.192.112-.415.294a6.86 6.86 0 0 1-1.017.7c-.458.257-1.038.507-1.51.734-.47.226-.831.429-1.004.712-.172.283-.155.648.04.85.194.204.566.246.883.259.318.013.58-.002.826.087.246.09.475.285.764.516.288.23.637.498.925.561.289.063.518-.079.766-.202.249-.124.516-.23.888-.225.371.005.847.12 1.318.37.47.248.938.63 1.184.866.247.236.272.327.245.362-.028.036-.108.018-.304-.14-.196-.157-.508-.454-.917-.688-.41-.234-.916-.404-1.4-.391-.482.013-.94.21-1.23.55-.29.34-.412.822-.546 1.164-.133.341-.28.543-.47.617-.19.074-.424.02-.703-.099-.28-.12-.604-.307-.874-.442-.269-.136-.484-.22-.62-.353-.136-.132-.195-.31-.203-.571-.01-.26.032-.6.05-.853.02-.25.018-.413-.038-.56a1.079 1.079 0 0 0-.232-.35c-.07-.07-.099-.075-.113-.058-.014.017-.012.058.01.158.023.1.067.26.05.581-.019.321-.098.803-.16 1.17-.062.366-.107.618-.02.808.087.191.306.322.707.54.4.22.982.527 1.518.855.537.327 1.027.673 1.562 1.089.534.415 1.112.9 1.5 1.238.39.339.588.532.742.59.154.059.264-.018.307-.138.044-.12.023-.285-.014-.429a1.174 1.174 0 0 0-.24-.46 4.92 4.92 0 0 0-.68-.704c-.287-.243-.614-.463-.803-.614-.19-.151-.242-.233-.212-.259.03-.026.14.004.302.108.162.103.375.28.612.459.237.178.499.356.733.584.235.228.443.506.583.706.14.201.214.324.294.372.08.049.165.022.277-.05a3.03 3.03 0 0 0 .426-.355c.178-.169.398-.393.551-.633.154-.24.242-.496.299-.772.056-.276.08-.572.247-.862.167-.29.476-.574.994-1.025.518-.451 1.244-1.07 1.891-1.664.648-.595 1.216-1.165 1.696-1.802.479-.638.87-1.342 1.067-1.743.199-.4.205-.498.14-.526-.063-.027-.198.015-.61.313-.414.297-1.106.849-1.886 1.43-.781.58-1.65 1.19-2.336 1.569-.686.378-1.19.524-1.55.562-.361.037-.58-.034-.724-.11-.143-.077-.21-.158-.224-.241-.013-.084.03-.17.135-.275.106-.106.277-.232.447-.392.17-.16.338-.354.468-.556.13-.202.22-.411.261-.592.042-.181.034-.333-.04-.376-.074-.043-.215.023-.376.11-.162.086-.343.192-.593.3a2.683 2.683 0 0 1-.92.235 1.626 1.626 0 0 1-1.088-.313c-.343-.26-.635-.71-.866-1.147-.23-.438-.398-.865-.512-1.12-.108-.242-.168-.33-.246-.33zm-2.215 4.075a.422.422 0 0 0-.294.115c-.094.086-.145.2-.034.338.112.137.385.297.636.469.252.172.481.357.666.42.184.064.323.006.402-.096.08-.102.1-.247-.003-.404-.103-.157-.327-.325-.564-.481-.238-.157-.488-.302-.681-.346a.574.574 0 0 0-.128-.015zm.252.208c.025 0 .053.003.083.01.118.026.272.115.418.211.145.096.283.2.333.289.05.089.014.163-.048.216a.255.255 0 0 1-.247.053c-.1-.031-.216-.126-.36-.219-.145-.093-.319-.184-.387-.268-.068-.084-.031-.162.029-.218a.26.26 0 0 1 .18-.074zm4.778 3.728c.211-.008.42.06.602.24.183.178.34.467.383.732.042.265-.03.505-.125.692a1.58 1.58 0 0 1-.289.397c-.074.074-.109.095-.14.095h-.003c-.033-.001-.062-.023-.208-.171a7.39 7.39 0 0 1-.573-.642c-.165-.22-.232-.383-.263-.568-.032-.185-.027-.39.082-.536.109-.146.323-.23.534-.239zm.093 1.111a.258.258 0 0 0-.153.046c-.058.041-.105.113-.093.185.012.073.085.146.174.255.089.11.195.255.264.335.068.08.1.093.127.091.029-.002.054-.018.086-.048a.349.349 0 0 0 .094-.157.518.518 0 0 0 .002-.316.668.668 0 0 0-.218-.282.476.476 0 0 0-.283-.109z" fill="#801010"/></svg></span><span>Rhinoceros</span></li><li><span class="ti"><svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="8" fill="#F26B21"/><path d="M0 8a8 8 0 0 1 8-8h11L0 19z" fill="#fff" opacity=".18"/><text x="21" y="29" text-anchor="middle" font-family="Archivo,Helvetica,Arial,sans-serif" font-size="22" font-weight="700" fill="#fff">F</text></svg></span><span>Fusion 360</span></li><li><span class="ti"><svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="8" fill="#E51050"/><path d="M0 8a8 8 0 0 1 8-8h11L0 19z" fill="#fff" opacity=".18"/><text x="21" y="29" text-anchor="middle" font-family="Archivo,Helvetica,Arial,sans-serif" font-size="22" font-weight="700" fill="#fff">A</text></svg></span><span>AutoCAD</span></li><li><span class="ti"><svg viewBox="-8 -8 40 40" aria-hidden="true"><rect x="-8" y="-8" width="40" height="40" rx="8" fill="#fff"/><path d="M12.052 0C5.394-.007-.003 5.412 0 11.976.003 18.654 5.475 23.981 11.978 24c6.535.02 12.057-5.306 12.022-11.998-.009-1.665-.53-5.371-1.84-5.276-1.98.145-2.159 4.12-2.377 5.407-.417 2.46-1.346 5.08-2.953 6.99-1.88 2.359-4.697 3.634-7.662 3.158-3.55-.564-5.893-3.278-6.68-5.201-.753-1.723-1.035-4.162-.07-6.324 1.16-2.766 3.734-4.632 6.28-5.584 2.006-.827 4.103-1.151 5.357-1.375 2.516-.5 2.855-1.463 2.814-2.149-.015-.252-.256-.724-.785-.943C15.03.269 13.268.001 12.052 0zm5.098 1.342c.139.398.088.85-.148 1.256-.325.56-.972 1.05-1.897 1.29-1.636.428-2.976.554-4.34.96-1.312.39-3.397 1.018-5.316 2.552-.268.842-.341 1.892-.369 2.662.15 5.014 4.557 8.884 9.17 8.682.853-.037 1.921-.261 2.912-.68a13.56 13.56 0 0 0 1.387-2.683l.002-.002v-.002c.424-1.03.606-1.836.8-2.793.32-1.565.202-2.88 1.012-4.758.251-.582.71-1.113 1.258-1.346.25-.105.522-.133.79-.072-.89-2.471-3.115-4.326-5.26-5.066z" fill="#011A6A"/></svg></span><span>Cinema 4D</span></li><li><span class="ti"><svg viewBox="-8 -8 40 40" aria-hidden="true"><rect x="-8" y="-8" width="40" height="40" rx="8" fill="#fff"/><path d="M19.734,11.603c0.078,0.376,0.116,0.76,0.116,1.144c0,1.44-0.562,2.846-1.556,3.889 c-0.989,1.037-2.358,1.668-3.789,1.741c-1.445,0.074-2.885-0.418-3.979-1.365c-1.079-0.933-1.776-2.265-1.921-3.684 c-0.148-1.445,0.273-2.914,1.17-4.057c0.877-1.118,2.168-1.879,3.574-2.095c1.439-0.222,2.934,0.127,4.123,0.97 C18.627,8.965,19.448,10.214,19.734,11.603z M24,6v12c0,3.314-2.686,6-6,6H6c-3.314,0-6-2.686-6-6V6c0-3.314,2.686-6,6-6h12 C21.314,0,24,2.686,24,6z M21.828,9.483c-0.465-1.398-1.274-2.674-2.334-3.697c-1.025-0.988-2.279-1.731-3.639-2.152 c0.159,0.423,0.239,0.874,0.238,1.326c-1.109-1.455-2.809-2.4-4.632-2.564c-1.112-0.1-2.245,0.084-3.265,0.538 c0.829,0.257,1.555,0.807,2.03,1.533C8.383,3.809,6.29,4.017,4.615,5.028C3.931,5.441,3.324,5.98,2.831,6.609 c1.151-0.247,2.375,0.069,3.262,0.843c-0.74,0.709-1.754,1.087-2.778,1.039C3.469,8.742,3.652,8.973,3.859,9.18 c-0.01,0.017-0.021,0.034-0.031,0.051c-0.696,0.314-1.288,0.842-1.68,1.496c-0.438,0.729-0.613,1.6-0.498,2.442 c0.066,0.481,0.226,0.947,0.469,1.367c-0.108-0.934,0.684-1.758,1.622-1.686c0.921,0.071,1.576,0.983,1.351,1.88 c-0.16,0.635-0.732,1.107-1.386,1.142c0.87,1.547,2.362,2.701,4.08,3.146c0.608,0.157,1.238,0.226,1.866,0.206 c-0.471,0.358-1.029,0.608-1.637,0.711c1.493,1.016,3.275,1.567,5.08,1.578c1.455,0.009,2.905-0.33,4.202-0.991 c1.249-0.636,2.345-1.562,3.184-2.684c0.851-1.139,1.43-2.475,1.676-3.876C22.417,12.472,22.305,10.919,21.828,9.483z" fill="#E6502A"/></svg></span><span>Corona Renderer</span></li><li><span class="ti"><svg viewBox="-8 -8 40 40" aria-hidden="true"><rect x="-8" y="-8" width="40" height="40" rx="8" fill="#fff"/><path d="M12.51 13.214c.046-.8.438-1.506 1.03-2.006a3.424 3.424 0 0 1 2.212-.79c.85 0 1.631.3 2.211.79.592.5.983 1.206 1.028 2.005.045.823-.285 1.586-.865 2.153a3.389 3.389 0 0 1-2.374.938 3.393 3.393 0 0 1-2.376-.938c-.58-.567-.91-1.33-.865-2.152M7.35 14.831c.006.314.106.922.256 1.398a7.372 7.372 0 0 0 1.593 2.757 8.227 8.227 0 0 0 2.787 2.001 8.947 8.947 0 0 0 3.66.76 8.964 8.964 0 0 0 3.657-.772 8.285 8.285 0 0 0 2.785-2.01 7.428 7.428 0 0 0 1.592-2.762 6.964 6.964 0 0 0 .25-3.074 7.123 7.123 0 0 0-1.016-2.779 7.764 7.764 0 0 0-1.852-2.043h.002L13.566 2.55l-.02-.015c-.492-.378-1.319-.376-1.86.002-.547.382-.609 1.015-.123 1.415l-.001.001 3.126 2.543-9.53.01h-.013c-.788.001-1.545.518-1.695 1.172-.154.665.38 1.217 1.2 1.22V8.9l4.83-.01-8.62 6.617-.034.025c-.813.622-1.075 1.658-.563 2.313.52.667 1.625.668 2.447.004L7.414 14s-.069.52-.063.831zm12.09 1.741c-.97.988-2.326 1.548-3.795 1.55-1.47.004-2.827-.552-3.797-1.538a4.51 4.51 0 0 1-1.036-1.622 4.282 4.282 0 0 1 .282-3.519 4.702 4.702 0 0 1 1.153-1.371c.942-.768 2.141-1.183 3.396-1.185 1.256-.002 2.455.41 3.398 1.175.48.391.87.854 1.152 1.367a4.28 4.28 0 0 1 .522 1.706 4.236 4.236 0 0 1-.239 1.811 4.54 4.54 0 0 1-1.035 1.626" fill="#E87D0D"/></svg></span><span>Blender</span></li></ul></div>
+      <div class="tg"><h3>Other tools</h3><ul><li><span class="ti"><svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="8" fill="#fff"/><g transform="translate(13.3 8) scale(.42)"><path fill="#1ABCFE" d="M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0z"/><path fill="#0ACF83" d="M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5a9.5 9.5 0 1 1-19 0z"/><path fill="#FF7262" d="M19 0v19h9.5a9.5 9.5 0 1 0 0-19H19z"/><path fill="#F24E1E" d="M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5z"/><path fill="#A259FF" d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5z"/></g></svg></span><span>Figma</span></li><li><span class="ti"><svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="8" fill="#fff"/><g fill="none" stroke="#196EF0" stroke-width="2.4" stroke-linejoin="round"><path d="M9 9h22v22H9zM9 15h22M16 15v5h8v-5M20 20v4M14 27h12"/></g></svg></span><span>Ultimaker Cura</span></li></ul></div>
+      <div class="tg ai"><h3>AI workflow</h3>
+        <div class="aich" role="img" aria-label="Share of my AI work: Claude and Claude Code 75 percent, Gemini 20 percent, ChatGPT 5 percent">
+          <div class="aibar"><i style="--w:75%;--c:#D97757"></i><i style="--w:20%;--c:#8E75B2"></i><i style="--w:5%;--c:var(--text)"></i></div>
+          <ul>
+            <li><span class="ti"><svg viewBox="-8 -8 40 40" aria-hidden="true"><rect x="-8" y="-8" width="40" height="40" rx="8" fill="#fff"/><path d="m4.7144 15.9555 4.7174-2.6471.079-.2307-.079-.1275h-.2307l-.7893-.0486-2.6956-.0729-2.3375-.0971-2.2646-.1214-.5707-.1215-.5343-.7042.0546-.3522.4797-.3218.686.0608 1.5179.1032 2.2767.1578 1.6514.0972 2.4468.255h.3886l.0546-.1579-.1336-.0971-.1032-.0972L6.973 9.8356l-2.55-1.6879-1.3356-.9714-.7225-.4918-.3643-.4614-.1578-1.0078.6557-.7225.8803.0607.2246.0607.8925.686 1.9064 1.4754 2.4893 1.8336.3643.3035.1457-.1032.0182-.0728-.164-.2733-1.3539-2.4467-1.445-2.4893-.6435-1.032-.17-.6194c-.0607-.255-.1032-.4674-.1032-.7285L6.287.1335 6.6997 0l.9957.1336.419.3642.6192 1.4147 1.0018 2.2282 1.5543 3.0296.4553.8985.2429.8318.091.255h.1579v-.1457l.1275-1.706.2368-2.0947.2307-2.6957.0789-.7589.3764-.9107.7468-.4918.5828.2793.4797.686-.0668.4433-.2853 1.8517-.5586 2.9021-.3643 1.9429h.2125l.2429-.2429.9835-1.3053 1.6514-2.0643.7286-.8196.85-.9046.5464-.4311h1.0321l.759 1.1293-.34 1.1657-1.0625 1.3478-.8804 1.1414-1.2628 1.7-.7893 1.36.0729.1093.1882-.0183 2.8535-.607 1.5421-.2794 1.8396-.3157.8318.3886.091.3946-.3278.8075-1.967.4857-2.3072.4614-3.4364.8136-.0425.0304.0486.0607 1.5482.1457.6618.0364h1.621l3.0175.2247.7892.522.4736.6376-.079.4857-1.2142.6193-1.6393-.3886-3.825-.9107-1.3113-.3279h-.1822v.1093l1.0929 1.0686 2.0035 1.8092 2.5075 2.3314.1275.5768-.3218.4554-.34-.0486-2.2039-1.6575-.85-.7468-1.9246-1.621h-.1275v.17l.4432.6496 2.3436 3.5214.1214 1.0807-.17.3521-.6071.2125-.6679-.1214-1.3721-1.9246L14.38 17.959l-1.1414-1.9428-.1397.079-.674 7.2552-.3156.3703-.7286.2793-.6071-.4614-.3218-.7468.3218-1.4753.3886-1.9246.3157-1.53.2853-1.9004.17-.6314-.0121-.0425-.1397.0182-1.4328 1.9672-2.1796 2.9446-1.7243 1.8456-.4128.164-.7164-.3704.0667-.6618.4008-.5889 2.386-3.0357 1.4389-1.882.929-1.0868-.0062-.1579h-.0546l-6.3385 4.1164-1.1293.1457-.4857-.4554.0608-.7467.2307-.2429 1.9064-1.3114Z" fill="#D97757"/></svg></span><span class="ti"><svg viewBox="-8 -8 40 40" aria-hidden="true"><rect x="-8" y="-8" width="40" height="40" rx="8" fill="#fff"/><path d="M21 10.5h3v3h-3v3h-1.5v3H18v-3h-1.5v3H15v-3H9v3H7.5v-3H6v3H4.5v-3H3v-3H0v-3h3v-6h18Zm-15 0h1.5v-3H6Zm10.5 0H18v-3h-1.5z" fill="#D97757"/></svg></span><span class="nm">Claude, Claude Code<em>Main tools · 6 months</em></span><b>75%</b></li>
+            <li><span class="ti"><svg viewBox="-8 -8 40 40" aria-hidden="true"><defs><linearGradient id="gg" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#1C7DFF"/><stop offset=".55" stop-color="#9168C0"/><stop offset="1" stop-color="#E2617D"/></linearGradient></defs><rect x="-8" y="-8" width="40" height="40" rx="8" fill="#fff"/><path d="M11.04 19.32Q12 21.51 12 24q0-2.49.93-4.68.96-2.19 2.58-3.81t3.81-2.55Q21.51 12 24 12q-2.49 0-4.68-.93a12.3 12.3 0 0 1-3.81-2.58 12.3 12.3 0 0 1-2.58-3.81Q12 2.49 12 0q0 2.49-.96 4.68-.93 2.19-2.55 3.81a12.3 12.3 0 0 1-3.81 2.58Q2.49 12 0 12q2.49 0 4.68.96 2.19.93 3.81 2.55t2.55 3.81" fill="url(#gg)"/></svg></span><span class="nm">Gemini<em>About 2 years</em></span><b>20%</b></li>
+            <li><span class="ti"><svg viewBox="-8 -8 40 40" aria-hidden="true"><rect x="-8" y="-8" width="40" height="40" rx="8" fill="#fff"/><path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z" fill="#000"/></svg></span><span class="nm">ChatGPT<em>Since 2022</em></span><b>5%</b></li>
+          </ul>
+        </div></div>
     </div>
     <div class="sk">
       <div><h3>Design</h3><p>Design thinking<br>System design<br>Concept sketching<br>UX/UI wireframing<br>Product prototyping<br>Visual identity &amp; storytelling</p></div>
@@ -676,7 +663,7 @@ body[data-page=project] .theme-switch,body[data-page=project] #rail,body[data-pa
 
 
 
-<nav id="rail" aria-label="Sezioni"></nav><div id="chint">Drag the cases · scroll for the archive ↓</div>
+<nav id="rail" aria-label="Sections"></nav><div id="chint">Drag the cases, scroll for more</div>
 <script src="js/gsap.min.js"></script>
 <script src="js/ScrollTrigger.min.js"></script>
 <script>
@@ -771,20 +758,24 @@ const projects=[
   ['Prototype','3D printed, finished by hand','The set was produced with 3D printing combined with hand finishing: after the first sketches, two matte filaments were tested. PLA for the pieces, plexiglass for the board squares and finished wood for the base. The complete set measures 65 × 65 cm.',[['z-3','h']]]]}
 ];
 /* progetti segnaposto (senza immagini): sostituiscili man mano con quelli veri */
-const PH_COL=['#c98aa0','#9b72c4','#6fbf7e','#c9b86a','#6fa3bf','#bf8a6f','#7a8fd1','#a3c46f','#d17a7a'];
+const PH_COL=['#3a3a3c','#4a4a4d','#2c2c2e','#5a5a5e','#424245'];   // progetti provvisori senza foto: grigi neutri
 const PH_SEC=[['Summary','Summary placeholder','Placeholder text: a short summary of the project, who it is for and what it achieved.'],['Problem','The problem','Placeholder text: the starting context and the difficulty to solve.'],['Research','The research','Placeholder text: methods used and the evidence that guided the choices.'],['Output','The output','Placeholder text: materials produced along the way.'],['Solution','The solution','Placeholder text: the final proposal and how it answers the problem.']];
-for(let k=0;k<6;k++){
-  const n=projects.length+1;
-  projects.push({ph:true,col:PH_COL[k%PH_COL.length],client:'Client',title:'Project '+n,cat:'Category',tag:TAGS_PH[k%TAGS_PH.length],year:'—',kind:'Project',team:'—',dur:'—',role:'—',
-   short:'Short caption of the project: role, goal and outcome.',long:'Project '+n+': extended description placeholder. Context, problem, process and result will go here.',
-   gal:[['','h'],['','v'],['','h'],['','v'],['','h']],sec:PH_SEC.map(x=>[x[0],x[1],x[2],[['',k%2?'w':'h']]])});
-}
+[['Chiara Alessi interview','Book presentation video','Videomaking','2023','Social media video for the launch of Chiara Alessi\'s book Lo Stato Delle Cose.'],
+ ['Fuocosacro','Documentary','Videomaking','2017','Camera operator on the 2017 docufilm Fuocosacro.'],
+ ['Unofficial Audi spot','Videomaking experiment','Videomaking','—','A self-initiated car spot, shot and edited as a videomaking experiment.'],
+ ['Coral','Design concept','Speculative Design','—','Case study coming soon.'],
+ ['Onea','Speculative design','Speculative Design','—','Case study coming soon.']].forEach(([title,cat,tag,year,short],k)=>{
+  projects.push({ph:true,col:PH_COL[k%PH_COL.length],client:'Case study coming soon',title,cat,tag,year,kind:cat,team:'—',dur:'—',role:'—',short,long:short+' Photos and the full story are on the way.',
+   gal:[['','w'],['','v'],['','w']],sec:[['Summary','Coming soon',short,[['','w']]]]});
+});
 const DIM={"b-1":0.665,"b-2":0.615,"b-3":0.751,"b-4":0.759,"b-5":0.616,"b-6":0.616,"b-cover":1.775,"f-2":1.6,"f-cover":1.6,"f-p1":0.75,"f-p2":0.75,"f-p3":0.75,"g-1":1.775,"g-2":0.993,"g-3":1.0,"g-4":0.821,"g-5":0.886,"g-6":2.917,"g-7":0.73,"g-cover":1.775,"h-2":1.6,"h-cover":1.6,"h-p1":0.75,"h-p2":0.75,"h-p3":0.75,"i-2":1.6,"i-cover":1.6,"i-p1":0.75,"i-p2":0.75,"i-p3":0.75,"q-1":1.083,"q-2":0.709,"q-3":2.128,"q-4":2.29,"q-5":1.0,"q-6":1.542,"q-7":0.616,"q-8":1.741,"q-cover":1.775,"w-1":0.745,"w-2":1.673,"w-3":0.763,"w-4":1.158,"w-5":1.396,"w-6":1.641,"w-cover":1.775,"z-1":0.754,"z-2":0.752,"z-3":0.885,"z-4":0.752,"z-cover":1.777};   // proporzioni vere delle foto (larghezza/altezza): le foto non vengono tagliate
 const WEBS=k=>PHOTO_DIR+'web/s/'+k+'.webp';   // foto del loop nella sfera (1100px)
 const WEB=k=>PHOTO_DIR+'web/'+k+'.webp';   // copertine ridimensionate (1600px, WebP) per sfera, carosello e griglie
-projects.forEach((p,i)=>{p.i=i;if(!p.ph)p.local=WEB(p.slug+'-cover')});
+projects.forEach((p,i)=>{p.i=i;if(p.ph)return;p.local=WEB(p.slug+'-cover');
+  const all=Object.keys(DIM).filter(k=>k.startsWith(p.slug+'-'));   // il loop usa tutte le foto del progetto, prima quelle scelte
+  p.loop=[...new Set([...(p.loop||[]),...all])]});
 const me={local:WEB('tobia'),pos:'50% 22%',client:'Tobia Seu · Turin',title:'me.',cat:'Industrial Product Designer',me:true};
-const TAGS=['Product Design','Textile & Fashion','Exhibition Design','System Design'];
+const TAGS=['Product Design','Textile & Fashion','Exhibition Design','System Design','Videomaking','Speculative Design'];
 me.i=-1;me.tag='About';me.short='Industrial product designer: concepts, prototypes and interfaces.';me.long='I hold a degree in Industrial Product Design, with a passion for projects in all their forms, from product development to visual communication. My background includes exhibition, prototyping and interactive design, while my most recent work focused on UX and UI design.';
 const items=[me,...projects];            // la card 0 della sfera e' la tua foto
 const N=items.length;
@@ -827,12 +818,12 @@ const rot0=rotTo(fibA[0],[0,0,1]);
 const P=fibA.map(v=>{const q=rot0(v).map(t=>t*R);return{x:q[0],y:q[1],z:q[2],ry:Math.atan2(q[0],q[2])*180/Math.PI,rx:-Math.asin(clamp(q[1]/R,-1,1))*180/Math.PI}});
 P[0]={x:0,y:0,z:R,ry:0,rx:0};
 function cardHTML(p,n,sph){
-  const lp=sph&&p.loop?p.loop.map((k,j)=>`<i class="pl${j?'':' on'}" data-src="${WEBS(k)}"${j?'':` style="background-image:url('${p.local}')"`}></i>`).join(''):'';
+  const lp=p.loop?p.loop.map((k,j)=>`<i class="pl${j?'':' on'}" data-src="${WEBS(k)}"${j?'':` style="background-image:url('${p.local}')"`}></i>`).join(''):'';
   const front=p.me?`<div class="card-in front mecard"><b>me</b><i class="glint"></i></div>`
     :`<div class="card-in front"><i class="glint"></i><div class="photo" style="${bg(p)}">${lp}</div><div class="cap"><div><small>${p.client}</small><b>${p.title}</b>${sph?`<div class="sh"><span>${p.short}</span></div>`:''}</div><div class="cr">${p.cat}</div></div></div>`;
   return `<div class="flip">${front}</div>`;
 }
-const pcHTML=(p,n)=>`<div class="pcw"><div class="pc" data-i="${p.i}">${cardHTML(p,projects.indexOf(p),false)}</div></div>`;
+const pcHTML=(p,n)=>`<div class="pcw"><div class="pc" data-i="${p.i}" tabindex="0" role="link" aria-label="Open ${p.title}">${cardHTML(p,projects.indexOf(p),false)}</div></div>`;
 const cards=items.map((p,i)=>{
   const c=document.createElement('div');c.className='card'+(p.me?' me':'');
   c.innerHTML=`<div class="cback"></div><div class="cface">${cardHTML(p,i,true)}</div>`;
@@ -845,20 +836,26 @@ const cards=items.map((p,i)=>{
    Una card alla volta cambia foto, in ordine sparso: la sfera si accende un pezzo dopo l'altro */
 const loopCards=cards.filter(c=>c.querySelector('.pl'));
 let loopBag=[];
-function loopStep(){
-  if(RM||document.hidden||document.body.dataset.page!=='home'||INTRO.p<1||scrollY>innerHeight*2)return;
-  if(!loopBag.length)loopBag=loopCards.slice().sort(()=>Math.random()-.5);
-  const c=loopBag.pop();if(c.classList.contains('flipped')||c._busy)return;
-  const ls=[...c.querySelectorAll('.pl')],cur=c._li||0,nx=(cur+1)%ls.length,el=ls[nx];
+function loopShow(c,to){
+  const ls=[...c.querySelectorAll('.pl')];if(ls.length<2||c._busy)return;
+  const cur=c._li||0,nx=to==null?(cur+1)%ls.length:to,el=ls[nx];if(nx===cur)return;
   const show=()=>{
     el.style.transition='none';el.classList.remove('on');void el.offsetWidth;el.style.transition='';
     el.style.zIndex=c._z=(c._z||1)+1;el.classList.add('on');c._li=nx;
-    setTimeout(()=>{c._busy=0},1700)};
+    setTimeout(()=>{c._busy=0},1100)};
   c._busy=1;
   if(el.style.backgroundImage)show();
   else{const im=new Image();im.src=el.dataset.src;(im.decode?im.decode():Promise.resolve()).then(()=>{el.style.backgroundImage=`url('${el.dataset.src}')`;show()},()=>{c._busy=0})}
 }
-setInterval(loopStep,850);
+function loopStep(){
+  if(RM||document.hidden||document.body.dataset.page!=='home'||INTRO.p<1||scrollY>innerHeight*2)return;
+  if(!loopBag.length)loopBag=loopCards.slice().sort(()=>Math.random()-.5);
+  loopShow(loopBag.pop());
+}
+/* Cases: sopra la card le foto scorrono una dopo l'altra; uscendo torna la copertina */
+document.addEventListener('pointerover',e=>{const c=e.target.closest&&e.target.closest('.pc');if(!c||c._hov||RM)return;c._hov=setInterval(()=>loopShow(c),1100);setTimeout(()=>loopShow(c),150)});
+document.addEventListener('pointerout',e=>{const c=e.target.closest&&e.target.closest('.pc');if(!c||c.contains(e.relatedTarget))return;clearInterval(c._hov);c._hov=0;setTimeout(()=>loopShow(c,0),c._busy?1100:0)});
+setInterval(loopStep,425);
 
 /* render: rotazione + bokeh (profondita' di campo).
    Fuori dal click la sfera ha un'apertura "larga" (dietro molto sfocato);
@@ -1012,7 +1009,7 @@ function lvTick(now){
   });
   LV.raf=LV.act.size?requestAnimationFrame(lvTick):0;
 }
-const listHTML=l=>l.length?l.map((p,j)=>`<div class="lrow" data-i="${p.i}"><span class="n">${pad(j+1)}</span><h3>${p.title}</h3><span class="lv" aria-hidden="true">${lvImgs(p)}<i class="lv-q"></i><i class="lv-l"></i></span><span class="c">${p.client} · ${p.cat}</span><span class="a">↗</span></div>`).join(''):'<p class="empty">Nessun progetto in questa categoria.</p>';
+const listHTML=l=>l.length?l.map((p,j)=>`<div class="lrow" data-i="${p.i}" tabindex="0" role="link" aria-label="Open ${p.title}"><span class="n">${pad(j+1)}</span><h3>${p.title}</h3><span class="lv" aria-hidden="true">${lvImgs(p)}<i class="lv-q"></i><i class="lv-l"></i></span><span class="c">${p.client} · ${p.cat}</span><span class="a">↗</span></div>`).join(''):'<p class="empty">Nessun progetto in questa categoria.</p>';
 function sync(){document.querySelectorAll('[data-f]').forEach(b=>b.classList.toggle('on',b.dataset.f===FILT));document.querySelectorAll('[data-v]').forEach(b=>b.classList.toggle('on',b.dataset.v===VIEW));document.body.dataset.view=VIEW}
 const kk=()=>clamp(innerHeight*.62/440,.5,1);
 function slideDims(){const W=document.documentElement.clientWidth,h=Math.min(innerHeight*.6,W*.64/1.5,720),w=h*1.5;return{w,h}}
@@ -1140,7 +1137,7 @@ addEventListener('scroll',()=>{
   XP.snapT=setTimeout(()=>{if(XP.q>.002&&XP.q<.995&&XP.armed)scrollTo({top:XP.sec.offsetTop+XP.run,behavior:RM?'auto':'smooth'})},380);
 },{passive:true});
 const SHAPE={w:1.6,h:1.333,v:.75,t:.75};
-function projectHTML(p){
+function projectHTML(p,pv){
   const used=new Set();let n=0;
   const fig=([k,sh],cap)=>{if(k)used.add(k);const j=n++,r=(k&&DIM[k])||SHAPE[sh]||1.6,full=r>=WIDE;
     return `<figure class="xp-fig${full?' full':''}" style="--r:${r}"><div class="fr" style="${k?'':`background:${p.col};filter:hue-rotate(${j*26}deg)`}">${k?`<img src="${PIMG(k)}" alt="${p.title}, ${cap}" ${j<2?'fetchpriority="high"':'loading="lazy"'} decoding="async">`:''}</div><figcaption><span>${cap}</span><span>${p.title}</span></figcaption></figure>`};
@@ -1149,7 +1146,7 @@ function projectHTML(p){
   const pool=()=>p.ph?[]:Object.keys(DIM).filter(k=>k.startsWith(p.slug+'-')&&!used.has(k));
   const takeExtra=cap=>{const ks=pool();if(!ks.length)return'';const a=ks[0],b=ks.find((x,j)=>j>0&&DIM[x]<1.25);
     if(DIM[a]<1.25&&b)return group([[[a,'v'],cap],[[b,'v'],cap]]);return group([[[a,'h'],cap]])};
-  let h=`<div class="xp-pan xp-intro"><div><button class="btn-o xp-back" data-go="cases">All cases</button><p class="xp-client">${p.client}</p></div>
+  let h=`<div class="xp-pan xp-intro"><div><button class="btn-o xp-back" data-go="cases">All cases</button><p class="xp-hint">Scroll back to open the previous project, ${pv.title}</p><p class="xp-client">${p.client}</p></div>
     <div><h1 class="xp-name">${p.title}</h1><p class="xp-lead">${p.short}</p>
     <div class="xp-meta"><div>Client<b>${p.client}</b></div><div>Type<b>${p.kind}</b></div><div>Role<b>${p.role}</b></div><div>Year<b>${p.year}</b></div></div></div></div>`;
   h+=fig(p.gal[0],p.cat);
@@ -1175,7 +1172,7 @@ function openProject(i,dir=1){
       ${ink(0)}<span class="xp-rev"><span class="xp-ph" style="${nbg}"></span>${ink(1)}</span></button>
     <div class="xp-endnav"><button class="btn-o" data-projb="${pv.i}">Previous project: ${pv.title}</button><button class="btn" data-proj="${nx.i}">Open ${nx.title}</button></div></div>`;
   $('pj').innerHTML=`<section class="xp" aria-label="${p.title} case study"><div class="xp-stage">
-    <div class="xp-track">${projectHTML(p)}${end}</div>
+    <div class="xp-track">${projectHTML(p,pv)}${end}</div>
     <div class="xp-bar start"><button class="t" data-projb="${pv.i}" tabindex="-1"><i class="ldr pv"><i></i></i><span class="tl">${p.title}</span><span class="pvl">Scroll back for ${pv.title}</span></button><span class="ln"><i></i></span><button class="r" data-proj="${nx.i}" tabindex="-1"><b class="c">01</b><span class="nxl">Scroll for ${nx.title}</span><i class="ldr nx"><i></i></i></button></div></div></section>`;
   const q=s=>XP.sec.querySelector(s);
   XP.sec=$('pj').querySelector('.xp');XP.track=q('.xp-track');XP.bar=q('.xp-bar');XP.ln=q('.ln i');XP.cnt=q('.xp-bar .c');
@@ -1326,7 +1323,7 @@ const centerR=()=>{const d=slideDims();return{left:(cwid()-d.w)/2,top:innerHeigh
 const cxS=()=>cwid()*(.5+SH/100);
 gsap.set(['#c1','#c2'],{autoAlpha:0,y:24,yPercent:matchMedia('(max-width:760px)').matches?0:-50});
 gsap.set('#vwin',{autoAlpha:0});
-gsap.set(['#vcap','#vchips'],{y:16});
+gsap.set(['#vcap','#vchips'],{y:16});gsap.set('#vcap',{yPercent:-58});   // testo al centro dello schermo
 gsap.set('#works',{autoAlpha:0});
 const E='sine.inOut';
 const heroTL=gsap.timeline({defaults:{ease:E},scrollTrigger:{trigger:'#pin',start:'top top',end:'bottom bottom',scrub:1.1,invalidateOnRefresh:true}})
@@ -1358,6 +1355,18 @@ const heroTL=gsap.timeline({defaults:{ease:E},scrollTrigger:{trigger:'#pin',star
  .to(S,{wo:1,duration:.3},10.7)
  .to('#vwin',{autoAlpha:0,duration:.3,ease:'none'},11)
  .to({},{duration:1.8},11.4);
+/* teaser provvisorio: la foto mostrata dipende dalla posizione nella timeline (ease in-out = lente, veloci, lente) */
+const VS_KEYS=['i-cover','f-cover','h-cover','g-1','q-cover','b-cover','w-cover','z-cover','i-2','h-2','q-3','b-1','g-6','w-4','f-2','q-6','z-3','b-2','g-3','q-8'];
+const vsEl=$('vshow');vsEl.innerHTML=VS_KEYS.map(k=>`<i data-src="${WEBS(k)}"></i>`).join('');
+const vsI=[...vsEl.children];let vsCur=-1;
+gsap.ticker.add(()=>{
+  if(document.body.dataset.page!=='home'||vwin.classList.contains('ok'))return;
+  const t=heroTL.time();if(t<3||t>11.2)return;
+  const p=clamp((t-3.3)/(9.6-3.3),0,1),e=p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2,k=Math.round(e*(vsI.length-1));
+  if(k===vsCur)return;vsCur=k;
+  for(let j=k;j<Math.min(vsI.length,k+3);j++){const el=vsI[j];if(!el.style.backgroundImage)el.style.backgroundImage=`url('${el.dataset.src}')`}
+  vsI.forEach((el,j)=>el.classList.toggle('on',j===k));
+});
 
 /* =====================================================================
    NAVIGAZIONE
@@ -1385,10 +1394,12 @@ document.addEventListener('click',e=>{
   const g=t.closest('[data-go]');
   if(g){e.preventDefault();const to=g.dataset.go;if(to===document.body.dataset.page&&to!=='project'){scrollTo({top:0,behavior:'smooth'});return}turnPage(dirTo(to),()=>go(to));return}
   const sc=t.closest('[data-scroll]');
+  if(sc&&document.body.dataset.page==='project'){e.preventDefault();location.href='mailto:info@tobiaseu.com';return}   // nel progetto il footer non c'e': scrivi direttamente
   if(sc){e.preventDefault();$(sc.dataset.scroll).scrollIntoView({behavior:'smooth'})}
 });
 const rvIO=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');rvIO.unobserve(e.target)}}),{threshold:.15});
 document.querySelectorAll('.rv').forEach(el=>rvIO.observe(el));
+addEventListener('keydown',e=>{if(e.key!=='Enter')return;const el=document.activeElement;if(el&&el.matches&&el.matches('.lrow,.pc')){e.preventDefault();el.click()}});
 addEventListener('resize',()=>{layout();ScrollTrigger.refresh()});
 rebuild();
 go('home');
