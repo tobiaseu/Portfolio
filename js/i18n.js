@@ -49,7 +49,7 @@ const IT={
 "Turning complexity into a shared map of actors, flows and leverage points.":"Trasformare la complessità in una mappa condivisa di attori, flussi e punti di leva.",
 "Giving the map a form that can be used, tested and improved.":"Dare alla mappa una forma che si può usare, testare e migliorare.",
 "See the framework":"Scopri il metodo",
-"Every project in one place, selected cases first: product, interface, exhibition, textile and system design.":"Tutti i progetti in un solo posto, prima quelli scelti: prodotto, interfacce, allestimenti, tessile e design sistemico.",
+"Every project in one place, newest first: product, interface, exhibition, textile and system design.":"Tutti i progetti in un solo posto, dal più recente: prodotto, interfacce, allestimenti, tessile e design sistemico.",
 "All":"Tutti","Product Design":"Design del prodotto","Textile & Fashion":"Tessile e moda","Videomaking":"Videomaking","Speculative Design":"Design speculativo",
 "Cards":"Schede","List":"Elenco",
 "Hi, I'm":"Ciao, sono","Tobia.":"Tobia.",

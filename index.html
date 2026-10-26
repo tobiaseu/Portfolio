@@ -618,7 +618,7 @@ body:not([data-page=home]) #chint{display:none}
 
 <main class="page sub" id="cases">
   <h1>Cases</h1>
-  <p class="lead">Every project in one place, selected cases first: product, interface, exhibition, textile and system design.</p>
+  <p class="lead">Every project in one place, newest first: product, interface, exhibition, textile and system design.</p>
   <div class="tools-row tools-host"></div>
   <div class="pgrid" id="grid-cases"></div><div class="llist" id="list-cases"></div>
 </main>
@@ -849,6 +849,9 @@ projects.push(
 const DIM={"ca-cover":1.778,"fs-cover":1.778,"on-cover":2.202,"on-1":2.292,"on-2":2.448,"on-3":2.124,"on-4":2.141,"on-5":1.566,"b-1":0.665,"b-2":0.615,"b-3":0.751,"b-4":0.759,"b-5":0.616,"b-6":0.616,"b-cover":1.775,"f-2":1.6,"f-cover":1.6,"f-p1":0.75,"f-p2":0.75,"f-p3":0.75,"g-1":1.775,"g-2":0.993,"g-3":1.0,"g-4":0.821,"g-5":0.886,"g-6":2.917,"g-7":0.73,"g-cover":1.775,"h-2":1.6,"h-cover":1.6,"h-p1":0.75,"h-p2":0.75,"h-p3":0.75,"i-2":1.6,"i-cover":1.6,"i-p1":0.75,"i-p2":0.75,"i-p3":0.75,"q-1":1.083,"q-2":0.709,"q-3":2.128,"q-4":2.29,"q-5":1.0,"q-6":1.542,"q-7":0.616,"q-8":1.741,"q-cover":1.775,"w-1":0.745,"w-2":1.673,"w-3":0.763,"w-4":1.158,"w-5":1.396,"w-6":1.641,"w-cover":1.775,"z-1":0.754,"z-2":0.752,"z-3":0.885,"z-4":0.752,"z-cover":1.777};   // proporzioni vere delle foto (larghezza/altezza): le foto non vengono tagliate
 const WEBS=k=>EXT[k]||PHOTO_DIR+'web/s/'+k+'.webp';   // foto del loop nella sfera (1100px)
 const WEB=k=>EXT[k]||PHOTO_DIR+'web/'+k+'.webp';   // copertine ridimensionate (1600px, WebP) per sfera, carosello e griglie
+/* ordine (Tobia, 26/10): dal piu' recente al piu' vecchio */
+const PJ_ORDER=['Onea','Hive','Fanta.me','Coral','Iprefab','Grain Keeper','Quadernazione','Buxaka','Chiara Alessi interview','Waterpack','Zeitknot','Unofficial Audi spot','Fuocosacro'];
+projects.sort((a,b)=>(PJ_ORDER.indexOf(a.title)+99)%99-(PJ_ORDER.indexOf(b.title)+99)%99);
 projects.forEach((p,i)=>{p.i=i;if(p.ph)return;p.local=WEB(p.slug+'-cover');
   const all=Object.keys(DIM).filter(k=>k.startsWith(p.slug+'-'));   // il loop usa tutte le foto del progetto, prima quelle scelte
   p.loop=[...new Set([...(p.loop||[]),...all])]});
@@ -857,7 +860,7 @@ const TAGS=['Product Design','Textile & Fashion','Exhibition Design','System Des
 me.i=-1;me.tag='About';me.short='Industrial product designer: concepts, prototypes and interfaces.';me.long='I hold a degree in Industrial Product Design, with a passion for projects in all their forms, from product development to visual communication. My background includes exhibition, prototyping and interactive design, while my most recent work focused on UX and UI design.';
 const items=[me,...projects];            // la card 0 della sfera e' la tua foto
 const N=items.length;
-const featured=[projects[0],projects[1],projects[3]];   // Selected cases: Iprefab, Fanta.me, Hive
+const featured=['Iprefab','Fanta.me','Hive'].map(t=>projects.find(p=>p.title===t));   // Selected cases
 const archList=projects.filter(p=>!featured.includes(p));   // l'archivio contiene gli altri progetti
 const steps=[["Observe","Entering the system before designing it: field research, interviews and data."],["Map","Turning complexity into a shared map of actors, flows and tensions."],["Prototype","Giving the map a tangible form with testable products and interfaces."],["Evolve","Measuring what changes and letting the system keep growing."]];
 const bg=p=>p.ph?`background-color:${p.col}`:`background-image:url('${p.local}');background-position:${p.pos||'center'}`;
@@ -1151,8 +1154,7 @@ $('al2').textContent=`${archList.length} more projects beyond the selected cases
 render2();
 /* pagine Cases / Archive */
 function rebuild(){
-  const sel=vis(featured),arc=vis(archList);
-  const all=[...sel,...arc];   // Cases e Archive sono un'unica pagina
+  const all=vis(projects);   // un'unica pagina, in ordine cronologico dal piu' recente
   $('grid-cases').innerHTML=all.map(pcHTML).join('');$('list-cases').innerHTML=listHTML(all);
   sync();layout();
 }
