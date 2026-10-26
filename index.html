@@ -19,7 +19,7 @@
 {"@type":"WebSite","@id":"https://tobiaseu.com/#site","url":"https://tobiaseu.com/","name":"Tobia Seu","inLanguage":"en","author":{"@id":"https://tobiaseu.com/#me"}}
 ]}
 </script>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23111'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23E5FF00'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23111'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23fff'/%3E%3C/svg%3E">
 
 <title>Tobia Seu · UX/UI & Product Designer in Turin (Torino)</title>
 <link rel="preload" href="fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
@@ -27,7 +27,7 @@
 <link rel="preload" href="img/web/tobia.webp" as="image" fetchpriority="high">
 <link rel="stylesheet" href="fonts/fonts.css">
 <style>
-:root{--bg:#F7F7F9;--text:#111;--muted:#5a5a5a;--accent:#E5FF00;--border:rgba(17,17,17,.16);--nav:rgba(255,255,255,.78);--card:#111;--ctext:#fff;--gc:rgba(0,0,0,.11);--fbg:#fff}
+:root{--bg:#F7F7F9;--text:#111;--muted:#5a5a5a;--border:rgba(17,17,17,.16);--nav:rgba(255,255,255,.78);--card:#111;--ctext:#fff;--gc:rgba(0,0,0,.11);--fbg:#fff}
 html.dark{--bg:#111;--text:#F7F7F9;--muted:#a5a5a5;--border:rgba(255,255,255,.22);--nav:rgba(30,30,30,.78);--card:#f4f4f2;--ctext:#111;--gc:rgba(255,255,255,.13);--fbg:#111}
 *,*::before,*::after{box-sizing:border-box}
 html{background:var(--bg);scrollbar-gutter:stable}
@@ -39,10 +39,12 @@ body.no-cur,body.no-cur *{cursor:none!important}
 
 /* ---------- pulsanti (stessa famiglia: pillola, con o senza cornice) ---------- */
 .btn,.btn-o{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.65rem 1.4rem;border-radius:999px;font:600 .8rem var(--sans);text-decoration:none;cursor:pointer;transition:transform .16s cubic-bezier(.23,1,.32,1),box-shadow .2s cubic-bezier(.23,1,.32,1),border-color .2s cubic-bezier(.23,1,.32,1),background .2s cubic-bezier(.23,1,.32,1)}
-.btn{background:var(--accent);color:#000;border:1px solid var(--accent)}
-.btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(229,255,0,.35)}
-.btn-o{background:transparent;color:var(--text);border:1px solid var(--border);backdrop-filter:blur(10px)}
-.btn-o:hover{border-color:var(--text);transform:translateY(-1px)}
+/* azioni: primaria piena (nero in light, bianco in dark), secondaria piena del colore di fondo con bordo:
+   restano leggibili su qualunque cosa ci sia dietro (foto, sfera sfocata, grigi) */
+.btn{background:var(--text);color:var(--bg);border:1.5px solid var(--text)}
+.btn:hover{transform:translateY(-1px);box-shadow:0 10px 26px rgba(0,0,0,.22)}
+.btn-o{background:var(--bg);color:var(--text);border:1.5px solid var(--text);box-shadow:0 6px 20px rgba(0,0,0,.08)}
+.btn-o:hover{transform:translateY(-1px)}
 .btn-o.w{color:#fff;border-color:rgba(255,255,255,.55);background:rgba(255,255,255,.14)}
 .btn-o.w:hover{border-color:#fff;background:rgba(255,255,255,.26)}
 .btn-o.round{width:44px;height:44px;padding:0;font-size:1.15rem}
@@ -68,7 +70,7 @@ html:not(.dark) [data-t=light],html.dark [data-t=dark]{color:var(--bg)!important
 #cur.show{opacity:1}
 .cur-in{width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;border:1px solid var(--border);background:var(--nav);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:var(--text);transform:scale(.6);transition:transform .35s cubic-bezier(.23,1,.32,1),background .25s,color .25s,border-color .25s}
 #cur.show .cur-in{transform:scale(1)}
-#cur.down .cur-in{transform:scale(.84);background:var(--accent);color:#000;border-color:var(--accent)}
+#cur.down .cur-in{transform:scale(.84);background:var(--text);color:var(--bg);border-color:var(--text)}
 .cur-in svg{width:13px;height:13px}
 .ic-globe{display:none}
 #cur[data-k=globe].down .ic-arrows{display:none}
@@ -95,7 +97,7 @@ body.pre .g-wrap{opacity:0;transform:translateY(18px)}
 body.pre .hin{opacity:0;transition:none}
 body.focus .g-wrap{opacity:0}
 #gt{font-size:clamp(2.5rem,7vw,5.5rem);line-height:1;white-space:nowrap;transition:opacity .28s cubic-bezier(.23,1,.32,1),transform .28s cubic-bezier(.23,1,.32,1)}
-.card{position:absolute;left:0;top:0;width:704px;height:440px;margin:-220px 0 0 -352px;transform-style:preserve-3d;cursor:pointer;will-change:transform}
+.card{position:absolute;left:0;top:0;width:660px;height:440px;margin:-220px 0 0 -330px;transform-style:preserve-3d;cursor:pointer;will-change:transform}
 .cback{position:absolute;inset:0;transform-style:preserve-3d}
 .cback{border-radius:0;background:var(--card);transform:translateZ(-.5px) rotateY(180deg);backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:0 30px 70px rgba(0,0,0,.22)}
 .cback::after{content:'tobia seu';position:absolute;left:0;right:0;bottom:34px;text-align:center;font:600 20px var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--ctext);opacity:.3}
@@ -134,7 +136,7 @@ body.top:not(.focus) .card:hover .flip{transform:scale(1.16)}
 .card-in.back p{margin:10px 0 0;font-size:17px;line-height:1.6;opacity:.8}
 .fnav{position:fixed;z-index:160;opacity:0;visibility:hidden;transition:opacity .4s}
 body.focus .fnav{opacity:1;visibility:visible}
-#fprev{left:calc(50% - 402px);top:50%;margin-top:-22px}#fnext{left:calc(50% + 358px);top:50%;margin-top:-22px}#fx{right:3rem;top:5.5rem}
+#fprev{left:calc(50% - 382px);top:50%;margin-top:-22px}#fnext{left:calc(50% + 338px);top:50%;margin-top:-22px}#fx{right:3rem;top:5.5rem}
 @media(max-width:760px){#fprev,#fnext{display:none}}
 .hint{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);z-index:20;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);pointer-events:none;text-align:center}
 #closehint{display:none}
@@ -142,7 +144,6 @@ body.focus .fnav{opacity:1;visibility:visible}
 #fcta{left:50%;top:calc(50vh + 234px);transform:translateX(-50%);display:flex;gap:12px;z-index:170}
 #fcta:active{transform:translateX(-50%)}
 #fcta .btn,#fcta .btn-o{padding:.8rem 1.6rem;font-size:.85rem;white-space:nowrap}
-#fworld{background:rgba(255,255,255,.18);border:1.5px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.08),0 10px 30px rgba(0,0,0,.08);color:var(--text)}
 body.focus #hint{visibility:hidden}
 .copy{position:absolute;left:6vw;top:50%;width:min(42vw,520px);z-index:10;pointer-events:none}
 .copy a,.copy button{pointer-events:auto}
@@ -161,8 +162,8 @@ body.focus #hint{visibility:hidden}
 
 :root{--k:1}
 /* card di progetto (stessa card della sfera) */
-.pcw{position:relative;width:calc(704px*var(--k));height:calc(440px*var(--k));flex:none}
-.pc{position:absolute;left:0;top:0;width:704px;height:440px;transform:scale(var(--k));transform-origin:0 0;cursor:pointer}
+.pcw{position:relative;width:calc(660px*var(--k));height:calc(440px*var(--k));flex:none}
+.pc{position:absolute;left:0;top:0;width:660px;height:440px;transform:scale(var(--k));transform-origin:0 0;cursor:pointer}
 .pc .turn{opacity:1;pointer-events:auto}
 .pc .card-in{box-shadow:0 24px 60px rgba(0,0,0,.18)}
 /* filtri e vista */
@@ -176,12 +177,22 @@ body.focus #hint{visibility:hidden}
 .fcol .vt{flex-direction:row}
 /* lista brutalista */
 .llist{display:none}
-.lrow{display:grid;grid-template-columns:48px 1.35fr .9fr 30px;gap:1rem;align-items:center;height:var(--rh,56px);border-top:1px solid var(--border);cursor:pointer;transition:background .2s cubic-bezier(.23,1,.32,1),color .2s cubic-bezier(.23,1,.32,1)}
+.lrow{display:grid;grid-template-columns:48px 1.1fr minmax(140px,16vw) 1fr 30px;gap:1.4rem;align-items:center;height:var(--rh,76px);border-top:1px solid var(--border);cursor:pointer;transition:background .2s cubic-bezier(.23,1,.32,1),color .2s cubic-bezier(.23,1,.32,1)}
 .llist .lrow:last-child{border-bottom:1px solid var(--border)}
-.lrow:hover{background:var(--text);color:var(--bg)}
+.lrow:hover{border-top-color:var(--text)}
 .lrow>*{transition:transform .25s cubic-bezier(.23,1,.32,1)}
 .lrow:hover>*{transform:translateX(1rem)}
 .lrow:hover>.a{transform:translateX(-1rem)}
+.lrow:hover>.lv{transform:none}
+/* rettangolo tra nome e dettagli: le foto del progetto scorrono dietro una quinta del colore della pagina.
+   Muovendo il mouse la quinta si apre attorno al puntatore, piu' veloce = piu' aperta, e si richiude da sola */
+@property --lvr{syntax:'<length>';inherits:false;initial-value:0px}
+.lv{position:relative;height:calc(100% - 18px);overflow:hidden;pointer-events:none}
+.lv-s{position:absolute;top:0;bottom:0;left:0;width:400%;display:flex;will-change:transform}
+.lv-s i{flex:1;background-image:var(--src);background-size:cover;background-position:center}
+.lv-q{position:absolute;inset:-1px;background:var(--bg);--lvr:0px;-webkit-mask-image:radial-gradient(circle var(--lvr) at var(--x,50%) var(--y,50%),transparent 0,transparent 55%,#000 100%);mask-image:radial-gradient(circle var(--lvr) at var(--x,50%) var(--y,50%),transparent 0,transparent 55%,#000 100%)}
+.lv-q.shut{transition:--lvr .6s cubic-bezier(.23,1,.32,1)}
+@media (hover:none),(max-width:760px){.lrow{grid-template-columns:40px 1fr auto 24px;height:var(--rh,64px)}.lrow .lv{display:none}.lrow .c{font-size:.8rem}}
 .lrow .n{font:.75rem ui-monospace,monospace;opacity:.5}
 .lrow h3{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin:0;font-size:clamp(1rem,2vw,1.7rem);font-weight:500;letter-spacing:-.02em}
 .lrow .c{font-size:.9rem;opacity:.65}
@@ -232,7 +243,7 @@ body[data-view=list] .pgrid{display:none}
 .tools-row{display:flex;gap:1.5rem;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:2.5rem}
 .tools-row .vt{margin:0}
 .pgrid{--pk:.5;display:grid;gap:44px 24px;justify-content:space-between}
-.pgrid .pcw{width:calc(704px*var(--pk));height:calc(440px*var(--pk))}
+.pgrid .pcw{width:calc(660px*var(--pk));height:calc(440px*var(--pk))}
 .pgrid .pc{transform:scale(var(--pk))}
 /* pagina progetto */
 .pj-hero{aspect-ratio:16/8;border-radius:0;background-size:cover;background-position:center;background-color:#555;margin:2.5rem 0}
@@ -306,12 +317,12 @@ body[data-view=list] .pgrid{display:none}
 /* ---------- footer ---------- */
 footer{background:var(--fbg);color:var(--text);border-top:1px solid var(--border);padding:6rem 6vw 6.5rem;position:relative;z-index:40;transition:background .5s,color .5s}
 footer .cta{font-size:clamp(2.4rem,7vw,6rem);font-weight:500;letter-spacing:-.03em;line-height:1;max-width:12ch}
-footer .cta em{background:linear-gradient(transparent 62%,var(--accent) 62%)}
+footer .cta em{text-decoration:underline;text-decoration-thickness:.06em;text-underline-offset:.12em}
 footer .btn{margin-top:2rem;padding:.8rem 1.5rem;font-size:.9rem}
 .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:2rem;margin:4.5rem 0 3rem;padding-top:2.5rem;border-top:1px solid var(--border)}
 .cols h4{margin:0 0 1rem;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:500}
 .cols a,.cols span{display:block;margin-bottom:.5rem;color:var(--text);text-decoration:none;cursor:pointer;font-size:.95rem}
-.cols a:hover,.cols .l:hover{text-decoration:underline;text-decoration-color:var(--accent);text-decoration-thickness:2px;text-underline-offset:4px}
+.cols a:hover,.cols .l:hover{text-decoration:underline;text-decoration-color:currentColor;text-decoration-thickness:2px;text-underline-offset:4px}
 .fb{display:flex;justify-content:space-between;align-items:center;font:.72rem ui-monospace,monospace;color:var(--muted)}
 .fb button{width:40px;height:40px;border-radius:50%;border:1px solid var(--border);background:none;color:var(--text);cursor:pointer}
 .btn:active,.btn-o:active,.chip:active,.turn:active,.fnav:active{transform:scale(.97);transition-duration:.1s}
@@ -345,8 +356,8 @@ body[data-page=project] #project{padding:0;min-height:0}
 /* apertura: cliente piccolo, nome enorme */
 .xp-intro{width:max-content;max-width:none;justify-content:space-between}
 .xp-intro .kicker{margin:0 0 1.2rem}
-.sub h1.xp-name,.xp-name{margin:0;font-size:clamp(4.5rem,13.5vw,15rem);font-weight:600;letter-spacing:-.055em;line-height:.86;white-space:nowrap}
-.xp-lead{margin:1.8rem 0 0;max-width:30ch;font-size:clamp(1.05rem,1.5vw,1.35rem);line-height:1.4;letter-spacing:-.01em;text-wrap:pretty}
+.sub h1.xp-name,.xp-name{margin:0;font-size:clamp(3.6rem,10vw,11rem);font-weight:600;letter-spacing:-.055em;line-height:.86;white-space:nowrap}
+.xp-lead{margin:1.6rem 0 0;max-width:32ch;font-size:clamp(1rem,1.3vw,1.2rem);line-height:1.4;letter-spacing:-.01em;text-wrap:pretty}
 .xp-meta{display:grid;grid-template-columns:repeat(4,max-content);gap:.5rem 3rem;margin-top:2.2rem;font-size:.75rem;color:var(--muted)}
 .xp-meta b{display:block;margin-top:.35rem;font-size:.92rem;font-weight:500;color:var(--text);max-width:22ch}
 /* foto grandi, spigoli vivi, nessun filtro */
@@ -362,10 +373,10 @@ body[data-page=project] #project{padding:0;min-height:0}
 .xp-txt{width:clamp(300px,30vw,480px)}
 .xp-txt.top{justify-content:flex-start}
 .xp-txt .num{font:.72rem ui-monospace,monospace;letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
-.xp-txt h2{margin:.9rem 0 1.3rem;font-size:clamp(2rem,3.4vw,3.6rem);font-weight:600;letter-spacing:-.04em;line-height:.98;text-wrap:balance}
+.xp-txt h2{margin:.9rem 0 1.3rem;font-size:clamp(1.7rem,2.7vw,2.9rem);font-weight:600;letter-spacing:-.04em;line-height:.98;text-wrap:balance}
 .xp-txt p{margin:0;color:var(--muted);line-height:1.7;font-size:1rem;text-wrap:pretty}
 .xp-say{width:clamp(320px,46vw,760px);justify-content:center}
-.xp-say p{margin:0;font-size:clamp(1.7rem,3vw,3rem);line-height:1.12;letter-spacing:-.035em;font-weight:500;text-wrap:balance}
+.xp-say p{margin:0;font-size:clamp(1.45rem,2.4vw,2.4rem);line-height:1.12;letter-spacing:-.035em;font-weight:500;text-wrap:balance}
 /* in breve: numeri grandi */
 .xp-facts{width:clamp(340px,38vw,620px);justify-content:center}
 .xp-facts .kicker{margin-bottom:2rem}
@@ -375,8 +386,7 @@ body[data-page=project] #project{padding:0;min-height:0}
 .xp-facts span{font-size:.78rem;color:var(--muted);text-align:right}
 /* fine: prossimo progetto */
 /* progetto a tutto schermo: niente header, menu, interruttore tema e footer */
-body[data-page=project] header,body[data-page=project] .theme-switch,body[data-page=project] #rail,body[data-page=project] footer{display:none}
-.xp-close{position:absolute;right:6vw;top:1.6rem;z-index:3}
+body[data-page=project] .theme-switch,body[data-page=project] #rail,body[data-page=project] footer{display:none}
 .xp-client{margin:0;font-size:1rem;color:var(--muted)}
 /* fine progetto: riquadro bianco con bordo nero che si riempie di nero scorrendo (pieni e vuoti) */
 .xp-end{width:min(72vw,1040px);justify-content:center;gap:1.4rem}
@@ -384,7 +394,7 @@ body[data-page=project] header,body[data-page=project] .theme-switch,body[data-p
 .xp-fill{position:absolute;inset:0;background:var(--text);transform-origin:0 50%;transform:scaleX(0)}
 .xp-ink{position:absolute;left:clamp(1.4rem,3vw,3rem);right:clamp(1.4rem,3vw,3rem);bottom:clamp(1.4rem,3vw,2.6rem);mix-blend-mode:difference;display:flex;flex-direction:column;gap:.9rem}
 .xp-ink small{font-size:1rem}
-.xp-ink b{font-size:clamp(3.4rem,9vw,9.5rem);font-weight:600;letter-spacing:-.055em;line-height:.86}
+.xp-ink b{font-size:clamp(2.8rem,7vw,7.5rem);font-weight:600;letter-spacing:-.055em;line-height:.86}
 .xp-ink em{font-style:normal;font-size:.95rem;display:flex;justify-content:space-between}
 .xp-frame:focus-visible{outline:2px solid var(--text);outline-offset:6px}
 .xp-endnav{display:flex;justify-content:space-between;gap:1rem}
@@ -399,29 +409,35 @@ body[data-page=project] header,body[data-page=project] .theme-switch,body[data-p
   background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.92) 22%,rgba(20,20,20,.5) 50%,rgba(255,255,255,.92) 78%,transparent 100%);
   -webkit-mask-image:radial-gradient(60% 52% at 50% 50%,#000 30%,transparent 100%);mask-image:radial-gradient(60% 52% at 50% 50%,#000 30%,transparent 100%);filter:blur(24px)}
 @media(max-width:760px){
-  .xp-close{right:5vw;top:1rem}
   .xp-end{width:88vw}
   .xp-frame{height:calc(100svh - 19rem)}
   .xp-endnav{flex-direction:column}
 }
 /* barra in basso: nome, avanzamento, contatore */
-.xp-bar{position:absolute;left:6vw;right:6vw;bottom:1.7rem;display:grid;grid-template-columns:1fr minmax(120px,38vw) 1fr;gap:1.5rem;align-items:center;font:.68rem ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);pointer-events:none}
+.xp-bar{position:absolute;left:6vw;right:6vw;bottom:1.7rem;display:grid;grid-template-columns:1fr minmax(120px,38vw) 1fr;gap:1.5rem;align-items:center;font-size:.8rem;color:var(--muted);pointer-events:none}
 .xp-bar .ln{height:1px;background:var(--border);position:relative;overflow:hidden;transition:height .3s}
 .xp-bar .ln i{position:absolute;inset:0;background:var(--text);transform-origin:0 50%;transform:scaleX(0)}
 .xp-bar .r{text-align:right}
+.xp-bar .t{display:flex;align-items:center;gap:.7rem;min-width:0}
+.xp-bar .t span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* all'inizio: piccolo riquadro che si riempie (da destra) se continui a scorrere indietro */
+.pvf{flex:none;position:relative;width:42px;height:16px;border:1.5px solid var(--text);overflow:hidden;display:none}
+.pvf i{position:absolute;inset:0;background:var(--text);transform-origin:100% 50%;transform:scaleX(0)}
+.xp-bar .pvl{display:none;color:var(--text)}
+.xp-bar.start .pvf,.xp-bar.start .pvl{display:block}.xp-bar.start .tl{display:none}
 .xp-back{align-self:flex-start;margin-bottom:1.6rem}
 @media(max-width:760px){
   .xp-track{gap:18px;padding:0 5vw}
   .xp-pan{padding:8.6rem 0 4.4rem}
   .xp-intro{width:88vw}
-  .xp-name{font-size:clamp(3.6rem,19vw,6rem);white-space:normal}
+  .sub h1.xp-name,.xp-name{font-size:clamp(3rem,15vw,4.6rem);white-space:normal}
   .xp-meta{grid-template-columns:repeat(2,max-content);gap:.8rem 2rem}
   .xp-fig{padding:8.4rem 0 4rem}
   .xp-fig{--fh:min(calc(100svh - 15.6rem),118vw)}
   .xp-txt,.xp-facts{width:80vw}.xp-say{width:86vw}
-  .xp-say p{font-size:1.7rem}
+  .xp-say p{font-size:1.45rem}
   .xp-bar{bottom:1.2rem;left:5vw;right:5vw;grid-template-columns:1fr auto;gap:.8rem}
-  .xp-bar .t{display:none}
+  .xp-bar .t{display:none}.xp-bar.start .t{display:flex}.xp-bar.start .ln{display:none}
 }
 
 /* mobile fixes */
@@ -767,12 +783,11 @@ const rotTo=(a,b)=>{const ax=[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-
 const rot0=rotTo(fibA[0],[0,0,1]);
 const P=fibA.map(v=>{const q=rot0(v).map(t=>t*R);return{x:q[0],y:q[1],z:q[2],ry:Math.atan2(q[0],q[2])*180/Math.PI,rx:-Math.asin(clamp(q[1]/R,-1,1))*180/Math.PI}});
 P[0]={x:0,y:0,z:R,ry:0,rx:0};
-const TURN='<button class="turn" aria-label="Gira la card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8M21 3v5h-5M21 12a9 9 0 0 1-15.5 6.2L3 16M3 21v-5h5"/></svg></button>';
 function cardHTML(p,n,sph){
   const lp=sph&&p.loop?p.loop.map((k,j)=>`<i class="pl${j?'':' on'}" data-src="${WEBS(k)}"${j?'':` style="background-image:url('${p.local}')"`}></i>`).join(''):'';
   const front=p.me?`<div class="card-in front mecard"><b>me</b></div>`
-    :`<div class="card-in front">${TURN}<div class="photo" style="${bg(p)}">${lp}</div><div class="cap"><div><small>${p.client}</small><b>${p.title}</b>${sph?`<div class="sh"><span>${p.short}</span></div>`:''}</div><div class="cr">${p.cat}</div></div></div>`;
-  return `<div class="flip">${front}<div class="card-in back">${TURN}<span class="bk">${p.tag}</span><h4>${p.title}</h4><i class="serif">${p.cat}</i><p>${p.long}</p></div></div>`;
+    :`<div class="card-in front"><div class="photo" style="${bg(p)}">${lp}</div><div class="cap"><div><small>${p.client}</small><b>${p.title}</b>${sph?`<div class="sh"><span>${p.short}</span></div>`:''}</div><div class="cr">${p.cat}</div></div></div>`;
+  return `<div class="flip">${front}</div>`;
 }
 const pcHTML=(p,n)=>`<div class="pcw"><div class="pc" data-i="${p.i}">${cardHTML(p,projects.indexOf(p),false)}</div></div>`;
 const cards=items.map((p,i)=>{
@@ -924,10 +939,39 @@ const AN=Math.min(8,archList.length),S2={t:0};
 const vis=l=>FILT==='all'?l:l.filter(p=>p.tag===FILT);
 const toolsHTML=()=>`<div class="chips">${['all',...TAGS].map(t=>`<button class="chip" data-f="${t}">${t==='all'?'All':t}</button>`).join('')}</div><div class="vt"><button class="chip" data-v="cards">Cards</button><button class="chip" data-v="list">List</button></div>`;
 document.querySelectorAll('.tools-host').forEach(h=>h.innerHTML=toolsHTML());
-const listHTML=l=>l.length?l.map((p,j)=>`<div class="lrow" data-i="${p.i}"><span class="n">${pad(j+1)}</span><h3>${p.title}</h3><span class="c">${p.cat}</span><span class="a">↗</span></div>`).join(''):'<p class="empty">Nessun progetto in questa categoria.</p>';
+const lvStrip=p=>{const ks=p.loop||[];const one=j=>ks.length?`<i style="--src:url('${WEBS(ks[j%ks.length])}')"></i>`:`<i style="background:${p.col};filter:hue-rotate(${j*30}deg)"></i>`;return [0,1,2,0].map(one).join('')};
+/* anteprima nella lista: velocita' del mouse -> apertura della quinta (si spegne in fretta), foto che scorrono piano */
+const LV={row:null,el:null,q:null,s:null,lx:0,ly:0,lt:0,v:0,r:0,d:0,raf:0,last:0};
+function lvSet(row){
+  if(LV.q&&row!==LV.row){LV.q.classList.add('shut');LV.q.style.setProperty('--lvr','0px')}
+  LV.row=row;LV.el=row?row.querySelector('.lv'):null;LV.q=LV.el?LV.el.querySelector('.lv-q'):null;LV.s=LV.el?LV.el.querySelector('.lv-s'):null;LV.r=0;
+  if(LV.q)LV.q.classList.remove('shut');
+}
+addEventListener('pointermove',e=>{
+  if(e.pointerType!=='mouse')return;
+  const row=e.target.closest?e.target.closest('.lrow'):null;
+  if(row!==LV.row)lvSet(row&&row.querySelector('.lv')&&row.querySelector('.lv').offsetWidth?row:null);
+  const now=performance.now();
+  if(LV.lt){const sp=Math.hypot(e.clientX-LV.lx,e.clientY-LV.ly)/Math.max(8,now-LV.lt);LV.v=Math.max(LV.v,sp)}
+  LV.lx=e.clientX;LV.ly=e.clientY;LV.lt=now;
+  if(LV.row&&!LV.raf){LV.last=now;LV.raf=requestAnimationFrame(lvTick)}
+},{passive:true});
+function lvTick(now){
+  const dt=Math.min(64,now-LV.last)/1000;LV.last=now;
+  if(!LV.row||!LV.el){LV.raf=0;return}
+  LV.v*=Math.exp(-dt*5);
+  const b=LV.el.getBoundingClientRect(),diag=Math.hypot(b.width,b.height);
+  const tgt=RM?diag:clamp((LV.v-.15)/1.6,0,1)*diag*1.15;                 // movimenti lenti aprono poco, gesti veloci aprono tutto
+  LV.r+=(tgt-LV.r)*(1-Math.exp(-dt*(tgt>LV.r?16:4)));                   // si apre subito, si richiude morbida
+  const x=clamp(LV.lx,b.left-b.width*.2,b.right+b.width*.2)-b.left,y=clamp(LV.ly,b.top,b.bottom)-b.top;
+  LV.q.style.setProperty('--lvr',LV.r.toFixed(1)+'px');LV.q.style.setProperty('--x',x.toFixed(0)+'px');LV.q.style.setProperty('--y',y.toFixed(0)+'px');
+  if(!RM){LV.d=(LV.d+dt*.045)%1;const m=(LV.d+(LV.lx-b.left)/b.width*.12+1)%1;LV.s.style.transform=`translate3d(${(-m*75).toFixed(3)}%,0,0)`}
+  LV.raf=requestAnimationFrame(lvTick);
+}
+const listHTML=l=>l.length?l.map((p,j)=>`<div class="lrow" data-i="${p.i}"><span class="n">${pad(j+1)}</span><h3>${p.title}</h3><span class="lv" aria-hidden="true"><span class="lv-s">${lvStrip(p)}</span><i class="lv-q"></i></span><span class="c">${p.client} · ${p.cat}</span><span class="a">↗</span></div>`).join(''):'<p class="empty">Nessun progetto in questa categoria.</p>';
 function sync(){document.querySelectorAll('[data-f]').forEach(b=>b.classList.toggle('on',b.dataset.f===FILT));document.querySelectorAll('[data-v]').forEach(b=>b.classList.toggle('on',b.dataset.v===VIEW));document.body.dataset.view=VIEW}
 const kk=()=>clamp(innerHeight*.62/440,.5,1);
-function slideDims(){const W=document.documentElement.clientWidth,h=Math.min(innerHeight*.6,W*.64*.625,720),w=h*1.6;return{w,h}}
+function slideDims(){const W=document.documentElement.clientWidth,h=Math.min(innerHeight*.6,W*.64/1.5,720),w=h*1.5;return{w,h}}
 /* carosello: 3 progetti in loop (duplicati a 6), si muove da solo ogni 2.5s e si puo' trascinare */
 const K=featured.length,TT=K*2,car=$('car');
 const lsHTML=(p,n)=>`<article class="ls" data-i="${p.i}"><div class="photo" style="${bg(p)}"></div><div class="lcap"><div><small>${p.client}</small><b>${p.title}</b></div><div><i>${p.cat}</i><em>${pad(n+1)} / ${pad(K)}</em><button class="btn" data-proj="${p.i}">View case study ↗</button></div></div></article>`;
@@ -949,7 +993,7 @@ function layout(){
   const d=slideDims();document.documentElement.style.setProperty('--sw',d.w+'px');document.documentElement.style.setProperty('--sh',d.h+'px');
   step=d.w+Math.max(28,W*.02);
   const cw=W*.88,cols=cw>=1000?5:cw>=760?4:cw>=520?3:2,gap=24,cell=(cw-(cols-1)*gap)/cols;   // 4-5 card per riga
-  document.querySelectorAll('.pgrid').forEach(g=>{g.style.setProperty('--pk',cell/704);g.style.gridTemplateColumns=`repeat(${cols},${cell}px)`});
+  document.querySelectorAll('.pgrid').forEach(g=>{g.style.setProperty('--pk',cell/660);g.style.gridTemplateColumns=`repeat(${cols},${cell}px)`});
 }
 function carDown(e){cdrag=true;cx0=e.clientX;cp0=cpos;cvel=0;clx=e.clientX;clt=performance.now();cmoved=0;cur.classList.add('down');snapTo=cpos}
 function carMove(e){
@@ -1003,7 +1047,7 @@ function setView(v){
    In fondo c'e' una "molla": continuando a scorrere il riquadro del progetto successivo si riempie di nero;
    pieno = si apre il progetto dopo, se ti fermi prima torna indietro da solo */
 const PIMG=k=>PHOTO_DIR+'web/'+k+'.webp';
-const SPD=1.6,            // px orizzontali per ogni px di scroll: i progetti si sfogliano in fretta
+const SPD=2.08,            // px orizzontali per ogni px di scroll: i progetti si sfogliano in fretta
       SPRING=.85;         // lunghezza della molla, in altezze di schermo
 const XP={x:0,tx:0,max:0,run:0,sp:0,q:0,qs:0,sec:null,track:null,figs:[],raf:0,last:0,i:0,armed:true,snapT:0};
 function xpMeasure(){
@@ -1034,6 +1078,12 @@ function xpTick(now){
   XP.bar.classList.toggle('end',atEnd);
   if(!atEnd)XP.cnt.textContent=pad(Math.max(1,seen))+' / '+pad(XP.figs.length);
   if(XP.q>=.995&&XP.armed){XP.armed=false;turnProject(1)}
+  // molla all'indietro: si carica solo scorrendo verso l'alto quando sei gia' fermo all'inizio; se smetti si scarica
+  const atStart=s<=2;XP.bar.classList.toggle('start',atStart&&!atEnd);
+  if(!atStart)XP.top0=now+350;
+  if(now-XP.bt>140)XP.b=Math.max(0,XP.b-dt*1.8);
+  XP.pvf.style.transform=`scaleX(${XP.b.toFixed(3)})`;
+  if(XP.b>=1&&XP.armed){XP.armed=false;turnProject(-1)}
   XP.raf=requestAnimationFrame(xpTick);
 }
 /* la molla torna indietro se ti fermi a meta' */
@@ -1070,12 +1120,11 @@ function openProject(i,dir=1){
       <i class="xp-fill"></i><span class="xp-ink"><small>Next project</small><b>${nx.title}</b><em>Keep scrolling to open it <span class="xp-pct">0%</span></em></span></button>
     <div class="xp-endnav"><button class="btn-o" data-projb="${pv.i}">Previous project: ${pv.title}</button><button class="btn" data-proj="${nx.i}">Open ${nx.title}</button></div></div>`;
   $('pj').innerHTML=`<section class="xp" aria-label="${p.title} case study"><div class="xp-stage">
-    <button class="btn-o round xp-close" data-go="cases" aria-label="Close the project">&#10005;</button>
     <div class="xp-track">${projectHTML(p)}${end}</div>
-    <div class="xp-bar"><span class="t">${p.title}</span><span class="ln"><i></i><i class="sp"></i></span><span class="r"><b class="c">01</b><button class="nx" data-proj="${nx.i}">Scroll for the next project</button></span></div></div></section>`;
+    <div class="xp-bar start"><span class="t"><i class="pvf"><i></i></i><span class="tl">${p.title}</span><span class="pvl">Scroll back for ${pv.title}</span></span><span class="ln"><i></i><i class="sp"></i></span><span class="r"><b class="c">01</b><button class="nx" data-proj="${nx.i}">Scroll for the next project</button></span></div></div></section>`;
   const q=s=>XP.sec.querySelector(s);
   XP.sec=$('pj').querySelector('.xp');XP.track=q('.xp-track');XP.bar=q('.xp-bar');XP.ln=q('.ln i');XP.sl=q('.ln .sp');XP.cnt=q('.xp-bar .c');
-  XP.fill=q('.xp-fill');XP.pct=q('.xp-pct');XP.x=0;XP.qs=0;XP.q=0;XP.last=0;XP.i=i;XP.armed=true;
+  XP.fill=q('.xp-fill');XP.pct=q('.xp-pct');XP.pvf=q('.pvf i');XP.b=0;XP.bt=0;XP.top0=performance.now()+700;XP.x=0;XP.qs=0;XP.q=0;XP.last=0;XP.i=i;XP.armed=true;
   document.querySelectorAll('#pj .rv').forEach(el=>rvIO.observe(el));
   go('project');
   xpMeasure();
@@ -1084,14 +1133,21 @@ function openProject(i,dir=1){
 }
 const turnProject=d=>{const L_=projects.length;turnPage(d,()=>openProject((XP.i+d+L_)%L_,d))};
 /* trackpad orizzontale e frecce: muovono la stessa striscia */
-addEventListener('wheel',e=>{if(document.body.dataset.page!=='project'||Math.abs(e.deltaX)<=Math.abs(e.deltaY))return;e.preventDefault();scrollBy(0,e.deltaX/SPD)},{passive:false});
+function chargeBack(d){const now=performance.now();if(!XP.sec||scrollY>2||now<XP.top0)return;XP.b=Math.min(1,XP.b+d);XP.bt=now}
+addEventListener('wheel',e=>{if(document.body.dataset.page!=='project')return;
+  if(Math.abs(e.deltaX)>Math.abs(e.deltaY)){e.preventDefault();if(e.deltaX<0)chargeBack(-e.deltaX/(innerHeight*.9));scrollBy(0,e.deltaX/SPD);return}
+  if(e.deltaY<0)chargeBack(-e.deltaY/(innerHeight*.9))},{passive:false});
+let touchY=null;addEventListener('touchstart',e=>{touchY=e.touches[0].clientY},{passive:true});
+addEventListener('touchmove',e=>{if(document.body.dataset.page!=='project'||touchY==null)return;const y=e.touches[0].clientY,d=y-touchY;touchY=y;if(d>0)chargeBack(d/(innerHeight*.45))},{passive:true});
 addEventListener('keydown',e=>{if(document.body.dataset.page!=='project'||e.target.closest('input,textarea'))return;
   if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();scrollBy({top:(e.key==='ArrowRight'?1:-1)*innerWidth*.6/SPD,behavior:RM?'auto':'smooth'})}
-  if(e.key==='Escape')turnPage(-1,()=>go('cases'))});
+  if(e.key==='Escape')turnPage(dirTo('cases'),()=>go('cases'))});
 addEventListener('resize',()=>{if(document.body.dataset.page==='project')xpMeasure()});
 
 /* CAMBIO PAGINA (0.5 s): una banda morbida di luce e ombra attraversa il centro dello schermo,
    come una pagina che gira senza girarla tutta; avanti = da destra a sinistra, indietro = da sinistra a destra */
+const ORDER={home:0,cases:1,project:1.5,archive:2,framework:3,about:4};   // la transizione va verso dove si trova la pagina nel menu
+const dirTo=to=>Math.sign((ORDER[to]??0)-(ORDER[document.body.dataset.page]??0))||1;
 let turning=false;
 function turnPage(dir,swap){
   if(turning)return;
@@ -1150,7 +1206,7 @@ function focusCard(i){
   setKind(null);aimAt(i);
   gsap.to(F,{f:1,duration:1.6,ease:'sine.inOut',overwrite:'auto'});
   gsap.to(F,{roll:-6,duration:2.2,ease:'sine.inOut',overwrite:'auto'});
-  const fsc=Math.min(CS*PERSP/(PERSP-R-PUSH),cwid()*.9/704);   // su telefono la card aperta sta tutta nello schermo
+  const fsc=Math.min(CS*PERSP/(PERSP-R-PUSH),cwid()*.9/660);   // su telefono la card aperta sta tutta nello schermo
   $('fcta').style.top=`calc(50vh + ${Math.round(220*fsc)+26}px)`;
   if(first){gsap.to(F,{push:PERSP-R-CS*PERSP/fsc,duration:2,ease:'sine.inOut',overwrite:'auto'});gsap.to('#closehint',{opacity:.9,delay:1.2,duration:.8})}
   const mine=cards[i];gsap.delayedCall(first?1.9:1.5,()=>{if(focused===mine)mine.classList.add('ready','open')});
@@ -1206,7 +1262,7 @@ let lastT=performance.now();
    SCROLL: sfera -> tua card -> teaser video -> 3 progetti -> archivio
    ===================================================================== */
 const cwid=()=>document.documentElement.clientWidth;
-const cardR=()=>{const sc=CS*PERSP/(PERSP-R-PUSH),cx=cwid()*(.5+SH/100),cy=innerHeight/2;return{left:cx-352*sc,top:cy-220*sc,width:704*sc,height:440*sc,borderRadius:0}};
+const cardR=()=>{const sc=CS*PERSP/(PERSP-R-PUSH),cx=cwid()*(.5+SH/100),cy=innerHeight/2;return{left:cx-330*sc,top:cy-220*sc,width:660*sc,height:440*sc,borderRadius:0}};
 const landR=cx=>{const w=Math.min(cwid()*.4,600),h=w*.6;return{left:cx-w/2,top:innerHeight/2-h/2,width:w,height:h,borderRadius:0}};
 const kkk=()=>Math.max(.5,Math.min(1,innerHeight*.62/440));
 const centerR=()=>{const d=slideDims();return{left:(cwid()-d.w)/2,top:innerHeight*.56-d.h/2,width:d.w,height:d.h,borderRadius:0}};
@@ -1252,7 +1308,7 @@ const heroTL=gsap.timeline({defaults:{ease:E},scrollTrigger:{trigger:'#pin',star
 function go(p){
   unfocus();
   document.body.dataset.page=p;
-  document.querySelectorAll('.nav-pill span').forEach(s=>s.classList.toggle('on',s.dataset.p===p));
+  document.querySelectorAll('.nav-pill span').forEach(s=>s.classList.toggle('on',s.dataset.p===(p==='project'?'cases':p)));   // dentro un progetto resta acceso Cases
   ScrollTrigger.getAll().forEach(t=>p==='home'?t.enable():t.disable());
   scrollTo(0,0);setKind(null);
   requestAnimationFrame(()=>{layout();ScrollTrigger.refresh()});
@@ -1262,16 +1318,15 @@ document.addEventListener('click',e=>{
   const fb=t.closest('[data-f]');if(fb){setFilter(fb.dataset.f);return}
   const vb=t.closest('[data-v]');if(vb){setView(vb.dataset.v);return}
   if(t.closest('[data-act=world]')){unfocus();return}
-  const tb=t.closest('.turn');if(tb){tb.closest('.card,.pc').classList.toggle('flipped');return}
   if(cmoved>6){cmoved=0;if(t.closest('.car'))return}
   const open=(i,d=1)=>turnPage(d,()=>openProject(i,d));
-  if(t.closest('#fcase')){if(!focused)return;const it=items[idx];it.me?turnPage(1,()=>go('about')):open(it.i);return}
+  if(t.closest('#fcase')){if(!focused)return;const it=items[idx];it.me?turnPage(dirTo('about'),()=>go('about')):open(it.i);return}
   const pb=t.closest('[data-projb]');if(pb){e.preventDefault();open(+pb.dataset.projb,-1);return}
   const pj=t.closest('[data-proj]');if(pj){e.preventDefault();open(+pj.dataset.proj);return}
   const lr=t.closest('.lrow');if(lr){open(+lr.dataset.i);return}
   const pc=t.closest('.pc,.ls');if(pc&&!t.closest('button,a')){open(+pc.dataset.i);return}
   const g=t.closest('[data-go]');
-  if(g){e.preventDefault();const to=g.dataset.go;if(to===document.body.dataset.page&&to!=='project'){scrollTo({top:0,behavior:'smooth'});return}turnPage(to==='home'||document.body.dataset.page==='project'?-1:1,()=>go(to));return}
+  if(g){e.preventDefault();const to=g.dataset.go;if(to===document.body.dataset.page&&to!=='project'){scrollTo({top:0,behavior:'smooth'});return}turnPage(dirTo(to),()=>go(to));return}
   const sc=t.closest('[data-scroll]');
   if(sc){e.preventDefault();$(sc.dataset.scroll).scrollIntoView({behavior:'smooth'})}
 });
