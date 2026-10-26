@@ -484,6 +484,28 @@ body:not([data-page=home]) #chint{display:none}
   header .btn{padding:0 1.1rem}.lang-switch button{min-width:34px;padding:0 .5rem}.hr{gap:.4rem}
   .nav-pill{top:4.1rem;gap:1.1rem;padding:.5rem 1.1rem;font-size:.74rem;white-space:nowrap}   /* su telefono il menu scende sotto logo e CTA */
 }
+/* mobile leggero: card della sfera disegnate al 60% (zoom) e senza ombre/blur, card di Cases piatte */
+.lite .card{width:396px;height:264px;margin:-132px 0 0 -198px}
+.lite .card>.cback,.lite .card>.cface{inset:auto;left:0;top:0;width:660px;height:440px;zoom:.6}
+.lite .card-in,.lite .cback{box-shadow:none}
+.lite .glint{display:none}
+.lite .pc .flip{transform-style:flat;perspective:none;transition:none}
+.lite .pc:hover .flip{transform:none}
+@media (max-width:760px){
+  .lite .copy{backdrop-filter:none;-webkit-backdrop-filter:none;background:color-mix(in srgb,var(--bg) 94%,transparent)}   /* il blur dietro al testo ricalcola tutta la sfera a ogni frame */
+  .hint{bottom:calc(var(--gy) + var(--ctl) + 1.2rem)}
+  #chint{bottom:calc(var(--gy) + var(--ctl) + 1rem);width:max-content;max-width:90vw;text-align:center}
+  /* telefoni bassi (iPhone SE): intro del progetto piu' compatta, non finisce sotto la barra */
+  @media (max-height:700px){.xp-pan{padding-top:7.6rem}.sub h1.xp-name,.xp-name{font-size:clamp(2.4rem,12vw,3.4rem)}.xp-meta{gap:.5rem 1.6rem}}
+  /* archivio in home: testo in alto, card sotto */
+  .arch-copy{left:5vw;right:5vw;width:auto;top:7.4rem;transform:none}
+  .arch-copy h2{font-size:clamp(2rem,9vw,2.6rem);margin-bottom:.7rem}
+  .arch-copy p.l2{margin-bottom:1rem;font-size:.92rem;line-height:1.5}
+  /* fuori dalla Home il contenuto non scorre piu' sotto logo e menu */
+  body:not([data-page=home]) header::before{content:'';position:absolute;left:0;right:0;top:0;height:calc(4.1rem + var(--ctl) + 1.2rem);background:linear-gradient(to bottom,var(--bg) 78%,transparent);pointer-events:none;z-index:-1}
+  body:not([data-page=home]) main,body:not([data-page=home]) footer{scroll-margin-top:7rem}
+  .stack{left:8vw;right:8vw;width:auto;top:auto;bottom:calc(var(--gy) + var(--ctl) + 1.6rem);height:min(calc(100svh - 33rem),300px);transform:none}
+}
 </style>
 </head>
 <body data-page="home" class="pre">
@@ -683,6 +705,8 @@ body:not([data-page=home]) #chint{display:none}
 <script src="js/ScrollTrigger.min.js"></script>
 <script>
 const RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+/* telefono e tablet: stessa esperienza, ma con meno memoria grafica (iOS Safari chiude la pagina se i layer 3D pesano troppo) */
+const LITE=matchMedia('(max-width:760px),(hover:none) and (pointer:coarse)').matches;if(LITE)document.documentElement.classList.add('lite');
 gsap.registerPlugin(ScrollTrigger);
 const $=id=>document.getElementById(id);
 const pad=n=>String(n).padStart(2,'0');
@@ -820,7 +844,10 @@ const sphere=$('sphere'),sscene=$('sscene'),scene=$('scene'),hub=$('hub'),R=330,
 const rot={x:14,y:0};
 const S={aim:0,hubO:1,wo:0,v:0,f:0,s:0,oth:0,push:0,sh:0,roll:0,gz:0};       // stato guidato dallo scroll
 const F={f:0,push:0,roll:0};
-const PERSP=1500,CS=.25,PUSH=770,SH=22,ctl={ex:0,ey:0};                    // stato guidato dal click sulla card
+const PERSP=1500,CS=.25,ctl={ex:0,ey:0};
+/* su telefono la card "me." sta tutta nello schermo, centrata e un po' in alto (sotto c'e' il testo) */
+const SH=LITE?0:22,SHY=LITE?14:0,PUSH=LITE?Math.min(770,PERSP-330-CS*PERSP/(document.documentElement.clientWidth*.86/660)):770;
+const CSC=CS/(LITE?.6:1);   // su mobile la card e' disegnata al 60% (vedi .lite .card) e scalata di piu': stessa resa, ~1/3 della memoria                    // stato guidato dal click sulla card
 let focused=null,idx=0,drag=false,armed=false,lx=0,ly=0,dmov=0,spunAt=0,mx=0,w=9,wx=0,qy=0,qx=0,dir=1,tgt=null,vs=[];
 
 /* posizioni: la card 0 (tu) sta al centro-fronte; le altre su una sfera di Fibonacci
@@ -843,7 +870,7 @@ const cards=items.map((p,i)=>{
   const c=document.createElement('div');c.className='card'+(p.me?' me':'');
   c.innerHTML=`<div class="cback"></div><div class="cface">${cardHTML(p,i,true)}</div>`;
   c._face=c.querySelector('.cface');c._back=c.querySelector('.cback');c._ph=Math.random()*6.28;c._d=i===0?0:.06+Math.random()*.36;
-  c._base=`translate3d(${P[i].x}px,${P[i].y}px,${P[i].z}px) rotateY(${P[i].ry}deg) rotateX(${P[i].rx}deg) scale(${CS})`;
+  c._base=`translate3d(${P[i].x}px,${P[i].y}px,${P[i].z}px) rotateY(${P[i].ry}deg) rotateX(${P[i].rx}deg) scale(${CSC})`;
   c.style.transform=c._base;
   c.onclick=()=>{if(performance.now()-spunAt<250)return;if(focused===c){p.me?turnPage(dirTo('about'),()=>go('about')):turnPage(1,()=>openProject(p.i));return}i===0?goStage():focusCard(i)};   // dopo un trascinamento non apre la card
   sphere.appendChild(c);return c});
@@ -857,18 +884,20 @@ function loopShow(c,to){
   const show=()=>{
     el.style.transition='none';el.classList.remove('on');void el.offsetWidth;el.style.transition='';
     el.style.zIndex=c._z=(c._z||1)+1;el.classList.add('on');c._li=nx;
-    setTimeout(()=>{c._busy=0},1100)};
+    setTimeout(()=>{c._busy=0;if(LITE&&c._li!==cur)ls[cur].style.backgroundImage=''},1100)};   // su mobile la foto precedente si libera: in memoria restano al massimo 2 foto per card
   c._busy=1;
   if(el.style.backgroundImage)show();
   else{const im=new Image();im.src=el.dataset.src;(im.decode?im.decode():Promise.resolve()).then(()=>{el.style.backgroundImage=`url('${el.dataset.src}')`;show()},()=>{c._busy=0})}
 }
+loopStep.n=0;
 function loopStep(){
   if(RM||document.hidden||document.body.dataset.page!=='home'||INTRO.p<1||scrollY>innerHeight*2)return;
+  if(LITE){if(focused||++loopStep.n%3)return;const vis=loopCards.filter(c=>c._nz>.25&&c._v!=='hidden');if(vis.length)loopShow(vis[Math.random()*vis.length|0]);return}   // su mobile solo le card davanti, piu' lentamente
   if(!loopBag.length)loopBag=loopCards.slice().sort(()=>Math.random()-.5);
   loopShow(loopBag.pop());
 }
 /* Cases: sopra la card le foto scorrono una dopo l'altra; uscendo torna la copertina */
-document.addEventListener('pointerover',e=>{const c=e.target.closest&&e.target.closest('.pc');if(!c||c._hov||RM)return;c._hov=setInterval(()=>loopShow(c),1100);setTimeout(()=>loopShow(c),150)});
+document.addEventListener('pointerover',e=>{const c=e.target.closest&&e.target.closest('.pc');if(!c||c._hov||RM||LITE)return;c._hov=setInterval(()=>loopShow(c),1100);setTimeout(()=>loopShow(c),150)});
 document.addEventListener('pointerout',e=>{const c=e.target.closest&&e.target.closest('.pc');if(!c||c.contains(e.relatedTarget))return;clearInterval(c._hov);c._hov=0;setTimeout(()=>loopShow(c,0),c._busy?1100:0)});
 setInterval(loopStep,425);
 
@@ -890,7 +919,7 @@ function render(){
   const f=Math.max(F.f,S.f),push=Math.max(F.push,S.push);
   sphere.style.transform=`rotateX(${ex}deg) rotateY(${ey}deg)`;
   sscene.style.transform=`translateZ(${push.toFixed(1)}px)`;
-  const ox=(50+S.sh*SH).toFixed(2)+'%';scene.style.perspectiveOrigin=ox+' 50%';hub.style.left=ox;
+  const ox=(50+S.sh*SH).toFixed(2)+'%',oy=(50-S.sh*SHY).toFixed(2)+'%';scene.style.perspectiveOrigin=ox+' '+oy;hub.style.left=ox;if(SHY)hub.style.top=oy;
   const a=ex*Math.PI/180,b=ey*Math.PI/180,cb=Math.cos(b),sb=Math.sin(b),ca=Math.cos(a),sa=Math.sin(a);
   const T=performance.now()/1000;
   const dtc=Math.min(.25,T-(render._t||T));render._t=T;const fl_=focused&&focused.classList.contains('flipped')?1:0;calm+=(fl_-calm)*(1-Math.exp(-dtc*3));hideO+=(fl_-hideO)*(1-Math.exp(-dtc*9));      // le altre card smettono di fluttuare quando la card viene girata
@@ -908,7 +937,7 @@ function render(){
      c._nz=nz}
     const isFoc=focused===c,sharp=isFoc||(i===0&&S.s>.99&&S.oth>.01);
     let fl;
-    if(sharp)fl='none';
+    if(sharp||LITE)fl='none';   // su mobile niente blur sulle card 3D: e' la cosa che piu' pesa sulla GPU
     else{
       // sfocatura a gradini (in px dello schermo) e solo sul lato della card che si vede: meno lavoro per la GPU
       const q=Math.round(coc/26*12)/12,lb=coc<.5?0:Math.exp(Math.round(Math.log(coc/scr)*10)/10);
@@ -922,11 +951,11 @@ function render(){
     if(i>0)op*=(1-S.oth)*(1-.6*S.s);
     op*=Math.min(1,ik*1.6);
     const o=op.toFixed(3);
-    if(c._o!==o){c._face.style.opacity=o;c._back.style.opacity=(op*.65).toFixed(3);c._o=o;const vv=op<.01?'hidden':'visible';if(c._v!==vv){c.style.visibility=vv;c._v=vv}}
+    if(c._o!==o){c._face.style.opacity=o;c._back.style.opacity=(op*(LITE?.3:.65)).toFixed(3);c._o=o;const vv=op<.01?'hidden':'visible';if(c._v!==vv){c.style.visibility=vv;c._v=vv}}
     let am=ampB;if(isFoc)am=0;if(i===0)am*=(1-S.s);
     if(op<.01){}
     else if(am>.002||ik<1){const ph=c._ph,m=L(.3,1,ik),sp=(1-ik)*50;
-      c.style.transform=`translate3d(${(p.x*m+Math.sin(T*.31+ph)*5*am).toFixed(1)}px,${(p.y*m+Math.sin(T*.37+ph*1.7)*8*am).toFixed(1)}px,${(p.z*m).toFixed(1)}px) rotateY(${(p.ry+sp+Math.sin(T*.23+ph*2.1)*6*am).toFixed(2)}deg) rotateX(${(p.rx+Math.sin(T*.29+ph*.7)*5*am).toFixed(2)}deg) rotateZ(${(Math.sin(T*.19+ph*1.3)*4*am).toFixed(2)}deg) scale(${CS})`;c._fa=1}
+      c.style.transform=`translate3d(${(p.x*m+Math.sin(T*.31+ph)*5*am).toFixed(1)}px,${(p.y*m+Math.sin(T*.37+ph*1.7)*8*am).toFixed(1)}px,${(p.z*m).toFixed(1)}px) rotateY(${(p.ry+sp+Math.sin(T*.23+ph*2.1)*6*am).toFixed(2)}deg) rotateX(${(p.rx+Math.sin(T*.29+ph*.7)*5*am).toFixed(2)}deg) rotateZ(${(Math.sin(T*.19+ph*1.3)*4*am).toFixed(2)}deg) scale(${CSC})`;c._fa=1}
     else if(c._fa){c.style.transform=c._base;c._fa=0}
   }
 }
@@ -1073,7 +1102,7 @@ function render2(){
   acards.forEach((c,i)=>{
     const rel=i-p;let y,z,sc,op,rt;
     if(rel<0){y=rel*520;z=0;sc=1+(-rel)*.04;op=Math.max(0,1+rel*1.4);rt=rel*5}
-    else{y=-rel*28;z=-rel*90;sc=1-rel*.05;op=Math.max(0,1-rel*.22);rt=0}
+    else{y=-rel*(LITE?12:28);z=-rel*90;sc=1-rel*.05;op=Math.max(0,1-rel*.22);rt=0}
     c.style.transform=`translate3d(0,${y.toFixed(1)}px,${z.toFixed(1)}px) rotate(${rt.toFixed(2)}deg) scale(${sc.toFixed(3)})`;
     c.style.opacity=op.toFixed(3);c.style.zIndex=String(AN-i);
   });
@@ -1102,7 +1131,7 @@ function setView(v){
 /* PAGINA PROGETTO: una striscia orizzontale. Lo scroll verticale (rotella, trackpad, dito) la fa scorrere di lato, veloce (SPD).
    In fondo c'e' una "molla": continuando a scorrere, nel riquadro del progetto successivo compare la sua prima foto;
    piena = si apre il progetto dopo, se ti fermi prima torna indietro da solo. All'inizio, la stessa molla all'indietro */
-const PIMG=k=>PHOTO_DIR+'web/'+k+'.webp';
+const PIMG=k=>PHOTO_DIR+(LITE?'web/s/':'web/')+k+'.webp';   // su mobile le foto da 1100px bastano e pesano meta' in memoria
 const SPD=2.7,            // px orizzontali per ogni px di scroll: i progetti si sfogliano in fretta
       SPRING=.85,         // lunghezza della molla, in altezze di schermo
       WIDE=1.9;           // foto piu' larghe di cosi' vanno a tutto schermo
@@ -1330,7 +1359,7 @@ let lastT=performance.now();
    SCROLL: sfera -> tua card -> teaser video -> 3 progetti -> archivio
    ===================================================================== */
 const cwid=()=>document.documentElement.clientWidth;
-const cardR=()=>{const sc=CS*PERSP/(PERSP-R-PUSH),cx=cwid()*(.5+SH/100),cy=innerHeight/2;return{left:cx-330*sc,top:cy-220*sc,width:660*sc,height:440*sc,borderRadius:0}};
+const cardR=()=>{const sc=CS*PERSP/(PERSP-R-PUSH),cx=cwid()*(.5+SH/100),cy=innerHeight*(.5-SHY/100);return{left:cx-330*sc,top:cy-220*sc,width:660*sc,height:440*sc,borderRadius:0}};
 const landR=cx=>{const w=Math.min(cwid()*.4,600),h=w*.6;return{left:cx-w/2,top:innerHeight/2-h/2,width:w,height:h,borderRadius:0}};
 const kkk=()=>Math.max(.5,Math.min(1,innerHeight*.62/440));
 const centerR=()=>{const d=slideDims(),c=$('car').getBoundingClientRect();return{left:(c.width?c.left+c.width/2:cwid()/2)-d.w/2,top:innerHeight*.56-d.h/2,width:d.w,height:d.h,borderRadius:0}};
@@ -1416,7 +1445,10 @@ document.addEventListener('click',e=>{
 const rvIO=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');rvIO.unobserve(e.target)}}),{threshold:.15});
 document.querySelectorAll('.rv').forEach(el=>rvIO.observe(el));
 addEventListener('keydown',e=>{if(e.key!=='Enter')return;const el=document.activeElement;if(el&&el.matches&&el.matches('.lrow,.pc')){e.preventDefault();el.click()}});
-addEventListener('resize',()=>{layout();ScrollTrigger.refresh()});
+let lastW=innerWidth;
+addEventListener('resize',()=>{
+  if(LITE){if(innerWidth===lastW)return;lastW=innerWidth}   // su mobile la barra degli indirizzi cambia l'altezza a ogni scroll: si ricalcola solo se cambia la larghezza
+  layout();ScrollTrigger.refresh()});
 rebuild();
 go('home');
 
