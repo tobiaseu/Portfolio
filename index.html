@@ -95,42 +95,33 @@ body.pre .g-wrap{opacity:0;transform:translateY(18px)}
 body.pre .hin{opacity:0;transition:none}
 body.focus .g-wrap{opacity:0}
 #gt{font-size:clamp(2.5rem,7vw,5.5rem);line-height:1;white-space:nowrap;transition:opacity .28s cubic-bezier(.23,1,.32,1),transform .28s cubic-bezier(.23,1,.32,1)}
-.card{position:absolute;left:0;top:0;width:600px;height:440px;margin:-220px 0 0 -300px;transform-style:preserve-3d;cursor:pointer;will-change:transform}
+.card{position:absolute;left:0;top:0;width:704px;height:440px;margin:-220px 0 0 -352px;transform-style:preserve-3d;cursor:pointer;will-change:transform}
 .cback{position:absolute;inset:0;transform-style:preserve-3d}
 .cback{border-radius:0;background:var(--card);transform:translateZ(-.5px) rotateY(180deg);backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:0 30px 70px rgba(0,0,0,.22)}
 .cback::after{content:'tobia seu';position:absolute;left:0;right:0;bottom:34px;text-align:center;font:600 20px var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--ctext);opacity:.3}
 .cface{position:absolute;inset:0;transform:translateZ(.5px);backface-visibility:hidden;-webkit-backface-visibility:hidden}
 .flip{position:absolute;inset:0;transform-style:preserve-3d;perspective:1600px;transition:transform .5s cubic-bezier(.23,1,.32,1)}
-.card-in{position:absolute;inset:0;border-radius:0;background:var(--card);color:var(--ctext);box-shadow:0 34px 80px rgba(0,0,0,.24);padding:0;display:flex;flex-direction:column;gap:0;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;transition:transform .9s cubic-bezier(.23,1,.32,1)}
+.card-in{position:absolute;inset:0;border-radius:0;background:#000;color:#fff;box-shadow:0 34px 80px rgba(0,0,0,.24);padding:0;display:flex;flex-direction:column;gap:0;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;transition:transform .9s cubic-bezier(.23,1,.32,1)}
 .card-in.back{transform:rotateY(180deg);justify-content:center;gap:12px;padding:44px 40px}
 .flipped .card-in.front{transform:rotateY(-180deg)}
 .flipped .card-in.back{transform:rotateY(0)}
 body.top:not(.focus) .card:hover .flip{transform:scale(1.16)}
 .pc:hover .flip{transform:translateY(-8px)}
-.photo{flex:1;min-height:0;border-radius:0;background-size:cover;background-position:center;background-color:#555;pointer-events:none;overflow:hidden}
+.photo{position:absolute!important;inset:0;z-index:0;border-radius:0;background-size:cover;background-position:center;background-color:#555;pointer-events:none;overflow:hidden}
 /* loop di 3 foto nella card della sfera (insieme, dettaglio, particolare): la nuova entra scorrendo da destra */
 .photo .pl{position:absolute;inset:0;background-size:cover;background-position:center;clip-path:inset(0 0 0 100%);transform:scale(1.06);transition:clip-path 1.5s cubic-bezier(.65,0,.35,1),transform 2.6s cubic-bezier(.23,1,.32,1)}
 .photo .pl.on{clip-path:inset(0);transform:none}
-.cap{height:92px;flex:none;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:0 24px;pointer-events:none}
-.cap small,.lcap small{display:block;font:500 13px var(--sans);letter-spacing:.12em;text-transform:uppercase;opacity:.55;margin-bottom:8px}
-.cap b{display:block;font:600 32px/1 var(--sans);letter-spacing:-.03em}
-.cap .cr{text-align:right;font-size:15px;opacity:.7;line-height:1.5}
-.cap em,.cap .cr em{display:block;font:14px ui-monospace,monospace;opacity:.6;font-style:normal}
-.more{flex:none;display:grid;grid-template-rows:0fr;opacity:0;transform:translateY(14px);transition:grid-template-rows 1s cubic-bezier(.23,1,.32,1),opacity .9s cubic-bezier(.23,1,.32,1) .1s,transform 1s cubic-bezier(.23,1,.32,1);padding:0 24px}
-.more .mi{min-height:0;overflow:hidden}
-.more p{margin:0 0 16px;font-size:15px;line-height:1.5;max-width:34ch;text-wrap:pretty;opacity:0;transform:translateY(10px);transition:opacity .6s cubic-bezier(.23,1,.32,1),transform .8s cubic-bezier(.23,1,.32,1)}
-.more .row2{opacity:0;transform:translateY(12px) scale(.98);transition:opacity .6s cubic-bezier(.23,1,.32,1),transform .8s cubic-bezier(.23,1,.32,1)}
-.card.open .more p{opacity:.78;transform:none;transition-delay:.12s}
-.card.open .more .row2{opacity:1;transform:none;transition-delay:.55s}
-.card:not(.open) .more p,.card:not(.open) .more .row2{transition-duration:.25s;transition-delay:0s}
-.row2{display:flex;gap:10px;justify-content:space-between;align-items:center}
-.row2 .btn,.row2 .btn-o{flex:none;font-size:14px;padding:.75rem 1.5rem;white-space:nowrap}
-.row2 .num{font:14px ui-monospace,monospace;opacity:.45;font-style:normal;padding-right:6px}
-.card-in .btn-o{color:var(--ctext);background:color-mix(in srgb,var(--ctext) 13%,transparent);border-color:color-mix(in srgb,var(--ctext) 28%,transparent);backdrop-filter:none}
-.card.open .more{grid-template-rows:1fr;opacity:1;transform:none}
-.card .card-in.front{transition:transform .9s cubic-bezier(.23,1,.32,1),inset 1s cubic-bezier(.23,1,.32,1)}
-.card.open .card-in.front{inset:-68px 0}   /* aperta: la card si allunga e la foto resta grande */
-.card:not(.open) .more *{pointer-events:none}
+.cap{position:absolute;z-index:1;left:0;right:0;bottom:0;padding:150px 30px 26px;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;pointer-events:none;color:#fff;background:linear-gradient(to top,#000 0%,rgba(0,0,0,.72) 32%,rgba(0,0,0,0) 100%)}
+.lcap small{font-size:15px!important;letter-spacing:0!important;text-transform:none!important}
+.cap small,.lcap small{display:block;font:500 17px var(--sans);opacity:.72;margin-bottom:8px}
+.cap b{display:block;font:600 44px/1 var(--sans);letter-spacing:-.04em}
+.cap .cr{text-align:right;font-size:17px;opacity:.72;line-height:1.5;flex:none}
+.cap .sh{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .9s cubic-bezier(.23,1,.32,1),opacity .7s cubic-bezier(.23,1,.32,1)}
+.cap .sh span{min-height:0;overflow:hidden;max-width:40ch;font-size:17px;line-height:1.45;padding-top:12px}
+.card.open .cap .sh{grid-template-rows:1fr;opacity:.82}
+/* card "me": solo la parola, nero su bianco */
+.card-in.mecard{background:#fff;color:#000;display:grid;place-items:center}
+.card-in.mecard b{font:600 190px/1 var(--sans);letter-spacing:-.06em}
 .turn{position:absolute;right:18px;top:18px;z-index:4;width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.9);color:#111;display:grid;place-items:center;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.25);transition:transform .2s cubic-bezier(.23,1,.32,1),opacity .4s cubic-bezier(.23,1,.32,1)}
 .turn:hover{transform:rotate(-30deg)}
 .turn svg{width:20px;height:20px}
@@ -142,13 +133,16 @@ body.top:not(.focus) .card:hover .flip{transform:scale(1.16)}
 .card-in.back i{font-size:22px;opacity:.7}
 .card-in.back p{margin:10px 0 0;font-size:17px;line-height:1.6;opacity:.8}
 .fnav{position:fixed;z-index:160;opacity:0;visibility:hidden;transition:opacity .4s}
-#fworld{z-index:170}
 body.focus .fnav{opacity:1;visibility:visible}
-#fprev{left:calc(50% - 356px);top:50%;margin-top:-22px}#fnext{left:calc(50% + 312px);top:50%;margin-top:-22px}#fx{right:3rem;top:5.5rem}
+#fprev{left:calc(50% - 402px);top:50%;margin-top:-22px}#fnext{left:calc(50% + 358px);top:50%;margin-top:-22px}#fx{right:3rem;top:5.5rem}
 @media(max-width:760px){#fprev,#fnext{display:none}}
 .hint{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);z-index:20;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);pointer-events:none;text-align:center}
 #closehint{display:none}
-#fworld{background:var(--nav);left:50%;margin-left:-88px;width:176px;top:calc(50vh + 300px)}
+/* card aperta: le azioni stanno fuori, sotto la card, centrate (ritorno a sinistra, progetto a destra) */
+#fcta{left:50%;top:calc(50vh + 234px);transform:translateX(-50%);display:flex;gap:12px;z-index:170}
+#fcta:active{transform:translateX(-50%)}
+#fcta .btn,#fcta .btn-o{padding:.8rem 1.6rem;font-size:.85rem;white-space:nowrap}
+#fworld{background:rgba(255,255,255,.18);border:1.5px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.08),0 10px 30px rgba(0,0,0,.08);color:var(--text)}
 body.focus #hint{visibility:hidden}
 .copy{position:absolute;left:6vw;top:50%;width:min(42vw,520px);z-index:10;pointer-events:none}
 .copy a,.copy button{pointer-events:auto}
@@ -167,8 +161,8 @@ body.focus #hint{visibility:hidden}
 
 :root{--k:1}
 /* card di progetto (stessa card della sfera) */
-.pcw{position:relative;width:calc(600px*var(--k));height:calc(440px*var(--k));flex:none}
-.pc{position:absolute;left:0;top:0;width:600px;height:440px;transform:scale(var(--k));transform-origin:0 0;cursor:pointer}
+.pcw{position:relative;width:calc(704px*var(--k));height:calc(440px*var(--k));flex:none}
+.pc{position:absolute;left:0;top:0;width:704px;height:440px;transform:scale(var(--k));transform-origin:0 0;cursor:pointer}
 .pc .turn{opacity:1;pointer-events:auto}
 .pc .card-in{box-shadow:0 24px 60px rgba(0,0,0,.18)}
 /* filtri e vista */
@@ -209,16 +203,17 @@ body[data-view=list] .pgrid{display:none}
 .w-head h2{margin:0;font-size:clamp(2.2rem,4.6vw,4rem);font-weight:500;letter-spacing:-.03em;line-height:1}
 .w-head .kicker{margin-bottom:.8rem}
 .car{perspective:1500px;perspective-origin:50% 50%;position:absolute;left:0;right:0;top:56%;height:var(--sh,520px);margin-top:calc(var(--sh,520px)/-2);cursor:grab;user-select:none;-webkit-user-select:none;touch-action:pan-y}
-.ls{position:absolute;left:50%;top:0;width:var(--sw,1000px);height:var(--sh,520px);margin-left:calc(var(--sw,1000px)/-2);border-radius:0;background:var(--card);color:var(--ctext);padding:0;display:flex;flex-direction:column;gap:0;box-shadow:0 30px 70px rgba(0,0,0,.2);cursor:pointer;will-change:transform,opacity}
+.ls{position:absolute;left:50%;top:0;width:var(--sw,1000px);height:var(--sh,520px);margin-left:calc(var(--sw,1000px)/-2);border-radius:0;background:#000;color:#fff;padding:0;overflow:hidden;display:flex;flex-direction:column;gap:0;box-shadow:0 30px 70px rgba(0,0,0,.2);cursor:pointer;will-change:transform,opacity}
 .ls .photo{flex:1;min-height:0}
+.ls .lcap{position:absolute;left:0;right:0;bottom:0;height:auto!important;padding:120px 26px 22px!important;align-items:flex-end!important;background:linear-gradient(to top,#000,rgba(0,0,0,.7) 34%,rgba(0,0,0,0))}
 .ls .lcap{height:88px;flex:none;display:flex;justify-content:space-between;align-items:center;padding:0 24px}
 .ls .lcap b{display:block;font:600 30px/1 var(--sans);letter-spacing:-.03em}
 .ls .lcap i{display:block;font-size:15px;font-style:normal;opacity:.7}
 .ls .lcap div:last-child{display:flex;align-items:center;gap:1.4rem}
 .ls .lcap em{font:14px ui-monospace,monospace;opacity:.45;font-style:normal}
 .ls .btn{font-size:14px;padding:.75rem 1.4rem}
-.ls .btn{background:color-mix(in srgb,var(--ctext) 18%,transparent);color:var(--ctext);border-color:color-mix(in srgb,var(--ctext) 14%,transparent)}
-.ls .btn:hover{background:color-mix(in srgb,var(--ctext) 28%,transparent)}
+.ls .btn{background:transparent;color:#fff;border:1.5px solid #fff}
+.ls .btn:hover{background:#fff;color:#000}
 .llist.home{position:absolute;left:51vw;right:6vw;top:50%;transform:translateY(-50%)}
 .arch-wrap{height:420vh}
 .arch-vp{position:sticky;top:0;height:100vh;overflow:hidden;background:var(--bg);transition:background .5s}
@@ -226,17 +221,18 @@ body[data-view=list] .pgrid{display:none}
 .arch-copy h2{margin:0 0 1.2rem;font-size:clamp(2.4rem,5.4vw,4.6rem);font-weight:500;letter-spacing:-.03em;line-height:1}
 .arch-copy p.l2{color:var(--muted);line-height:1.65;max-width:38ch;margin:0 0 1.8rem}
 .stack{position:absolute;right:9vw;top:50%;width:min(44vw,600px);height:min(54vh,420px);transform:translateY(-50%);perspective:1400px}
-.acard{position:absolute;inset:0;border-radius:0;overflow:hidden;background:var(--card);box-shadow:0 30px 70px rgba(0,0,0,.25);will-change:transform,opacity;color:#fff}
-.acard .ph{position:absolute;inset:0 0 74px 0;background-size:cover;background-position:center}
-.acard .am{position:absolute;left:1.4rem;bottom:0;height:74px;display:flex;flex-direction:column;justify-content:center;color:var(--ctext)}
-.acard .am small{font:500 .62rem var(--sans);letter-spacing:.12em;text-transform:uppercase;opacity:.55;margin-bottom:.35rem}
+.acard{position:absolute;inset:0;border-radius:0;overflow:hidden;background:#000;box-shadow:0 30px 70px rgba(0,0,0,.25);will-change:transform,opacity;color:#fff}
+.acard .ph{position:absolute;inset:0;background-size:cover;background-position:center}
+.acard::after{content:'';position:absolute;inset:auto 0 0 0;height:55%;background:linear-gradient(to top,#000,rgba(0,0,0,0))}
+.acard .am{position:absolute;z-index:2;left:1.4rem;bottom:1.2rem;display:flex;flex-direction:column;color:#fff}
+.acard .am small{font-size:.8rem;opacity:.72;margin-bottom:.35rem}
 .acard .am b{display:block;font-size:1.4rem;font-weight:600;letter-spacing:-.03em;line-height:1}
-.acard .an{position:absolute;right:1.4rem;bottom:0;height:74px;display:flex;align-items:center;color:var(--ctext);opacity:.6;font:.7rem ui-monospace,monospace;letter-spacing:.12em}
+.acard .an{position:absolute;z-index:2;right:1.4rem;bottom:1.2rem;color:#fff;opacity:.72;font:.7rem ui-monospace,monospace;letter-spacing:.12em}
 /* pagine Cases / Archive */
 .tools-row{display:flex;gap:1.5rem;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:2.5rem}
 .tools-row .vt{margin:0}
 .pgrid{--pk:.5;display:grid;gap:44px 24px;justify-content:space-between}
-.pgrid .pcw{width:calc(600px*var(--pk));height:calc(440px*var(--pk))}
+.pgrid .pcw{width:calc(704px*var(--pk));height:calc(440px*var(--pk))}
 .pgrid .pc{transform:scale(var(--pk))}
 /* pagina progetto */
 .pj-hero{aspect-ratio:16/8;border-radius:0;background-size:cover;background-position:center;background-color:#555;margin:2.5rem 0}
@@ -378,17 +374,39 @@ body[data-page=project] #project{padding:0;min-height:0}
 .xp-facts b{font-size:clamp(1.4rem,2.3vw,2.3rem);font-weight:600;letter-spacing:-.04em;line-height:1}
 .xp-facts span{font-size:.78rem;color:var(--muted);text-align:right}
 /* fine: prossimo progetto */
-.xp-next{flex:none;width:min(78vw,1100px);display:grid;grid-template-columns:1fr 1.25fr;gap:2.5rem;align-items:end;padding:7.5rem 0 5.5rem;border:0;background:none;color:var(--text);text-align:left;cursor:pointer;font:inherit}
-.xp-next small{display:block;font:.72rem ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-.xp-next .kicker{margin:1.4rem 0 .6rem}
-.xp-next b{display:block;font-size:clamp(3rem,7vw,7.5rem);font-weight:600;letter-spacing:-.05em;line-height:.9;transition:transform .6s cubic-bezier(.23,1,.32,1)}
-.xp-next .go{display:inline-block;margin-top:1.4rem;font-size:.85rem;color:var(--muted)}
-.xp-next .fr{aspect-ratio:16/10;background-size:cover;background-position:center;background-color:#d9d9dc;transition:transform .8s cubic-bezier(.23,1,.32,1)}
-.xp-next:hover b{transform:translateX(14px)}.xp-next:hover .fr{transform:scale(.98)}
-.xp-next:focus-visible{outline:2px solid var(--text);outline-offset:6px}
+/* progetto a tutto schermo: niente header, menu, interruttore tema e footer */
+body[data-page=project] header,body[data-page=project] .theme-switch,body[data-page=project] #rail,body[data-page=project] footer{display:none}
+.xp-close{position:absolute;right:6vw;top:1.6rem;z-index:3}
+.xp-client{margin:0;font-size:1rem;color:var(--muted)}
+/* fine progetto: riquadro bianco con bordo nero che si riempie di nero scorrendo (pieni e vuoti) */
+.xp-end{width:min(72vw,1040px);justify-content:center;gap:1.4rem}
+.xp-frame{position:relative;display:block;width:100%;height:calc(100svh - 16rem);border:1.5px solid var(--text);background:var(--bg);color:#fff;padding:0;cursor:pointer;overflow:hidden;text-align:left;font:inherit}
+.xp-fill{position:absolute;inset:0;background:var(--text);transform-origin:0 50%;transform:scaleX(0)}
+.xp-ink{position:absolute;left:clamp(1.4rem,3vw,3rem);right:clamp(1.4rem,3vw,3rem);bottom:clamp(1.4rem,3vw,2.6rem);mix-blend-mode:difference;display:flex;flex-direction:column;gap:.9rem}
+.xp-ink small{font-size:1rem}
+.xp-ink b{font-size:clamp(3.4rem,9vw,9.5rem);font-weight:600;letter-spacing:-.055em;line-height:.86}
+.xp-ink em{font-style:normal;font-size:.95rem;display:flex;justify-content:space-between}
+.xp-frame:focus-visible{outline:2px solid var(--text);outline-offset:6px}
+.xp-endnav{display:flex;justify-content:space-between;gap:1rem}
+/* barra di stato: avanzamento del progetto; alla fine diventa "scorri per il prossimo" */
+.xp-bar .ln .sp{background:var(--text);transform-origin:0 50%;transform:scaleX(0);opacity:0;transition:opacity .3s}
+.xp-bar .nx{display:none;border:0;background:none;padding:0;font:inherit;letter-spacing:inherit;text-transform:inherit;color:var(--text);cursor:pointer;pointer-events:auto}
+.xp-bar.end .ln{height:3px}.xp-bar.end .ln i:first-child{opacity:.18}.xp-bar.end .ln .sp{opacity:1}
+.xp-bar.end .c{display:none}.xp-bar.end .nx{display:inline}
+/* transizione tra le pagine: banda morbida bianco/nero solo al centro dello schermo */
+#pt{position:fixed;inset:0;z-index:500;pointer-events:none;overflow:hidden}
+#pt-band{position:absolute;left:15vw;top:0;width:70vw;height:100%;opacity:0;will-change:transform,opacity;
+  background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.92) 22%,rgba(20,20,20,.5) 50%,rgba(255,255,255,.92) 78%,transparent 100%);
+  -webkit-mask-image:radial-gradient(60% 52% at 50% 50%,#000 30%,transparent 100%);mask-image:radial-gradient(60% 52% at 50% 50%,#000 30%,transparent 100%);filter:blur(24px)}
+@media(max-width:760px){
+  .xp-close{right:5vw;top:1rem}
+  .xp-end{width:88vw}
+  .xp-frame{height:calc(100svh - 19rem)}
+  .xp-endnav{flex-direction:column}
+}
 /* barra in basso: nome, avanzamento, contatore */
-.xp-bar{position:absolute;left:calc(2rem + 190px);right:6vw;bottom:1.7rem;display:grid;grid-template-columns:1fr minmax(120px,38vw) 1fr;gap:1.5rem;align-items:center;font:.68rem ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);pointer-events:none}
-.xp-bar .ln{height:1px;background:var(--border);position:relative;overflow:hidden}
+.xp-bar{position:absolute;left:6vw;right:6vw;bottom:1.7rem;display:grid;grid-template-columns:1fr minmax(120px,38vw) 1fr;gap:1.5rem;align-items:center;font:.68rem ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);pointer-events:none}
+.xp-bar .ln{height:1px;background:var(--border);position:relative;overflow:hidden;transition:height .3s}
 .xp-bar .ln i{position:absolute;inset:0;background:var(--text);transform-origin:0 50%;transform:scaleX(0)}
 .xp-bar .r{text-align:right}
 .xp-back{align-self:flex-start;margin-bottom:1.6rem}
@@ -402,8 +420,7 @@ body[data-page=project] #project{padding:0;min-height:0}
   .xp-fig{--fh:min(calc(100svh - 15.6rem),118vw)}
   .xp-txt,.xp-facts{width:80vw}.xp-say{width:86vw}
   .xp-say p{font-size:1.7rem}
-  .xp-next{width:88vw;grid-template-columns:1fr;gap:1.4rem;align-content:end}
-  .xp-bar{bottom:1.75rem;left:calc(1rem + 186px);right:5vw;grid-template-columns:1fr auto;gap:.8rem}
+  .xp-bar{bottom:1.2rem;left:5vw;right:5vw;grid-template-columns:1fr auto;gap:.8rem}
   .xp-bar .t{display:none}
 }
 
@@ -441,6 +458,7 @@ body[data-page=project] #project{padding:0;min-height:0}
 </div>
 
 <!-- cursore: appare sopra la sfera e sul carosello -->
+<div id="pt" aria-hidden="true"><div id="pt-band"></div></div>
 <div id="cur" data-k="globe"><div class="cur-in">
   <svg class="ic-arrows" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M3 12h18"/></svg>
   <svg class="ic-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18M5 7.5h14M5 16.5h14"/></svg>
@@ -449,7 +467,7 @@ body[data-page=project] #project{padding:0;min-height:0}
 
 <button class="btn-o round fnav" id="fprev" aria-label="Precedente">&#8249;</button>
 <button class="btn-o round fnav" id="fnext" aria-label="Successivo">&#8250;</button>
-<button class="btn-o fnav" id="fworld" data-act="world">Return to world</button>
+<div class="fnav" id="fcta"><button class="btn-o" id="fworld" data-act="world">Return to world</button><button class="btn" id="fcase">View case study</button></div>
 
 <!-- HOME -->
 <div class="page" id="home">
@@ -751,10 +769,10 @@ const P=fibA.map(v=>{const q=rot0(v).map(t=>t*R);return{x:q[0],y:q[1],z:q[2],ry:
 P[0]={x:0,y:0,z:R,ry:0,rx:0};
 const TURN='<button class="turn" aria-label="Gira la card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8M21 3v5h-5M21 12a9 9 0 0 1-15.5 6.2L3 16M3 21v-5h5"/></svg></button>';
 function cardHTML(p,n,sph){
-  const act=p.me?'<button class="btn" data-go="about">About me</button>':`<button class="btn" data-proj="${p.i}">View case study ↗</button>`;
-  const more=sph?`<div class="more"><div class="mi"><p>${p.short}</p><div class="row2">${act}<em class="num">${pad(n+1)}</em></div></div></div>`:'';
   const lp=sph&&p.loop?p.loop.map((k,j)=>`<i class="pl${j?'':' on'}" data-src="${WEBS(k)}"${j?'':` style="background-image:url('${p.local}')"`}></i>`).join(''):'';
-  return `<div class="flip"><div class="card-in front">${TURN}<div class="photo" style="${bg(p)}">${lp}</div><div class="cap"><div><small>${p.client||p.tag}</small><b>${p.title}</b></div><div class="cr">${p.cat}${p.me||sph?'':`<em>${pad(n+1)}</em>`}</div></div>${more}</div><div class="card-in back">${TURN}<span class="bk">${p.tag}</span><h4>${p.title}</h4><i class="serif">${p.cat}</i><p>${p.long}</p></div></div>`;
+  const front=p.me?`<div class="card-in front mecard"><b>me</b></div>`
+    :`<div class="card-in front">${TURN}<div class="photo" style="${bg(p)}">${lp}</div><div class="cap"><div><small>${p.client}</small><b>${p.title}</b>${sph?`<div class="sh"><span>${p.short}</span></div>`:''}</div><div class="cr">${p.cat}</div></div></div>`;
+  return `<div class="flip">${front}<div class="card-in back">${TURN}<span class="bk">${p.tag}</span><h4>${p.title}</h4><i class="serif">${p.cat}</i><p>${p.long}</p></div></div>`;
 }
 const pcHTML=(p,n)=>`<div class="pcw"><div class="pc" data-i="${p.i}">${cardHTML(p,projects.indexOf(p),false)}</div></div>`;
 const cards=items.map((p,i)=>{
@@ -931,7 +949,7 @@ function layout(){
   const d=slideDims();document.documentElement.style.setProperty('--sw',d.w+'px');document.documentElement.style.setProperty('--sh',d.h+'px');
   step=d.w+Math.max(28,W*.02);
   const cw=W*.88,cols=cw>=1000?5:cw>=760?4:cw>=520?3:2,gap=24,cell=(cw-(cols-1)*gap)/cols;   // 4-5 card per riga
-  document.querySelectorAll('.pgrid').forEach(g=>{g.style.setProperty('--pk',cell/600);g.style.gridTemplateColumns=`repeat(${cols},${cell}px)`});
+  document.querySelectorAll('.pgrid').forEach(g=>{g.style.setProperty('--pk',cell/704);g.style.gridTemplateColumns=`repeat(${cols},${cell}px)`});
 }
 function carDown(e){cdrag=true;cx0=e.clientX;cp0=cpos;cvel=0;clx=e.clientX;clt=performance.now();cmoved=0;cur.classList.add('down');snapTo=cpos}
 function carMove(e){
@@ -948,7 +966,7 @@ function carUp(){
 ['pointerdown','keydown'].forEach(ev=>addEventListener(ev,()=>lastAct=performance.now()));
 setInterval(()=>{if(!RM&&document.body.dataset.page==='home'&&S.wo>.9&&!cdrag&&performance.now()-lastAct>1200)snapTo=Math.round(cpos)+1},3500);
 /* archivio in home: card una dietro l'altra, senza filtri */
-$('stack').innerHTML=archList.slice(0,AN).map((p,i)=>`<div class="acard"><div class="ph" style="${bg(p)}"></div><span class="an">${pad(i+1)} · ${p.cat}</span><div class="am"><small>${p.client||p.tag}</small><b>${p.title}</b></div></div>`).join('');
+$('stack').innerHTML=archList.slice(0,AN).map((p,i)=>`<div class="acard"><div class="ph" style="${bg(p)}"></div><span class="an">${p.cat}</span><div class="am"><small>${p.client||p.tag}</small><b>${p.title}</b></div></div>`).join('');
 const acards=[...$('stack').children];
 function render2(){
   const p=S2.t*(AN-1);
@@ -981,71 +999,117 @@ function setView(v){
     else gsap.from('.pgrid .pcw',{opacity:0,scale:.9,y:24,duration:.55,stagger:.04,ease:'power3.out',clearProps:'opacity,transform'});
   }});
 }
-/* PAGINA PROGETTO: una striscia orizzontale. Lo scroll verticale (rotella, trackpad, dito) la fa scorrere di lato;
-   apertura col nome, poi foto grandi alternate a righe di testo, in fondo il prossimo progetto */
+/* PAGINA PROGETTO: una striscia orizzontale. Lo scroll verticale (rotella, trackpad, dito) la fa scorrere di lato, veloce (SPD).
+   In fondo c'e' una "molla": continuando a scorrere il riquadro del progetto successivo si riempie di nero;
+   pieno = si apre il progetto dopo, se ti fermi prima torna indietro da solo */
 const PIMG=k=>PHOTO_DIR+'web/'+k+'.webp';
-const XP={x:0,tx:0,max:0,sec:null,track:null,figs:[],raf:0,last:0};
+const SPD=1.6,            // px orizzontali per ogni px di scroll: i progetti si sfogliano in fretta
+      SPRING=.85;         // lunghezza della molla, in altezze di schermo
+const XP={x:0,tx:0,max:0,run:0,sp:0,q:0,qs:0,sec:null,track:null,figs:[],raf:0,last:0,i:0,armed:true,snapT:0};
 function xpMeasure(){
   const sec=XP.sec,t=XP.track;if(!sec||!t)return;
   XP.max=Math.max(0,t.scrollWidth-document.documentElement.clientWidth);
-  sec.style.height=(XP.max+innerHeight)+'px';
+  XP.run=XP.max/SPD;XP.sp=innerHeight*SPRING;
+  sec.style.height=(XP.run+innerHeight+XP.sp)+'px';
   XP.figs=[...t.querySelectorAll('.xp-fig')].map(el=>({el,img:el.querySelector('img'),l:el.offsetLeft,w:el.offsetWidth}));
 }
 function xpTick(now){
   if(document.body.dataset.page!=='project'||!XP.sec){XP.raf=0;return}
   const dt=Math.min(64,now-(XP.last||now))/1000;XP.last=now;
-  const top=XP.sec.getBoundingClientRect().top,p=XP.max?clamp(-top/(XP.sec.offsetHeight-innerHeight||1),0,1):0;
-  XP.tx=p*XP.max;
-  XP.x=RM?XP.tx:XP.x+(XP.tx-XP.x)*(1-Math.exp(-dt*10));
-  if(Math.abs(XP.tx-XP.x)<.05)XP.x=XP.tx;
+  const s=-XP.sec.getBoundingClientRect().top;
+  XP.tx=clamp(s/(XP.run||1),0,1)*XP.max;
+  XP.q=clamp((s-XP.run)/(XP.sp||1),0,1);
+  const k=1-Math.exp(-dt*12);
+  XP.x=RM?XP.tx:XP.x+(XP.tx-XP.x)*k;if(Math.abs(XP.tx-XP.x)<.05)XP.x=XP.tx;
+  XP.qs=RM?XP.q:XP.qs+(XP.q-XP.qs)*Math.min(1,k*1.6);
   XP.track.style.transform=`translate3d(${(-XP.x).toFixed(1)}px,0,0)`;
   const vw=document.documentElement.clientWidth;let seen=0;
   XP.figs.forEach(f=>{const cx=f.l-XP.x+f.w/2;if(cx<vw*.62)seen++;
     if(!RM&&f.img&&cx>-vw&&cx<vw*2){const r=clamp((cx-vw/2)/vw,-1.2,1.2);f.img.style.transform=`translate3d(${(-r*5).toFixed(2)}%,0,0) scale(1.1)`}});
-  const pr=XP.max?XP.x/XP.max:0;
+  const pr=XP.max?XP.x/XP.max:0,atEnd=pr>.985;
   XP.ln.style.transform=`scaleX(${pr.toFixed(4)})`;
-  XP.cnt.textContent=pad(Math.max(1,seen))+' / '+pad(XP.figs.length);
+  XP.sl.style.transform=`scaleX(${XP.qs.toFixed(4)})`;
+  XP.fill.style.transform=`scaleX(${XP.qs.toFixed(4)})`;
+  XP.pct.textContent=Math.round(XP.qs*100)+'%';
+  XP.bar.classList.toggle('end',atEnd);
+  if(!atEnd)XP.cnt.textContent=pad(Math.max(1,seen))+' / '+pad(XP.figs.length);
+  if(XP.q>=.995&&XP.armed){XP.armed=false;turnProject(1)}
   XP.raf=requestAnimationFrame(xpTick);
 }
-function openProject(i){
-  const p=projects[i];if(!p)return;unfocus();
-  const nx=projects[(i+1)%projects.length];
-  const used=new Set();
-  const fig=([k,sh],n,cap)=>{if(k)used.add(k);
-    const s=sh==='t'?'v':sh;
-    return `<figure class="xp-fig ${s}"><div class="fr" style="${k?'':`background:${p.col};filter:hue-rotate(${n*26}deg)`}">${k?`<img src="${PIMG(k)}" alt="${p.title}, ${cap}" ${n<2?'fetchpriority="high"':'loading="lazy"'} decoding="async">`:''}</div><figcaption><span>${cap}</span><span>${p.title}</span></figcaption></figure>`};
-  let n=0;
-  const hero=p.gal[0];
-  let html=`<div class="xp-pan xp-intro"><div><button class="btn-o xp-back" data-go="cases">← All cases</button><p class="kicker">${p.client} — ${p.tag}</p></div>
+/* la molla torna indietro se ti fermi a meta' */
+addEventListener('scroll',()=>{
+  if(document.body.dataset.page!=='project'||!XP.sec)return;
+  clearTimeout(XP.snapT);
+  XP.snapT=setTimeout(()=>{if(XP.q>.002&&XP.q<.995&&XP.armed)scrollTo({top:XP.sec.offsetTop+XP.run,behavior:RM?'auto':'smooth'})},380);
+},{passive:true});
+function projectHTML(p){
+  const used=new Set();let n=0;
+  const fig=([k,sh],cap)=>{if(k)used.add(k);const j=n++;
+    return `<figure class="xp-fig ${sh==='t'?'v':sh}"><div class="fr" style="${k?'':`background:${p.col};filter:hue-rotate(${j*26}deg)`}">${k?`<img src="${PIMG(k)}" alt="${p.title}, ${cap}" ${j<2?'fetchpriority="high"':'loading="lazy"'} decoding="async">`:''}</div><figcaption><span>${cap}</span><span>${p.title}</span></figcaption></figure>`};
+  let h=`<div class="xp-pan xp-intro"><div><button class="btn-o xp-back" data-go="cases">All cases</button><p class="xp-client">${p.client}</p></div>
     <div><h1 class="xp-name">${p.title}</h1><p class="xp-lead">${p.short}</p>
     <div class="xp-meta"><div>Client<b>${p.client}</b></div><div>Type<b>${p.kind}</b></div><div>Role<b>${p.role}</b></div><div>Year<b>${p.year}</b></div></div></div></div>`;
-  html+=fig(hero,n++,p.cat);
-  html+=`<div class="xp-pan xp-say rv"><p>${p.long}</p></div>`;
+  h+=fig(p.gal[0],p.cat);
+  h+=`<div class="xp-pan xp-say rv"><p>${p.long}</p></div>`;
   p.sec.forEach((x,k)=>{
     let ims=x[3].filter(([m])=>!m||!used.has(m));
     if(!ims.length){const g=p.gal.find(([m])=>m&&!used.has(m));if(g)ims=[g]}
-    html+=`<div class="xp-pan xp-txt rv ${k%2?'top':'end'}"><span class="num">${pad(k+1)} — ${x[0]}</span><h2>${x[1]}</h2><p>${x[2]}</p></div>`;
-    if(ims.length>1)html+=`<div class="xp-pair">${ims.map(m=>fig(m,n++,x[0])).join('')}</div>`;
-    else if(ims.length)html+=fig(ims[0],n++,x[0]);
-    if(k===0)html+=`<div class="xp-pan xp-facts rv"><p class="kicker">At a glance</p><div><b>${p.year}</b><span>Year</span></div><div><b>${p.team}</b><span>Team</span></div><div><b>${p.dur}</b><span>Duration</span></div><div><b>${p.cat}</b><span>Discipline</span></div></div>`;
+    h+=`<div class="xp-pan xp-txt rv ${k%2?'top':'end'}"><span class="num">${x[0]}</span><h2>${x[1]}</h2><p>${x[2]}</p></div>`;
+    if(ims.length>1)h+=`<div class="xp-pair">${ims.map(m=>fig(m,x[0])).join('')}</div>`;
+    else if(ims.length)h+=fig(ims[0],x[0]);
+    if(k===0)h+=`<div class="xp-pan xp-facts rv"><div><b>${p.year}</b><span>Year</span></div><div><b>${p.team}</b><span>Team</span></div><div><b>${p.dur}</b><span>Duration</span></div><div><b>${p.cat}</b><span>Discipline</span></div></div>`;
   });
   const rest=p.gal.filter(([m])=>m&&!used.has(m));
-  if(rest.length)html+=`<div class="xp-pair">${rest.slice(0,2).map(m=>fig(m,n++,'Gallery')).join('')}</div>`;
-  html+=`<button class="xp-next" data-proj="${nx.i}"><div><small>Next case study —</small><p class="kicker">${nx.client}</p><b>${nx.title}</b><span class="go">Click to view the next project →</span></div><div class="fr" style="${bg(nx)}"></div></button>`;
-  $('pj').innerHTML=`<section class="xp" aria-label="${p.title} case study"><div class="xp-stage"><div class="xp-track">${html}</div>
-    <div class="xp-bar" aria-hidden="true"><span class="t">${p.client} · ${p.title}</span><span class="ln"><i></i></span><span class="r"><b id="xpc">01</b> · Scroll →</span></div></div></section>`;
-  XP.sec=$('pj').querySelector('.xp');XP.track=XP.sec.querySelector('.xp-track');XP.ln=XP.sec.querySelector('.xp-bar .ln i');XP.cnt=$('xpc');XP.x=0;XP.last=0;
+  if(rest.length)h+=`<div class="xp-pair">${rest.slice(0,2).map(m=>fig(m,'Gallery')).join('')}</div>`;
+  return h;
+}
+function openProject(i,dir=1){
+  const p=projects[i];if(!p)return;unfocus();
+  const L_=projects.length,nx=projects[(i+1)%L_],pv=projects[(i+L_-1)%L_];
+  const end=`<div class="xp-pan xp-end"><button class="xp-frame" data-proj="${nx.i}" aria-label="Open the next project, ${nx.title}">
+      <i class="xp-fill"></i><span class="xp-ink"><small>Next project</small><b>${nx.title}</b><em>Keep scrolling to open it <span class="xp-pct">0%</span></em></span></button>
+    <div class="xp-endnav"><button class="btn-o" data-projb="${pv.i}">Previous project: ${pv.title}</button><button class="btn" data-proj="${nx.i}">Open ${nx.title}</button></div></div>`;
+  $('pj').innerHTML=`<section class="xp" aria-label="${p.title} case study"><div class="xp-stage">
+    <button class="btn-o round xp-close" data-go="cases" aria-label="Close the project">&#10005;</button>
+    <div class="xp-track">${projectHTML(p)}${end}</div>
+    <div class="xp-bar"><span class="t">${p.title}</span><span class="ln"><i></i><i class="sp"></i></span><span class="r"><b class="c">01</b><button class="nx" data-proj="${nx.i}">Scroll for the next project</button></span></div></div></section>`;
+  const q=s=>XP.sec.querySelector(s);
+  XP.sec=$('pj').querySelector('.xp');XP.track=q('.xp-track');XP.bar=q('.xp-bar');XP.ln=q('.ln i');XP.sl=q('.ln .sp');XP.cnt=q('.xp-bar .c');
+  XP.fill=q('.xp-fill');XP.pct=q('.xp-pct');XP.x=0;XP.qs=0;XP.q=0;XP.last=0;XP.i=i;XP.armed=true;
   document.querySelectorAll('#pj .rv').forEach(el=>rvIO.observe(el));
   go('project');
   xpMeasure();
   XP.track.querySelectorAll('img').forEach(im=>{if(!im.complete)im.addEventListener('load',xpMeasure,{once:true})});
   if(!XP.raf)XP.raf=requestAnimationFrame(xpTick);
 }
+const turnProject=d=>{const L_=projects.length;turnPage(d,()=>openProject((XP.i+d+L_)%L_,d))};
 /* trackpad orizzontale e frecce: muovono la stessa striscia */
-addEventListener('wheel',e=>{if(document.body.dataset.page!=='project'||Math.abs(e.deltaX)<=Math.abs(e.deltaY))return;e.preventDefault();scrollBy(0,e.deltaX)},{passive:false});
+addEventListener('wheel',e=>{if(document.body.dataset.page!=='project'||Math.abs(e.deltaX)<=Math.abs(e.deltaY))return;e.preventDefault();scrollBy(0,e.deltaX/SPD)},{passive:false});
 addEventListener('keydown',e=>{if(document.body.dataset.page!=='project'||e.target.closest('input,textarea'))return;
-  if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();scrollBy({top:(e.key==='ArrowRight'?1:-1)*innerWidth*.6,behavior:RM?'auto':'smooth'})}});
+  if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();scrollBy({top:(e.key==='ArrowRight'?1:-1)*innerWidth*.6/SPD,behavior:RM?'auto':'smooth'})}
+  if(e.key==='Escape')turnPage(-1,()=>go('cases'))});
 addEventListener('resize',()=>{if(document.body.dataset.page==='project')xpMeasure()});
+
+/* CAMBIO PAGINA (0.5 s): una banda morbida di luce e ombra attraversa il centro dello schermo,
+   come una pagina che gira senza girarla tutta; avanti = da destra a sinistra, indietro = da sinistra a destra */
+let turning=false;
+function turnPage(dir,swap){
+  if(turning)return;
+  const cur=[...document.querySelectorAll('.page')].find(el=>el.offsetParent!==null);
+  if(RM||!cur){swap();return}
+  turning=true;
+  const band=$('pt-band'),T=.25;
+  gsap.killTweensOf([band,cur]);
+  gsap.set(band,{xPercent:dir*70,opacity:0});
+  const tl=gsap.timeline({onComplete:()=>{turning=false;gsap.set(band,{opacity:0})}});
+  tl.to(band,{xPercent:0,opacity:1,duration:T,ease:'power2.in'},0)
+    .to(cur,{opacity:0,x:-dir*36,duration:T,ease:'power2.in'},0)
+    .add(()=>{gsap.set(cur,{clearProps:'opacity,transform'});swap();
+      const nw=[...document.querySelectorAll('.page')].find(el=>el.offsetParent!==null);
+      if(nw)gsap.fromTo(nw,{opacity:0,x:dir*36},{opacity:1,x:0,duration:T,ease:'power2.out',clearProps:'opacity,transform'})},T)
+    .to(band,{xPercent:-dir*70,opacity:0,duration:T,ease:'power2.out'},T);
+}
+
 gsap.timeline({scrollTrigger:{trigger:'#arch',start:'top top',end:'bottom bottom',scrub:.6}})
  .to(S2,{t:1,ease:'none',duration:1,onUpdate:render2});
 
@@ -1081,12 +1145,14 @@ function focusCard(i){
   if((focused&&i===idx)||scrollY>40||S.aim>.001)return;
   const first=!focused;
   if(focused)cards[idx].classList.remove('open','ready','flipped');
-  idx=i;focused=cards[i];
+  idx=i;focused=cards[i];$('fcase').textContent=items[i].me?'About me':'View case study';
   document.documentElement.classList.add('lock');document.body.classList.add('focus');
   setKind(null);aimAt(i);
   gsap.to(F,{f:1,duration:1.6,ease:'sine.inOut',overwrite:'auto'});
   gsap.to(F,{roll:-6,duration:2.2,ease:'sine.inOut',overwrite:'auto'});
-  if(first){gsap.to(F,{push:PUSH,duration:2,ease:'sine.inOut',overwrite:'auto'});gsap.to('#closehint',{opacity:.9,delay:1.2,duration:.8})}
+  const fsc=Math.min(CS*PERSP/(PERSP-R-PUSH),cwid()*.9/704);   // su telefono la card aperta sta tutta nello schermo
+  $('fcta').style.top=`calc(50vh + ${Math.round(220*fsc)+26}px)`;
+  if(first){gsap.to(F,{push:PERSP-R-CS*PERSP/fsc,duration:2,ease:'sine.inOut',overwrite:'auto'});gsap.to('#closehint',{opacity:.9,delay:1.2,duration:.8})}
   const mine=cards[i];gsap.delayedCall(first?1.9:1.5,()=>{if(focused===mine)mine.classList.add('ready','open')});
 }
 function unfocus(){
@@ -1140,7 +1206,7 @@ let lastT=performance.now();
    SCROLL: sfera -> tua card -> teaser video -> 3 progetti -> archivio
    ===================================================================== */
 const cwid=()=>document.documentElement.clientWidth;
-const cardR=()=>{const sc=CS*PERSP/(PERSP-R-PUSH),cx=cwid()*(.5+SH/100),cy=innerHeight/2;return{left:cx-300*sc,top:cy-220*sc,width:600*sc,height:440*sc,borderRadius:0}};
+const cardR=()=>{const sc=CS*PERSP/(PERSP-R-PUSH),cx=cwid()*(.5+SH/100),cy=innerHeight/2;return{left:cx-352*sc,top:cy-220*sc,width:704*sc,height:440*sc,borderRadius:0}};
 const landR=cx=>{const w=Math.min(cwid()*.4,600),h=w*.6;return{left:cx-w/2,top:innerHeight/2-h/2,width:w,height:h,borderRadius:0}};
 const kkk=()=>Math.max(.5,Math.min(1,innerHeight*.62/440));
 const centerR=()=>{const d=slideDims();return{left:(cwid()-d.w)/2,top:innerHeight*.56-d.h/2,width:d.w,height:d.h,borderRadius:0}};
@@ -1198,11 +1264,14 @@ document.addEventListener('click',e=>{
   if(t.closest('[data-act=world]')){unfocus();return}
   const tb=t.closest('.turn');if(tb){tb.closest('.card,.pc').classList.toggle('flipped');return}
   if(cmoved>6){cmoved=0;if(t.closest('.car'))return}
-  const pj=t.closest('[data-proj]');if(pj){e.preventDefault();openProject(+pj.dataset.proj);return}
-  const lr=t.closest('.lrow');if(lr){openProject(+lr.dataset.i);return}
-  const pc=t.closest('.pc,.ls');if(pc&&!t.closest('button,a')){openProject(+pc.dataset.i);return}
+  const open=(i,d=1)=>turnPage(d,()=>openProject(i,d));
+  if(t.closest('#fcase')){if(!focused)return;const it=items[idx];it.me?turnPage(1,()=>go('about')):open(it.i);return}
+  const pb=t.closest('[data-projb]');if(pb){e.preventDefault();open(+pb.dataset.projb,-1);return}
+  const pj=t.closest('[data-proj]');if(pj){e.preventDefault();open(+pj.dataset.proj);return}
+  const lr=t.closest('.lrow');if(lr){open(+lr.dataset.i);return}
+  const pc=t.closest('.pc,.ls');if(pc&&!t.closest('button,a')){open(+pc.dataset.i);return}
   const g=t.closest('[data-go]');
-  if(g){e.preventDefault();go(g.dataset.go);return}
+  if(g){e.preventDefault();const to=g.dataset.go;if(to===document.body.dataset.page&&to!=='project'){scrollTo({top:0,behavior:'smooth'});return}turnPage(to==='home'||document.body.dataset.page==='project'?-1:1,()=>go(to));return}
   const sc=t.closest('[data-scroll]');
   if(sc){e.preventDefault();$(sc.dataset.scroll).scrollIntoView({behavior:'smooth'})}
 });
