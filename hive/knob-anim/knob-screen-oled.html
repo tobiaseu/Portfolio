@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hive Knob OLED</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  html,body{margin:0;height:100%;background:#000;overflow:hidden}
+  body{display:grid;place-items:center}
+  svg{width:min(100vw,100vh);height:min(100vw,100vh);display:block}
+  text{text-anchor:middle;dominant-baseline:central;font-family:-apple-system,"SF Pro Display","SF Pro Text",Inter,system-ui,sans-serif;font-feature-settings:"tnum" 1}
+  #cue{position:fixed;left:16px;bottom:14px;font:500 13px/1.4 Inter,system-ui;color:#FFB020;display:none}
+</style>
+</head>
+<body>
+<!-- Solo display OLED: frame 280 (Figma) centrato, sfondo nero. Durata 28 s, loop.
+     ?t=12.5 = fotogramma fermo · ?cues=1 = mostra la scaletta press/rotate -->
+<svg id="k" viewBox="0 0 280 280">
+  <rect width="280" height="280" fill="#000"/>
+  <g id="screen"></g>
+</svg>
+<div id="cue"></div>
+<script>
+const NS='http://www.w3.org/2000/svg',D=Math.PI/180,CX=140,CY=140;
+const C={acc:'#6EC0FF',grn:'#32D74B',gr:'#8B919C',dim:'#4A505B',track:'#22262E',w:'#FFFFFF'};
+const el=(tag,a,p)=>{const e=document.createElementNS(NS,tag);for(const k in a)e.setAttribute(k,a[k]);p&&p.appendChild(e);return e;};
+const S=document.getElementById('screen');
+const sp=v=>135+270*v/60;
+const clamp=x=>Math.max(0,Math.min(1,x));
+const E={out:p=>1-Math.pow(1-p,3),inout:p=>p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2,lin:p=>p,
+  // knob detent: static friction, magnetic pull, soft catch (same curve to use in Blender)
+  detent:p=>p<.18?0.06*(p/.18)**2:p>.82?1-0.06*((1-p)/.18)**2:0.06+0.88*E.inout((p-.18)/.64)};
+
+// ======================= CUE SHEET (seconds) =======================
+const CUES=[
+ [5.0,'PRESS','Selezione modalità'],
+ [6.6,'ROTATE CW 1 scatto (0.5 s)','N → A'],
+ [8.4,'PRESS','Conferma A → percorso Field H'],
+ [10.4,'ROTATE CW 1 scatto (0.5 s)','Field H → Field M'],
+ [12.0,'ROTATE CCW 1 scatto (0.5 s)','Field M → Field H'],
+ [13.8,'PRESS','Seleziona Field H → Ready'],
+ [15.6,'PRESS','Avvio guida autonoma'],
+ [19.0,'HOLD 2 s (19.0 → 21.0)','Apre impostazioni'],
+ [22.6,'PRESS','Modifica velocità'],
+ [24.2,'ROTATE CW 5 scatti (0.3 s ciascuno, ogni 0.45 s)','6.0 → 6.5 km/h'],
+ [27.0,'PRESS','Conferma 6.5 km/h'],
+];
+const T=28.5; // durata totale
+const R=[24.2,24.65,25.1,25.55,26.0]; // inizio di ogni scatto velocità
+
+// ======================= STATIC GEOMETRY =======================
+el('circle',{cx:CX,cy:CY,r:126,fill:'#05060A'},S);
+const glow=el('circle',{cx:CX,cy:CY,r:125,fill:'none',stroke:C.acc,'stroke-width':1.5},S);
+const arcC=(r,sw,col,rot)=>el('circle',{cx:CX,cy:CY,r,fill:'none',stroke:col,'stroke-width':sw,'stroke-linecap':'round',pathLength:360,'stroke-dasharray':'0 360',transform:`rotate(${rot} ${CX} ${CY})`},S);
+const track=arcC(112,6,C.track,135);track.setAttribute('stroke-dasharray','270 360');
+const fill=arcC(112,6,C.grn,135);
+const scale=el('g',{},S);
+for(let v=0;v<=60;v+=5){const a=sp(v)*D,maj=v%10===0,r1=104,r2=maj?95:99;
+  el('line',{x1:CX+Math.cos(a)*r2,y1:CY+Math.sin(a)*r2,x2:CX+Math.cos(a)*r1,y2:CY+Math.sin(a)*r1,stroke:maj?C.w:C.gr,'stroke-width':maj?1.5:1,'stroke-linecap':'round'},scale);
+  if(maj&&v>0&&v<60){const t=el('text',{x:CX+Math.cos(a)*84,y:CY+Math.sin(a)*84,'font-size':9,fill:C.gr},scale);t.textContent=v;}}
+[[0,sp(0)+7],[60,sp(60)-7]].forEach(([v,g])=>{const t=el('text',{x:CX+Math.cos(g*D)*116,y:CY+Math.sin(g*D)*116,'font-size':12,'font-weight':500,fill:C.w},scale);t.textContent=v;});
+const marker=el('circle',{r:4.5,fill:C.w},S);
+const hold=arcC(122,3,C.w,-90);
+const modes=el('g',{},S),MA={M:245,N:270,A:295},modeT={};
+for(const m in MA){const a=MA[m]*D;const t=el('text',{x:CX+Math.cos(a)*104,y:CY+Math.sin(a)*104,'font-size':15,'font-weight':500,fill:C.gr},modes);t.textContent=m;modeT[m]=t;}
+const ind=el('circle',{r:3,fill:C.acc},modes);
+const pager=el('g',{},S);const dots=[0,1,2,3].map(()=>el('circle',{r:2.5,fill:C.dim},pager));
+const logo=el('g',{},S);
+el('circle',{cx:CX,cy:132,r:26,fill:C.w},logo);
+el('path',{d:'M126 120 q14 16 28 0 M126 144 q14 -16 28 0',stroke:'#05060A','stroke-width':4.5,fill:'none','stroke-linecap':'round'},logo);
+const brand=el('text',{x:CX,y:186,'font-size':11,'font-weight':600,fill:C.w,'letter-spacing':1.5},logo);brand.textContent='HIVE';
+function slot(y,size,weight,col,ls){const g=el('g',{},S);const mk=()=>el('text',{x:CX,y,'font-size':size,'font-weight':weight,fill:col,'letter-spacing':ls||0},g);return {g,a:mk(),b:mk()};}
+const title=slot(86,10,600,C.acc,1),value=slot(140,64,500,C.w),unit=slot(182,11,500,C.gr),delta=slot(200,12,600,C.acc),sub=slot(200,11,500,C.gr),hint=slot(226,9,600,C.gr,.8);
+
+// ======================= TIMELINE DATA =======================
+// keyed text: [time, text, opts]; crossfade (and vertical roll for value)
+const K={
+ title:[[0,''],[3.3,'NEUTRAL'],[5.0,'SELECT MODE'],[6.8,'AUTONOMOUS'],[8.4,'ROUTE · 1 / 3'],[10.6,'ROUTE · 2 / 3'],[12.2,'ROUTE · 1 / 3'],[13.8,'ROUTE · FIELD H'],[15.6,'ENGAGING'],[16.6,'AUTO · L3'],[21.0,'SETTINGS · 1 / 4'],[22.6,'FORWARD SPEED'],[27.4,'AUTO · L3']],
+ value:[[0,''],[3.3,'N'],[6.8,'A',{dir:1}],[8.4,'Field H',{size:30}],[10.6,'Field M',{size:30}],[12.2,'Field H',{size:30,dir:-1}],[13.8,'Ready',{size:30}],[15.6,'Field H',{size:30}],[16.6,'A'],[21.0,'Speed',{size:30}],[22.6,'6.0',{col:C.acc}],
+   [R[0]+.12,'6.1',{col:C.acc,d:.22}],[R[1]+.12,'6.2',{col:C.acc,d:.22}],[R[2]+.12,'6.3',{col:C.acc,d:.22}],[R[3]+.12,'6.4',{col:C.acc,d:.22}],[R[4]+.12,'6.5',{col:C.acc,d:.22}],[27.0,'6.5',{col:C.w,fade:1}],[27.4,'A']],
+ unit:[[0,''],[16.6,'39 %',{col:C.grn}],[21.0,'6.0 km/h',{col:C.w}],[22.6,'km/h'],[27.0,''],[27.4,'39 %',{col:C.grn}]],
+ delta:[[0,''],[R[0]+.12,'+0.1'],[R[1]+.12,'+0.2'],[R[2]+.12,'+0.3'],[R[3]+.12,'+0.4'],[R[4]+.12,'+0.5'],[27.0,'']],
+ sub:[[0,''],[8.4,'Hoeing · 18 rows · 2 h 43 min'],[10.6,'Spraying · 12 rows · 1 h 20 min'],[12.2,'Hoeing · 18 rows · 2 h 43 min'],[13.8,'Hoeing · 18 rows'],[16.6,'6.0 km/h · Row 7 / 18'],[21.0,''],[27.4,'6.5 km/h  ✓',{col:C.grn}]],
+ hint:[[0,''],[3.3,'PRESS TO SELECT MODE'],[5.0,'ROTATE  ·  PRESS TO CONFIRM'],[6.8,'PRESS TO CONFIRM'],[8.4,'ROTATE · PRESS TO SELECT'],[13.8,'PRESS TO START',{col:C.acc}],[15.6,''],[16.6,'HOLD 2 S FOR SETTINGS'],[19.0,'HOLD…'],[21.0,'ROTATE · PRESS TO EDIT'],[22.6,'ROTATE  ±0.1'],[R[4]+.6,'PRESS TO CONFIRM',{col:C.acc}],[27.4,'HOLD 2 S FOR SETTINGS']]
+};
+// layer visibility: [time,on]  (fade 0.4 s)
+const V={
+ logo:[[0,0],[1.0,1],[3.0,0]], glow:[[0,0],[1.4,1],[3.0,0]],
+ modes:[[0,0],[3.3,1],[8.4,0]], pager:[[0,0],[8.4,1],[15.6,0],[21.0,1],[27.4,0]],
+ track:[[0,0],[13.8,1],[21.0,0],[22.6,1]], fill:[[0,0],[15.6,1],[21.0,0],[22.6,1]],
+ scale:[[0,0],[22.6,1],[27.0,0]], marker:[[0,0],[22.6,1],[27.0,0]], hold:[[0,0],[19.0,1],[21.0,0]]
+};
+// fill arc (degrees of 270) and colour
+function fillAt(t){
+ if(t<15.6)return [0,C.acc];
+ if(t<16.6)return [270*E.inout(clamp((t-15.6)/0.9)),C.acc];
+ if(t<21.0)return [270*0.39*E.out(clamp((t-16.6)/0.9)),C.grn];
+ if(t<24.2){return [270*6/60*E.out(clamp((t-22.6)/0.5)),C.acc];}
+ if(t<27.4){let v=6;for(const r of R)v+=0.1*E.detent(clamp((t-r)/0.3));return [270*v/60,C.acc];}
+ return [270*0.39*E.out(clamp((t-27.4)/0.8)),C.grn];
+}
+function speedAt(t){if(t<24.2)return 6*E.out(clamp((t-22.6)/0.5));let v=6;for(const r of R)v+=0.1*E.detent(clamp((t-r)/0.3));return v;}
+function indAt(t){return 270+25*E.detent(clamp((t-6.6)/0.5));}
+function pagerAt(t){if(t<21)return [3,t>=10.6&&t<12.2?1:0];return [4,0];}
+function modeSelAt(t){return t>=6.8?'A':'N';}
+
+// ======================= RENDER =======================
+function vis(list,t,d=.4){let on=0,since=-9,prev=0;for(const [k,v] of list){if(t>=k){prev=on;on=v;since=k;}}const p=E.out(clamp((t-since)/d));return prev+(on-prev)*p;}
+function keyed(s,list,t,roll){let i=0;for(let j=0;j<list.length;j++)if(t>=list[j][0])i=j;const [k,txt,o={}]=list[i];const prev=i>0?list[i-1]:null;
+ const d=o.d||(roll?.32:.25);const p=E.out(clamp((t-k)/d));const dir=o.dir||1;
+ const set=(n,tx,oo,op,dy)=>{n.textContent=tx;n.setAttribute('font-size',oo.size||(roll?64:n.getAttribute('font-size')));n.setAttribute('fill',oo.col||s.def);n.setAttribute('opacity',op);n.setAttribute('transform',`translate(0 ${dy})`);};
+ if(!s.def)s.def=s.a.getAttribute('fill');
+ if(o.fade){set(s.a,txt,o,1,0);s.b.setAttribute('opacity',0);return;}
+ if(roll){set(s.a,txt,o,p,(1-p)*16*dir);if(prev)set(s.b,prev[1],prev[2]||{},1-p,-p*16*dir);else s.b.setAttribute('opacity',0);}
+ else{set(s.a,txt,o,p,0);if(prev)set(s.b,prev[1],prev[2]||{},1-p,0);else s.b.setAttribute('opacity',0);}}
+function render(t){
+ const lp=vis(V.logo,t,.6);logo.setAttribute('opacity',lp);logo.setAttribute('transform',`translate(${CX} 132) scale(${0.92+0.08*E.out(clamp((t-1)/.6))}) translate(${-CX} -132)`);
+ glow.setAttribute('opacity',vis(V.glow,t,.5));
+ modes.setAttribute('opacity',vis(V.modes,t));const ms=modeSelAt(t);for(const m in modeT)modeT[m].setAttribute('fill',m===ms?C.w:C.gr);
+ const ia=indAt(t)*D;ind.setAttribute('cx',CX+Math.cos(ia)*121);ind.setAttribute('cy',CY+Math.sin(ia)*121);
+ pager.setAttribute('opacity',vis(V.pager,t));const [cnt,act]=pagerAt(t);const step=9,start=270-step*(cnt-1)/2;
+ dots.forEach((d,i)=>{if(i>=cnt){d.setAttribute('opacity',0);return;}d.setAttribute('opacity',1);const a=(start+step*i)*D;d.setAttribute('cx',CX+Math.cos(a)*121);d.setAttribute('cy',CY+Math.sin(a)*121);d.setAttribute('r',i===act?3.5:2.5);d.setAttribute('fill',i===act?C.w:C.dim);});
+ track.setAttribute('opacity',vis(V.track,t));
+ const [deg,col]=fillAt(t);fill.setAttribute('opacity',vis(V.fill,t));fill.setAttribute('stroke',col);fill.setAttribute('stroke-dasharray',`${Math.max(deg,0.01)} 360`);
+ scale.setAttribute('opacity',vis(V.scale,t));
+ const sv=speedAt(t),ma=sp(sv)*D;marker.setAttribute('opacity',vis(V.marker,t));marker.setAttribute('cx',CX+Math.cos(ma)*112);marker.setAttribute('cy',CY+Math.sin(ma)*112);
+ hold.setAttribute('opacity',vis(V.hold,t,.2));hold.setAttribute('stroke-dasharray',`${360*clamp((t-19)/2)} 360`);
+ keyed(title,K.title,t);keyed(value,K.value,t,true);keyed(unit,K.unit,t);keyed(delta,K.delta,t);keyed(sub,K.sub,t);keyed(hint,K.hint,t);
+ // global fade-out at the loop end
+ S.setAttribute('opacity',1-clamp((t-(T-0.6))/0.6));
+ if(showCues){const c=CUES.filter(c=>t>=c[0]&&t<c[0]+1.2).map(c=>`${c[0].toFixed(1)} s · ${c[1]} — ${c[2]}`).join('<br>');cueEl.innerHTML=`${t.toFixed(2)} s<br>${c}`;}
+}
+const q=new URLSearchParams(location.search),showCues=q.has('cues'),cueEl=document.getElementById('cue');if(showCues)cueEl.style.display='block';
+window.render=render;window.DURATION=T;window.CUES=CUES;
+if(q.has('t'))render(parseFloat(q.get('t')));
+else{const t0=performance.now();(function loop(now){render(((now-t0)/1000)%T);requestAnimationFrame(loop);})(t0);}
+</script>
+</body>
+</html>
