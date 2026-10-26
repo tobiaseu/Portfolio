@@ -814,27 +814,27 @@ projects.push({slug:'au',client:'Self-initiated',title:'Unofficial Audi spot',ca
  short:'A self-initiated spot for the Audi TT, shot and edited as a videomaking experiment.',
  long:'An unofficial spot for the Audi TT: a personal experiment in shooting, rhythm and editing, made to explore how a car commercial is built.',
  gal:[['yt:J31Gmd84640','w']],
- sec:[['Summary','A car, as a commercial','I shot and edited an unofficial spot for the Audi TT as a videomaking experiment: framing, light and rhythm used the way a real commercial would.',[]]]});
+ sec:[['Summary','A car, as a commercial','I shot and edited an unofficial spot for the Audi TT as a videomaking experiment: framing, light and rhythm used the way a real commercial would.',[['au-1','w']]]]});
 const PH_COL=['#3a3a3c','#4a4a4d','#2c2c2e','#5a5a5e','#424245'];   // progetti provvisori senza foto: grigi neutri
 const PH_SEC=[['Summary','Summary placeholder','Placeholder text: a short summary of the project, who it is for and what it achieved.'],['Problem','The problem','Placeholder text: the starting context and the difficulty to solve.'],['Research','The research','Placeholder text: methods used and the evidence that guided the choices.'],['Output','The output','Placeholder text: materials produced along the way.'],['Solution','The solution','Placeholder text: the final proposal and how it answers the problem.']];
 /* progetti con foto e video ospitati fuori (YouTube, Framer): chiavi in EXT, proporzioni in DIM */
 const YT=id=>'https://i.ytimg.com/vi/'+id+'/maxresdefault.jpg',FR=id=>'https://framerusercontent.com/images/'+id+'.png';
-const EXT={'ca-cover':YT('BZM064G_pp0'),'fs-cover':YT('SUhmhww_o3g'),'au-cover':YT('J31Gmd84640')};
+const EXT={}   // foto ospitate fuori, se servono;
 projects.push(
 {slug:'ca',client:'Chiara Alessi',title:'Chiara Alessi interview',cat:'Book presentation video',tag:'Videomaking',year:'2023',kind:'Freelance video',team:'—',dur:'—',role:'Video production',
  links:[['Watch on YouTube ↗','https://www.youtube.com/watch?v=BZM064G_pp0']],
  short:'Social media video for the launch of Chiara Alessi\'s book Lo Stato Delle Cose.',
  long:'A video interview made for the social media launch of Lo Stato Delle Cose, the 2023 book by design critic Chiara Alessi.',
  gal:[['yt:BZM064G_pp0','w']],
- sec:[['Summary','A book, in a few minutes','For the launch of Lo Stato Delle Cose I produced a video for social media: an interview with Chiara Alessi that brings the ideas of the book into a short format people can watch on their phones.',[]]]},
+ sec:[['Summary','A book, in a few minutes','For the launch of Lo Stato Delle Cose I produced a video for social media: an interview with Chiara Alessi that brings the ideas of the book into a short format people can watch on their phones.',[['ca-1','w']]]]},
 {slug:'fs',client:'Docufilm by Valerio Matteu',title:'Fuocosacro',cat:'Documentary',tag:'Videomaking',year:'2017',kind:'Docufilm',team:'Team of 6',dur:'2 weeks',role:'Camera 1 operator',
  links:[['Watch on YouTube ↗','https://www.youtube.com/watch?v=SUhmhww_o3g']],
  short:'A docufilm inside the feast of a small village in central Sardinia, where rituals meet the present day.',
  long:'An anthropological look inside a small village in central Sardinia during its most important days, when rituals and traditions mix with the society of today.',
  gal:[['yt:SUhmhww_o3g','w']],
- sec:[['Summary','Inside the feast','Fuocosacro follows the feast of a small village in central Sardinia during its most important days. I was camera 1 operator in many scenes, in a crew of six that followed the project for about two weeks.',[]],
-  ['Concept','What makes a tradition hold','The film enters the feast to understand what lies behind a tradition that can truly bring people together and make them happy, as old rituals mix with the habits of today\'s society.',[]],
-  ['Crew','A crew of six','Directed by Valerio Matteu, with Marco Meli, Stefano Secchi, Nicola Pusceddu and Daniele Manca.',[]]]});
+ sec:[['Summary','Inside the feast','Fuocosacro follows the feast of a small village in central Sardinia during its most important days. I was camera 1 operator in many scenes, in a crew of six that followed the project for about two weeks.',[['fs-1','w']]],
+  ['Concept','What makes a tradition hold','The film enters the feast to understand what lies behind a tradition that can truly bring people together and make them happy, as old rituals mix with the habits of today\'s society.',[['fs-3','w']]],
+  ['Crew','A crew of six','Directed by Valerio Matteu, with Marco Meli, Stefano Secchi, Nicola Pusceddu and Daniele Manca.',[['fs-4','w']]]]});
 [['Coral','Innovation design','Innovation Design','—','Case study coming soon.']].forEach(([title,cat,tag,year,short],k)=>{
   projects.push({ph:true,col:PH_COL[k%PH_COL.length],client:'Case study coming soon',title,cat,tag,year,kind:cat,team:'—',dur:'—',role:'—',short,long:short+' Photos and the full story are on the way.',
    gal:[['','w'],['','v'],['','w']],sec:[['Summary','Coming soon',short,[['','w']]]]});
@@ -850,7 +850,7 @@ projects.push(
   ['System','Haptix, O·neiros and O·nea','Haptix, a tactile device for monitoring and gestural command, collects biometric and behavioural data. O·neiros, an algorithm named after the Greek word for dream, turns it into predictions of collective behaviour. O·nea closes the loop with an environment: a workstation with a spherical display and a voice guide for emotional regulation.',[['on-3','w']]],
   ['Critique','Comfort as control','Behind the calm corporate tone, O·nea applies cognitive desensitization: it pre-exposes employees to future stressors until they stop reacting. Testimonials from fictional CEOs and a world map ranking companies by stability make the question tangible: how much would we sign away for a predictable future?',[['on-4','w']]],
   ['Website','A website you enter','The website is the exhibit. A personal greeting, a binding agreement, a snap gesture that turns the door of O·nea towards you and a particle scene to explore turn the visitor into a participant of the story.',[['on-2','w']]]]});
-const DIM={"au-cover":1.778,"ca-cover":1.778,"fs-cover":1.778,"on-cover":2.202,"on-1":2.292,"on-2":2.448,"on-3":2.124,"on-4":2.141,"on-5":1.566,"b-1":0.665,"b-2":0.615,"b-3":0.751,"b-4":0.759,"b-5":0.616,"b-6":0.616,"b-cover":1.775,"f-2":1.6,"f-cover":1.6,"f-p1":0.75,"f-p2":0.75,"f-p3":0.75,"g-1":1.775,"g-2":0.993,"g-3":1.0,"g-4":0.821,"g-5":0.886,"g-6":2.917,"g-7":0.73,"g-cover":1.775,"h-2":1.6,"h-cover":1.6,"h-p1":0.75,"h-p2":0.75,"h-p3":0.75,"i-2":1.6,"i-cover":1.6,"i-p1":0.75,"i-p2":0.75,"i-p3":0.75,"q-1":1.083,"q-2":0.709,"q-3":2.128,"q-4":2.29,"q-5":1.0,"q-6":1.542,"q-7":0.616,"q-8":1.741,"q-cover":1.775,"w-1":0.745,"w-2":1.673,"w-3":0.763,"w-4":1.158,"w-5":1.396,"w-6":1.641,"w-cover":1.775,"z-1":0.754,"z-2":0.752,"z-3":0.885,"z-4":0.752,"z-cover":1.777};   // proporzioni vere delle foto (larghezza/altezza): le foto non vengono tagliate
+const DIM={"au-cover":1.778,"au-1":1.9,"au-2":1.9,"au-3":1.9,"ca-cover":1.778,"ca-1":1.778,"ca-2":1.778,"ca-3":1.778,"fs-cover":1.778,"fs-1":1.778,"fs-2":1.778,"fs-3":1.778,"fs-4":1.778,"fs-5":1.778,"on-cover":2.202,"on-1":2.292,"on-2":2.448,"on-3":2.124,"on-4":2.141,"on-5":1.566,"b-1":0.665,"b-2":0.615,"b-3":0.751,"b-4":0.759,"b-5":0.616,"b-6":0.616,"b-cover":1.775,"f-2":1.6,"f-cover":1.6,"f-p1":0.75,"f-p2":0.75,"f-p3":0.75,"g-1":1.775,"g-2":0.993,"g-3":1.0,"g-4":0.821,"g-5":0.886,"g-6":2.917,"g-7":0.73,"g-cover":1.775,"h-2":1.6,"h-cover":1.6,"h-p1":0.75,"h-p2":0.75,"h-p3":0.75,"i-2":1.6,"i-cover":1.6,"i-p1":0.75,"i-p2":0.75,"i-p3":0.75,"q-1":1.083,"q-2":0.709,"q-3":2.128,"q-4":2.29,"q-5":1.0,"q-6":1.542,"q-7":0.616,"q-8":1.741,"q-cover":1.775,"w-1":0.745,"w-2":1.673,"w-3":0.763,"w-4":1.158,"w-5":1.396,"w-6":1.641,"w-cover":1.775,"z-1":0.754,"z-2":0.752,"z-3":0.885,"z-4":0.752,"z-cover":1.777};   // proporzioni vere delle foto (larghezza/altezza): le foto non vengono tagliate
 const WEBS=k=>EXT[k]||PHOTO_DIR+'web/s/'+k+'.webp';   // foto del loop nella sfera (1100px)
 const WEB=k=>EXT[k]||PHOTO_DIR+'web/'+k+'.webp';   // copertine ridimensionate (1600px, WebP) per sfera, carosello e griglie
 /* ordine (Tobia, 26/10): dal piu' recente al piu' vecchio */
@@ -1229,7 +1229,7 @@ function projectHTML(p,pv){
   const used=new Set();let n=0;
   if(/^(yt|mp4):/.test(p.gal[0][0]))used.add(p.slug+'-cover');   // progetti video: si apre col video, la miniatura serve solo alle card
   const vid=(k,cap)=>{n++;used.add(k);const yt=k.startsWith('yt:'),id=k.slice(k.indexOf(':')+1);
-    return `<figure class="xp-fig xp-vid" style="--r:1.778"><div class="fr">${yt?`<button class="yt" data-yt="${id}" aria-label="Play the video, ${p.title}"><img src="${YT(id)}" alt="" loading="lazy"><span class="yt-play">▶ Play</span></button>`:`<video src="${id}" muted loop playsinline autoplay preload="metadata"></video>`}</div><figcaption><span>${cap}</span><span>${p.title}</span></figcaption></figure>`};
+    return `<figure class="xp-fig xp-vid" style="--r:1.778"><div class="fr">${yt?`<button class="yt" data-yt="${id}" aria-label="Play the video, ${p.title}"><img src="${DIM[p.slug+'-cover']?PIMG(p.slug+'-cover'):YT(id)}" alt="" loading="lazy"><span class="yt-play">▶ Play</span></button>`:`<video src="${id}" muted loop playsinline autoplay preload="metadata"></video>`}</div><figcaption><span>${cap}</span><span>${p.title}</span></figcaption></figure>`};
   const fig=([k,sh],cap)=>{if(k&&/^(yt|mp4):/.test(k))return vid(k,cap);if(k)used.add(k);const j=n++,r=(k&&DIM[k])||SHAPE[sh]||1.6,full=r>=WIDE;
     return `<figure class="xp-fig${full?' full':''}" style="--r:${r}"><div class="fr" style="${k?'':`background:${p.col};filter:hue-rotate(${j*26}deg)`}">${k?`<img src="${PIMG(k)}" alt="${p.title}, ${cap}" ${j<2?'fetchpriority="high"':'loading="lazy"'} decoding="async">`:''}</div><figcaption><span>${cap}</span><span>${p.title}</span></figcaption></figure>`};
   const group=ims=>ims.length>1?`<div class="xp-pair">${ims.map(m=>fig(m[0],m[1])).join('')}</div>`:ims.length?fig(ims[0][0],ims[0][1]):'';
