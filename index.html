@@ -63,8 +63,8 @@ body.vfull .logo{color:#fff}
 header .btn{height:var(--ctl);padding:0 1.5rem}
 .lang-switch{position:relative;display:grid;grid-template-columns:1fr 1fr;height:var(--ctl);padding:4px;border-radius:999px;background:var(--nav);backdrop-filter:blur(12px);border:1px solid var(--border)}
 .lang-switch .ts-thumb{width:calc(50% - 4px)}
-html[lang=en] .lang-switch .ts-thumb{transform:translateX(100%)}
-html.dark .lang-switch .ts-thumb{transform:none}html.dark[lang=en] .lang-switch .ts-thumb{transform:translateX(100%)}
+html[lang=it] .lang-switch .ts-thumb{transform:translateX(100%)}
+html.dark .lang-switch .ts-thumb{transform:none}html.dark[lang=it] .lang-switch .ts-thumb{transform:translateX(100%)}
 .lang-switch button{position:relative;height:30px;min-width:40px;padding:0 .7rem;border:0;background:none;border-radius:999px;font:600 .72rem var(--sans);letter-spacing:.04em;color:var(--muted);cursor:pointer;transition:color .4s}
 html[lang=it] [data-l=it],html[lang=en] [data-l=en]{color:var(--bg)}
 /* ---------- toggle light/dark ---------- */
@@ -73,6 +73,13 @@ html[lang=it] [data-l=it],html[lang=en] [data-l=en]{color:var(--bg)}
 html.dark .ts-thumb{transform:translateX(100%)}
 .theme-switch button{position:relative;height:30px;padding:0 .4rem;white-space:nowrap;border:0;background:none;border-radius:999px;font:600 .72rem var(--sans);color:var(--muted);cursor:pointer;transition:color .4s}
 html:not(.dark) .theme-switch [data-t=light],html.dark .theme-switch [data-t=dark]{color:var(--bg)!important}
+/* fuori dalla home, e in home dopo il primo scroll, il selettore resta solo con le icone (Tobia, 27/10) */
+.theme-switch{transition:width .45s cubic-bezier(.23,1,.32,1)}
+.theme-switch button{display:flex;align-items:center;justify-content:center;overflow:hidden}
+.theme-switch button i{font-style:normal}
+.theme-switch .lb{display:inline-block;max-width:6em;margin-left:.3em;overflow:hidden;transition:max-width .45s cubic-bezier(.23,1,.32,1),opacity .3s,margin .45s}
+html.tsc{--tsw:78px}
+html.tsc .theme-switch .lb{max-width:0;margin-left:0;opacity:0}
 
 /* ---------- cursore "drag" ---------- */
 #cur{position:fixed;left:0;top:0;z-index:400;pointer-events:none;opacity:0;transition:opacity .25s;will-change:transform}
@@ -419,7 +426,7 @@ html:has(body[data-page=project]),body[data-page=project]{overscroll-behavior-y:
 .xp-fig.full{--fh:100vh;--fh:100svh;padding:0}.xp-fig.full figcaption{display:none}
 .xp-fig figcaption{width:calc(var(--fh)*var(--r))}
 .xp-fig img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.08);will-change:transform}
-.xp-fig figcaption{display:flex;justify-content:space-between;gap:1rem;margin-top:.7rem;font-size:.8rem;color:var(--muted)}
+.xp-fig figcaption{display:none}   /* niente didascalie sotto foto e video (Tobia, 27/10): le aggiunge lui dove servono */
 .xp-pair{flex:none;display:flex;gap:clamp(12px,1.2vw,20px)}
 .xp-pair .xp-fig{padding-left:0;padding-right:0}
 .xp-stack{flex:none;display:flex;flex-direction:column;justify-content:center;gap:clamp(22px,3.4vh,40px);padding:6.2rem 0 4.6rem}
@@ -439,12 +446,20 @@ html:has(body[data-page=project]),body[data-page=project]{overscroll-behavior-y:
 @keyframes macScroll{0%,14%{transform:translateY(0)}46%,60%{transform:translateY(var(--sh))}92%,100%{transform:translateY(0)}}
 .mac .base{width:112%;height:clamp(8px,1.6vw,18px);background:linear-gradient(#d9d9dd,#a9a9ae);border-radius:0 0 18px 18px/0 0 12px 12px;position:relative}
 .mac .base::before{content:"";position:absolute;left:50%;top:0;width:15%;height:45%;transform:translateX(-50%);background:#bdbdc2;border-radius:0 0 8px 8px}
-.phone{height:88%;aspect-ratio:9/19.2;background:#0d0d0f;border-radius:13%/6.2%;padding:2.6%;box-shadow:0 0 0 1.5px #3a3a3e inset,0 30px 60px -30px rgba(0,0,0,.35);transition:transform 1.1s cubic-bezier(.23,1,.32,1)}
-.phone .pscr{position:relative;width:100%;height:100%;border-radius:11%/5.2%;overflow:hidden;background:#f2f2f7}
-.phone .pscr::before{content:"";position:absolute;z-index:2;left:50%;top:1.6%;width:31%;height:3.6%;transform:translateX(-50%);background:#0d0d0f;border-radius:999px}
-.phone img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;opacity:0;transition:opacity .7s ease}
-.phone img.on{opacity:1}
-.phone.p1{transform:translate(-5%,-2%) rotate(-3deg)}.phone.p2{transform:translate(5%,1%) rotate(2.5deg)}
+.phone{position:relative;height:84%;aspect-ratio:.49;border-radius:16.5%/8%;padding:2.8%;background:#0a0a0b;box-shadow:0 0 0 1.6px #6e6e73,0 0 0 3.2px #2c2c2e,0 0 0 4.2px #8e8e93,0 50px 70px -40px rgba(0,0,0,.45),0 18px 30px -18px rgba(0,0,0,.25)}
+.phone::before,.phone::after{content:"";position:absolute;width:4px;background:linear-gradient(90deg,#4a4a4e,#8e8e93);border-radius:2px}
+.phone::before{left:-7px;top:17%;height:4%}
+.phone::after{right:-7px;top:24%;height:11%}
+.phone .vol{position:absolute;left:-7px;width:4px;height:7.5%;background:linear-gradient(90deg,#4a4a4e,#8e8e93);border-radius:2px}
+.phone .vol:nth-child(1){top:25%}.phone .vol:nth-child(2){top:34%}
+.phone .pscr{position:relative;width:100%;height:100%;border-radius:13.5%/6.4%;overflow:hidden;background:#f2f2f7;isolation:isolate}
+.phone .pscr::before{content:"";position:absolute;z-index:5;left:50%;top:1.5%;width:30%;height:3.3%;transform:translateX(-50%);background:#000;border-radius:999px}
+.phone .pscr::after{content:"";position:absolute;z-index:5;left:50%;bottom:.9%;width:36%;height:.55%;transform:translateX(-50%);background:rgba(0,0,0,.82);border-radius:999px}
+/* le schermate entrano come una navigazione iOS: la nuova scorre da destra, la vecchia arretra e si scurisce; il telefono resta fermo */
+.phone img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;transform:translateX(102%);transition:transform .8s cubic-bezier(.32,.72,0,1),filter .8s cubic-bezier(.32,.72,0,1);z-index:0}
+.phone img.out{transform:translateX(-28%);filter:brightness(.86);z-index:1}
+.phone img.on{transform:none;z-index:2;box-shadow:-12px 0 30px rgba(0,0,0,.12)}
+.phone img.cut{transition:none}
 /* righe di testo tra le immagini */
 .xp-txt{width:clamp(300px,30vw,480px)}
 .xp-txt.top{justify-content:flex-start}
@@ -508,7 +523,7 @@ body:not([data-page=home]) #chint{display:none}
 .xp-frame:focus-visible{outline:2px solid var(--text);outline-offset:6px}
 .xp-endnav{display:flex;justify-content:space-between;gap:2rem;margin-top:.8rem}
 /* barra di stato: un solo layout. Linea spessa sempre; a sinistra la molla indietro (all'inizio), a destra quella avanti (alla fine) */
-.xp-bar{position:absolute;left:calc(var(--gx) + var(--tsw) + 2rem);right:var(--gx);bottom:var(--gy);height:var(--ctl);display:grid;grid-template-columns:minmax(0,1fr) minmax(120px,38vw) minmax(0,1fr);gap:1.5rem;align-items:center;font-size:.85rem;color:var(--muted);pointer-events:none}
+.xp-bar{position:absolute;left:var(--gx);right:var(--gx);bottom:var(--gy);height:var(--ctl);display:grid;grid-template-columns:minmax(0,1fr) var(--pw,minmax(120px,38vw)) minmax(0,1fr);gap:1.5rem;align-items:center;font-size:.85rem;color:var(--muted);pointer-events:none}
 .xp-bar .ln{height:3px;background:var(--border);position:relative;overflow:hidden}
 .xp-bar .ln i{position:absolute;inset:0;background:var(--text);transform-origin:0 50%;transform:scaleX(0)}
 .xp-bar .t,.xp-bar .r{display:flex;align-items:center;gap:.8rem;min-width:0;border:0;background:none;padding:0;font:inherit;color:inherit;text-align:left}
@@ -594,17 +609,21 @@ body:not([data-page=home]) #chint{display:none}
     <span data-p="about" data-go="about">About</span>
   </nav>
   <div class="hr">
-    <div class="lang-switch" role="group" aria-label="Language"><span class="ts-thumb"></span><button data-l="it" onclick="setLang('it')" aria-label="Italiano">IT</button><button data-l="en" onclick="setLang('en')" aria-label="English">EN</button></div>
+    <div class="lang-switch" role="group" aria-label="Language"><span class="ts-thumb"></span><button data-l="en" onclick="setLang('en')" aria-label="English">EN</button><button data-l="it" onclick="setLang('it')" aria-label="Italiano">IT</button></div>
     <a class="btn" href="#talk" data-scroll="talk">Ciao</a>
   </div>
 </header>
 
 <div class="theme-switch">
   <span class="ts-thumb"></span>
-  <button data-t="light" onclick="setTheme('light')">☀ Light</button>
-  <button data-t="dark" onclick="setTheme('dark')">☾ Dark</button>
+  <button data-t="light" onclick="setTheme('light')" aria-label="Light theme"><i aria-hidden="true">☀</i><span class="lb">Light</span></button>
+  <button data-t="dark" onclick="setTheme('dark')" aria-label="Dark theme"><i aria-hidden="true">☾</i><span class="lb">Dark</span></button>
 </div>
 
+<script>
+(()=>{const upd=()=>document.documentElement.classList.toggle('tsc',document.body.dataset.page!=='home'||scrollY>8);
+  addEventListener('scroll',upd,{passive:true});new MutationObserver(upd).observe(document.body,{attributes:true,attributeFilter:['data-page']});upd()})();
+</script>
 <!-- cursore: appare sopra la sfera e sul carosello -->
 <div id="pt" aria-hidden="true"><div id="pt-band"></div></div>
 <div id="cur" data-k="globe"><div class="cur-in">
@@ -804,22 +823,22 @@ const PHOTO_DIR='img/';
 const IMG=k=>PHOTO_DIR+k+'.jpg';
 const TAGS_PH=['Product Design','Textile & Fashion','Exhibition Design','System Design'];
 const projects=[
-{slug:'i',client:'Aalto Start-Up Centre',hide:['i-2','i-p1','i-p2','i-p3'],loop:['i-cover', 'i-p1', 'i-2'],title:'Iprefab',cat:'UX/UI Design',tag:'Digital Product',year:'2025',kind:'Start-up internship',team:'Start-up team',dur:'4 months',role:'Customer journey, UX/UI and Figma prototype',
+{slug:'i',client:'Aalto Start-Up Centre',hide:['i-2','i-p1','i-p2','i-p3','i-w1','i-w3'],loop:['i-cover', 'i-w2'],title:'Iprefab',cat:'UX/UI Design',tag:'Digital Product',year:'2025',kind:'Start-up internship',team:'Start-up team',dur:'4 months',role:'Customer journey, UX/UI and website',
  short:'A website that matches people with Finnish prefab homes and builders, with AI matchmaking and consultancy.',
- long:'Customer journey and desktop prototype for House Finland, powered by Iprefab, a start-up at the Aalto Start-Up Centre: compare prefab houses from Finland\'s builders, get matched by AI and follow your project from a personal dashboard.',
+ long:'Customer journey and website for Iprefab, a start-up at the Aalto Start-Up Centre that brings Finland\'s prefab builders together: design your home first with an AI-guided configurator, compare houses side by side and get matched with the builder who can make it.',
  gal:[['mac:i-w1','']],
-  sec:[['Summary','Compare first, then meet the builder','During my four-month UX/UI internship at the Aalto Start-Up Centre in Espoo I designed the customer journey and the Figma prototype of House Finland, powered by Iprefab: a website where people compare prefab houses from Finland\'s builders and get matched by AI, built together with the development and marketing teams.',[]],
-  ['Journey','From browsing to a project','Visitors start from a house type, browse houses, builders and the magazine, and can ask the AI at any time. Logging in turns browsing into a personal dashboard that keeps the project, the matched results and the consultants in one place.',[['mac:i-w2','']]],
-  ['Matchmaking','Houses matched to you','Matchmaking ranks houses and builders against the project: plot, size and budget. People like and compare houses side by side, then open the builder\'s page when they are ready to talk.',[['mac:i-w3','']]],
-  ['Consultancy','Help at every step','General, architectural, financial and AI consultancy sit next to a guided site zoning and permit wizard of about twenty steps, so the hardest part of building in Finland is never faced alone.',[]],
+  sec:[['Summary','Compare first, then meet the builder','During my four-month UX/UI internship at the Aalto Start-Up Centre in Espoo I designed the customer journey and the website of Iprefab: a place where people compare prefab houses from Finland\'s builders and get matched by AI, built together with the development and marketing teams.',[]],
+  ['Journey','Design your home first','The configurator asks one thing at a time: plot size, rooms, floors, the side the garden faces. The house takes shape as people answer, with an estimated price, so nobody needs to know how to build before starting.',[['mac:i-w2','']]],
+  ['Matchmaking','Houses matched to you','Houses from independent builders sit side by side, filtered by type, size, price and rooms. People save the ones they like, compare them, and get matched when a new house fits their project.',[['mac:i-w3','']]],
+  ['Consultancy','Help at every step','General, architectural, financial and AI consultancy sit next to a guided site zoning and permit service, so the hardest part of building in Finland is never faced alone.',[]],
   ['Handoff','From prototype to implementation','The Figma prototype was the shared reference for the front-end and back-end teams, and the visual language was aligned with the marketing strategy so product and communication speak with one voice.',[]]]},
 {slug:'f',client:'Personal project',hide:['f-p1','f-p2','f-p3','f-2'],loop:['f-cover', 'f-p1', 'f-2'],title:'Fanta.me',cat:'UX/UI Design',tag:'Digital Product',year:'2026',kind:'Digital product',team:'—',dur:'—',role:'Concept, UX/UI design and prototype',
  short:'The fantasy game of real life: call what friends do, vote it, and climb the live standings.',
  long:'A mobile game where a group of friends turns everyday moments into points, with bonus and malus cards, fantapowers and a live podium.',
  gal:[['f-cover','w'],['f-p2','v'],['f-2','w'],['f-p1','v'],['f-p3','v']],
- sec:[['Summary','The fantasy game of real life','Fanta.me turns a group of friends into a fantasy league of real life. Someone does something, the card is called, the group confirms the points and the standings move live. Rooms like Fantapasquetta bring people back with one tap.',[['ph:f-s1|f-s2','']]],
-  ['Powers','Turbo doubles, Moviola cancels','Fantapowers add strategy on top of luck: Turbo doubles a call, Moviola cancels it, and each power can be used once per game, with a countdown that makes the timing matter.',[['ph:f-s4|f-s3','']]],
-  ['Standings','Teams on a live podium','Teams and individuals are ranked on a live podium, with a daily view and a full-game view, so the story of the game is always one tab away.',[['ph:f-s5|f-s6','']]]]},
+ sec:[['Summary','The fantasy game of real life','Fanta.me turns a group of friends into a fantasy league of real life. Someone does something, the card is called, the group confirms the points and the standings move live. Rooms like Fantapasquetta bring people back with one tap.',[['ph:f-s2|f-s3|f-s4|f-s5','']]],
+  ['Powers','Turbo doubles, Moviola cancels','Fantapowers add strategy on top of luck: Turbo doubles a call, Moviola cancels it, and each power can be used once per game, with a countdown that makes the timing matter.',[['f-ux','R1.5']]],
+  ['Standings','Teams on a live podium','Teams and individuals are ranked on a live podium, with a daily view and a full-game view, so the story of the game is always one tab away.',[]]]},
 {slug:'g',client:'Sinis Marine Protected Area',loop:['g-cover', 'g-1', 'g-6'],title:'Grain Keeper',cat:'System Design',tag:'System Design',year:'2025',kind:'Thesis project',team:'Individual',dur:'6 months',role:'Research, data analysis and design',
  short:'Urban furniture that keeps tourists from carrying away the quartz sand of the Sinis Peninsula.',
  long:'Thesis project developed with the Sinis Marine Protected Area to counter the unintentional removal of quartz sand caused by overtourism.',
@@ -829,23 +848,23 @@ const projects=[
   ['Research','Maintenance is the real problem','The research phase was run jointly with the Sinis Marine Protected Area on the quartz beaches of Is Arutas, Mari Ermi, Corrigas and S\'archeddu e Sa Canna. The main issue of the existing design is not collecting the sand but the frequent maintenance it requires, which is unsustainable with the limited resources available.',[['g-2','h']]],
   ['Output','Showers and a bench that filter and store','A redesigned shower with a sturdier structure, a bamboo tray and a filtration system under the user\'s feet: a funnel sends water and sand to two stacked filters, 1 mm for the quartz sand and 200 micron for sediment. With about 10 litres of capacity, double the previous design, it runs longer between maintenance. Alongside it, a bench offers dry sand storage and a buffer between beach and parking.',[['g-4','t'],['g-7','t']]],
   ['Solution','Visitors release it, volunteers return it','Multilingual prompts on the shower and along the path invite visitors to release the quartz sand as they leave. The sand collects in the filters or in the bench, and volunteers regularly return it to the beach. The products are modular, so the filtering areas can be configured for the size and shape of each beach.',[['g-3','h']]]]},
-{slug:'h',client:'Politecnico di Torino',loop:['h-cover', 'h-f4', 'h-padv'],hide:['h-f1','h-f2','h-f3','h-f5','h-2','h-p1','h-p2','h-p3'],title:'Hive',cat:'UX/UI Design',tag:'Digital Product',year:'2026',kind:'University project',team:'Team of 5',dur:'3 months',role:'Research, UX/UI and prototype',
+{slug:'h',client:'Politecnico di Torino',loop:['h-cover', 'h-f4', 'h-padv'],hide:['h-f6','h-f1','h-f2','h-f3','h-f5','h-2','h-p1','h-p2','h-p3'],title:'Hive',cat:'UX/UI Design',tag:'Digital Product',year:'2026',kind:'University project',team:'Team of 5',dur:'3 months',role:'Research, UX/UI and prototype',
  short:'A modular tractor HMI that lets farmers multitask safely while Level 3 autonomy keeps the row.',
  long:'Cognitive Ergonomics and HMI project: a touch-and-tactile cockpit for autonomous orchard tractors, with a rotary knob, a pillar mapping screen and a two-level take-over request shared with the crew.',
  gal:[['h-f4','w']],
- sec:[['Summary','The tractor is the body, the hive is the network','Hive is a human-machine interface for Level 3 autonomous tractors in orchards and vineyards. While the tractor keeps the row on its own, the operator, even a seasonal worker on their first day, can plan the day, tag the field and stay in control. Developed in a team of five for the Cognitive Ergonomics and HMI course.',[['mp4:img/web/v/h-v-loop.mp4']]],
-  ['Research','What farmers asked for','We benchmarked six Level 3 systems, from Mercedes and BMW to Monarch and John Deere, read what farmers say online and interviewed growers, contractors and technicians around Cuneo. The same issues kept coming back: error codes with no words, touchscreens that fail on bumpy ground, implement settings to re-enter every time and a weak sense of safety around people in the rows.',[]],
-  ['Concept','Two screens, two jobs','A detachable horizontal dashboard and a vertical mapping screen on the cab pillar split control from navigation: plan the day on the pad, follow the row on the pillar.',[['h-pad',''],['h-padv','']]],
+ sec:[['Summary','The tractor is the body, the hive is the network','Hive is a human-machine interface for Level 3 autonomous tractors in orchards and vineyards. While the tractor keeps the row on its own, the operator, even a seasonal worker on their first day, can plan the day, tag the field and stay in control. Developed in a team of five for the Cognitive Ergonomics and HMI course.',[['h-pad',''],['h-padv','']]],
+  ['Research','What farmers asked for','We benchmarked six Level 3 systems, from Mercedes and BMW to Monarch and John Deere, read what farmers say online and interviewed growers, contractors and technicians around Cuneo. The same issues kept coming back: error codes with no words, touchscreens that fail on bumpy ground, implement settings to re-enter every time and a weak sense of safety around people in the rows.',[['mp4:img/web/v/h-v-loop.mp4']]],
+  ['Concept','Two screens, two jobs','A detachable horizontal dashboard and a vertical mapping screen on the cab pillar split control from navigation: plan the day on the pad, follow the row on the pillar.',[]],
   ['Knob','A knob for the field','A rotary knob mirrors every touch gesture, so the operator never has to aim at glass on bumpy ground: push left for the menu, push right to drop a marker for weeds, disease, pests or drainage, press to adjust working depth or rotor speed.',[['mp4:img/web/v/h-v-knob.mp4','']]],
   ['Safety','Two levels of take-over','When a person is within 50 metres, a Planned TOR turns the borders yellow, plays a soft chime and pulses the crew wristbands. If a collision is less than five seconds away, an Emergency TOR turns every screen red with a loud alarm, and stops tractor and implement if nobody reacts. Colour, sound and vibration say the same thing on every device.',[['h-pad2','']]],
-  ['Outcome','A modular kit, not a new fleet','We staged the virtual prototype on a real tractor in an apple orchard and filmed a working day, from the driver check-in to an obstacle in the row. Expert reviewers praised the clarity of the layout and a hardware-agnostic kit that moves across a mixed fleet and protects what farmers already own. Their next step for us: a quick-message channel between operators, so crews can coordinate shared tasks without reaching for a phone.',[['h-f6','R0.75@50%']]]]},
-{slug:'q',client:'Zanotta',loop:['q-cover', 'q-8', 'q-6'],title:'Quadernazione',cat:'Exhibition Design',tag:'Exhibition Design',year:'2024',kind:'University project',team:'Team of 5',dur:'4 months',role:'Concept, 3D modeling and visualization',
+  ['Outcome','A modular kit, not a new fleet','We staged the virtual prototype on a real tractor in an apple orchard and filmed a working day, from the driver check-in to an obstacle in the row. Expert reviewers praised the clarity of the layout and a hardware-agnostic kit that moves across a mixed fleet and protects what farmers already own. Their next step for us: a quick-message channel between operators, so crews can coordinate shared tasks without reaching for a phone.',[]]]},
+{slug:'q',client:'Zanotta',loop:['q-cover', 'q-4', 'q-6'],title:'Quadernazione',cat:'Exhibition Design',tag:'Exhibition Design',year:'2024',kind:'University project',team:'Team of 5',dur:'4 months',role:'Concept, 3D modeling and visualization',
  short:'An immersive exhibition on Superstudio\'s Quaderna series, staged in Ferrara\'s Verdi Theatre.',
  long:'Exhibition concept for Zanotta that showcases the radical minds of Superstudio and their Quaderna products through an immersive journey.',
  gal:[['q-cover','h'],['q-2','v'],['q-3','h'],['q-1','h'],['q-4','h']],
- sec:[['Summary','A journey through the radical','An exhibition concept for Zanotta that showcases the radical minds of Superstudio and their Quaderna products through an immersive journey reflecting on society and the future. It is hosted in the former Verdi Theatre in Ferrara. I mainly worked on the concept, the 3D modeling and the visualization, including the renders for the exhibition.',[['q-1','h']]],
+ sec:[['Summary','A journey through the radical','An exhibition concept for Zanotta that showcases the radical minds of Superstudio and their Quaderna products through an immersive journey reflecting on society and the future. It is hosted in the former Verdi Theatre in Ferrara. I mainly worked on the concept, the 3D modeling and the visualization, including the renders for the exhibition.',[['q-1','F1.6']]],
   ['Concept','The continuous monument','The project showcases the Quaderna series, designed by the Superstudio collective and produced by Zanotta. The exhibition highlights not only the products but also the visionary and radical philosophy behind them. Central to the show is the concept of the “continuous monument”, the main theme and driving force of the whole exhibition.',[['q-5','h']]],
-  ['Space','The stage tower of the Verdi Theatre','The stage tower of the former Verdi Theatre in Ferrara was chosen for its strong visual harmony with the showcased products. Its vast, open spaces create an ideal environment for exhibition artifacts inspired by the continuous monument.',[['q-7','t'],['q-8','h']]],
+  ['Space','The stage tower of the Verdi Theatre','The stage tower of the former Verdi Theatre in Ferrara was chosen for its strong visual harmony with the showcased products. Its vast, open spaces create an ideal environment for exhibition artifacts inspired by the continuous monument.',[['q-7','t'],['q-4','R1.8']]],
   ['System','A modular system of environments','The exhibition is structured around the Continuous Monument, an architectural device that divides the space into semi-open environments and integrates captions and technical equipment such as lighting and speakers. Nine environments, from the entrance and colophon to an immersive room, a video installation and storage.',[['q-2','t'],['q-6','t']]],
   ['Experience','A path with no fixed route','Visitors enter through a transitional space and then choose their own path; only a suggested one continues after the colophon. An immersive room hosts an open discussion about the future and a video projection shows Superstudio\'s Supersuperficie, for a visit of about 30 minutes. The visual identity pairs acid green with the Quaderna pattern in a bold yet minimal composition.',[['q-3','F1.8']]]]},
 {slug:'b',client:'Museum of Marsh Herbs',loop:['b-cover', 'b-2', 'b-1'],title:'Buxaka',cat:'Textile Design',tag:'Textile & Fashion',year:'2023',kind:'University project',team:'Team of 4',dur:'3 months',role:'Concept, 3D modeling and visualization',
@@ -853,7 +872,7 @@ const projects=[
  long:'Textile project with the Museum of Marsh Herbs in Bagnacavallo: a modular streetwear jacket that pays tribute to handmade craftsmanship.',
  gal:[['b-cover','h'],['b-1','v'],['b-2','v'],['b-3','v'],['b-4','v']],
  sec:[['Summary','Craft, worn every day','A project developed with the University of Ferrara and the Eco Museum of Marsh Herbs in Bagnacavallo. The objective was to design an everyday object using traditional weaving techniques from the Romagna region, preserving local craftsmanship through contemporary design. I mainly worked on the concept, the 3D modeling and the visualization, including the renders for the exhibition.',[['b-5','t']]],
-  ['Concept','Streetwear meets tradition','The idea was to merge everyday streetwear with practical usability. The result is a modular overwear jacket designed to carry your daily essentials with ease, and a tribute to the handmade craftsmanship that has been gradually fading from the fashion world.',[['b-1','t']]],
+  ['Concept','Streetwear meets tradition','The idea was to merge everyday streetwear with practical usability. The result is a modular overwear jacket designed to carry your daily essentials with ease, and a tribute to the handmade craftsmanship that has been gradually fading from the fashion world.',[['b-1','F0.665']]],
   ['Process','Woven by hand','The entire project was handcrafted with traditional textile techniques: loom weaving, basket weave, plain weave and braiding, each selected to balance decorative and structural needs.',[['b-3','t']]],
   ['Prototype','Hemp, raffia and braided cords','The main structure is woven from hemp on a custom-made loom and forms the back panel and belt, decorated with patterns inspired by Sardinian textile heritage. The suspenders are made from double-braided cords, and all other embellishments from raffia fibres.',[['b-2','t'],['b-6','t']]],
   ['Add-ons','Pockets you can change','Modular pockets can be attached or removed to suit the user\'s needs. The larger one carries a diamond pattern that mirrors the design on the jacket\'s back, while the smaller one, with an alternating weave, is made for compact items.',[['b-4','t']]]]},
@@ -883,8 +902,7 @@ projects.push({slug:'au',client:'Self-initiated',title:'Unofficial Audi spot',ca
  long:'An unofficial spot for the Audi TT: a personal experiment in shooting, rhythm and editing, made to explore how a car commercial is built.',
  gal:[['mp4:img/web/v/au-v-hero.mp4','']],
  sec:[['Summary','A car, as a commercial','I shot and edited an unofficial spot for the Audi TT as a videomaking experiment: framing, light and rhythm used the way a real commercial would.',[['au-3','R0.75@45%']]],
-  ['Film','The full spot','The finished spot, from the first aerial of the coast road to the last light on the sea.',[['yt:J31Gmd84640','']]],
-  ['Frames','Three shots, one road','The road from above, the car at ground level, the drone rising to the sea at dusk: three shots that carry the whole spot.',[['au-1','M1.6'],['mp4:img/web/v/au-strip-1.mp4','S4'],['mp4:img/web/v/au-strip-2.mp4','S4'],['mp4:img/web/v/au-strip-3.mp4','S4']]]]});
+  ['Film','The full spot','The finished spot, from the first aerial of the coast road to the last light on the sea.',[['yt:J31Gmd84640','']]]]});
 const PH_COL=['#3a3a3c','#4a4a4d','#2c2c2e','#5a5a5e','#424245'];   // progetti provvisori senza foto: grigi neutri
 const PH_SEC=[['Summary','Summary placeholder','Placeholder text: a short summary of the project, who it is for and what it achieved.'],['Problem','The problem','Placeholder text: the starting context and the difficulty to solve.'],['Research','The research','Placeholder text: methods used and the evidence that guided the choices.'],['Output','The output','Placeholder text: materials produced along the way.'],['Solution','The solution','Placeholder text: the final proposal and how it answers the problem.']];
 /* progetti con foto e video ospitati fuori (YouTube, Framer): chiavi in EXT, proporzioni in DIM */
@@ -916,22 +934,22 @@ projects.push(
   ['Revenue','Where the money comes from','Grants carry the start. Over time Coral relies more on what it earns: training sold to companies and matched by sponsors, the Coral Days and the baby parking. That shift is what lets the hub survive when public funds shrink.',[['co-1','R0.8@60%']],'<p class="kicker">Revenue over ten years, central scenario</p><ul class="bl"><li title="Public grants: €1.27M, 30%"><span>Public grants</span><i style="--w:1.000"></i><b>30%</b><em>€1.27M</em></li><li title="Training sales and sponsors: €0.76M, 18%"><span>Training sales and sponsors</span><i style="--w:0.600"></i><b>18%</b><em>€0.76M</em></li><li title="Private grants: €0.65M, 15%"><span>Private grants</span><i style="--w:0.500"></i><b>15%</b><em>€0.65M</em></li><li title="Coral Days: €0.60M, 14%"><span>Coral Days</span><i style="--w:0.467"></i><b>14%</b><em>€0.60M</em></li><li title="City of Turin renovation funds: €0.50M, 12%"><span>City of Turin renovation funds</span><i style="--w:0.400"></i><b>12%</b><em>€0.50M</em></li><li title="Baby parking: €0.39M, 9%"><span>Baby parking</span><i style="--w:0.300"></i><b>9%</b><em>€0.39M</em></li><li title="Renovation partner: €0.06M, 1%"><span>Renovation partner</span><i style="--w:0.033"></i><b>1%</b><em>€0.06M</em></li></ul>'],
   ['Scenarios','Three futures, one answer','I stress-tested the plan with fewer public grants, slower growth and emptier courses. Even in the pessimistic case Coral pays back its investment and returns more than its cost of capital. Margins are thin, and the plan says so: the strength of the project is that it holds, not that it is a business.',[],'<p class="kicker">Discounted cash flow, three scenarios</p><table class="scn"><thead><tr><th></th><th>Pessimistic</th><th>Central</th><th>Optimistic</th></tr></thead><tbody><tr><th>Payback</th><td>Quarter 24</td><td>Quarter 16</td><td>Quarter 12</td></tr><tr><th>Net present value</th><td>€2,174</td><td>€5,654</td><td>€7,717</td></tr><tr><th>IRR per quarter</th><td>3.89%</td><td>4.71%</td><td>9.92%</td></tr><tr><th>Courses filled</th><td>50% rising</td><td>60% rising</td><td>70%, +10% a year</td></tr><tr><th>Coral Days growth</th><td>3% a year</td><td>5% a year</td><td>Up to 10% a year</td></tr></tbody></table><p class="note">All three return more than the 3.54% quarterly cost of capital.</p>'],
   ['Outreach','Banners, newsletters and word of mouth','The plan includes the communication that makes the numbers possible: banners for the Coral Days, newsletters for associations and partners, and ambassadors who carry the word into the places women already trust.',[['co-m1','M0.714'],['co-m2','M0.714'],['co-m3','M0.714'],['co-3','M1.346']]]]},
-{slug:'on',client:'Orakle, a fictional corporation',title:'Onea',cat:'Speculative Design',tag:'Speculative Design',year:'2026',kind:'Speculative design and storytelling',team:'—',dur:'—',role:'Concept, storytelling and immersive website',
+{slug:'on',client:'Orakle, a fictional corporation',hide:['on-1','on-3','on-4'],title:'Orakle',cat:'Speculative Design',tag:'Speculative Design',year:'2026',kind:'Speculative design and storytelling',team:'—',dur:'—',role:'Concept, storytelling and immersive website',
  links:[['Enter the Orakle website ↗','https://oraklecorporate.framer.website/']],
  short:'A speculative corporate future, told through the immersive website of the company that sells it.',
- long:'Onea is set in 2041. Orakle, a corporation that predicts burnout and collapse, sells companies a programme that prepares employees for the future by numbing them to it. The story is told from inside, through Orakle\'s own interactive website.',
+ long:'The year is 2041. Orakle, a corporation that predicts burnout and collapse, sells companies a programme that prepares employees for the future by numbing them to it. The story is told from inside, through Orakle\'s own interactive website.',
  gal:[['on-cover','F1.6']],
- sec:[['Summary','Predict. Prepare. Perform.','Instead of describing a dystopia from the outside, Onea lets people walk into it. The project is an immersive, interactive website for Orakle, a fictional corporation: the visitor is greeted by name, signs an access agreement and explores the products that promise companies a stable future.',[['mac:img/web/v/on-v-loop.mp4','']]],
-  ['World','January 2041','In the story, protests and burnout caused by relentless scheduling have pushed companies towards financial collapse. Orakle\'s answer is O·nea, a programme that keeps the workforce ready: a 34% gain in the Workforce Readiness Index and twelve new companies joining the ecosystem every day. The tour starts outside Orakle\'s headquarters, a tower of stacked curves.',[['on-1','']]],
-  ['System','Haptix, O·neiros and O·nea','Haptix, a tactile device for monitoring and gestural command, collects biometric and behavioural data. O·neiros, an algorithm named after the Greek word for dream, turns it into predictions of collective behaviour. O·nea closes the loop with an environment: a workstation with a spherical display and a voice guide for emotional regulation. A double click takes the visitor inside the pod, hands on the desk.',[['on-3','F0.75@50%']]],
+ sec:[['Summary','Predict. Prepare. Perform.','Instead of describing a dystopia from the outside, Orakle lets people walk into it. The project is an immersive, interactive website for Orakle, a fictional corporation: the visitor is greeted by name, signs an access agreement and explores the products that promise companies a stable future.',[['mac:img/web/v/on-v-loop.mp4','']]],
+  ['World','January 2041','In the story, protests and burnout caused by relentless scheduling have pushed companies towards financial collapse. Orakle\'s answer is O·nea, a programme that keeps the workforce ready: a 34% gain in the Workforce Readiness Index and twelve new companies joining the ecosystem every day. The tour starts outside Orakle\'s headquarters, a tower of stacked curves.',[['ok-1','']]],
+  ['System','Haptix, O·neiros and O·nea','Haptix, a tactile device for monitoring and gestural command, collects biometric and behavioural data. O·neiros, an algorithm named after the Greek word for dream, turns it into predictions of collective behaviour. O·nea closes the loop with an environment: a workstation with a spherical display and a voice guide for emotional regulation. A double click takes the visitor inside the pod, hands on the desk.',[['ok-2','']]],
   ['Session','Rehearsing tomorrow','Inside O·nea the voice guide starts a training session. The employee focuses on a luminous sphere, then watches figures made of particles act out the conflicts of the coming day, so that when they happen nothing is felt anymore.',[['mp4:img/web/v/on-v-session.mp4']]],
-  ['Critique','Comfort as control','Behind the calm corporate tone, O·nea applies cognitive desensitization: it pre-exposes employees to future stressors until they stop reacting. Testimonials from fictional CEOs and a world map ranking companies by stability make the question tangible: how much would we sign away for a predictable future?',[['on-4','R0.75@40%']]],
+  ['Critique','Comfort as control','Behind the calm corporate tone, O·nea applies cognitive desensitization: it pre-exposes employees to future stressors until they stop reacting. Testimonials from fictional CEOs and a world map ranking companies by stability make the question tangible: how much would we sign away for a predictable future?',[['ok-3','']]],
   ['Website','A website you enter','The website is the exhibit. A personal greeting, a binding agreement, a snap gesture that turns the door of O·nea towards you and a particle scene to explore turn the visitor into a participant of the story.',[]]]});
-const DIM={"au-yt":1.778,"h-pad":1.6,"h-padv":0.8,"h-pad2":1.6,"f-s1":0.438,"f-s2":0.438,"f-s3":0.438,"f-s4":0.438,"f-s5":0.438,"f-s6":0.438,"i-w1":0.796,"i-w2":0.797,"i-w3":0.671,"co-m1":0.714,"co-m2":0.714,"co-m3":0.714,"co-rec":2.0,"co-plate":1.0,"ca-v":0.8,"fs-dusk":1.778,"h-f1":1.778,"h-f2":1.778,"h-f3":1.778,"h-f4":1.778,"h-f5":1.778,"h-f6":1.778,"co-cover":2.0,"co-5":1.0,"co-1":1.0,"co-2":1.333,"co-3":1.346,"co-4":1.414,"au-cover":1.778,"au-1":1.9,"au-2":1.9,"au-3":1.9,"ca-cover":1.778,"ca-1":1.778,"ca-2":1.778,"ca-3":1.778,"fs-cover":1.778,"fs-1":1.778,"fs-2":1.778,"fs-3":1.778,"fs-4":1.778,"fs-5":1.778,"on-cover":2.202,"on-1":2.292,"on-2":2.448,"on-3":2.124,"on-4":2.141,"on-5":1.566,"b-1":0.665,"b-2":0.615,"b-3":0.751,"b-4":0.759,"b-5":0.616,"b-6":0.616,"b-cover":1.775,"f-2":1.6,"f-cover":1.6,"f-p1":0.75,"f-p2":0.75,"f-p3":0.75,"g-1":1.775,"g-2":0.993,"g-3":1.0,"g-4":0.821,"g-5":0.886,"g-6":2.917,"g-7":0.73,"g-cover":1.775,"h-2":1.6,"h-cover":1.6,"h-p1":0.75,"h-p2":0.75,"h-p3":0.75,"i-2":1.6,"i-cover":1.6,"i-p1":0.75,"i-p2":0.75,"i-p3":0.75,"q-1":1.083,"q-2":0.709,"q-3":2.128,"q-4":2.29,"q-5":1.0,"q-6":1.542,"q-7":0.616,"q-8":1.741,"q-cover":1.775,"w-1":0.745,"w-2":1.673,"w-3":0.763,"w-4":1.158,"w-5":1.396,"w-6":1.641,"w-cover":1.775,"z-1":0.754,"z-2":0.752,"z-3":0.885,"z-4":0.752,"z-cover":1.777};   // proporzioni vere delle foto (larghezza/altezza): le foto non vengono tagliate
+const DIM={"au-yt":1.778,"h-pad":1.6,"h-padv":0.8,"h-pad2":1.6,"f-s1":0.438,"f-s2":0.438,"f-s3":0.438,"f-s4":0.438,"f-s5":0.438,"f-s6":0.438,"i-w1":0.524,"i-w2":1.6,"i-w3":0.575,"co-m1":0.714,"co-m2":0.714,"co-m3":0.714,"co-rec":2.0,"co-plate":1.0,"ca-v":0.8,"fs-dusk":1.778,"h-f1":1.778,"h-f2":1.778,"h-f3":1.778,"h-f4":1.778,"h-f5":1.778,"h-f6":1.778,"co-cover":2.0,"co-5":1.0,"co-1":1.0,"co-2":1.333,"co-3":1.346,"co-4":1.414,"au-cover":1.778,"au-1":1.9,"au-2":1.9,"au-3":1.9,"ca-cover":1.778,"ca-1":1.778,"ca-2":1.778,"ca-3":1.778,"fs-cover":1.778,"fs-1":1.778,"fs-2":1.778,"fs-3":1.778,"fs-4":1.778,"fs-5":1.778,"on-cover":2.202,"on-1":2.292,"on-2":2.448,"on-3":2.124,"on-4":2.141,"on-5":1.566,"b-1":0.665,"b-2":0.615,"b-3":0.751,"b-4":0.759,"b-5":0.616,"b-6":0.616,"b-cover":1.775,"f-2":1.6,"f-cover":1.6,"f-p1":0.75,"f-p2":0.75,"f-p3":0.75,"g-1":1.775,"g-2":0.993,"g-3":1.0,"g-4":0.821,"g-5":0.886,"g-6":2.917,"g-7":0.73,"g-cover":1.775,"h-2":1.6,"h-cover":1.6,"h-p1":0.75,"h-p2":0.75,"h-p3":0.75,"i-2":1.6,"i-cover":1.6,"i-p1":0.75,"i-p2":0.75,"i-p3":0.75,"q-1":1.083,"q-2":0.709,"q-3":2.128,"q-4":2.29,"q-5":1.0,"q-6":1.542,"q-7":0.616,"q-8":1.741,"q-cover":1.775,"w-1":0.745,"w-2":1.673,"w-3":0.763,"w-4":1.158,"w-5":1.396,"w-6":1.641,"w-cover":1.775,"z-1":0.754,"z-2":0.752,"z-3":0.885,"z-4":0.752,"z-cover":1.777,"ok-1":1.499,"ok-2":1.499,"ok-3":1.499,"f-ux":1.5};   // proporzioni vere delle foto (larghezza/altezza): le foto non vengono tagliate
 const WEBS=k=>EXT[k]||PHOTO_DIR+'web/s/'+k+'.webp';   // foto del loop nella sfera (1100px)
 const WEB=k=>EXT[k]||PHOTO_DIR+'web/'+k+'.webp';   // copertine ridimensionate (1600px, WebP) per sfera, carosello e griglie
 /* ordine (Tobia, 26/10): dal piu' recente al piu' vecchio */
-const PJ_ORDER=['Onea','Hive','Fanta.me','Coral','Iprefab','Grain Keeper','Quadernazione','Buxaka','Chiara Alessi interview','Waterpack','Zeitknot','Unofficial Audi spot','Fuocosacro'];
+const PJ_ORDER=['Orakle','Hive','Fanta.me','Coral','Iprefab','Grain Keeper','Quadernazione','Buxaka','Chiara Alessi interview','Waterpack','Zeitknot','Unofficial Audi spot','Fuocosacro'];
 projects.sort((a,b)=>(PJ_ORDER.indexOf(a.title)+99)%99-(PJ_ORDER.indexOf(b.title)+99)%99);
 projects.forEach((p,i)=>{p.i=i;if(p.ph)return;p.local=WEB(p.slug+'-cover');
   const all=Object.keys(DIM).filter(k=>k.startsWith(p.slug+'-')&&!(p.hide||[]).includes(k));   // il loop usa tutte le foto del progetto, prima quelle scelte
@@ -1289,7 +1307,7 @@ function xpTick(now){
   XP.ph.style.transform=`scale(${(1.12-.12*qs).toFixed(4)})`;
   const pc=Math.round(qs*100)+'%';XP.pct.forEach(e=>e.textContent=pc);
   XP.bar.classList.toggle('end',atEnd);
-  XP.cnt.textContent=pad(Math.max(1,seen))+' / '+pad(XP.figs.length);
+  
   if(XP.q>=.995&&XP.armed){XP.armed=false;turnProject(1)}
   // molla all'indietro: si carica solo scorrendo verso l'alto quando sei gia' fermo all'inizio; se smetti si scarica
   const atStart=s<=2;
@@ -1318,7 +1336,7 @@ function projectHTML(p,pv){
       const inner=mp?`<video src="${v}" poster="${v.replace(/\.mp4$/,'.webp')}" muted loop playsinline preload="none" aria-label="${cap}, ${p.title}"></video>`:`<img class="mscroll" style="--sh:${sh_}" src="${PIMG(v)}" alt="${p.title}, ${cap}" loading="lazy" decoding="async">`;
       return `<figure class="xp-fig xp-dev" style="--r:${f?f.r:1.6}"><div class="fr"><div class="mac"><div class="lid"><div class="scr">${inner}</div></div><div class="base"></div></div></div><figcaption><span>${cap}</span><span>${p.title}</span></figcaption></figure>`}
     const ks=v.split('|');ks.forEach(x=>used.add(x));
-    return `<figure class="xp-fig xp-dev" style="--r:${f?f.r:.9}"><div class="fr"><div class="phone" data-n="${ks.length}"><div class="pscr">${ks.map((x,j)=>`<img class="${j?'':'on'}" src="${PIMG(x)}" alt="${p.title}, ${cap}" loading="lazy" decoding="async">`).join('')}</div></div></div><figcaption><span>${cap}</span><span>${p.title}</span></figcaption></figure>`};
+    return `<figure class="xp-fig xp-dev" style="--r:${f?f.r:.9}"><div class="fr"><div class="phone" data-n="${ks.length}"><i class="vol"></i><i class="vol"></i><div class="pscr">${ks.map((x,j)=>`<img class="${j?'':'on'}" src="${PIMG(x)}" alt="${p.title}, ${cap}" loading="lazy" decoding="async">`).join('')}</div></div></div><figcaption><span>${cap}</span><span>${p.title}</span></figcaption></figure>`};
   const vid=(k,cap,sh)=>{n++;used.add(k);const yt=k.startsWith('yt:'),id=k.slice(k.indexOf(':')+1),f=form(sh),r=f?f.r:1.778,ps=f&&f.pos?` style="object-position:${f.pos}"`:'';
     return `<figure class="xp-fig xp-vid${f&&f.full?' full':''}" style="--r:${r}"><div class="fr">${yt?`<button class="yt" data-yt="${id}" aria-label="Play the video, ${p.title}"><img src="${(k=>k?PIMG(k):YT(id))(DIM[p.slug+'-yt']?p.slug+'-yt':Object.keys(DIM).find(d=>d.startsWith(p.slug+'-')&&!used.has(d)&&!(p.hide||[]).includes(d)&&DIM[d]>1.5))}" alt="" loading="lazy"><span class="yt-play">▶ Play the full video</span></button>`:`<video src="${id}" poster="${id.replace(/\.mp4$/,'.webp')}" muted loop playsinline preload="none" aria-label="${cap}, ${p.title}"${ps}></video>`}</div><figcaption><span>${cap}</span><span>${p.title}</span></figcaption></figure>`};
   const fig=([k,sh],cap)=>{if(k&&/^(yt|mp4):/.test(k))return vid(k,cap,sh);if(k&&/^(mac|ph):/.test(k))return dev(k,cap,sh);if(k)used.add(k);const j=n++,f=form(sh),r=f?f.r:(k&&DIM[k])||SHAPE[sh]||1.6,full=f?f.full:r>=WIDE;
@@ -1351,20 +1369,20 @@ function projectHTML(p,pv){
 /* le clip partono solo quando sono in vista: non scarichiamo video che nessuno guarda */
 const vidIO=new IntersectionObserver(es=>es.forEach(e=>{const v=e.target;if(e.isIntersecting&&!RM){v.preload='auto';v.play().catch(()=>{})}else v.pause()}),{threshold:.35});
 /* telefoni: cambiano schermata e posizione ogni 2.8 s */
-setInterval(()=>{if(RM)return;document.querySelectorAll('#pj .phone').forEach(ph=>{const ims=ph.querySelectorAll('img');if(ims.length<2)return;const i=((+ph.dataset.i||0)+1)%ims.length;ph.dataset.i=i;ims.forEach((m,j)=>m.classList.toggle('on',j===i));ph.className='phone p'+(i%3)})},2800);
+setInterval(()=>{if(RM)return;document.querySelectorAll('#pj .phone').forEach(ph=>{const ims=ph.querySelectorAll('img');if(ims.length<2)return;const i=((+ph.dataset.i||0)+1)%ims.length;ph.dataset.i=i;ims.forEach((m,j)=>{const was=m.classList.contains('out');m.classList.toggle('on',j===i);m.classList.toggle('out',j===(i+ims.length-1)%ims.length);if(was&&!m.classList.contains('out')){m.classList.add('cut');requestAnimationFrame(()=>m.classList.remove('cut'))}})})},3200);
 function openProject(i,dir=1){
   const p=projects[i];if(!p)return;unfocus();
   const L_=projects.length,nx=projects[(i+1)%L_],pv=projects[(i+L_-1)%L_];
-  const nk=nx.gal&&nx.gal[0]&&nx.gal[0][0],nbg=nk?`background-image:url('${nk.startsWith('mp4:')?nk.slice(4).replace(/\.mp4$/,'.webp'):PIMG(nk)}')`:`background-color:${nx.col}`;
+  const nk=nx.gal&&nx.gal[0]&&nx.gal[0][0],nbg=nk?`background-image:url('${nk.startsWith('mp4:')?nk.slice(4).replace(/\.mp4$/,'.webp'):/^(mac|ph|yt):/.test(nk)?PIMG(nx.slug+'-cover'):PIMG(nk)}')`:`background-color:${nx.col}`;
   const ink=w=>`<span class="xp-ink${w?' w':''}"><small>Next project</small><b>${nx.title}</b><em>Keep scrolling to open it <span class="xp-pct">0%</span></em></span>`;
   const end=`<div class="xp-pan xp-end"><button class="xp-frame" data-proj="${nx.i}" aria-label="Open the next project, ${nx.title}">
       ${ink(0)}<span class="xp-rev"><span class="xp-ph" style="${nbg}"></span>${ink(1)}</span></button>
     <div class="xp-endnav"><button class="btn-o" data-projb="${pv.i}">Previous project: ${pv.title}</button><button class="btn" data-proj="${nx.i}">Open ${nx.title}</button></div></div>`;
   $('pj').innerHTML=`<section class="xp" aria-label="${p.title} case study"><div class="xp-stage">
     <div class="xp-track">${projectHTML(p,pv)}${end}</div>
-    <div class="xp-bar"><span class="t"><span class="tl">${p.title}</span></span><span class="ln"><i></i></span><span class="r"><b class="c">01</b></span></div></div></section>`;
+    <div class="xp-bar"><span class="t"></span><span class="ln"><i></i></span><span class="r"><span class="tl">${p.title}</span></span></div></div></section>`;
   const q=s=>XP.sec.querySelector(s);
-  XP.sec=$('pj').querySelector('.xp');XP.track=q('.xp-track');XP.bar=q('.xp-bar');XP.ln=q('.ln i');XP.cnt=q('.xp-bar .c');
+  XP.sec=$('pj').querySelector('.xp');XP.track=q('.xp-track');XP.bar=q('.xp-bar');XP.ln=q('.ln i');{const np=document.querySelector('.nav-pill');if(np&&np.offsetWidth)XP.bar.style.setProperty('--pw',np.offsetWidth+'px')}   // la linea del progresso e' larga e centrata come il menu (Tobia, 27/10)
   XP.rev=q('.xp-rev');XP.ph=q('.xp-ph');XP.pct=[...XP.sec.querySelectorAll('.xp-pct')];XP.pvf=q('.ldr.pv i');
   XP.b=0;XP.bt=0;XP.top0=performance.now()+700;XP.x=0;XP.qs=0;XP.q=0;XP.last=0;XP.i=i;XP.armed=true;
   document.querySelectorAll('#pj .rv').forEach(el=>rvIO.observe(el));
