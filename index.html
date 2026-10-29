@@ -19,13 +19,48 @@
 {"@type":"WebSite","@id":"https://tobiaseu.com/#site","url":"https://tobiaseu.com/","name":"Tobia Seu","inLanguage":"en","author":{"@id":"https://tobiaseu.com/#me"}}
 ]}
 </script>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23111'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23111'/%3E%3Cpath d='M9 9h14v3.2h-5.4V24h-3.2V12.2H9z' fill='%23fff'/%3E%3C/svg%3E">
 
 <title>Tobia Seu · UX/UI & Product Designer in Turin (Torino)</title>
 <link rel="preload" href="fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/playfair-display-italic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="img/web/tobia.webp" as="image" fetchpriority="high">
 <link rel="stylesheet" href="fonts/fonts.css">
+<script>
+/* telefono (Tobia, 29/10): per ora il sito e' solo desktop; si ferma tutto e resta un invito ad aprirlo dal computer */
+(function(){if(!matchMedia('(max-width:760px),(pointer:coarse) and (max-height:500px)').matches)return;
+var it=false;try{it=localStorage.getItem('lang')==='it'}catch(e){}
+var T=it?{k:'Solo desktop, per ora',h:'Fatto per uno<br>schermo più grande.',p:'Il portfolio è uno spazio orizzontale e interattivo. Apri tobiaseu.com dal computer per esplorarlo.',c:'Copia il link',d:'Link copiato',m:'Scrivimi'}:{k:'Desktop only, for now',h:'Made for a<br>bigger screen.',p:'The portfolio is a horizontal, interactive space. Open tobiaseu.com on a computer to explore it.',c:'Copy the link',d:'Link copied',m:'Write to me'};
+try{window.stop()}catch(e){}
+var html=document.documentElement;html.lang=it?'it':'en';html.className='mob';
+var b=document.body;if(!b){b=document.createElement('body');html.appendChild(b)}
+b.innerHTML='<style>'+
+'html.mob{--bg:#F7F7F9;--text:#111;--muted:#5a5a5a;--line:rgba(17,17,17,.16)}'+
+'@media (prefers-color-scheme:dark){html.mob{--bg:#0e0e10;--text:#f2f2f2;--muted:#9a9a9f;--line:rgba(255,255,255,.18)}}'+
+'html.mob,html.mob body{margin:0;height:100%;background:var(--bg);color:var(--text);font-family:Archivo,system-ui,sans-serif;-webkit-font-smoothing:antialiased}'+
+'.mb{min-height:100%;box-sizing:border-box;display:flex;flex-direction:column;justify-content:space-between;padding:1.6rem 1.25rem 2rem;padding-top:max(1.6rem,env(safe-area-inset-top))}'+
+'.mb-logo{font-size:.78rem;font-weight:700;letter-spacing:.18em}'+
+'.mb-k{display:inline-flex;align-items:center;gap:.5rem;font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}'+
+'.mb-k i{width:7px;height:7px;border-radius:50%;background:var(--text)}'+
+'.mb h1{margin:1rem 0 1.1rem;font-size:clamp(2.4rem,12vw,3.4rem);line-height:.98;letter-spacing:-.045em;font-weight:600}'+
+'.mb p{margin:0;max-width:30ch;font-size:1rem;line-height:1.5;color:var(--muted)}'+
+'.mb-dev{width:100%;max-width:260px;margin:1.8rem 0 0}'+
+'.mb-dev rect,.mb-dev path{fill:none;stroke:var(--text);stroke-width:1.5}'+
+'.mb-dev .st{fill:var(--text);stroke:none;opacity:.12}.mb-dev .sg{animation:mbs 7s cubic-bezier(.65,0,.35,1) infinite}'+
+'@keyframes mbs{0%,12%{transform:translateX(0)}44%,56%{transform:translateX(-96px)}88%,100%{transform:translateX(0)}}'+
+'.mb>div:last-child{flex:1;display:flex;flex-direction:column;margin-top:2.6rem}'+
+'.mb-cta{display:flex;flex-direction:column;gap:.7rem;margin-top:auto;padding-top:2rem}'+
+'.mb-cta a,.mb-cta button{display:flex;align-items:center;justify-content:center;height:48px;border-radius:999px;font:600 .92rem Archivo,system-ui,sans-serif;text-decoration:none;cursor:pointer}'+
+'.mb-cta button{border:0;background:var(--text);color:var(--bg)}'+
+'.mb-cta a{border:1.5px solid var(--text);color:var(--text);background:transparent}'+
+'</style><main class="mb"><div class="mb-logo">TOBIA SEU</div><div>'+
+'<span class="mb-k"><i></i>'+T.k+'</span><h1>'+T.h+'</h1><p>'+T.p+'</p>'+
+'<svg class="mb-dev" viewBox="0 0 320 200" aria-hidden="true"><defs><clipPath id="mbc"><rect x="44" y="20" width="232" height="140"/></clipPath></defs><rect x="36" y="12" width="248" height="156" rx="10"/><g clip-path="url(#mbc)"><g class="sg"><rect class="st" x="56" y="40" width="70" height="100"/><rect class="st" x="134" y="40" width="130" height="100"/><rect class="st" x="272" y="40" width="70" height="100"/><rect class="st" x="350" y="40" width="40" height="100"/></g></g><path d="M8 176h304l-12 12H20z"/></svg>'+
+'<div class="mb-cta"><button type="button" id="mbcopy">'+T.c+'</button><a href="mailto:info@tobiaseu.com">'+T.m+'</a></div></div></main>';
+document.getElementById('mbcopy').onclick=function(){var t=this,u='https://tobiaseu.com/';
+  (navigator.clipboard?navigator.clipboard.writeText(u):Promise.reject()).then(function(){t.textContent=T.d},function(){prompt('',u)})};
+})();
+</script>
 <style>
 :root{--gx:3rem;--gy:1.5rem;--ctl:40px;--tsw:156px;--bg:#F7F7F9;--text:#111;--muted:#5a5a5a;--border:rgba(17,17,17,.16);--nav:rgba(255,255,255,.78);--card:#111;--ctext:#fff;--gc:rgba(0,0,0,.11);--fbg:#fff}
 html.dark{--bg:#111;--text:#F7F7F9;--muted:#a5a5a5;--border:rgba(255,255,255,.22);--nav:rgba(30,30,30,.78);--card:#f4f4f2;--ctext:#111;--gc:rgba(255,255,255,.13);--fbg:#111}
@@ -250,6 +285,26 @@ body[data-view=list] .pgrid{display:none}
 .ls .btn{font-size:14px;padding:.75rem 1.4rem}
 .ls .btn{background:transparent;color:#fff;border:1.5px solid #fff}
 .ls .btn:hover{background:#fff;color:#000}
+/* bordo chiaro sotto card e video in dark mode (Tobia, 29/10): sfumatura e video sbordano di 2px, la foto non spunta mai sotto */
+.cap,.ls .lcap{bottom:-2px!important}
+.card-in>.photo{bottom:3px!important}.ls>.photo{margin-bottom:3px}
+.xp-fig.xp-vid .fr{background:#111}
+.xp-seq img{opacity:0;transition:opacity .5s ease;transform:none!important}.xp-seq img.on{opacity:1}
+.xp-fig .fr figcaption.xp-in{display:block;position:absolute;z-index:3;left:0;bottom:0;max-width:min(78%,34rem);margin:0;padding:3rem 3.2rem 1.05rem 1.15rem;font:500 .8rem/1.35 var(--sans);letter-spacing:.005em;color:#fff;text-align:left;pointer-events:none;background:radial-gradient(130% 150% at 0% 100%,rgba(0,0,0,.5),rgba(0,0,0,.18) 55%,transparent 75%);text-shadow:0 1px 8px rgba(0,0,0,.25)}
+.xp-fig .fr figcaption.xp-in.lt{color:#111;background:none;text-shadow:none}
+.xp-dev .fr figcaption.xp-in,.xp-cut .fr figcaption.xp-in{color:var(--text);padding:0;left:0;bottom:-1.2rem}
+.xp-cut .fr figcaption.xp-in{bottom:-1.9rem}
+.xp-fig.xp-cut{--fh:calc((100vh - 12.8rem)*.74);--fh:calc((100svh - 12.8rem)*.74)}
+.xp-fig.full .fr figcaption.xp-in{bottom:calc(var(--gy) + var(--ctl) + .6rem);left:var(--gx)}
+.xp-mini .fr figcaption.xp-in{font-size:.72rem;padding:2rem 2rem .8rem .9rem}html.dark .xp-fig:not(.xp-dev):not(.xp-cut) .fr{background:#1c1c1e}
+.xp-vid video,.knob .ko video,.mac .scr video{inset:-1px!important;width:calc(100% + 2px)!important;height:calc(100% + 2px)!important}
+/* card (Tobia, 29/10): titolo, sotto la disciplina, in basso a sinistra il tipo di progetto; l'anno e' una pillola sottile in alto a destra */
+.cap small,.lcap small{margin:10px 0 0}
+.cap .ct,.lcap .ct{display:block;margin-top:20px;font:500 15px var(--sans);letter-spacing:.01em;opacity:.6}
+.ls .lcap .ct{margin-top:14px;font-size:13px}
+.ypill{position:absolute;z-index:2;top:24px;right:24px;padding:5px 14px 6px;border-radius:999px;border:1px solid rgba(255,255,255,.5);background:rgba(0,0,0,.22);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:#fff;font:500 16px/1 var(--sans);letter-spacing:.01em;font-variant-numeric:tabular-nums;pointer-events:none}
+.ls .ypill{top:20px;right:20px;font-size:14px}
+.lite .ypill{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(0,0,0,.35)}
 .llist.home{position:absolute;left:51vw;right:6vw;top:50%;transform:translateY(-50%)}
 .arch-wrap{height:420vh}
 .arch-vp{position:sticky;top:0;height:100vh;overflow:hidden;background:var(--bg);transition:background .5s}
@@ -410,9 +465,9 @@ html:has(body[data-page=project]),body[data-page=project]{overscroll-behavior-y:
 /* apertura: cliente piccolo, nome enorme */
 .xp-intro{width:max-content;max-width:none;justify-content:space-between}
 .xp-intro .kicker{margin:0 0 1.2rem}
-.sub h1.xp-name,.xp-name{margin:0;font-size:clamp(3.6rem,10vw,11rem);font-weight:600;letter-spacing:-.055em;line-height:.86;white-space:nowrap}
+.sub h1.xp-name,.xp-name{margin:0;font-size:clamp(3.6rem,10vw,11rem);font-weight:600;letter-spacing:-.055em;line-height:.86;white-space:normal;max-width:7.4em;text-wrap:balance}   /* titoli lunghi su piu' righe: la foto dopo si vede subito (Tobia, 29/10) */
 .xp-lead{margin:1.6rem 0 0;max-width:32ch;font-size:clamp(1rem,1.3vw,1.2rem);line-height:1.4;letter-spacing:-.01em;text-wrap:pretty}
-.xp-meta{display:grid;grid-template-columns:repeat(4,max-content);gap:.5rem 3rem;margin-top:2.2rem;font-size:.75rem;color:var(--muted)}
+.xp-meta{display:grid;grid-template-columns:repeat(3,max-content);gap:.5rem 3rem;margin-top:2.2rem;font-size:.75rem;color:var(--muted)}
 .xp-links{display:flex;gap:.8rem;margin-top:1.6rem}
 .xp-vid .fr{background:#111}
 .xp-vid video,.xp-vid iframe{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border:0}
@@ -460,6 +515,27 @@ html:has(body[data-page=project]),body[data-page=project]{overscroll-behavior-y:
 .phone img.out{transform:translateX(-28%);filter:brightness(.86);z-index:1}
 .phone img.on{transform:none;z-index:2;box-shadow:-12px 0 30px rgba(0,0,0,.12)}
 .phone img.cut{transition:none}
+/* immagini scontornate (pad di Hive): niente fondo, niente parallasse */
+.xp-cut .fr{background:transparent;overflow:visible}.xp-cut img{object-fit:contain;transform:none!important;filter:drop-shadow(0 40px 50px rgba(0,0,0,.18))}
+/* knob di Hive: schermo OLED vero, indicatore che si accende e gira con l'interfaccia */
+.knob{--kb:#6cb8ff;position:relative;height:62%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 50% 30%,#3c3c41,#141416 72%);box-shadow:0 50px 70px -40px rgba(0,0,0,.55),0 0 0 1px #2a2a2e,inset 0 2px 3px rgba(255,255,255,.14)}
+.knob i{position:absolute;border-radius:50%;pointer-events:none}
+.knob .kr{inset:0;background:repeating-conic-gradient(#303035 0 2.25deg,#18181b 2.25deg 4.5deg);-webkit-mask:radial-gradient(circle,transparent 0 80%,#000 80.6%);mask:radial-gradient(circle,transparent 0 80%,#000 80.6%)}
+.knob .kt{inset:-9%;background:repeating-conic-gradient(var(--text) 0 .5deg,transparent .5deg 36deg);opacity:.22;-webkit-mask:radial-gradient(circle,transparent 0 93%,#000 93.5% 100%);mask:radial-gradient(circle,transparent 0 93%,#000 93.5% 100%)}
+.knob .ki{inset:-9%;transform:rotate(var(--a,0deg))}
+.knob .ki::after{content:"";position:absolute;left:50%;top:0;width:3.4%;height:3.4%;margin:-1.7% 0 0 -1.7%;border-radius:50%;background:var(--kb);opacity:.5;box-shadow:0 0 8px 2px rgba(108,184,255,.5);transition:opacity .3s,box-shadow .3s}
+.knob.spin .ki::after{opacity:1;box-shadow:0 0 16px 6px rgba(108,184,255,.9),0 0 40px 12px rgba(108,184,255,.35)}
+.knob .kh{inset:-2.5%;box-shadow:0 0 0 1.5px rgba(108,184,255,0);transition:box-shadow .6s}
+.knob.press .kh{box-shadow:0 0 0 1.5px rgba(108,184,255,.85),0 0 34px 6px rgba(108,184,255,.32);transition:none}
+.knob .ko{position:absolute;inset:12%;border-radius:50%;overflow:hidden;background:#07080a;box-shadow:0 0 0 2px #0a0a0c,0 0 0 3.5px #45454b;transition:transform .2s cubic-bezier(.3,1.5,.5,1)}
+.knob.press .ko{transform:scale(.965)}
+.knob .ko video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+/* Apple Watch */
+.watch{position:relative;height:58%;aspect-ratio:410/502;padding:4.2%;border-radius:23%/19%;background:linear-gradient(145deg,#2c2c30,#0b0b0c 60%);box-shadow:0 0 0 1.5px #55555a,0 50px 70px -40px rgba(0,0,0,.55);box-sizing:content-box}
+.watch .wscr{width:100%;height:100%;border-radius:19%/15.5%;overflow:hidden;background:#000}
+.watch .wscr img{position:static;width:100%;height:100%;object-fit:cover;transform:scale(1.045)!important}
+.watch i{position:absolute;right:-3.4%;background:linear-gradient(90deg,#3a3a3e,#8e8e93);border-radius:3px}
+.watch .crown{top:24%;width:4.4%;height:15%;border-radius:4px}.watch .sbtn{top:48%;width:2.6%;height:17%;right:-2.4%}
 /* righe di testo tra le immagini */
 .xp-txt{width:clamp(300px,30vw,480px)}
 .xp-txt.top{justify-content:flex-start}
@@ -823,7 +899,7 @@ const PHOTO_DIR='img/';
 const IMG=k=>PHOTO_DIR+k+'.jpg';
 const TAGS_PH=['Product Design','Textile & Fashion','Exhibition Design','System Design'];
 const projects=[
-{slug:'i',client:'Aalto Start-Up Centre',hide:['i-2','i-p1','i-p2','i-p3','i-w1','i-w3'],loop:['i-cover', 'i-w2'],title:'Iprefab',cat:'UX/UI Design',tag:'Digital Product',year:'2025',kind:'Start-up internship',team:'Start-up team',dur:'4 months',role:'Customer journey, UX/UI and website',
+{slug:'i',client:'Aalto Start-Up Centre',hide:['i-2','i-p1','i-p2','i-p3','i-w1','i-w3'],loop:['i-cover', 'i-w2'],title:'Iprefab',cat:'UX/UI Design',tag:'Digital Product',year:'2025',kind:'Erasmus+ internship project',team:'Start-up team',dur:'4 months',role:'Customer journey, UX/UI and website',
  short:'A website that matches people with Finnish prefab homes and builders, with AI matchmaking and consultancy.',
  long:'Customer journey and website for Iprefab, a start-up at the Aalto Start-Up Centre that brings Finland\'s prefab builders together: design your home first with an AI-guided configurator, compare houses side by side and get matched with the builder who can make it.',
  gal:[['mac:i-w1','']],
@@ -832,32 +908,27 @@ const projects=[
   ['Matchmaking','Houses matched to you','Houses from independent builders sit side by side, filtered by type, size, price and rooms. People save the ones they like, compare them, and get matched when a new house fits their project.',[['mac:i-w3','']]],
   ['Consultancy','Help at every step','General, architectural, financial and AI consultancy sit next to a guided site zoning and permit service, so the hardest part of building in Finland is never faced alone.',[]],
   ['Handoff','From prototype to implementation','The Figma prototype was the shared reference for the front-end and back-end teams, and the visual language was aligned with the marketing strategy so product and communication speak with one voice.',[]]]},
-{slug:'f',client:'Personal project',hide:['f-p1','f-p2','f-p3','f-2'],loop:['f-cover', 'f-p1', 'f-2'],title:'Fanta.me',cat:'UX/UI Design',tag:'Digital Product',year:'2026',kind:'Digital product',team:'—',dur:'—',role:'Concept, UX/UI design and prototype',
- short:'The fantasy game of real life: call what friends do, vote it, and climb the live standings.',
- long:'A mobile game where a group of friends turns everyday moments into points, with bonus and malus cards, fantapowers and a live podium.',
- gal:[['f-cover','w'],['f-p2','v'],['f-2','w'],['f-p1','v'],['f-p3','v']],
- sec:[['Summary','The fantasy game of real life','Fanta.me turns a group of friends into a fantasy league of real life. Someone does something, the card is called, the group confirms the points and the standings move live. Rooms like Fantapasquetta bring people back with one tap.',[['ph:f-s2|f-s3|f-s4|f-s5','']]],
-  ['Powers','Turbo doubles, Moviola cancels','Fantapowers add strategy on top of luck: Turbo doubles a call, Moviola cancels it, and each power can be used once per game, with a countdown that makes the timing matter.',[['f-ux','R1.5']]],
-  ['Standings','Teams on a live podium','Teams and individuals are ranked on a live podium, with a daily view and a full-game view, so the story of the game is always one tab away.',[]]]},
 {slug:'g',client:'Sinis Marine Protected Area',loop:['g-cover', 'g-1', 'g-6'],title:'Grain Keeper',cat:'System Design',tag:'System Design',year:'2025',kind:'Thesis project',team:'Individual',dur:'6 months',role:'Research, data analysis and design',
  short:'Urban furniture that keeps tourists from carrying away the quartz sand of the Sinis Peninsula.',
  long:'Thesis project developed with the Sinis Marine Protected Area to counter the unintentional removal of quartz sand caused by overtourism.',
  gal:[['g-1','h'],['g-4','v'],['g-2','h'],['g-5','v'],['g-cover','h']],
- sec:[['Summary','A system to keep the sand','A series of urban furniture elements designed to protect the quartz sand of the Sinis Peninsula beaches, threatened by unintentional removal caused by overtourism. Developed as my thesis, in close collaboration with the Sinis Marine Protected Area. I managed the entire process, from the initial research to the project development, handling both data analysis and design.',[['g-5','t']]],
-  ['Problem','Tourists are carrying the sand away','Overtourism is endangering the quartz sand of the Sinis Peninsula. The sand is geologically exceptional: it originates from a nearby island and formed millions of years ago, and its rarity and fragility make its preservation a priority. Dedicated showers recover the sand unintentionally removed by tourists, but their filtration clogs, so they are rarely fully operational.',[['g-6','F1.8']]],
+ sec:[['Summary','A system to keep the sand','A series of urban furniture elements designed to protect the quartz sand of the Sinis Peninsula beaches, threatened by unintentional removal caused by overtourism. Developed as my thesis, in close collaboration with the Sinis Marine Protected Area. I managed the entire process, from the initial research to the project development, handling both data analysis and design.',[['g-6','R0.72@0%_50%']]],
+  ['Problem','Tourists are carrying the sand away','Overtourism is endangering the quartz sand of the Sinis Peninsula. The sand is geologically exceptional: it originates from a nearby island and formed millions of years ago, and its rarity and fragility make its preservation a priority. Dedicated showers recover the sand unintentionally removed by tourists, but their filtration clogs, so they are rarely fully operational.',[['g-5','t']]],
   ['Research','Maintenance is the real problem','The research phase was run jointly with the Sinis Marine Protected Area on the quartz beaches of Is Arutas, Mari Ermi, Corrigas and S\'archeddu e Sa Canna. The main issue of the existing design is not collecting the sand but the frequent maintenance it requires, which is unsustainable with the limited resources available.',[['g-2','h']]],
-  ['Output','Showers and a bench that filter and store','A redesigned shower with a sturdier structure, a bamboo tray and a filtration system under the user\'s feet: a funnel sends water and sand to two stacked filters, 1 mm for the quartz sand and 200 micron for sediment. With about 10 litres of capacity, double the previous design, it runs longer between maintenance. Alongside it, a bench offers dry sand storage and a buffer between beach and parking.',[['g-4','t'],['g-7','t']]],
-  ['Solution','Visitors release it, volunteers return it','Multilingual prompts on the shower and along the path invite visitors to release the quartz sand as they leave. The sand collects in the filters or in the bench, and volunteers regularly return it to the beach. The products are modular, so the filtering areas can be configured for the size and shape of each beach.',[['g-3','h']]]]},
-{slug:'h',client:'Politecnico di Torino',loop:['h-cover', 'h-f4', 'h-padv'],hide:['h-f6','h-f1','h-f2','h-f3','h-f5','h-2','h-p1','h-p2','h-p3'],title:'Hive',cat:'UX/UI Design',tag:'Digital Product',year:'2026',kind:'University project',team:'Team of 5',dur:'3 months',role:'Research, UX/UI and prototype',
+  ['Output','Showers and a bench that filter and store','A redesigned shower with a sturdier structure, a bamboo tray and a filtration system under the user\'s feet: a funnel sends water and sand to two stacked filters, 1 mm for the quartz sand and 200 micron for sediment. With about 10 litres of capacity, double the previous design, it runs longer between maintenance. Alongside it, a bench offers dry sand storage and a buffer between beach and parking.',[['g-4','F0.821@50%_50%']]],
+  ['Solution','Visitors release it, volunteers return it','Multilingual prompts on the shower and along the path invite visitors to release the quartz sand as they leave. The sand collects in the filters or in the bench, and volunteers regularly return it to the beach. The products are modular, so the filtering areas can be configured for the size and shape of each beach.',[['g-7','t'],['g-3','h']]]]},
+{slug:'h',client:'Politecnico di Torino',loop:['h-cover', 'h-f4', 'h-padv'],hide:['h-pad-png','h-padv-png','h-pad2-png','h-watch','h-f6','h-f1','h-f2','h-f3','h-f5','h-2','h-p1','h-p2','h-p3'],title:'Hive',cat:'UX/UI Design',tag:'Digital Product',year:'2026',kind:'University project',team:'Team of 5',dur:'3 months',role:'Research, UX/UI and prototype',
  short:'A modular tractor HMI that lets farmers multitask safely while Level 3 autonomy keeps the row.',
  long:'Cognitive Ergonomics and HMI project: a touch-and-tactile cockpit for autonomous orchard tractors, with a rotary knob, a pillar mapping screen and a two-level take-over request shared with the crew.',
  gal:[['h-f4','w']],
- sec:[['Summary','The tractor is the body, the hive is the network','Hive is a human-machine interface for Level 3 autonomous tractors in orchards and vineyards. While the tractor keeps the row on its own, the operator, even a seasonal worker on their first day, can plan the day, tag the field and stay in control. Developed in a team of five for the Cognitive Ergonomics and HMI course.',[['h-pad',''],['h-padv','']]],
-  ['Research','What farmers asked for','We benchmarked six Level 3 systems, from Mercedes and BMW to Monarch and John Deere, read what farmers say online and interviewed growers, contractors and technicians around Cuneo. The same issues kept coming back: error codes with no words, touchscreens that fail on bumpy ground, implement settings to re-enter every time and a weak sense of safety around people in the rows.',[['mp4:img/web/v/h-v-loop.mp4']]],
-  ['Concept','Two screens, two jobs','A detachable horizontal dashboard and a vertical mapping screen on the cab pillar split control from navigation: plan the day on the pad, follow the row on the pillar.',[]],
-  ['Knob','A knob for the field','A rotary knob mirrors every touch gesture, so the operator never has to aim at glass on bumpy ground: push left for the menu, push right to drop a marker for weeds, disease, pests or drainage, press to adjust working depth or rotor speed.',[['mp4:img/web/v/h-v-knob.mp4','']]],
-  ['Safety','Two levels of take-over','When a person is within 50 metres, a Planned TOR turns the borders yellow, plays a soft chime and pulses the crew wristbands. If a collision is less than five seconds away, an Emergency TOR turns every screen red with a loud alarm, and stops tractor and implement if nobody reacts. Colour, sound and vibration say the same thing on every device.',[['h-pad2','']]],
-  ['Outcome','A modular kit, not a new fleet','We staged the virtual prototype on a real tractor in an apple orchard and filmed a working day, from the driver check-in to an obstacle in the row. Expert reviewers praised the clarity of the layout and a hardware-agnostic kit that moves across a mixed fleet and protects what farmers already own. Their next step for us: a quick-message channel between operators, so crews can coordinate shared tasks without reaching for a phone.',[]]]},
+ sec:[['Summary','The tractor is the body, the hive is the network','Hive is a human-machine interface for Level 3 autonomous tractors in orchards and vineyards. While the tractor keeps the row on its own, the operator, even a seasonal worker on their first day, can plan the day, tag the field and stay in control. Developed in a team of five for the Cognitive Ergonomics and HMI course.',[]],
+  ['Research','What farmers asked for','We benchmarked six Level 3 systems, from Mercedes and BMW to Monarch and John Deere, read what farmers say online and interviewed growers, contractors and technicians around Cuneo. The same issues kept coming back: error codes with no words, touchscreens that fail on bumpy ground, implement settings to re-enter every time and a weak sense of safety around people in the rows.',[]],
+  ['Horizontal pad','Plan the day from the armrest','The detachable dashboard sits on the armrest and holds control: speed, lift, working depth and rotor speed around the tractor, the job of the day with its progress, and implement settings saved per field, so nothing has to be re-entered.',[['h-pad-png','R1.31']]],
+  ['Vertical pad','Follow the row on the pillar','The vertical screen on the cab pillar keeps navigation in the line of sight: the row being worked, the line path and the live camera, with the markers dropped along the way.',[['h-padv-png','R0.665']]],
+  ['Knob','A knob for the field','A rotary knob mirrors every touch gesture, so the operator never has to aim at glass on bumpy ground: push left for the menu, push right to drop a marker for weeds, disease, pests or drainage, press to adjust working depth or rotor speed.',[['knob:img/web/v/h-v-oled.mp4','R1']]],
+  ['Watch','Safety on the wrist','The operator and the crew wear the same alert: who is in the row and how far, two short pulses, and the one thing to do next, push the knob in the cab to take over.',[['watch:h-watch','R0.8']]],
+  ['Safety','Two levels of take-over','When a person is within 50 metres, a Planned TOR turns the borders yellow, plays a soft chime and pulses the crew wristbands. If a collision is less than five seconds away, an Emergency TOR turns every screen red with a loud alarm, and stops tractor and implement if nobody reacts. Colour, sound and vibration say the same thing on every device.',[]],
+  ['Outcome','A modular kit, not a new fleet','We staged the virtual prototype on a real tractor in an apple orchard and filmed a working day, from the driver check-in to an obstacle in the row. Expert reviewers praised the clarity of the layout and a hardware-agnostic kit that moves across a mixed fleet and protects what farmers already own. Their next step for us: a quick-message channel between operators, so crews can coordinate shared tasks without reaching for a phone.',[['mp4:img/web/v/h-v-loop.mp4']]]]},
 {slug:'q',client:'Zanotta',loop:['q-cover', 'q-4', 'q-6'],title:'Quadernazione',cat:'Exhibition Design',tag:'Exhibition Design',year:'2024',kind:'University project',team:'Team of 5',dur:'4 months',role:'Concept, 3D modeling and visualization',
  short:'An immersive exhibition on Superstudio\'s Quaderna series, staged in Ferrara\'s Verdi Theatre.',
  long:'Exhibition concept for Zanotta that showcases the radical minds of Superstudio and their Quaderna products through an immersive journey.',
@@ -882,7 +953,7 @@ const projects=[
  gal:[['w-cover','R1.5'],['w-1','v'],['w-2','h'],['w-3','v'],['w-4','h']],
  sec:[['Summary','Rethinking the water pack','Developed within the course of Ergonomics and Human-Centered Design: a redesign of the Lete water pack to improve how people interact with it while reducing its environmental impact. I was responsible for designing the prototype, both functional and aesthetic aspects, and for the 3D renderings.',[['w-4','h']]],
   ['Problem','Plastic and an uncomfortable handle','The original design has two main flaws: it is made entirely of plastic and it has a non-ergonomic handle, which makes it less sustainable and uncomfortable to carry.',[['w-1','t']]],
-  ['Concept','Less plastic, same stackability','The aim was to replace plastic with a more sustainable material where possible, improve the handle, and keep good stackability at industrial level, without compromising the main function of the carrier across production, transport and consumption.',[['w-5','h']]],
+  ['Concept','Less plastic, same stackability','The aim was to replace plastic with a more sustainable material where possible, improve the handle, and keep good stackability at industrial level, without compromising the main function of the carrier across production, transport and consumption.',[['w-5','R1.396']]],
   ['Output','Cardboard that carries','A rigid-cardboard structure and handle, plus a packaging-cardboard hygiene package that keeps the bottle caps fully enclosed. Plastic is limited to a recycled stabilizing cable that holds the bottles in place, and the handle is removable, staying compatible with stackable packaging.',[['w-3','t'],['w-6','t']]],
   ['Solution','Built to scale','The cardboard packaging is engineered so that bundles stack while the caps stay protected and reachable through strategically placed openings. The design is optimized for industrial scalability, allowing efficient mass production and distribution.',[['w-2','h']]]]},
 {slug:'z',client:'Ethnographic Museum of Santarcangelo',loop:['z-cover', 'z-1', 'z-3'],title:'Zeitknot',cat:'Concept Design',tag:'Product Design',year:'2022',kind:'University project',team:'Individual',dur:'4 months',role:'Design and prototype, start to finish',
@@ -896,7 +967,7 @@ const projects=[
   ['Prototype','3D printed, finished by hand','The set was produced with 3D printing combined with hand finishing: after the first sketches, two matte filaments were tested. PLA for the pieces, plexiglass for the board squares and finished wood for the base. The complete set measures 65 × 65 cm.',[['z-3','h']]]]}
 ];
 /* progetti segnaposto (senza immagini): sostituiscili man mano con quelli veri */
-projects.push({slug:'au',client:'Self-initiated',title:'Unofficial Audi spot',cat:'Videomaking experiment',tag:'Videomaking',year:'2021',kind:'Car spot',team:'Individual',dur:'—',role:'Shooting and editing',
+projects.push({slug:'au',client:'Self-initiated',title:'Unofficial Audi Spot',cat:'Videomaking experiment',tag:'Videomaking',year:'2021',kind:'Personal project',team:'Individual',dur:'—',role:'Shooting and editing',
  links:[['Watch on YouTube ↗','https://www.youtube.com/watch?v=J31Gmd84640']],
  short:'A self-initiated spot for the Audi TT, shot and edited as a videomaking experiment.',
  long:'An unofficial spot for the Audi TT: a personal experiment in shooting, rhythm and editing, made to explore how a car commercial is built.',
@@ -909,7 +980,7 @@ const PH_SEC=[['Summary','Summary placeholder','Placeholder text: a short summar
 const YT=id=>'https://i.ytimg.com/vi/'+id+'/maxresdefault.jpg',FR=id=>'https://framerusercontent.com/images/'+id+'.png';
 const EXT={}   // foto ospitate fuori, se servono;
 projects.push(
-{slug:'ca',client:'Chiara Alessi',title:'Chiara Alessi interview',cat:'Book presentation video',tag:'Videomaking',year:'2023',kind:'Freelance video',team:'—',dur:'—',role:'Video production',
+{slug:'ca',client:'Chiara Alessi',title:'Lo Stato delle Cose',cat:'Social video trailer',tag:'Videomaking',year:'2023',kind:'Content production',team:'—',dur:'—',role:'Video production',
  links:[['Watch on YouTube ↗','https://www.youtube.com/watch?v=BZM064G_pp0']],
  short:'Social media video for the launch of Chiara Alessi\'s book Lo Stato Delle Cose.',
  long:'A video interview made for the social media launch of Lo Stato Delle Cose, the 2023 book by design critic Chiara Alessi.',
@@ -928,28 +999,28 @@ projects.push(
  short:'A hub in Turin that turns training into work for women the job market does not see, with a business plan built to last ten years.',
  long:'Coral is a community hub for women in fragile employment in Barriera di Milano, one of the most complex neighbourhoods of Turin. It brings together two training paths, a baby parking service and a career event with local companies. In the team I built the economic side: the business plan, the growth plan and how the budget is split.',
  gal:[['co-rec','']],
-  sec:[['Summary','A hub for the women recruiting misses','Many women in Barriera di Milano are invisible to standard recruiting channels. Coral reaches them through associations and ambassadors from the community, then offers two paths: Lead-Her, to start a micro-business, and Learn-Her, to train for a job and enter companies through internships. A baby parking makes care and work fit in the same day.',[['mp4:img/web/v/co-v-loop.mp4']]],
-  ['System','Three moves, one loop','Coral only works as a whole: every part feeds the next, and the money follows the same path. I read the system in three moves, each with the number that keeps it alive.',[['co-plate','M1']],'<p class="kicker">How Coral works</p><svg class="sysg" viewBox="0 0 600 150" aria-hidden="true"><path d="M70 60H530" /><path class="lp" d="M530 78C530 140 70 140 70 78" /><path class="lp" d="M78 86l-8-8-8 8" /><circle cx="70" cy="60" r="14"/><circle cx="300" cy="60" r="14"/><circle cx="530" cy="60" r="14"/><text x="70" y="30">Reach</text><text x="300" y="30">Train</text><text x="530" y="30">Work</text><text class="sm" x="300" y="138">those who finish come back as staff</text></svg><ol class="sys"><li><b>01 Reach</b><span>Associations and ambassadors from the neighbourhood find the women recruiting misses. The City grants an unused building through a collaboration pact, so the hub sits where they live.</span><em>€560k of the €586k start-up covered by the City and a partner</em></li><li><b>02 Train</b><span>Lead-Her to start a micro-business, Learn-Her to train for a job and enter companies through internships. A baby parking makes care and training fit in the same day.</span><em>Training sold to companies and sponsors: 18% of revenue</em></li><li><b>03 Work</b><span>Each cycle ends with the Coral Days, where participants meet local companies. The women who finish can come back as staff, and the loop starts again.</span><em>Coral Days: 14% of revenue, growing 5% a year</em></li></ol>'],
+  sec:[['Summary','A hub for the women recruiting misses','Many women in Barriera di Milano are invisible to standard recruiting channels. Coral reaches them through associations and ambassadors from the community, then offers two paths: Lead-Her, to start a micro-business, and Learn-Her, to train for a job and enter companies through internships. A baby parking makes care and work fit in the same day.',[['co-plate','R1']]],
+  ['System','Three moves, one loop','Coral only works as a whole: every part feeds the next, and the money follows the same path. I read the system in three moves, each with the number that keeps it alive.',[['mp4:img/web/v/co-v-loop.mp4']],'<p class="kicker">How Coral works</p><svg class="sysg" viewBox="0 0 600 150" aria-hidden="true"><path d="M70 60H530" /><path class="lp" d="M530 78C530 140 70 140 70 78" /><path class="lp" d="M78 86l-8-8-8 8" /><circle cx="70" cy="60" r="14"/><circle cx="300" cy="60" r="14"/><circle cx="530" cy="60" r="14"/><text x="70" y="30">Reach</text><text x="300" y="30">Train</text><text x="530" y="30">Work</text><text class="sm" x="300" y="138">those who finish come back as staff</text></svg><ol class="sys"><li><b>01 Reach</b><span>Associations and ambassadors from the neighbourhood find the women recruiting misses. The City grants an unused building through a collaboration pact, so the hub sits where they live.</span><em>€560k of the €586k start-up covered by the City and a partner</em></li><li><b>02 Train</b><span>Lead-Her to start a micro-business, Learn-Her to train for a job and enter companies through internships. A baby parking makes care and training fit in the same day.</span><em>Training sold to companies and sponsors: 18% of revenue</em></li><li><b>03 Work</b><span>Each cycle ends with the Coral Days, where participants meet local companies. The women who finish can come back as staff, and the loop starts again.</span><em>Coral Days: 14% of revenue, growing 5% a year</em></li></ol>'],
   ['Plan','Ten years, quarter by quarter','I modelled Coral over 40 quarters: start-up investment, fixed costs such as staff and utilities, and variable costs that follow the Coral Days. Every cash flow is discounted at a rate built from the risk-free rate, inflation, business and financial risk.',[['co-cover','']],'<p class="kicker">Key figures, central scenario</p><div><b>€586k</b><span>Start-up investment: renovation, classrooms, baby parking and a lab</span></div><div><b>€560k</b><span>Of it covered by the City of Turin and a renovation partner</span></div><div><b>€4.2M</b><span>Revenue over ten years</span></div><div><b>40</b><span>Quarters modelled one by one</span></div><div><b>14.39%</b><span>Annual discount rate, 3.54% a quarter</span></div>'],
   ['Revenue','Where the money comes from','Grants carry the start. Over time Coral relies more on what it earns: training sold to companies and matched by sponsors, the Coral Days and the baby parking. That shift is what lets the hub survive when public funds shrink.',[['co-1','R0.8@60%']],'<p class="kicker">Revenue over ten years, central scenario</p><ul class="bl"><li title="Public grants: €1.27M, 30%"><span>Public grants</span><i style="--w:1.000"></i><b>30%</b><em>€1.27M</em></li><li title="Training sales and sponsors: €0.76M, 18%"><span>Training sales and sponsors</span><i style="--w:0.600"></i><b>18%</b><em>€0.76M</em></li><li title="Private grants: €0.65M, 15%"><span>Private grants</span><i style="--w:0.500"></i><b>15%</b><em>€0.65M</em></li><li title="Coral Days: €0.60M, 14%"><span>Coral Days</span><i style="--w:0.467"></i><b>14%</b><em>€0.60M</em></li><li title="City of Turin renovation funds: €0.50M, 12%"><span>City of Turin renovation funds</span><i style="--w:0.400"></i><b>12%</b><em>€0.50M</em></li><li title="Baby parking: €0.39M, 9%"><span>Baby parking</span><i style="--w:0.300"></i><b>9%</b><em>€0.39M</em></li><li title="Renovation partner: €0.06M, 1%"><span>Renovation partner</span><i style="--w:0.033"></i><b>1%</b><em>€0.06M</em></li></ul>'],
   ['Scenarios','Three futures, one answer','I stress-tested the plan with fewer public grants, slower growth and emptier courses. Even in the pessimistic case Coral pays back its investment and returns more than its cost of capital. Margins are thin, and the plan says so: the strength of the project is that it holds, not that it is a business.',[],'<p class="kicker">Discounted cash flow, three scenarios</p><table class="scn"><thead><tr><th></th><th>Pessimistic</th><th>Central</th><th>Optimistic</th></tr></thead><tbody><tr><th>Payback</th><td>Quarter 24</td><td>Quarter 16</td><td>Quarter 12</td></tr><tr><th>Net present value</th><td>€2,174</td><td>€5,654</td><td>€7,717</td></tr><tr><th>IRR per quarter</th><td>3.89%</td><td>4.71%</td><td>9.92%</td></tr><tr><th>Courses filled</th><td>50% rising</td><td>60% rising</td><td>70%, +10% a year</td></tr><tr><th>Coral Days growth</th><td>3% a year</td><td>5% a year</td><td>Up to 10% a year</td></tr></tbody></table><p class="note">All three return more than the 3.54% quarterly cost of capital.</p>'],
   ['Outreach','Banners, newsletters and word of mouth','The plan includes the communication that makes the numbers possible: banners for the Coral Days, newsletters for associations and partners, and ambassadors who carry the word into the places women already trust.',[['co-m1','M0.714'],['co-m2','M0.714'],['co-m3','M0.714'],['co-3','M1.346']]]]},
-{slug:'on',client:'Orakle, a fictional corporation',hide:['on-1','on-3','on-4'],title:'Orakle',cat:'Speculative Design',tag:'Speculative Design',year:'2026',kind:'Speculative design and storytelling',team:'—',dur:'—',role:'Concept, storytelling and immersive website',
+{slug:'on',client:'Orakle, a fictional corporation',hide:['on-1','on-3','on-4','on-s1','on-s2','on-s3','on-s4','on-s5','on-s6'],title:'Orakle',cat:'Speculative Design',tag:'Speculative Design',year:'2026',kind:'Speculative design and storytelling',team:'—',dur:'—',role:'Concept, storytelling and immersive website',
  links:[['Enter the Orakle website ↗','https://oraklecorporate.framer.website/']],
  short:'A speculative corporate future, told through the immersive website of the company that sells it.',
  long:'The year is 2041. Orakle, a corporation that predicts burnout and collapse, sells companies a programme that prepares employees for the future by numbing them to it. The story is told from inside, through Orakle\'s own interactive website.',
- gal:[['on-cover','F1.6']],
+ gal:[['seq:on-s1|on-s2|on-s3|on-s4|on-s5|on-s6','R1.778']],
  sec:[['Summary','Predict. Prepare. Perform.','Instead of describing a dystopia from the outside, Orakle lets people walk into it. The project is an immersive, interactive website for Orakle, a fictional corporation: the visitor is greeted by name, signs an access agreement and explores the products that promise companies a stable future.',[['mac:img/web/v/on-v-loop.mp4','']]],
-  ['World','January 2041','In the story, protests and burnout caused by relentless scheduling have pushed companies towards financial collapse. Orakle\'s answer is O·nea, a programme that keeps the workforce ready: a 34% gain in the Workforce Readiness Index and twelve new companies joining the ecosystem every day. The tour starts outside Orakle\'s headquarters, a tower of stacked curves.',[['ok-1','']]],
-  ['System','Haptix, O·neiros and O·nea','Haptix, a tactile device for monitoring and gestural command, collects biometric and behavioural data. O·neiros, an algorithm named after the Greek word for dream, turns it into predictions of collective behaviour. O·nea closes the loop with an environment: a workstation with a spherical display and a voice guide for emotional regulation. A double click takes the visitor inside the pod, hands on the desk.',[['ok-2','']]],
-  ['Session','Rehearsing tomorrow','Inside O·nea the voice guide starts a training session. The employee focuses on a luminous sphere, then watches figures made of particles act out the conflicts of the coming day, so that when they happen nothing is felt anymore.',[['mp4:img/web/v/on-v-session.mp4']]],
-  ['Critique','Comfort as control','Behind the calm corporate tone, O·nea applies cognitive desensitization: it pre-exposes employees to future stressors until they stop reacting. Testimonials from fictional CEOs and a world map ranking companies by stability make the question tangible: how much would we sign away for a predictable future?',[['ok-3','']]],
-  ['Website','A website you enter','The website is the exhibit. A personal greeting, a binding agreement, a snap gesture that turns the door of O·nea towards you and a particle scene to explore turn the visitor into a participant of the story.',[]]]});
-const DIM={"au-yt":1.778,"h-pad":1.6,"h-padv":0.8,"h-pad2":1.6,"f-s1":0.438,"f-s2":0.438,"f-s3":0.438,"f-s4":0.438,"f-s5":0.438,"f-s6":0.438,"i-w1":0.524,"i-w2":1.6,"i-w3":0.575,"co-m1":0.714,"co-m2":0.714,"co-m3":0.714,"co-rec":2.0,"co-plate":1.0,"ca-v":0.8,"fs-dusk":1.778,"h-f1":1.778,"h-f2":1.778,"h-f3":1.778,"h-f4":1.778,"h-f5":1.778,"h-f6":1.778,"co-cover":2.0,"co-5":1.0,"co-1":1.0,"co-2":1.333,"co-3":1.346,"co-4":1.414,"au-cover":1.778,"au-1":1.9,"au-2":1.9,"au-3":1.9,"ca-cover":1.778,"ca-1":1.778,"ca-2":1.778,"ca-3":1.778,"fs-cover":1.778,"fs-1":1.778,"fs-2":1.778,"fs-3":1.778,"fs-4":1.778,"fs-5":1.778,"on-cover":2.202,"on-1":2.292,"on-2":2.448,"on-3":2.124,"on-4":2.141,"on-5":1.566,"b-1":0.665,"b-2":0.615,"b-3":0.751,"b-4":0.759,"b-5":0.616,"b-6":0.616,"b-cover":1.775,"f-2":1.6,"f-cover":1.6,"f-p1":0.75,"f-p2":0.75,"f-p3":0.75,"g-1":1.775,"g-2":0.993,"g-3":1.0,"g-4":0.821,"g-5":0.886,"g-6":2.917,"g-7":0.73,"g-cover":1.775,"h-2":1.6,"h-cover":1.6,"h-p1":0.75,"h-p2":0.75,"h-p3":0.75,"i-2":1.6,"i-cover":1.6,"i-p1":0.75,"i-p2":0.75,"i-p3":0.75,"q-1":1.083,"q-2":0.709,"q-3":2.128,"q-4":2.29,"q-5":1.0,"q-6":1.542,"q-7":0.616,"q-8":1.741,"q-cover":1.775,"w-1":0.745,"w-2":1.673,"w-3":0.763,"w-4":1.158,"w-5":1.396,"w-6":1.641,"w-cover":1.775,"z-1":0.754,"z-2":0.752,"z-3":0.885,"z-4":0.752,"z-cover":1.777,"ok-1":1.499,"ok-2":1.499,"ok-3":1.499,"f-ux":1.5};   // proporzioni vere delle foto (larghezza/altezza): le foto non vengono tagliate
+  ['World','January 2041','In the story, protests and burnout caused by relentless scheduling have pushed companies towards financial collapse. Orakle\'s answer is O·nea, a programme that keeps the workforce ready: a 34% gain in the Workforce Readiness Index and twelve new companies joining the ecosystem every day. The tour starts outside Orakle\'s headquarters, a tower of stacked curves.',[['mac:img/web/v/on-v-globe.mp4','']]],
+  ['System','Haptix, O·neiros and O·nea','Haptix, a tactile device for monitoring and gestural command, collects biometric and behavioural data. O·neiros, an algorithm named after the Greek word for dream, turns it into predictions of collective behaviour. O·nea closes the loop with an environment: a workstation with a spherical display and a voice guide for emotional regulation. A double click takes the visitor inside the pod, hands on the desk.',[['ok-3','']]],
+  ['Session','Rehearsing tomorrow','Inside O·nea the voice guide starts a training session. The employee focuses on a luminous sphere while the conflicts of the coming day are rehearsed in advance, so that when they happen nothing is felt anymore.',[['mp4:img/web/v/on-v-site.mp4']]],
+  ['Critique','Comfort as control','Behind the calm corporate tone, O·nea applies cognitive desensitization: it pre-exposes employees to future stressors until they stop reacting. Testimonials from fictional CEOs and a world map ranking companies by stability make the question tangible: how much would we sign away for a predictable future?',[['ok-1','']]],
+  ['Website','A website you enter','The website is the exhibit. A personal greeting, a binding agreement and a snap gesture that turns the door of O·nea towards you make the visitor a participant of the story. The book collects the whole world of Orakle, from the moodboard to the 3D printed models.',[['ok-2','']]]]});
+const DIM={"au-yt":1.778,"h-pad":1.6,"h-padv":0.8,"h-pad2":1.6,"f-s1":0.438,"f-s2":0.438,"f-s3":0.438,"f-s4":0.438,"f-s5":0.438,"f-s6":0.438,"i-w1":0.524,"i-w2":1.6,"i-w3":0.575,"co-m1":0.714,"co-m2":0.714,"co-m3":0.714,"co-rec":2.0,"co-plate":1.0,"ca-v":0.8,"fs-dusk":1.778,"h-f1":1.778,"h-f2":1.778,"h-f3":1.778,"h-f4":1.778,"h-f5":1.778,"h-f6":1.778,"co-cover":2.0,"co-5":1.0,"co-1":1.0,"co-2":1.333,"co-3":1.346,"co-4":1.414,"au-cover":1.778,"au-1":1.9,"au-2":1.9,"au-3":1.9,"ca-cover":1.778,"ca-1":1.778,"ca-2":1.778,"ca-3":1.778,"fs-cover":1.778,"fs-1":1.778,"fs-2":1.778,"fs-3":1.778,"fs-4":1.778,"fs-5":1.778,"on-cover":2.202,"on-1":2.292,"on-2":2.448,"on-3":2.124,"on-4":2.141,"on-5":1.566,"b-1":0.665,"b-2":0.615,"b-3":0.751,"b-4":0.759,"b-5":0.616,"b-6":0.616,"b-cover":1.775,"f-2":1.6,"f-cover":1.6,"f-p1":0.75,"f-p2":0.75,"f-p3":0.75,"g-1":1.775,"g-2":0.993,"g-3":1.0,"g-4":0.821,"g-5":0.886,"g-6":2.917,"g-7":0.73,"g-cover":1.775,"h-2":1.6,"h-cover":1.6,"h-p1":0.75,"h-p2":0.75,"h-p3":0.75,"i-2":1.6,"i-cover":1.6,"i-p1":0.75,"i-p2":0.75,"i-p3":0.75,"q-1":1.083,"q-2":0.709,"q-3":2.128,"q-4":2.29,"q-5":1.0,"q-6":1.542,"q-7":0.616,"q-8":1.741,"q-cover":1.775,"w-1":0.745,"w-2":1.673,"w-3":0.763,"w-4":1.158,"w-5":1.396,"w-6":1.641,"w-cover":1.775,"z-1":0.754,"z-2":0.752,"z-3":0.885,"z-4":0.752,"z-cover":1.777,"ok-1":1.499,"ok-2":1.499,"ok-3":1.499,"on-s1":1.778,"on-s2":1.778,"on-s3":1.778,"on-s4":1.778,"on-s5":1.778,"on-s6":1.778,"h-pad-png":1.31,"h-padv-png":0.665,"h-watch":0.817,"f-ux":1.5};   // proporzioni vere delle foto (larghezza/altezza): le foto non vengono tagliate
 const WEBS=k=>EXT[k]||PHOTO_DIR+'web/s/'+k+'.webp';   // foto del loop nella sfera (1100px)
 const WEB=k=>EXT[k]||PHOTO_DIR+'web/'+k+'.webp';   // copertine ridimensionate (1600px, WebP) per sfera, carosello e griglie
 /* ordine (Tobia, 26/10): dal piu' recente al piu' vecchio */
-const PJ_ORDER=['Orakle','Hive','Fanta.me','Coral','Iprefab','Grain Keeper','Quadernazione','Buxaka','Chiara Alessi interview','Waterpack','Zeitknot','Unofficial Audi spot','Fuocosacro'];
+const PJ_ORDER=['Orakle','Hive','Coral','Iprefab','Grain Keeper','Quadernazione','Buxaka','Lo Stato delle Cose','Waterpack','Zeitknot','Unofficial Audi Spot','Fuocosacro'];
 projects.sort((a,b)=>(PJ_ORDER.indexOf(a.title)+99)%99-(PJ_ORDER.indexOf(b.title)+99)%99);
 projects.forEach((p,i)=>{p.i=i;if(p.ph)return;p.local=WEB(p.slug+'-cover');
   const all=Object.keys(DIM).filter(k=>k.startsWith(p.slug+'-')&&!(p.hide||[]).includes(k));   // il loop usa tutte le foto del progetto, prima quelle scelte
@@ -959,7 +1030,7 @@ const TAGS=['Product Design','Textile & Fashion','Exhibition Design','System Des
 me.i=-1;me.tag='About';me.short='Industrial product designer: concepts, prototypes and interfaces.';me.long='I hold a degree in Industrial Product Design, with a passion for projects in all their forms, from product development to visual communication. My background includes exhibition, prototyping and interactive design, while my most recent work focused on UX and UI design.';
 const items=[me,...projects];            // la card 0 della sfera e' la tua foto
 const N=items.length;
-const featured=['Iprefab','Fanta.me','Hive'].map(t=>projects.find(p=>p.title===t));   // Selected cases
+const featured=['Iprefab','Orakle','Hive'].map(t=>projects.find(p=>p.title===t));   // Selected cases
 const archList=projects.filter(p=>!featured.includes(p));   // l'archivio contiene gli altri progetti
 const steps=[["Observe","Entering the system before designing it: field research, interviews and data."],["Map","Turning complexity into a shared map of actors, flows and tensions."],["Prototype","Giving the map a tangible form with testable products and interfaces."],["Evolve","Measuring what changes and letting the system keep growing."]];
 const bg=p=>p.ph?`background-color:${p.col}`:`background-image:url('${p.local}');background-position:${p.pos||'center'}`;
@@ -969,6 +1040,7 @@ function setTheme(t){document.documentElement.classList.toggle('dark',t==='dark'
 try{if(localStorage.getItem('theme')==='dark')setTheme('dark')}catch(e){}
 
 /* ===== contenuti delle pagine ===== */
+const CTYPE={'Coral':'Innovation project','Orakle':'Speculative project'};const ctype=p=>CTYPE[p.title]||p.kind||'';   // etichetta in basso a sinistra sulle card
 const yr=p=>p.year&&p.year!=='—'?p.year:'';   // anno di produzione, sempre sotto il titolo
 const gridHTML=list=>list.map(p=>`<article class="case"><div class="ph" style="${bg(p)}"></div><div class="m"><small>${p.cat}</small><h3>${p.title}</h3><p>${yr(p)}</p></div></article>`).join('');
 $('steps').innerHTML=steps.map((s,i)=>`<div class="row"><span class="n">${pad(i+1)}</span><h3>${s[0]}</h3><p>${s[1]}</p></div>`).join('');
@@ -1007,7 +1079,7 @@ const P=items.map((it,i)=>{const [fx,fy,fz]=fib[slotOf[i]],c=Math.cos(-lon0),sn=
 function cardHTML(p,n,sph){
   const lp=p.loop?p.loop.map((k,j)=>`<i class="pl${j?'':' on'}" data-src="${WEBS(k)}"${j?'':` style="background-image:url('${p.local}')"`}></i>`).join(''):'';
   const front=p.me?`<div class="card-in front mecard"><b>me</b><i class="glint"></i></div>`
-    :`<div class="card-in front"><i class="glint"></i><div class="photo" style="${bg(p)}">${lp}</div><div class="cap"><div><small>${p.cat}</small><b>${p.title}</b><span class="yr">${yr(p)}</span>${sph?`<div class="sh"><span>${p.short}</span></div>`:''}</div><div class="cr">${p.client}</div></div></div>`;
+    :`<div class="card-in front"><i class="glint"></i><div class="photo" style="${bg(p)}">${lp}</div>${yr(p)?`<span class="ypill">${yr(p)}</span>`:''}<div class="cap"><div><b>${p.title}</b><small>${p.cat}</small>${sph?`<div class="sh"><span>${p.short}</span></div>`:''}<span class="ct">${ctype(p)}</span></div></div></div>`;
   return `<div class="flip">${front}</div>`;
 }
 const pcHTML=(p,n)=>`<div class="pcw"><div class="pc" data-i="${p.i}" tabindex="0" role="link" aria-label="Open ${p.title}">${cardHTML(p,projects.indexOf(p),false)}</div></div>`;
@@ -1204,7 +1276,7 @@ const kk=()=>clamp(innerHeight*.62/440,.5,1);
 function slideDims(){const W=document.documentElement.clientWidth,h=Math.min(innerHeight*.6,W*.64/1.5,720),w=h*1.5;return{w,h}}
 /* carosello: 3 progetti in loop (duplicati a 6), si muove da solo ogni 2.5s e si puo' trascinare */
 const K=featured.length,TT=K*2,car=$('car');
-const lsHTML=(p,n)=>`<article class="ls" data-i="${p.i}"><div class="photo" style="${bg(p)}"></div><div class="lcap"><div><small>${p.cat}</small><b>${p.title}</b><span class="yr">${yr(p)}</span></div><div><i>${p.client}</i><em>${pad(n+1)} / ${pad(K)}</em><button class="btn" data-proj="${p.i}">View case study ↗</button></div></div></article>`;
+const lsHTML=(p,n)=>`<article class="ls" data-i="${p.i}"><div class="photo" style="${bg(p)}"></div>${yr(p)?`<span class="ypill">${yr(p)}</span>`:''}<div class="lcap"><div><b>${p.title}</b><small>${p.cat}</small><span class="ct">${ctype(p)}</span></div><div><em>${pad(n+1)} / ${pad(K)}</em><button class="btn" data-proj="${p.i}">View case study ↗</button></div></div></article>`;
 car.innerHTML=Array.from({length:TT},(_,j)=>lsHTML(featured[j%K],j%K)).join('');
 const slides=[...car.children];
 let cpos=0,snapTo=0,cp0=0,cvel=0,clx=0,clt=0,step=500;
@@ -1324,6 +1396,9 @@ addEventListener('scroll',()=>{
   XP.snapT=setTimeout(()=>{if(XP.q>.002&&XP.q<.995&&XP.armed)scrollTo({top:XP.sec.offsetTop+XP.run,behavior:RM?'auto':'smooth'})},380);
 },{passive:true});
 const SHAPE={w:1.6,h:1.333,v:.75,t:.75};
+/* descrizioni dentro le immagini (Tobia, 29/10): bianche su foto con un velo scuro, nere quando il fondo e' chiaro */
+const DESC={"img/web/v/on-v-globe.mp4":"The static website: Orakle's global ranking","img/web/v/on-v-site.mp4":"O·nea, the pod and its interior","on-cover": "The O·nea pod at Orakle's headquarters", "img/web/v/on-v-loop.mp4": "The immersive website: greeting, agreement, tour", "ok-1": "The book: the headquarters, a tower of stacked curves", "ok-2": "The book with 3D prints of the tower and Haptix", "img/web/v/on-v-session.mp4": "A training session inside O·nea", "ok-3": "Leafing through the moodboard", "h-f4": "The horizontal pad in the cab", "h-pad-png": "Horizontal pad, autonomous driving", "h-padv-png": "Vertical pad, row mapping on the pillar", "img/web/v/h-v-oled.mp4": "Knob screen: mode, field, start", "h-watch": "Apple Watch, planned take-over request", "img/web/v/h-v-loop.mp4": "A working day, filmed on a real tractor", "co-rec": "The reception", "co-plate": "Spazio Coral, the plaque at the entrance", "co-cover": "The training room", "co-1": "The open space with movable walls", "co-m1": "The campaign posters", "co-3": "The newsletter", "mac:i-w1": "Home: design your home first", "mac:i-w2": "The AI-guided configurator", "mac:i-w3": "Houses from Finnish builders, side by side", "g-1": "Shower and bench at the beach access", "g-6": "The Sinis coast from above", "g-5": "The bench", "g-2": "A buffer between beach and parking", "g-4": "The shower system, exploded", "g-7": "The sand storage module", "g-3": "Sand collected under the bench", "q-cover": "The exhibition inside the stage tower", "q-1": "Axonometry of the stage tower", "q-5": "The continuous monument", "q-7": "The former Verdi Theatre, Ferrara", "q-4": "The immersive room", "q-2": "Display totems", "q-6": "The Quaderna series", "q-3": "Entrance and colophon", "b-cover": "Buxaka, worn", "b-5": "Streetwear and tradition", "b-1": "In the fields of Romagna", "b-3": "Woven by hand", "b-2": "Hemp and raffia", "b-6": "Double-braided cords", "b-4": "The modular pocket", "w-cover": "Six bottles, one cardboard pack", "w-4": "Two packs, one in each hand", "w-1": "Carried by hand", "w-5": "Top view, the cardboard section", "w-3": "The handle locks between the bottles", "w-6": "The rigid handle", "w-2": "Handle and cardboard top", "z-cover": "Six pieces, three traditions", "z-1": "Rook and knight, from the cartwheel", "z-4": "Pawn and bishop, from the shearing shears", "z-2": "King and queen, from the Caveja", "z-3": "The set on its board", "img/web/v/au-v-hero.mp4": "The best moments of the spot", "au-3": "On the coast road", "img/web/v/fs-v-hero.mp4": "The fire and the finale", "fs-dusk": "The celebration at dusk", "ca-1": "Lo Stato delle Cose, the book"},DESC_LT=new Set(["ok-1", "h-pad-png", "h-padv-png", "img/web/v/h-v-oled.mp4", "h-watch", "co-plate", "co-3", "mac:i-w1", "mac:i-w2", "mac:i-w3", "g-5", "g-4", "w-cover"]);
+const capIn=k=>{const key=k&&(DESC[k]?k:k.replace(/^(mp4|knob|mac):/,''));const d=key&&DESC[key];return d?`<figcaption class="xp-in${DESC_LT.has(key)?' lt':''}">${d}</figcaption>`:''};
 function projectHTML(p,pv){
   const used=new Set();let n=0;
   if(/^(yt|mp4):/.test(p.gal[0][0]))used.add(p.slug+'-cover');   // progetti video: si apre col video, la miniatura serve solo alle card
@@ -1334,13 +1409,15 @@ function projectHTML(p,pv){
   const dev=(k,cap,sh)=>{n++;const [t,v]=[k.slice(0,k.indexOf(':')),k.slice(k.indexOf(':')+1)],f=form(sh);
     if(t==='mac'){const mp=v.endsWith('.mp4');if(!mp)used.add(v);const sh_=!mp&&DIM[v]&&DIM[v]<1.6?((1-DIM[v]/1.6)*-100).toFixed(2)+'%':'0%';
       const inner=mp?`<video src="${v}" poster="${v.replace(/\.mp4$/,'.webp')}" muted loop playsinline preload="none" aria-label="${cap}, ${p.title}"></video>`:`<img class="mscroll" style="--sh:${sh_}" src="${PIMG(v)}" alt="${p.title}, ${cap}" loading="lazy" decoding="async">`;
-      return `<figure class="xp-fig xp-dev" style="--r:${f?f.r:1.6}"><div class="fr"><div class="mac"><div class="lid"><div class="scr">${inner}</div></div><div class="base"></div></div></div><figcaption><span>${cap}</span><span>${p.title}</span></figcaption></figure>`}
+      return `<figure class="xp-fig xp-dev" style="--r:${f?f.r:1.6}"><div class="fr"><div class="mac"><div class="lid"><div class="scr">${inner}</div></div><div class="base"></div></div>${capIn(k)}</div></figure>`}
+    if(t==='knob')return `<figure class="xp-fig xp-dev" style="--r:${f?f.r:1}"><div class="fr"><div class="knob"><i class="kt"></i><i class="kr"></i><i class="kh"></i><i class="ki"></i><div class="ko"><video src="${v}" poster="${v.replace(/\.mp4$/,'.webp')}" muted loop playsinline preload="none" aria-label="${cap}, ${p.title}"></video></div></div>${capIn(k)}</div></figure>`;
+    if(t==='watch'){used.add(v);return `<figure class="xp-fig xp-dev" style="--r:${f?f.r:.9}"><div class="fr"><div class="watch"><i class="crown"></i><i class="sbtn"></i><div class="wscr"><img src="${PIMG(v)}" alt="${p.title}, ${cap}" loading="lazy" decoding="async"></div></div>${capIn(k)}</div></figure>`}
     const ks=v.split('|');ks.forEach(x=>used.add(x));
-    return `<figure class="xp-fig xp-dev" style="--r:${f?f.r:.9}"><div class="fr"><div class="phone" data-n="${ks.length}"><i class="vol"></i><i class="vol"></i><div class="pscr">${ks.map((x,j)=>`<img class="${j?'':'on'}" src="${PIMG(x)}" alt="${p.title}, ${cap}" loading="lazy" decoding="async">`).join('')}</div></div></div><figcaption><span>${cap}</span><span>${p.title}</span></figcaption></figure>`};
+    return `<figure class="xp-fig xp-dev" style="--r:${f?f.r:.9}"><div class="fr"><div class="phone" data-n="${ks.length}"><i class="vol"></i><i class="vol"></i><div class="pscr">${ks.map((x,j)=>`<img class="${j?'':'on'}" src="${PIMG(x)}" alt="${p.title}, ${cap}" loading="lazy" decoding="async">`).join('')}</div></div>${capIn(k)}</div></figure>`};
   const vid=(k,cap,sh)=>{n++;used.add(k);const yt=k.startsWith('yt:'),id=k.slice(k.indexOf(':')+1),f=form(sh),r=f?f.r:1.778,ps=f&&f.pos?` style="object-position:${f.pos}"`:'';
-    return `<figure class="xp-fig xp-vid${f&&f.full?' full':''}" style="--r:${r}"><div class="fr">${yt?`<button class="yt" data-yt="${id}" aria-label="Play the video, ${p.title}"><img src="${(k=>k?PIMG(k):YT(id))(DIM[p.slug+'-yt']?p.slug+'-yt':Object.keys(DIM).find(d=>d.startsWith(p.slug+'-')&&!used.has(d)&&!(p.hide||[]).includes(d)&&DIM[d]>1.5))}" alt="" loading="lazy"><span class="yt-play">▶ Play the full video</span></button>`:`<video src="${id}" poster="${id.replace(/\.mp4$/,'.webp')}" muted loop playsinline preload="none" aria-label="${cap}, ${p.title}"${ps}></video>`}</div><figcaption><span>${cap}</span><span>${p.title}</span></figcaption></figure>`};
-  const fig=([k,sh],cap)=>{if(k&&/^(yt|mp4):/.test(k))return vid(k,cap,sh);if(k&&/^(mac|ph):/.test(k))return dev(k,cap,sh);if(k)used.add(k);const j=n++,f=form(sh),r=f?f.r:(k&&DIM[k])||SHAPE[sh]||1.6,full=f?f.full:r>=WIDE;
-    return `<figure class="xp-fig${full?' full':''}" style="--r:${r}"><div class="fr" style="${k?'':`background:${p.col};filter:hue-rotate(${j*26}deg)`}">${k?`<img src="${PIMG(k)}" alt="${p.title}, ${cap}" ${j<2?'fetchpriority="high"':'loading="lazy"'} decoding="async"${f&&f.pos?` style="object-position:${f.pos}"`:''}>`:''}</div><figcaption><span>${cap}</span><span>${p.title}</span></figcaption></figure>`};
+    return `<figure class="xp-fig xp-vid${f&&f.full?' full':''}" style="--r:${r}"><div class="fr">${yt?`<button class="yt" data-yt="${id}" aria-label="Play the video, ${p.title}"><img src="${(k=>k?PIMG(k):YT(id))(DIM[p.slug+'-yt']?p.slug+'-yt':Object.keys(DIM).find(d=>d.startsWith(p.slug+'-')&&!used.has(d)&&!(p.hide||[]).includes(d)&&DIM[d]>1.5))}" alt="" loading="lazy"><span class="yt-play">▶ Play the full video</span></button>`:`<video src="${id}" poster="${id.replace(/\.mp4$/,'.webp')}" muted loop playsinline preload="none" aria-label="${cap}, ${p.title}"${ps}></video>`}${capIn(k)}</div></figure>`};
+  const fig=([k,sh],cap)=>{if(k&&/^(yt|mp4):/.test(k))return vid(k,cap,sh);if(k&&/^(mac|ph|knob|watch):/.test(k))return dev(k,cap,sh);if(k&&k.startsWith('seq:')){n++;const ks=k.slice(4).split('|');ks.forEach(x=>used.add(x));return `<figure class="xp-fig xp-seq" style="--r:${(form(sh)||{}).r||1.778}"><div class="fr">${ks.map((x,j)=>`<img class="${j?'':'on'}" src="${PIMG(x)}" alt="${p.title}, ${cap}" ${j?'loading="lazy"':'fetchpriority="high"'} decoding="async">`).join('')}</div></figure>`}if(k)used.add(k);const j=n++,f=form(sh),r=f?f.r:(k&&DIM[k])||SHAPE[sh]||1.6,full=f?f.full:r>=WIDE;
+    return `<figure class="xp-fig${full?' full':''}${k&&k.endsWith('-png')?' xp-cut':''}" style="--r:${r}"><div class="fr" style="${k?'':`background:${p.col};filter:hue-rotate(${j*26}deg)`}">${k?`<img src="${PIMG(k)}" alt="${p.title}, ${cap}" ${j<2?'fetchpriority="high"':'loading="lazy"'} decoding="async"${f&&f.pos?` style="object-position:${f.pos}"`:''}>`:''}${capIn(k)}</div></figure>`};
   // 'S3' = striscia: le strisce vicine si impilano in una colonna (Audi, 3 frame orizzontali stretti)
   const group=ims=>{const parts=[];ims.forEach(m=>{const fm=form(m[0][1])||{},st=fm.stack?'s':fm.mini?'m':'',last=parts[parts.length-1];if(st&&last&&last.st===st)last.it.push(m);else parts.push({st,it:[m]})});
     const out=parts.map(g=>g.st?`<div class="${g.st==='s'?'xp-stack':'xp-mini'}">${g.it.map(m=>fig(m[0],m[1])).join('')}</div>`:fig(g.it[0][0],g.it[0][1]));
@@ -1348,32 +1425,37 @@ function projectHTML(p,pv){
   // le pagine mostrano solo le foto scelte nelle sezioni (Tobia, 26/10: pagine piu' corte ed equilibrate, niente foto aggiunte in automatico)
   let h=`<div class="xp-pan xp-intro"><div><button class="btn-o xp-back" data-go="cases">All cases</button><button class="xp-hint" data-projb="${pv.i}"><i class="ldr pv"><i></i></i><span>Scroll back to open the previous project, ${pv.title}</span></button><p class="xp-client">${p.cat}</p></div>
     <div><h1 class="xp-name">${p.title}</h1>${yr(p)?`<p class="xp-year">${yr(p)}</p>`:''}<p class="xp-lead">${p.short}</p>
-    <div class="xp-meta">${[['Client',p.client],['Type',p.kind],['Role',p.role]].filter(([,v])=>v&&v!=='—').map(([l,v])=>`<div>${l}<b>${v}</b></div>`).join('')}</div>${p.links?`<div class="xp-links">${p.links.map(([t,u])=>`<a class="btn-o" href="${u}" target="_blank" rel="noopener">${t}</a>`).join('')}</div>`:''}</div></div>`;
+    <div class="xp-meta">${[['Client',p.client],['Type',p.kind],['Role',p.role],['Team',p.team],['Duration',p.dur]].filter(([,v])=>v&&v!=='—').map(([l,v])=>`<div>${l}<b>${v}</b></div>`).join('')}</div>${p.links?`<div class="xp-links">${p.links.map(([t,u])=>`<a class="btn-o" href="${u}" target="_blank" rel="noopener">${t}</a>`).join('')}</div>`:''}</div></div>`;
   // la prima immagine e' sempre orizzontale con margini sopra e sotto, mai a tutto schermo (Tobia, 27/10)
   const g0=p.gal[0],f0=form(g0[1]),r0=Math.min(f0?f0.r:(DIM[g0[0]]||1.778),1.8);
   h+=fig([g0[0],'R'+r0+(f0&&f0.pos?'@'+f0.pos:'')],p.cat);
   h+=`<div class="xp-pan xp-say rv"><p>${p.long}</p></div>`;
   // dopo l'ultima foto o video niente testo (Tobia, 26/10): le sezioni finali senza media passano prima dell'ultima immagine
   const lastM=p.sec.reduce((a,x,k)=>x[3].length?k:a,-1),secs=lastM<0?p.sec:[...p.sec.slice(0,lastM),...p.sec.slice(lastM+1),p.sec[lastM]];
-  const facts=`<div class="xp-pan xp-facts rv">${[[p.year,'Year'],[p.team,'Team'],[p.dur,'Duration'],[p.cat,'Discipline']].filter(([v])=>v&&v!=='—').map(([v,l])=>`<div><b>${v}</b><span>${l}</span></div>`).join('')}</div>`;   // solo i dati che conosciamo
   secs.forEach((x,k)=>{
     const ims=x[3].filter(([m])=>!m||!used.has(m)),last=k===secs.length-1;
     h+=`<div class="xp-pan xp-txt rv ${k%2?'top':'end'}"><span class="num">${x[0]}</span><h2>${x[1]}</h2><p>${x[2]}</p></div>`;
     if(x[4])h+=`<div class="xp-pan xp-data rv">${x[4]}</div>`;   // numeri in chiaro (Coral)
-    if(k===0&&last)h+=facts;
     h+=group(ims.map(m=>[m,x[0]]));
-    if(k===0&&!last)h+=facts;
   });
   return h;
 }
 /* le clip partono solo quando sono in vista: non scarichiamo video che nessuno guarda */
 const vidIO=new IntersectionObserver(es=>es.forEach(e=>{const v=e.target;if(e.isIntersecting&&!RM){v.preload='auto';v.play().catch(()=>{})}else v.pause()}),{threshold:.35});
+/* sequenza di fotogrammi (apertura di Orakle): una schermata ogni 1.6 s */
+setInterval(()=>{if(RM)return;document.querySelectorAll('#pj .xp-seq').forEach(f=>{const ims=f.querySelectorAll('img'),i=((+f.dataset.i||0)+1)%ims.length;f.dataset.i=i;ims.forEach((m,j)=>m.classList.toggle('on',j===i))})},1600);
+/* knob: l'indicatore segue gli scatti e le pressioni dell'interfaccia (scaletta della knob, clip da 3.0 s) */
+const KROT=[[3.6,4.1,1],[7.4,7.9,1],[9.0,9.5,-1],[13.6,14.15,-1]],KPR=[2.0,5.4,10.8,12.6];
+(function knobTick(){if(document.body.dataset.page==='project')document.querySelectorAll('#pj .knob').forEach(k=>{const v=k.querySelector('video');if(!v||v.paused)return;const t=v.currentTime;let a=0,sp=false;
+  for(const [s0,e0,d] of KROT){if(t>=e0)a+=d;else if(t>s0){const x=(t-s0)/(e0-s0);a+=d*(x<.5?2*x*x:1-Math.pow(-2*x+2,2)/2);sp=true}}
+  k.style.setProperty('--a',(a*36).toFixed(2)+'deg');k.classList.toggle('spin',sp);k.classList.toggle('press',KPR.some(p=>t>=p&&t<p+.28))});
+  requestAnimationFrame(knobTick)})();
 /* telefoni: cambiano schermata e posizione ogni 2.8 s */
 setInterval(()=>{if(RM)return;document.querySelectorAll('#pj .phone').forEach(ph=>{const ims=ph.querySelectorAll('img');if(ims.length<2)return;const i=((+ph.dataset.i||0)+1)%ims.length;ph.dataset.i=i;ims.forEach((m,j)=>{const was=m.classList.contains('out');m.classList.toggle('on',j===i);m.classList.toggle('out',j===(i+ims.length-1)%ims.length);if(was&&!m.classList.contains('out')){m.classList.add('cut');requestAnimationFrame(()=>m.classList.remove('cut'))}})})},3200);
 function openProject(i,dir=1){
   const p=projects[i];if(!p)return;unfocus();
   const L_=projects.length,nx=projects[(i+1)%L_],pv=projects[(i+L_-1)%L_];
-  const nk=nx.gal&&nx.gal[0]&&nx.gal[0][0],nbg=nk?`background-image:url('${nk.startsWith('mp4:')?nk.slice(4).replace(/\.mp4$/,'.webp'):/^(mac|ph|yt):/.test(nk)?PIMG(nx.slug+'-cover'):PIMG(nk)}')`:`background-color:${nx.col}`;
+  const nk=nx.gal&&nx.gal[0]&&nx.gal[0][0],nbg=nk?`background-image:url('${nk.startsWith('mp4:')?nk.slice(4).replace(/\.mp4$/,'.webp'):/^(mac|ph|yt|seq|knob|watch):/.test(nk)?PIMG(nx.slug+'-cover'):PIMG(nk)}')`:`background-color:${nx.col}`;
   const ink=w=>`<span class="xp-ink${w?' w':''}"><small>Next project</small><b>${nx.title}</b><em>Keep scrolling to open it <span class="xp-pct">0%</span></em></span>`;
   const end=`<div class="xp-pan xp-end"><button class="xp-frame" data-proj="${nx.i}" aria-label="Open the next project, ${nx.title}">
       ${ink(0)}<span class="xp-rev"><span class="xp-ph" style="${nbg}"></span>${ink(1)}</span></button>
@@ -1574,6 +1656,25 @@ const heroTL=gsap.timeline({defaults:{ease:E},scrollTrigger:{trigger:'#pin',star
  .to(S,{wo:1,duration:.3},10.7)
  .to('#vwin',{autoAlpha:0,duration:.3,ease:'none'},11)
  .to({},{duration:1.8},11.4);
+/* calamita della home (Tobia, 29/10): dal punto di partenza il primo scroll in giu' porta dritto alla card "me",
+   il primo in su riporta all'inizio; durante il viaggio l'input e' fermo, cosi' nessuno resta incastrato a meta' */
+(()=>{let on=false,lastIn=0;
+  const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+  function fly(y){on=true;const y0=scrollY,d=y-y0,T=RM?0:1100,t0=performance.now();
+    const step=now=>{const k=T?Math.min(1,(now-t0)/T):1;scrollTo(0,y0+d*ease(k));
+      if(k<1)return requestAnimationFrame(step);
+      const t1=performance.now(),wait=()=>{const n=performance.now();if(n-lastIn>220&&n-t1>380)on=false;else requestAnimationFrame(wait)};wait()};   // aspetta che finisca l'inerzia del trackpad
+    requestAnimationFrame(step)}
+  function want(dir,e){if(document.body.dataset.page!=='home'||focused||locked())return;
+    if(on){lastIn=performance.now();e.preventDefault();e.stopImmediatePropagation();return}
+    const me=stepY('me');
+    if(dir>0&&scrollY<me-2){e.preventDefault();e.stopImmediatePropagation();lastIn=performance.now();fly(me)}
+    else if(dir<0&&scrollY>2&&scrollY<=me+2){e.preventDefault();e.stopImmediatePropagation();lastIn=performance.now();fly(0)}}
+  addEventListener('wheel',e=>{if(Math.abs(e.deltaY)<Math.abs(e.deltaX))return;want(Math.sign(e.deltaY),e)},{passive:false,capture:true});
+  addEventListener('keydown',e=>{if(e.target.closest&&e.target.closest('input,textarea,[contenteditable]'))return;
+    const dn=['ArrowDown','PageDown',' '].includes(e.key)&&!e.shiftKey,up=['ArrowUp','PageUp'].includes(e.key)||(e.key===' '&&e.shiftKey);
+    if(dn||up)want(dn?1:-1,e)},{capture:true});
+})();
 /* card me: la parola prima di "designer" cambia ogni 2.4 s */
 (()=>{const rw=document.querySelector('#c1 .rw');if(!rw)return;const b=rw.firstElementChild,w=[...b.children];let k=0;
   const set=(i,anim)=>{b.style.transition=rw.style.transition=anim?'':'none';b.style.transform=`translateY(${-i*1.2}em)`;rw.style.width=w[i].offsetWidth+'px'};
@@ -1582,7 +1683,7 @@ const heroTL=gsap.timeline({defaults:{ease:E},scrollTrigger:{trigger:'#pin',star
   addEventListener('resize',()=>set(k,false));
 })();
 /* teaser provvisorio: la foto mostrata dipende dalla posizione nella timeline (ease in-out = lente, veloci, lente) */
-const VS_KEYS=['i-cover','f-cover','h-cover','g-1','q-cover','b-cover','w-cover','z-cover','i-2','h-2','q-3','b-1','g-6','w-4','f-2','q-6','z-3','b-2','g-3','q-8'];
+const VS_KEYS=['i-cover','on-cover','h-cover','g-1','q-cover','b-cover','w-cover','z-cover','co-rec','h-pad','q-3','b-1','g-6','w-4','ok-2','q-6','z-3','b-2','g-3','q-4'];
 const vsEl=$('vshow'),f0=featured[0];
 vsEl.innerHTML=VS_KEYS.filter(k=>!f0.local.includes('/'+k+'.')).map(k=>`<i data-src="${WEBS(k)}"></i>`).join('')+`<i data-src="${f0.local}" style="background-position:${f0.pos||'center'}"></i>`;
 const vsI=[...vsEl.children];let vsCur=-1;
