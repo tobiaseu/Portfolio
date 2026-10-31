@@ -2,6 +2,8 @@
    (anche quelli creati dopo, tramite MutationObserver) e torna all'originale quando si rimette EN. */
 (function(){
 const IT={
+/* About v2, filtri, card me (31/10) */
+"Systemic & UX/UI Designer":"Systemic & UX/UI Designer","Systemic & UX/UI Designer · Turin":"Systemic & UX/UI Designer · Torino","I hold a degree in Industrial Product Design and I'm now studying Systemic Design at Politecnico di Torino. I love projects in all their forms, from product development to visual communication: my background includes exhibition, prototyping and interactive design, while my most recent work focused on UX and UI.":"Sono laureato in Design del Prodotto Industriale e ora studio Systemic Design al Politecnico di Torino. Amo i progetti in tutte le loro forme, dallo sviluppo del prodotto alla comunicazione visiva: il mio percorso comprende allestimenti, prototipazione e design interattivo, mentre i lavori più recenti si sono concentrati su UX e UI.","I am ambitious, with strong interpersonal skills, and I often act as a cohesive force within teams.":"Sono ambizioso, ho buone capacità relazionali e spesso tengo unito il gruppo.","Now":"Ora","Focus":"Focus","Languages":"Lingue","MSc Systemic Design, PoliTo":"Magistrale in Systemic Design, PoliTo","UX/UI, systemic, product":"UX/UI, sistemico, prodotto","Italian, English":"Italiano, inglese","Scroll to see more":"Scorri per vedere altro","4 months":"4 mesi","2 months":"2 mesi","9 years":"9 anni","2025 — Now":"2025 — oggi","2017 — Now":"2017 — oggi","Master's Degree in Systemic Design":"Laurea magistrale in Systemic Design","Politecnico di Torino · Turin":"Politecnico di Torino · Torino","Currently working on Innovation Design, Virtual Design, UX/UI and Open Design projects.":"Sto lavorando a progetti di Innovation Design, Virtual Design, UX/UI e Open Design.","03 — Tools":"03 — Strumenti","Tools":"Strumenti","& level":"e livello","Advanced":"Avanzato","Intermediate":"Intermedio","Basic":"Base","Legend":"Legenda","Graphic & layout":"Grafica e impaginazione","3D modeling & rendering":"Modellazione 3D e rendering","Video editing":"Montaggio video","AI tools":"Strumenti AI","04 — Skills":"04 — Competenze","Skills":"Competenze","& languages":"e lingue","Soft skills":"Soft skill","Hard skills":"Hard skill","Multidisciplinary Research":"Ricerca multidisciplinare","UX/UI Wireframing & Prototyping":"Wireframe e prototipi UX/UI","3D Modeling & Rendering":"Modellazione 3D e rendering","Product Prototyping":"Prototipazione di prodotto","Videomaking & Photography":"Videomaking e fotografia","Visual Identity & Storytelling":"Identità visiva e storytelling","Italian":"Italiano","English":"Inglese","Mother tongue":"Madrelingua","Publication":"Pubblicazione","Design Anthropology journal article":"Articolo su rivista di Design Anthropology","2024 · with Prof. G. Scandurra and colleagues, on Valle della Luna (Sardinia)":"2024 · con il Prof. G. Scandurra e colleghi, sulla Valle della Luna (Sardegna)","Portrait of Tobia Seu":"Ritratto di Tobia Seu","Click to flip":"Clicca per girarla","Filter by category":"Filtra per categoria","View":"Vista",
 "Home":"Home","Cases":"Progetti","Framework":"Metodo","About":"Chi sono",
 "Let's meet":"Incontriamoci","Ciao":"Ciao","Light":"Chiaro","Light theme":"Tema chiaro","Dark":"Scuro","Dark theme":"Tema scuro",
 "Drag":"Trascina","Spin":"Ruota","Return to world":"Torna al mondo","View case study":"Vedi il progetto","About me":"Chi sono",
@@ -103,7 +105,7 @@ const IT={
 "Next project":"Prossimo progetto","Keep scrolling to open it":"Continua a scorrere per aprirlo",
 "Coming soon":"In arrivo","Gallery":"Galleria","Individual":"Individuale",
 "Team of 3":"Team di 3","Team of 4":"Team di 4","Team of 5":"Team di 5",
-"3 months":"3 mesi","4 months":"4 mesi","6 months":"6 mesi",
+"5 months":"5 mesi","1 day of shooting":"1 giorno di riprese","2024 · 3 months":"2024 · 3 mesi","3 months":"3 mesi","4 months":"4 mesi","6 months":"6 mesi",
 "Start-up team":"Team della start-up","Start-up internship":"Tirocinio in start-up",
 "University project":"Progetto universitario","Thesis project":"Progetto di tesi","Digital product":"Prodotto digitale",
 "UX/UI Design":"UX/UI Design","System Design":"Design sistemico","Exhibition Design":"Allestimento","Textile Design":"Design tessile","Package Design":"Packaging","Concept Design":"Concept design",
@@ -313,6 +315,7 @@ const IT={
 };
 // frasi con un nome dentro
 const PAT=[
+ [/^(.+): (advanced|intermediate|basic)$/,(m,a,b)=>a+': '+({advanced:'avanzato',intermediate:'intermedio',basic:'base'})[b]],
  [/^Scroll back to open the previous project, (.+)$/,'Scorri indietro per aprire il progetto precedente, $1'],
  [/^Scroll back for (.+)$/,'Scorri indietro per $1'],
  [/^Scroll for (.+)$/,'Scorri per $1'],
