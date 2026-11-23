@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Lettore di disegni · modello da stampare</title>
+<style>
+@page { size: A3 landscape; margin: 0; }
+@page verticale { size: A3 portrait; margin: 0; }
+*{box-sizing:border-box}
+html,body{margin:0;background:#e9e7e1;font-family:Helvetica,Arial,sans-serif;color:#111}
+.page{width:420mm;height:297mm;background:#fff;margin:10mm auto;position:relative;overflow:hidden;page-break-after:always;break-after:page}
+.page.v{width:297mm;height:420mm;page:verticale}
+.page:last-child{page-break-after:auto;break-after:auto}
+@media print{body{background:#fff}.page{margin:0}.noprint{display:none}}
+.abs{position:absolute}
+h1{font-size:9mm;margin:0;letter-spacing:-.02em}
+h2{font-size:5mm;margin:0 0 2mm}
+p{font-size:3.4mm;line-height:1.4;margin:0 0 2mm}
+.tag{font-size:3mm;color:#666}
+.noprint{max-width:900px;margin:16px auto;font-size:15px;padding:0 16px}
+.noprint button{font:inherit;padding:8px 14px;border-radius:8px;border:1px solid #bbb;background:#fff;cursor:pointer}
+ol{font-size:3.4mm;line-height:1.45;margin:0;padding-left:5mm}
+</style>
+</head>
+<body>
+<div class="noprint"><b>Modello da stampare.</b> Stampa in A3 al <b>100% / dimensione reale</b> (non "adatta alla pagina"), poi controlla il righello da 100 mm su ogni foglio. <button onclick="print()">Stampa</button></div>
+
+<!-- Pagina 1: pianta -->
+<section class="page" id="p1">
+  <div class="abs" style="left:14mm;top:12mm;right:14mm">
+    <h1>Lettore di disegni · base in cartone</h1>
+    <p class="tag">Modello v1 · pagina 1 di 3 · pianta in scala 1:1,8 (le misure sono in millimetri)</p>
+  </div>
+  <div class="abs" id="plan" style="left:14mm;top:34mm;width:290mm"></div>
+  <div class="abs" style="left:318mm;top:40mm;width:88mm;display:grid;gap:6mm">
+    <div><h2>1 · Pannello comandi</h2><p>Pagina 2. Incolla il pannello a sinistra, con il bordo alto a 70 mm dall'alto e a 10 mm dal bordo sinistro. Le tre manopole sono dischi bucati al centro con un fermacampione.</p></div>
+    <div><h2>2 · Matrice e marker</h2><p>Pagina 3. La matrice va sotto il foglio, a 205 mm da sinistra e 285 mm dall'alto. I 4 marker vanno negli angoli, centrati a 40 mm dai bordi. Non piegarli e non coprirli.</p></div>
+    <div><h2>3 · Foglio A3</h2><p>Strappa le strisce e infila il foglio (386 × 265 mm) nelle 4 squadrette di cartone, angolo in alto a sinistra a 195 mm da sinistra e 15 mm dall'alto.</p></div>
+  </div>
+</section>
+
+<!-- Pagina 2: pannello + dischi -->
+<section class="page v" id="p2">
+  <div class="abs" style="left:14mm;top:12mm;right:14mm">
+    <h1>Pannello comandi · 1:1</h1>
+    <p class="tag">Pagina 2 di 3 · ritaglia lungo il tratteggio · i cerchi bianchi devono restare bianchi: la camera vede quando un dito o un tappo li copre</p>
+  </div>
+  <div class="abs" id="panel" style="left:14mm;top:32mm"></div>
+  <div class="abs" style="left:215mm;top:32mm;width:70mm">
+    <h2>Come funziona</h2>
+    <p><b>PLAY · STOP, GIRO, REC</b>: appoggia il dito sul cerchio per un attimo.</p>
+    <p><b>Cerchi colorati</b> accanto al foglio: un tappo sopra = quel colore è muto.</p>
+    <p><b>Cerchi piccoli</b> accanto alla matrice: un tappo sopra = quella percussione è muta.</p>
+    <p><b>Manopole</b>: gira il disco, la camera legge il pallino nero.</p>
+    <p><b>Trasporta</b>: 0 in alto, 6 scatti per parte.<br><b>Scala</b>: 5 scatti colorati.<br><b>Velocità</b>: da lento a veloce.</p>
+  </div>
+  <div class="abs" id="discs" style="left:14mm;top:345mm"></div>
+  <div class="abs" style="left:200mm;top:345mm;width:85mm"><p><b>Dischi manopola</b> (diametro 48 mm): ritagliali, incollali su cartone, fora il centro e fissali con un fermacampione sul segno a croce della manopola. Il pallino nero deve restare scoperto.</p></div>
+  <div class="abs ruler" style="left:185mm;top:400mm"></div>
+</section>
+
+<!-- Pagina 3: matrice + marker -->
+<section class="page" id="p3">
+  <div class="abs" style="left:14mm;top:12mm;right:14mm">
+    <h1>Matrice percussioni e marker · 1:1</h1>
+    <p class="tag">Pagina 3 di 3 · 4 righe × 16 passi · un bollino adesivo colorato da 19 mm (o un gettone) in una casella = un colpo</p>
+  </div>
+  <div class="abs" id="matrix" style="left:22mm;top:34mm"></div>
+  <div class="abs" style="left:22mm;top:150mm;display:flex;gap:16mm" id="markers"></div>
+  <div class="abs" style="left:22mm;top:250mm;width:250mm"><p>Righe dall'alto: <b>Charleston, Battimani, Rullante, Cassa</b>. Le righe scure verticali dividono i 4 tempi. I marker si incollano sulla base: <b>0</b> in alto a sinistra, <b>1</b> in alto a destra, <b>2</b> in basso a destra, <b>3</b> in basso a sinistra.</p></div>
+  <div class="abs ruler" style="left:290mm;top:255mm"></div>
+</section>
+
+<script src="vendor/cv.js"></script>
+<script src="vendor/aruco.js"></script>
+<script src="layout.js"></script>
+<script src="board.js"></script>
+<script>
+var L = LAYOUT;
+function mm(svgInner, x, y, w, h) { return BOARD.svg(svgInner, x, y, w, h, 'width="' + w + 'mm" height="' + h + 'mm" style="display:block"'); }
+/* pianta in scala */
+(function () {
+  var t = BOARD.text, s = BOARD.full({}), W = L.board.w, Hh = L.board.h;
+  s += '<rect x="0" y="0" width="' + W + '" height="' + Hh + '" fill="none" stroke="#111" stroke-width="1.2"/>';
+  function dim(x1, y1, x2, y2, label, off) {
+    var o = '<line x1="' + x1 + '" y1="' + y1 + '" x2="' + x2 + '" y2="' + y2 + '" stroke="#ff5a1f" stroke-width=".8" marker-start="url(#a)" marker-end="url(#a)"/>';
+    var mx = (x1 + x2) / 2, my = (y1 + y2) / 2;
+    return o + t(mx + (off ? off[0] : 0), my + (off ? off[1] : -2.5), label, 7, { c: '#ff5a1f', w: 700 });
+  }
+  var defs = '<defs><marker id="a" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto"><circle cx="5" cy="5" r="3" fill="#ff5a1f"/></marker></defs>';
+  s = defs + s;
+  s += dim(0, -12, W, -12, 'base 660');
+  s += dim(-12, 0, -12, Hh, '460', [-10, 2]);
+  s += dim(L.sheet.x, L.sheet.y + L.sheet.h / 2, L.sheet.x + L.sheet.w, L.sheet.y + L.sheet.h / 2, 'foglio A3 senza strisce 386 × 265');
+  s += dim(0, L.sheet.y + 120, L.sheet.x, L.sheet.y + 120, '195');
+  s += dim(L.matrix.x, L.matrix.y + L.matrix.h + 10, L.matrix.x + L.matrix.w, L.matrix.y + L.matrix.h + 10, 'matrice 366 × 88, a 285 dall\'alto', [0, 9]);
+  s += t(L.sheet.x + L.sheet.w / 2, L.sheet.y + 30, 'area che suona: 366 × 222', 7, { c: '#888' });
+  s += '<rect x="' + L.read.x + '" y="' + L.read.y + '" width="' + L.read.w + '" height="' + L.read.h + '" fill="none" stroke="#888" stroke-width=".6" stroke-dasharray="4 3"/>';
+  s += t(L.panel.x + L.panel.w / 2, L.panel.y + L.panel.h + 10, 'pannello 185 × 308', 7, { c: '#ff5a1f', w: 700 });
+  L.markers.forEach(function (m) { s += t(m.x, m.y + m.size / 2 + 10, 'marker ' + m.id, 6, { c: '#ff5a1f', w: 700 }); });
+  var sc = 290 / (W + 40);
+  document.getElementById('plan').innerHTML = BOARD.svg(s, -30, -24, W + 40, Hh + 48, 'width="290mm" height="' + ((Hh + 48) * sc).toFixed(1) + 'mm" style="display:block;overflow:visible"');
+})();
+/* pannello 1:1 */
+(function () {
+  var P = L.panel;
+  document.getElementById('panel').innerHTML = mm(BOARD.panel({ cut: true }), P.x - 2, P.y - 2, P.w + 4, P.h + 4);
+  var d = '', r = 24, k = L.knobs;
+  [['trasporta', k.transpose], ['scala', k.scale], ['velocità', k.speed]].forEach(function (e, i) {
+    var cx = 28 + i * 58, cy = 28;
+    d += BOARD.disc(cx, cy, r, 5, e[1].dot, 0, e[0]);
+  });
+  document.getElementById('discs').innerHTML = mm(d, 0, 0, 180, 56);
+})();
+/* matrice + marker */
+(function () {
+  var M = L.matrix, s = BOARD.matrix({ numbers: true });
+  s += '<rect x="' + (M.x - 3) + '" y="' + (M.y - 3) + '" width="' + (M.w + 6) + '" height="' + (M.h + 13) + '" fill="none" stroke="#aaa" stroke-width=".3" stroke-dasharray="2 1.5"/>';
+  L.drums.forEach(function (d, i) { s += BOARD.text(M.x - 5, M.rowY(i) + 1.2, d.short, 3, { a: 'end', c: '#777' }); });
+  document.getElementById('matrix').innerHTML = mm(s, M.x - 14, M.y - 5, M.w + 20, M.h + 17);
+  var out = '';
+  L.markers.forEach(function (m) {
+    var q = m.size / 8, w = m.size + 2 * q + 2;
+    var inner = BOARD.marker(m.id, w / 2, w / 2, m.size, q) +
+      '<rect x=".2" y=".2" width="' + (w - .4) + '" height="' + (w - .4) + '" fill="none" stroke="#aaa" stroke-width=".3" stroke-dasharray="2 1.5"/>';
+    out += '<div>' + mm(inner, 0, 0, w, w) + '<p style="text-align:center;margin-top:2mm"><b>' + m.id + '</b> · ' + m.name + '</p></div>';
+  });
+  document.getElementById('markers').innerHTML = out;
+})();
+/* righello di controllo */
+Array.prototype.forEach.call(document.querySelectorAll('.ruler'), function (el) {
+  var s = '<rect x="0" y="0" width="100" height="8" fill="none" stroke="#111" stroke-width=".3"/>';
+  for (var i = 0; i <= 100; i++) s += '<line x1="' + i + '" x2="' + i + '" y1="0" y2="' + (i % 10 ? (i % 5 ? 2 : 3.5) : 5) + '" stroke="#111" stroke-width="' + (i % 10 ? .15 : .3) + '"/>';
+  s += BOARD.text(50, 7.3, 'questo righello deve misurare 100 mm', 2.4, { w: 500 });
+  el.innerHTML = mm(s, -.5, -.5, 101, 9);
+});
+</script>
+</body>
+</html>
